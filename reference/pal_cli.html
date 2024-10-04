@@ -107,15 +107,14 @@ and are generated with the default model, Claude Sonnet 3.5.</p>
 <span></span>
 <span><span class="fu"><a href="../reference/pal.html">pal</a></span><span class="op">(</span><span class="st">"cli"</span><span class="op">)</span></span>
 <span><span class="co">#&gt;</span></span>
-<span><span class="co">#&gt; -- A cli pal using gpt-4o-mini.</span></span></code></pre><p></p></div>
+<span><span class="co">#&gt; -- A cli pal using claude-3-5-sonnet-20240620.</span></span></code></pre><p></p></div>
 <p>The <code><a href="pal_chat.html">pal_chat()</a></code> function takes an R expression that raises a condition
 and converts it to use cli. At its simplest, a one-line message with a
 little bit of markup:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/pal_chat.html">pal_chat</a></span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort</a></span><span class="op">(</span><span class="st">"`save_pred` can only be used if the initial results saved predictions."</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; cli::cli_abort("The {.code save_pred} function can only be used if the</span></span>
-<span><span class="co">#&gt;                 initial results saved predictions.")</span></span></code></pre><p></p></div>
+<span><span class="co">#&gt; cli::cli_abort("{.code save_pred} can only be used if the initial results saved predictions.")</span></span></code></pre><p></p></div>
 <p>The function knows to look for the most recently defined pal, but you can
 pass one manually via <code>pal_chat(pal)</code> if you please.</p>
 <p>Some strange vector collapsing and funky line breaking:</p>
@@ -131,10 +130,8 @@ pass one manually via <code>pal_chat(pal)</code> if you please.</p>
 <span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; cli::cli_abort(</span></span>
-<span><span class="co">#&gt;   c(</span></span>
-<span><span class="co">#&gt;     "The provided {.code grid} has the following parameter columns that have</span></span>
-<span><span class="co">#&gt;      not been marked for tuning by {.fn tune}: {extra_grid_params}."</span></span>
-<span><span class="co">#&gt;   )</span></span>
+<span><span class="co">#&gt;   "The provided {.arg grid} has parameter columns that have not been</span></span>
+<span><span class="co">#&gt;    marked for tuning by {.fn tune}: {extra_grid_params}."</span></span>
 <span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
 <p>A message that probably best lives as two separate elements:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/pal_chat.html">pal_chat</a></span><span class="op">(</span><span class="op">{</span></span>
@@ -149,9 +146,10 @@ pass one manually via <code>pal_chat(pal)</code> if you please.</p>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; cli::cli_abort(</span></span>
 <span><span class="co">#&gt;   c(</span></span>
-<span><span class="co">#&gt;     "Some model parameters require finalization, but there are recipe parameters that require tuning.",</span></span>
-<span><span class="co">#&gt;     "i" = "Please use {.fn extract_parameter_set_dials} to set parameter ranges manually</span></span>
-<span><span class="co">#&gt;            and supply the output to the {.arg param_info} argument."</span></span>
+<span><span class="co">#&gt;     "Some model parameters require finalization but there are recipe</span></span>
+<span><span class="co">#&gt;      parameters that require tuning.",</span></span>
+<span><span class="co">#&gt;     "i" = "Use {.fn extract_parameter_set_dials} to set parameter ranges</span></span>
+<span><span class="co">#&gt;            manually and supply the output to the {.arg param_info} argument."</span></span>
 <span><span class="co">#&gt;   )</span></span>
 <span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
 <p>Gnarly ad-hoc pluralization:</p>
@@ -166,9 +164,7 @@ pass one manually via <code>pal_chat(pal)</code> if you please.</p>
 <span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">inform</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; cli::cli_inform(</span></span>
-<span><span class="co">#&gt;   c(</span></span>
-<span><span class="co">#&gt;     "Creating pre-processing data to finalize unknown parameter{?s}: {unk_names}."</span></span>
-<span><span class="co">#&gt;   )</span></span>
+<span><span class="co">#&gt;   "Creating pre-processing data to finalize unknown parameter{?s}: {unk_names}"</span></span>
 <span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
 <p>Some <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0()</a></code> wonk:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/pal_chat.html">pal_chat</a></span><span class="op">(</span><span class="op">{</span></span>
@@ -179,9 +175,8 @@ pass one manually via <code>pal_chat(pal)</code> if you please.</p>
 <span>  <span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; cli::cli_abort(</span></span>
-<span><span class="co">#&gt;   c(</span></span>
-<span><span class="co">#&gt;     "The workflow has arguments to be tuned that are missing some parameter objects: {pset$id[!params]}."</span></span>
-<span><span class="co">#&gt;   )</span></span>
+<span><span class="co">#&gt;   "The workflow has arguments to be tuned that are missing some</span></span>
+<span><span class="co">#&gt;    parameter objects: {.val {pset$id[!params]}}"</span></span>
 <span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
 <p>The model is instructed to only return a call to a cli function, so
 erroring code that's run conditionally can get borked:</p>
@@ -196,16 +191,14 @@ erroring code that's run conditionally can get borked:</p>
 <span><span class="op">}</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; cli::cli_abort(</span></span>
-<span><span class="co">#&gt;   c(</span></span>
-<span><span class="co">#&gt;     "Argument {.code {deparse(cl$x)}} should be a {.cls {cls}} or NULL{i =</span></span>
-<span><span class="co">#&gt;      in `{where}` if (!is.null(where)) }."</span></span>
-<span><span class="co">#&gt;   )</span></span>
+<span><span class="co">#&gt;   "Argument {.code {deparse(cl$x)}} should be {?a/an} {cls} or {.code NULL}{?</span></span>
+<span><span class="co">#&gt;    in {.fn {where}}}"</span></span>
 <span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
 <p>Sprintf-style statements aren't an issue:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/pal_chat.html">pal_chat</a></span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="fu">abort</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"No such '%s' function: `%s()`."</span>, <span class="va">package</span>, <span class="va">name</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; cli::cli_abort("No such '{.pkg {package}}' function: {.fn {name}}().")</span></span></code></pre><p></p></div>
+<span><span class="co">#&gt; cli::cli_abort("No such {.pkg {package}} function: {.fn {name}}.")</span></span></code></pre><p></p></div>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
