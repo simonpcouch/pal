@@ -14,7 +14,7 @@ pal(
 }
 \arguments{
 \item{role}{The identifier for a pal prompt. Currently one
-of: \link[=pal_cli]{"cli"} or \link[=pal_testthat]{"testthat"}.}
+of \link[=pal_cli]{"cli"} or \link[=pal_testthat]{"testthat"}.}
 
 \item{keybinding}{A key binding for the pal.}
 
