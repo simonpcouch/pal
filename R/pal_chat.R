@@ -1,15 +1,12 @@
-#' Convert erroring code to use cli
-#'
-#' This help-page documents the function that pals created with `pal("cli")`
-#' apply. For more on cli pals, see [pal_cli].
+#' Apply pals to code
 #'
 #' @param expr Lines of code that raise an error, as an expression.
-#' @param pal A pal created with [pal("cli")][pal_cli].
+#' @param pal A pal created with [pal()].
 #'
 #' @examplesIf FALSE
 #' pal <- pal("cli")
 #'
-#' .pal_cli(stop("An error message."))
+#' pal_chat(stop("An error message."))
 #'
 #' @export
 pal_chat <- function(expr, pal = NULL) {
