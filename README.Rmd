@@ -28,7 +28,7 @@ To create a pal, simply pass `pal()` the ID of a pre-defined pal and a keybindin
 pal("cli", "Ctrl+Shift+C")
 ```
 
-> [!CAUTION]
+> [!IMPORTANT]
 > Much of the documentation in this package is aspirational and its interface is likely to change rapidly.
 
 ## Installation
