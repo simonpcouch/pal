@@ -1,15 +1,10 @@
-rs_update_selection <- function(
-    context = rstudioapi::getActiveDocumentContext(),
-    id = "cli"
-  ) {
+rs_update_selection <- function(context, role) {
   # see if the user has run `pal()` successfully already
-  if (exists(paste0(".last_pal_", id))) {
-    pal <- get(paste0(".last_pal_", id))
-  } else if (exists(".last_pal")) {
-    pal <- .last_pal
+  if (exists(paste0(".last_pal_", role))) {
+    pal <- get(paste0(".last_pal_", role))
   } else {
     tryCatch(
-      pal <- pal(id),
+      pal <- pal(role),
       error = function(e) {
         rstudioapi::showDialog("Error", "Unable to create a pal. See `?pal()`.")
       }
@@ -25,8 +20,7 @@ rs_update_selection <- function(
   }
 
   tryCatch({
-    output_str <- pal_chat(selection_text, pal)
-    output_str <- rlang::call2(.pal)
+    output_str <- .pal_chat(pal, selection_text)
 
     rstudioapi::modifyRange(
       selection$range,
@@ -40,4 +34,12 @@ rs_update_selection <- function(
   }, error = function(e) {
     rstudioapi::showDialog("Error", paste("The pal ran into an issue: ", e$message))
   })
+}
+
+rs_pal_cli <- function(context = rstudioapi::getActiveDocumentContext()) {
+  rs_update_selection(context = context, role = "cli")
+}
+
+rs_pal_testthat <- function(context = rstudioapi::getActiveDocumentContext()) {
+  rs_update_selection(context = context, role = "testthat")
 }

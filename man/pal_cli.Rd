@@ -57,7 +57,7 @@ and are generated with the default model, Claude Sonnet 3.5.
 
 pal("cli")
 #> 
-#> -- A cli pal using claude-3-5-sonnet-20240620.
+#> -- A cli pal using gpt-4o-mini.
 }\if{html}{\out{</div>}}
 
 The \code{pal_chat()} function takes an R expression that raises a condition
@@ -67,7 +67,8 @@ little bit of markup:
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{pal_chat(\{
   rlang::abort("`save_pred` can only be used if the initial results saved predictions.")
 \})
-#> cli::cli_abort("\{.code save_pred\} can only be used if the initial results saved predictions.")
+#> cli::cli_abort("The \{.code save_pred\} function can only be used if the initial
+#>  results saved predictions.")
 }\if{html}{\out{</div>}}
 
 The function knows to look for the most recently defined pal, but you can
@@ -87,8 +88,10 @@ Some strange vector collapsing and funky line breaking:
   rlang::abort(msg)
 \})
 #> cli::cli_abort(
-#>   "The provided \{.arg grid\} has parameter columns that have not been 
-#>    marked for tuning by \{.fn tune\}: \{extra_grid_params\}."
+#>   c(
+#>     "The provided \{.code grid\} has the following parameter columns that have
+#>      not been marked for tuning by \{.code tune()\}: \{extra_grid_params\}."
+#>   )
 #> )
 }\if{html}{\out{</div>}}
 
@@ -108,8 +111,8 @@ A message that probably best lives as two separate elements:
 #>   c(
 #>     "Some model parameters require finalization but there are recipe
 #>      parameters that require tuning.",
-#>     "i" = "Use \{.fn extract_parameter_set_dials\} to set parameter ranges
-#>            manually and supply the output to the \{.arg param_info\} argument."
+#>     "i" = "Please use \{.code extract_parameter_set_dials()\} to set parameter 
+#>            ranges manually and supply the output to the \{.arg param_info\} argument."
 #>   )
 #> )
 }\if{html}{\out{</div>}}
@@ -127,7 +130,9 @@ Gnarly ad-hoc pluralization:
   rlang::inform(msg)
 \})
 #> cli::cli_inform(
-#>   "Creating pre-processing data to finalize unknown parameter\{?s\}: \{unk_names\}"
+#>   c(
+#>     "Creating pre-processing data to finalize unknown parameter\{?s:\}. \{unk_names\}"
+#>   )
 #> )
 }\if{html}{\out{</div>}}
 
@@ -141,8 +146,10 @@ Some \code{paste0()} wonk:
   ))
 \})
 #> cli::cli_abort(
-#>   "The workflow has arguments to be tuned that are missing some 
-#>    parameter objects: \{.val \{pset$id[!params]\}\}"
+#>   c(
+#>     "The workflow has arguments to be tuned that are missing some
+#>      parameter objects: \{pset$id[!params]\}."
+#>   )
 #> )
 }\if{html}{\out{</div>}}
 
@@ -160,8 +167,10 @@ if (!fine) \{
 \}
 \})
 #> cli::cli_abort(
-#>   "Argument \{.code \{deparse(cl$x)\}\} should be \{?a/an\} \{cls\} or \{.code NULL\}\{?
-#>    in \{.fn \{where\}\}\}"
+#>   c(
+#>     "Argument \{.code \{deparse(cl$x)\}\} should be a \{.cls \{cls\}\} or \{.code NULL\}.",
+#>     "i" = "\{if (!is.null(where)) \{where\}\}"
+#>   )
 #> )
 }\if{html}{\out{</div>}}
 
@@ -170,7 +179,7 @@ Sprintf-style statements aren't an issue:
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{pal_chat(\{
   abort(sprintf("No such '\%s' function: `\%s()`.", package, name))
 \})
-#> cli::cli_abort("No such \{.pkg \{package\}\} function: \{.fn \{name\}\}.")
+#> cli::cli_abort("No such '\{.pkg \{package\}\}' function: \{.fn \{name\}\}().")
 }\if{html}{\out{</div>}}
 }
 

@@ -1,4 +1,9 @@
 Name: Convert to cli
 Description: Replaces selected erroring code with a version adapted to cli
-Binding: rs_.pal_cli
+Binding: rs_pal_cli
+Interactive: false
+
+Name: Convert to testthat
+Description: Replaces selected unit testing code with a version adapted to testthat 3
+Binding: rs_pal_testthat
 Interactive: false
