@@ -1,0 +1,12 @@
+^pal\.Rproj$
+^\.Rproj\.user$
+^LICENSE\.md$
+^README\.Rmd$
+^cran-comments\.md$
+^\.github$
+inst/figs/
+^_pkgdown\.yml$
+^docs$
+^pkgdown$
+.env
+inst/slides/

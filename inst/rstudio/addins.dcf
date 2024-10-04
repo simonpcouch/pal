@@ -1,0 +1,4 @@
+Name: Convert to cli
+Description: Replaces selected erroring code with a version adapted to cli
+Binding: rs_.pal_cli
+Interactive: false

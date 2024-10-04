@@ -1,0 +1,26 @@
+Package: pal
+Title: LLM-driven coding assistants
+Version: 0.0.1
+Authors@R: 
+    person("Simon", "Couch", , "simon.couch@posit.co", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0001-5676-5107"))
+Description: LLM-driven coding assistants.
+License: MIT + file LICENSE
+Config/testthat/edition: 3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2
+URL: https://github.com/simonpcouch/pal, https://simonpcouch.github.io/pal/
+BugReports: https://github.com/simonpcouch/pal/issues
+Imports: 
+    cli,
+    dotenv,
+    glue,
+    elmer,
+    rlang,
+    rstudioapi
+Suggests: 
+    testthat (>= 3.0.0),
+    withr
+Remotes:
+    hadley/elmer#70
