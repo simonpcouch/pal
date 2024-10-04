@@ -23,8 +23,8 @@ keybinding you’d like it attached to. For example, to use the cli pal:
 pal("cli", "Ctrl+Shift+C")
 ```
 
-> \[!IMPORTANT\] Much of the documentation in this package is
-> aspirational and its interface is likely to change rapidly.
+**Much of the documentation in this package is aspirational and its
+interface is likely to change rapidly.**
 
 ## Installation
 
