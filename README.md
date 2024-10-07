@@ -30,10 +30,11 @@ You can install pal like so:
 pak::pak("simonpcouch/pal")
 ```
 
-Then, ensure that you have an `ANTHROPIC_API_KEY` set in your
+Then, ensure that you have an
+[`ANTHROPIC_API_KEY`](https://console.anthropic.com/) set in your
 [`.env`](https://github.com/gaborcsardi/dotenv). If you’d like to use an
-LLM other than Anthropic’s Claude 3.5 Sonnet to power the pal, see
-`?pal()` to set default metadata on that model.
+LLM other than Anthropic’s Claude 3.5 Sonnet—like OpenAI’s ChatGPT—to
+power the pal, see `?pal()` to set default metadata on that model.
 
 ## Example
 
