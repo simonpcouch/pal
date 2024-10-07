@@ -39,7 +39,8 @@ power the pal, see `?pal()` to set default metadata on that model.
 ## Example
 
 To create a pal, simply pass `pal()` a pre-defined “role” and a
-keybinding you’d like it attached to. For example, to use the cli pal:
+keybinding you’d like it attached to. For example, to use the [cli
+pal](https://simonpcouch.github.io/pal/reference/pal_cli.html):
 
 ``` r
 pal("cli", "Ctrl+Shift+C")
@@ -48,10 +49,12 @@ pal("cli", "Ctrl+Shift+C")
 Then, highlight some code, press the keyboard shortcut, and watch your
 code be rewritten:
 
-![](inst/figs/addin.gif) As-is, the package provides ergonomic LLM
-assistants for R package development:
+![](https://github.com/simonpcouch/pal/raw/main/inst/figs/addin.gif)
+As-is, the package provides ergonomic LLM assistants for R package
+development:
 
-- `"cli"`: Convert to cli
+- `"cli"`: [Convert to
+  cli](https://simonpcouch.github.io/pal/reference/pal_cli.html)
 - `"testthat"`: Convert to testthat 3
 - `"roxygen"`: Document functions with roxygen
 
@@ -65,10 +68,10 @@ tasks.
 
 The cost of using pals depends on 1) the length of the underlying prompt
 for a given pal and 2) the cost per token of the chosen model. Using the
-cli pal with Anthropic’s Claude Sonnet 3.5, for example, costs something
-like \$15 per 1,000 code refactorings, while using the testthat pal with
+cli pal with Anthropic’s Claude Sonnet 3.5, for example, [costs
+something
+like](https://simonpcouch.github.io/pal/reference/pal_cli.html#cost)
+\$15 per 1,000 code refactorings, while using the testthat pal with
 OpenAI’s GPT 4o-mini would cost something like \$1 per 1,000
 refactorings. Pals using a locally-served LLM are “free” (in the usual
 sense of code execution, ignoring the cost of increased battery usage).
-
-<!-- TODO: link to `cli_pal` here. -->
