@@ -115,7 +115,7 @@ regular expression present:</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; expect_snapshot(</span></span>
-<span><span class="co">#&gt;   .res &lt;- check_ellipses("exponentiate", "tidy", "boop",</span></span>
+<span><span class="co">#&gt;   object_from_warning &lt;- check_ellipses("exponentiate", "tidy", "boop",</span></span>
 <span><span class="co">#&gt;     exponentiate = TRUE, quick = FALSE)</span></span>
 <span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">testthat_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
@@ -128,12 +128,10 @@ regular expression present:</p>
 <span><span class="co">#&gt;   error = TRUE,</span></span>
 <span><span class="co">#&gt;   augment(res_fenegbin, df)</span></span>
 <span><span class="co">#&gt; )</span></span>
-<span><span class="co">#&gt;</span></span>
 <span><span class="co">#&gt; expect_snapshot(</span></span>
 <span><span class="co">#&gt;   error = TRUE,</span></span>
 <span><span class="co">#&gt;   augment(res_feNmlm, df)</span></span>
 <span><span class="co">#&gt; )</span></span>
-<span><span class="co">#&gt;</span></span>
 <span><span class="co">#&gt; expect_snapshot(</span></span>
 <span><span class="co">#&gt;   error = TRUE,</span></span>
 <span><span class="co">#&gt;   augment(res_fepois, df)</span></span>
@@ -162,9 +160,7 @@ results so as not to snapshot both the result and the warning:</p>
 <span>    <span class="st">'"robust" argument has been deprecated'</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; expect_snapshot(</span></span>
-<span><span class="co">#&gt;   .res &lt;- tidy(fit, robust = TRUE)</span></span>
-<span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
+<span><span class="co">#&gt; expect_snapshot(.res &lt;- tidy(fit, robust = TRUE))</span></span></code></pre><p></p></div>
 <p>Nested expectations can generally be disentangled without issue:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">testthat_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="fu">expect_equal</span><span class="op">(</span></span>
@@ -173,13 +169,12 @@ results so as not to snapshot both the result and the warning:</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; expect_snapshot({</span></span>
-<span><span class="co">#&gt;   fit_resamples_result &lt;- fit_resamples(decision_tree(cost_complexity = 1),</span></span>
+<span><span class="co">#&gt;   object_from_fit_resamples &lt;- fit_resamples(decision_tree(cost_complexity = 1),</span></span>
 <span><span class="co">#&gt;     bootstraps(mtcars))</span></span>
-<span><span class="co">#&gt;   tune_grid_result &lt;- tune_grid(decision_tree(cost_complexity = 1),</span></span>
+<span><span class="co">#&gt;   object_from_tune_grid &lt;- tune_grid(decision_tree(cost_complexity = 1),</span></span>
 <span><span class="co">#&gt;     bootstraps(mtcars))</span></span>
 <span><span class="co">#&gt; })</span></span>
-<span><span class="co">#&gt;</span></span>
-<span><span class="co">#&gt; expect_equal(fit_resamples_result, tune_grid_result)</span></span></code></pre><p></p></div>
+<span><span class="co">#&gt; expect_equal(object_from_fit_resamples, object_from_tune_grid)</span></span></code></pre><p></p></div>
 <p>There are also a few edits the pal knows to make to third-edition code.
 For example, it transitions <code>expect_snapshot_error()</code> and friends to
 use <code>expect_snapshot(error = TRUE)</code> so that the error context is snapshotted
