@@ -11,17 +11,11 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 status](https://www.r-pkg.org/badges/version/pal)](https://CRAN.R-project.org/package=pal)
 <!-- badges: end -->
 
-Pals are persistent LLM-driven helpers designed to help you complete
-common tasks in interactive data analysis, authoring, and package
-development. Once created, they can be attached to a keybinding and
-immediately get to work on repetitive but hard-to-automate tasks.
-
-To create a pal, simply pass `pal()` the ID of a pre-defined pal and a
-keybinding you’d like it attached to. For example, to use the cli pal:
-
-``` r
-pal("cli", "Ctrl+Shift+C")
-```
+Pals are persistent, ergonomic LLM assistants designed to help you
+complete repetitive, hard-to-automate tasks quickly. When created, they
+automatically generate RStudio add-ins registered to keyboard shortcuts.
+After selecting some code, press the keyboard shortcut you’ve chosen and
+watch your code be rewritten.
 
 **Much of the documentation in this package is aspirational and its
 interface is likely to change rapidly.**
@@ -41,30 +35,25 @@ LLM other than Anthropic’s Claude 3.5 Sonnet to power the pal, see
 
 ## Example
 
-For example, the cli pal created above with `pal("cli", "Ctrl+Shift+C")`
-provides an RStudio add-in “Convert to cli” registered with the
-keybinding “Ctrl+Shift+C”. After selecting some code, press the keyboard
-shortcut and wait a moment:
+To create a pal, simply pass `pal()` a pre-defined “role” and a
+keybinding you’d like it attached to. For example, to use the cli pal:
 
-![](inst/figs/addin.gif)
+``` r
+pal("cli", "Ctrl+Shift+C")
+```
 
-## Available Pals
+Then, highlight some code, press the keyboard shortcut, and watch your
+code be rewritten:
 
-There are pre-engineered pals for all sorts of tasks in R:
-
-**Interactive Data Analysis**
-
-- …
-
-**Quarto / Authoring**
-
-- `"label"`: Label code chunks
-
-**Package development**
+![](inst/figs/addin.gif) As-is, the package provides ergonomic LLM
+assistants for R package development:
 
 - `"cli"`: Convert to cli
 - `"testthat"`: Convert to testthat 3
 - `"roxygen"`: Document functions with roxygen
 
-You can also create your own pals by passing a custom prompt to
-`pal(role)`.
+That said, the package provides infrastructure for others to make LLM
+assistants for any task in R, from authoring to interactive data
+analysis. With only a markdown file and a function call, users can
+extend pal to assist with their own repetitive but hard-to-automate
+tasks.
