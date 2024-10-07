@@ -25,6 +25,14 @@ pal_chat <- function(expr, pal = NULL) {
   )
 }
 
+# TODO: these should just be methods in an R6 object
+.pal_stream <- function(pal, request, call = caller_env()) {
+  if (identical(request, "")) {
+    cli::cli_abort("Please supply a non-empty chat request.", call = call)
+  }
+  pal$stream(paste0(request, collapse = "\n"))
+}
+
 #' @export
 print.pal_response <- function(x, ...) {
   cat(x)
