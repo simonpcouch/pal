@@ -6,6 +6,7 @@ test_that(".last_pal is up to date with most recent pal", {
 
   pal("cli")
   expect_snapshot(.last_pal)
+  expect_snapshot(.last_pal_cli)
 
   pal("cli", "new_chat_openai", model = "gpt-4o-mini")
   expect_snapshot(.last_pal)

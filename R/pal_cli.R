@@ -52,26 +52,21 @@
 #' ```{r}
 #' library(pal)
 #'
-#' pal("cli")
+#' cli_pal <- pal("cli")
 #' ```
 #'
-#' The `pal_chat()` function takes an R expression that raises a condition
-#' and converts it to use cli. At its simplest, a one-line message with a
-#' little bit of markup:
+#' At its simplest, a one-line message with a little bit of markup:
 #'
 #' ```{r}
-#' pal_chat({
+#' cli_pal$chat({
 #'   rlang::abort("`save_pred` can only be used if the initial results saved predictions.")
 #' })
 #' ```
 #'
-#' The function knows to look for the most recently defined pal, but you can
-#' pass one manually via `pal_chat(pal)` if you please.
-#'
 #' Some strange vector collapsing and funky line breaking:
 #'
 #' ```{r}
-#' pal_chat({
+#' cli_pal$chat({
 #'   extra_grid_params <- glue::single_quote(extra_grid_params)
 #'   extra_grid_params <- glue::glue_collapse(extra_grid_params, sep = ", ")
 #'
@@ -87,7 +82,7 @@
 #' A message that probably best lives as two separate elements:
 #'
 #' ```{r}
-#' pal_chat({
+#' cli_pal$chat({
 #'   rlang::abort(
 #'     paste(
 #'       "Some model parameters require finalization but there are recipe",
@@ -102,7 +97,7 @@
 #' Gnarly ad-hoc pluralization:
 #'
 #' ```{r}
-#' pal_chat({
+#' cli_pal$chat({
 #'   msg <- "Creating pre-processing data to finalize unknown parameter"
 #'   unk_names <- pset$id[unk]
 #'   if (length(unk_names) == 1) {
@@ -117,7 +112,7 @@
 #' Some `paste0()` wonk:
 #'
 #' ```{r}
-#' pal_chat({
+#' cli_pal$chat({
 #'   rlang::abort(paste0(
 #'     "The workflow has arguments to be tuned that are missing some ",
 #'     "parameter objects: ",
@@ -130,7 +125,7 @@
 #' erroring code that's run conditionally can get borked:
 #'
 #'   ```{r}
-#' pal_chat({
+#' cli_pal$chat({
 #'   cls <- paste(cls, collapse = " or ")
 #'   if (!fine) {
 #'     msg <- glue::glue("Argument '{deparse(cl$x)}' should be a {cls} or NULL")
@@ -145,7 +140,7 @@
 #' Sprintf-style statements aren't an issue:
 #'
 #' ```{r}
-#' pal_chat({
+#' cli_pal$chat({
 #'   abort(sprintf("No such '%s' function: `%s()`.", package, name))
 #' })
 #' ```

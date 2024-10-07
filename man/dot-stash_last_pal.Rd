@@ -4,7 +4,7 @@
 \alias{.stash_last_pal}
 \title{Save most recent results to search path}
 \usage{
-.stash_last_pal(x, role)
+.stash_last_pal(x)
 }
 \arguments{
 \item{x}{A pal.}

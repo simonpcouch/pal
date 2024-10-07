@@ -9,19 +9,20 @@
 #'
 #' @export
 #' @keywords internal
-.stash_last_pal <- function(x, role) {
-  if (!"org:r-lib" %in% search()) {
+.stash_last_pal <- function(x) {
+  if (!"pkg:pal" %in% search()) {
     do.call("attach", list(new.env(), pos = length(search()),
-                           name = "org:r-lib"))
+                           name = "pkg:pal"))
   }
-  env <- as.environment("org:r-lib")
-  env[[paste0(".last_pal_", role)]] <- x
+  env <- as.environment("pkg:pal")
+  env[[paste0(".last_pal_", x$role)]] <- x
   env[[".last_pal"]] <- x
   invisible(NULL)
 }
 
-.pal_role <- function(pal) {
-  gsub("_pal", "", class(pal)[1])
+#' @export
+print.pal_response <- function(x, ...) {
+  cat(x)
 }
 
 check_role <- function(role, call = caller_env()) {
@@ -41,7 +42,7 @@ last_pal <- function(pal, call = caller_env()) {
     return(pal)
   }
 
-  pal_role <- .pal_role(pal)
+  pal_role <- pal$role
 
   if (exists(paste0(".last_pal_", pal_role))) {
     return(get(paste0(".last_pal_", pal_role)))
