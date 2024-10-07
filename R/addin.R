@@ -62,7 +62,7 @@ wipe_selection <- function(selection, context) {
 stream_selection <- function(selection, context, pal, n_lines_orig) {
   selection_text <- selection[["text"]]
   output_lines <- character(0)
-  stream <- .pal_stream(pal, selection_text)
+  stream <- pal[[".__enclos_env__"]][["private"]]$.stream(selection_text)
   coro::loop(for (chunk in stream) {
     output_lines <- paste(output_lines, sub("\n$", "", chunk), sep = "")
     n_lines <- nchar(gsub("[^\n]+", "", output_lines)) + 1

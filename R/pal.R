@@ -60,28 +60,14 @@ pal <- function(
     fn = getOption(".pal_fn", default = "new_chat_claude"), ..., .ns = "elmer"
   ) {
   check_role(role)
-  args <- list(...)
-  default_args <- getOption(".pal_args", default = list())
-  args <- modifyList(default_args, args)
 
-  # TODO: make this an environment initialized on onLoad that folks can
-  # register dynamically
-  args$system_prompt <- get(paste0(role, "_system_prompt"), envir = ns_env("pal"))
-
-  pal <- rlang::eval_bare(rlang::call2(fn, !!!args, .ns = "elmer"))
-
-  pal <- structure(pal, class = c(paste(role, "_pal"), "pal", class(pal)))
-  .stash_last_pal(pal, role = role)
-  pal
+  Pal$new(
+    role = role,
+    keybinding = keybinding,
+    fn = fn,
+    ...,
+    .ns = .ns
+  )
 }
 
 supported_roles <- c("cli", "testthat")
-
-#' @export
-print.pal <- function(x, ...) {
-  model <- x[[".__enclos_env__"]][["private"]][["provider"]]@model
-  role <- .pal_role(x)
-  cli::cli_h3(
-    "A {.field {role}}pal using {.field {model}}."
-  )
-}
