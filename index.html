@@ -53,39 +53,24 @@
 </div>
 <!-- badges: start -->
 
-<p>Pals are persistent LLM-driven helpers designed to help you complete common tasks in interactive data analysis, authoring, and package development. Once created, they can be attached to a keybinding and immediately get to work on repetitive but hard-to-automate tasks.</p>
-<p>To create a pal, simply pass <code><a href="reference/pal.html">pal()</a></code> the ID of a pre-defined pal and a keybinding you’d like it attached to. For example, to use the cli pal:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/pal.html">pal</a></span><span class="op">(</span><span class="st">"cli"</span>, <span class="st">"Ctrl+Shift+C"</span><span class="op">)</span></span></code></pre></div>
-<p><strong>Much of the documentation in this package is aspirational and its interface is likely to change rapidly.</strong></p>
+<p>Pals are persistent, ergonomic LLM assistants designed to help you complete repetitive, hard-to-automate tasks quickly. When created, they automatically generate RStudio add-ins registered to keyboard shortcuts. After selecting some code, press the keyboard shortcut you’ve chosen and watch your code be rewritten.</p>
+<p><strong>Much of the documentation in this package is aspirational and its interface is likely to change rapidly.</strong> Note, especially, that keyboard shortcuts will have to registered in the usual way (via Tools &gt; Modify Keyboard Shortcuts &gt; search “Pal”), for now.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>You can install pal like so:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pak.html" class="external-link">pak</a></span><span class="op">(</span><span class="st">"simonpcouch/pal"</span><span class="op">)</span></span></code></pre></div>
-<p>Then, ensure that you have an <code>ANTHROPIC_API_KEY</code> set in your <a href="https://github.com/gaborcsardi/dotenv" class="external-link"><code>.env</code></a>. If you’d like to use an LLM other than Anthropic’s Claude 3.5 Sonnet to power the pal, see <code>?pal()</code> to set default metadata on that model.</p>
+<p>Then, ensure that you have an <a href="https://console.anthropic.com/" class="external-link"><code>ANTHROPIC_API_KEY</code></a> set in your <a href="https://github.com/gaborcsardi/dotenv" class="external-link"><code>.env</code></a>. If you’d like to use an LLM other than Anthropic’s Claude 3.5 Sonnet—like OpenAI’s ChatGPT—to power the pal, see <code>?pal()</code> to set default metadata on that model.</p>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
 </h2>
-<p>For example, the cli pal created above with <code>pal("cli", "Ctrl+Shift+C")</code> provides an RStudio add-in “Convert to cli” registered with the keybinding “Ctrl+Shift+C”. After selecting some code, press the keyboard shortcut and wait a moment:</p>
-<p><img src="inst/figs/addin.gif"></p>
-</div>
-<div class="section level2">
-<h2 id="available-pals">Available Pals<a class="anchor" aria-label="anchor" href="#available-pals"></a>
-</h2>
-<p>There are pre-engineered pals for all sorts of tasks in R:</p>
-<p><strong>Interactive Data Analysis</strong></p>
-<ul>
-<li>…</li>
-</ul>
-<p><strong>Quarto / Authoring</strong></p>
-<ul>
-<li>
-<code>"label"</code>: Label code chunks</li>
-</ul>
-<p><strong>Package development</strong></p>
+<p>To create a pal, simply pass <code><a href="reference/pal.html">pal()</a></code> a pre-defined “role” and a keybinding you’d like it attached to. For example, to use the cli pal:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/pal.html">pal</a></span><span class="op">(</span><span class="st">"cli"</span>, <span class="st">"Ctrl+Shift+C"</span><span class="op">)</span></span></code></pre></div>
+<p>Then, highlight some code, press the keyboard shortcut, and watch your code be rewritten:</p>
+<p><img src="inst/figs/addin.gif"> As-is, the package provides ergonomic LLM assistants for R package development:</p>
 <ul>
 <li>
 <code>"cli"</code>: Convert to cli</li>
@@ -94,7 +79,13 @@
 <li>
 <code>"roxygen"</code>: Document functions with roxygen</li>
 </ul>
-<p>You can also create your own pals by passing a custom prompt to <code>pal(role)</code>.</p>
+<p>That said, the package provides infrastructure for others to make LLM assistants for any task in R, from authoring to interactive data analysis. With only a markdown file and a function call, users can extend pal to assist with their own repetitive but hard-to-automate tasks.</p>
+</div>
+<div class="section level2">
+<h2 id="how-much-do-pals-cost">How much do pals cost?<a class="anchor" aria-label="anchor" href="#how-much-do-pals-cost"></a>
+</h2>
+<p>The cost of using pals depends on 1) the length of the underlying prompt for a given pal and 2) the cost per token of the chosen model. Using the cli pal with Anthropic’s Claude Sonnet 3.5, for example, costs something like $15 per 1,000 code refactorings, while using the testthat pal with OpenAI’s GPT 4o-mini would cost something like $1 per 1,000 refactorings. Pals using a locally-served LLM are “free” (in the usual sense of code execution, ignoring the cost of increased battery usage).</p>
+<!-- TODO: link to `cli_pal` here. -->
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

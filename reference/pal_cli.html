@@ -75,7 +75,7 @@ tidymodels organizations.</p>
 
 
 <p>Create a cli pal with:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/pal.html">pal</a></span><span class="op">(</span><span class="st">"cli"</span>, <span class="st">"Ctrl+Shift+C"</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/pal.html">pal</a></span><span class="op">(</span><span class="st">"cli"</span><span class="op">)</span></span></code></pre><p></p></div>
     </div>
     <div class="section level2">
     <h2 id="cost">Cost<a class="anchor" aria-label="anchor" href="#cost"></a></h2>
@@ -90,7 +90,7 @@ receives, so we'll call that 100 output tokens per refactor.</p>
 <p>As of the time of writing (October 2024), the default pal model Claude
 Sonnet 3.5 costs \$3 per million input tokens and $15 per million output
 tokens. So, using the default model,
-<strong>pals cost around \$15 for every 1,000 refactored pieces of code</strong>. GPT-4o
+<strong>cli pals cost around \$15 for every 1,000 refactored pieces of code</strong>. GPT-4o
 Mini, by contrast, doesn't tend to get cli markup classes right but <em>does</em>
 return syntactically valid calls to cli functions, and it would cost around
 75 cents per 1,000 refactored pieces of code.</p>
@@ -105,20 +105,14 @@ return syntactically valid calls to cli functions, and it would cost around
 and are generated with the default model, Claude Sonnet 3.5.</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/simonpcouch/pal" class="external-link">pal</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="../reference/pal.html">pal</a></span><span class="op">(</span><span class="st">"cli"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;</span></span>
-<span><span class="co">#&gt; -- A cli pal using claude-3-5-sonnet-20240620.</span></span></code></pre><p></p></div>
-<p>The <code><a href="pal_chat.html">pal_chat()</a></code> function takes an R expression that raises a condition
-and converts it to use cli. At its simplest, a one-line message with a
-little bit of markup:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/pal_chat.html">pal_chat</a></span><span class="op">(</span><span class="op">{</span></span>
+<span><span class="va">cli_pal</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pal.html">pal</a></span><span class="op">(</span><span class="st">"cli"</span><span class="op">)</span></span></code></pre><p></p></div>
+<p>At its simplest, a one-line message with a little bit of markup:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">cli_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort</a></span><span class="op">(</span><span class="st">"`save_pred` can only be used if the initial results saved predictions."</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; cli::cli_abort("{.code save_pred} can only be used if the initial results saved predictions.")</span></span></code></pre><p></p></div>
-<p>The function knows to look for the most recently defined pal, but you can
-pass one manually via <code>pal_chat(pal)</code> if you please.</p>
+<span><span class="co">#&gt; cli::cli_abort("{.arg save_pred} can only be used if the initial results saved predictions.")</span></span></code></pre><p></p></div>
 <p>Some strange vector collapsing and funky line breaking:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/pal_chat.html">pal_chat</a></span><span class="op">(</span><span class="op">{</span></span>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">cli_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="va">extra_grid_params</span> <span class="op">&lt;-</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/quoting.html" class="external-link">single_quote</a></span><span class="op">(</span><span class="va">extra_grid_params</span><span class="op">)</span></span>
 <span>  <span class="va">extra_grid_params</span> <span class="op">&lt;-</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue_collapse.html" class="external-link">glue_collapse</a></span><span class="op">(</span><span class="va">extra_grid_params</span>, sep <span class="op">=</span> <span class="st">", "</span><span class="op">)</span></span>
 <span></span>
@@ -130,11 +124,12 @@ pass one manually via <code>pal_chat(pal)</code> if you please.</p>
 <span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; cli::cli_abort(</span></span>
-<span><span class="co">#&gt;   "The provided {.arg grid} has parameter columns that have not been</span></span>
-<span><span class="co">#&gt;    marked for tuning by {.fn tune}: {extra_grid_params}."</span></span>
+<span><span class="co">#&gt;   "The provided {.arg grid} has the parameter column{?s}</span></span>
+<span><span class="co">#&gt;    {.code {extra_grid_params}} that {?has/have} not been marked for</span></span>
+<span><span class="co">#&gt;    tuning by {.fn tune}."</span></span>
 <span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
 <p>A message that probably best lives as two separate elements:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/pal_chat.html">pal_chat</a></span><span class="op">(</span><span class="op">{</span></span>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">cli_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span></span>
 <span>      <span class="st">"Some model parameters require finalization but there are recipe"</span>,</span>
@@ -148,12 +143,13 @@ pass one manually via <code>pal_chat(pal)</code> if you please.</p>
 <span><span class="co">#&gt;   c(</span></span>
 <span><span class="co">#&gt;     "Some model parameters require finalization but there are recipe</span></span>
 <span><span class="co">#&gt;      parameters that require tuning.",</span></span>
-<span><span class="co">#&gt;     "i" = "Use {.fn extract_parameter_set_dials} to set parameter ranges</span></span>
-<span><span class="co">#&gt;            manually and supply the output to the {.arg param_info} argument."</span></span>
+<span><span class="co">#&gt;     "i" = "Please use {.fn extract_parameter_set_dials} to set parameter</span></span>
+<span><span class="co">#&gt;            ranges manually and supply the output to the {.arg param_info}</span></span>
+<span><span class="co">#&gt;            argument."</span></span>
 <span><span class="co">#&gt;   )</span></span>
 <span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
 <p>Gnarly ad-hoc pluralization:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/pal_chat.html">pal_chat</a></span><span class="op">(</span><span class="op">{</span></span>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">cli_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="va">msg</span> <span class="op">&lt;-</span> <span class="st">"Creating pre-processing data to finalize unknown parameter"</span></span>
 <span>  <span class="va">unk_names</span> <span class="op">&lt;-</span> <span class="va">pset</span><span class="op">$</span><span class="va">id</span><span class="op">[</span><span class="va">unk</span><span class="op">]</span></span>
 <span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">unk_names</span><span class="op">)</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span></span>
@@ -164,10 +160,10 @@ pass one manually via <code>pal_chat(pal)</code> if you please.</p>
 <span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">inform</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; cli::cli_inform(</span></span>
-<span><span class="co">#&gt;   "Creating pre-processing data to finalize unknown parameter{?s}: {unk_names}"</span></span>
+<span><span class="co">#&gt;   "Creating pre-processing data to finalize unknown parameter{?s}: {.val {unk_names}}"</span></span>
 <span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
 <p>Some <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0()</a></code> wonk:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/pal_chat.html">pal_chat</a></span><span class="op">(</span><span class="op">{</span></span>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">cli_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
 <span>    <span class="st">"The workflow has arguments to be tuned that are missing some "</span>,</span>
 <span>    <span class="st">"parameter objects: "</span>,</span>
@@ -180,7 +176,7 @@ pass one manually via <code>pal_chat(pal)</code> if you please.</p>
 <span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
 <p>The model is instructed to only return a call to a cli function, so
 erroring code that's run conditionally can get borked:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/pal_chat.html">pal_chat</a></span><span class="op">(</span><span class="op">{</span></span>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">cli_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
 <span><span class="va">cls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">cls</span>, collapse <span class="op">=</span> <span class="st">" or "</span><span class="op">)</span></span>
 <span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="va">fine</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"Argument '{deparse(cl$x)}' should be a {cls} or NULL"</span><span class="op">)</span></span>
@@ -191,11 +187,11 @@ erroring code that's run conditionally can get borked:</p>
 <span><span class="op">}</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; cli::cli_abort(</span></span>
-<span><span class="co">#&gt;   "Argument {.code {deparse(cl$x)}} should be {?a/an} {cls} or {.code NULL}{?</span></span>
-<span><span class="co">#&gt;    in {.fn {where}}}"</span></span>
+<span><span class="co">#&gt;   "Argument {.code {deparse(cl$x)}} should be {?a/an} {cls} or NULL{?</span></span>
+<span><span class="co">#&gt;    in {.code {where}}}"</span></span>
 <span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
 <p>Sprintf-style statements aren't an issue:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/pal_chat.html">pal_chat</a></span><span class="op">(</span><span class="op">{</span></span>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">cli_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="fu">abort</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"No such '%s' function: `%s()`."</span>, <span class="va">package</span>, <span class="va">name</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; cli::cli_abort("No such {.pkg {package}} function: {.fn {name}}.")</span></span></code></pre><p></p></div>
