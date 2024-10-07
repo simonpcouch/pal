@@ -7,7 +7,7 @@
 pal(
   role = NULL,
   keybinding = NULL,
-  fn = getOption(".pal_fn", default = "new_chat_claude"),
+  fn = getOption(".pal_fn", default = "chat_claude"),
   ...,
   .ns = "elmer"
 )
@@ -21,7 +21,7 @@ Keybdings have to be registered in the usual way (via Tools >
 Modify Keyboard Shortcuts), for now.}
 
 \item{fn}{A \verb{new_*()} function, likely from the elmer package. Defaults
-to \code{\link[elmer:new_chat_claude]{elmer::new_chat_claude()}}. To set a persistent alternative default,
+to \code{\link[elmer:chat_claude]{elmer::chat_claude()}}. To set a persistent alternative default,
 set the \code{.pal_fn} option; see examples below.}
 
 \item{...}{Additional arguments to \code{fn}. The \code{system_prompt} argument will
@@ -53,7 +53,7 @@ pal()
 
 # or with OpenAI's 4o-mini:
 pal(
-  "new_chat_openai",
+  "chat_openai",
   model = "gpt-4o-mini"
 )
 
@@ -61,7 +61,7 @@ pal(
 # following options (possibly in your .Rprofile, if you'd like
 # them to persist across sessions):
 options(
-  .pal_fn = "new_chat_openai",
+  .pal_fn = "chat_openai",
   .pal_args = list(model = "gpt-4o-mini")
 )
 \dontshow{\}) # examplesIf}

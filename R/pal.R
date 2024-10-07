@@ -13,7 +13,7 @@
 #' Keybdings have to be registered in the usual way (via Tools >
 #' Modify Keyboard Shortcuts), for now.
 #' @param fn A `new_*()` function, likely from the elmer package. Defaults
-#'   to [elmer::new_chat_claude()]. To set a persistent alternative default,
+#'   to [elmer::chat_claude()]. To set a persistent alternative default,
 #'   set the `.pal_fn` option; see examples below.
 #' @param .ns The package that the `new_*()` function is exported from.
 #' @param ... Additional arguments to `fn`. The `system_prompt` argument will
@@ -35,7 +35,7 @@
 #'
 #' # or with OpenAI's 4o-mini:
 #' pal(
-#'   "new_chat_openai",
+#'   "chat_openai",
 #'   model = "gpt-4o-mini"
 #' )
 #'
@@ -43,13 +43,13 @@
 #' # following options (possibly in your .Rprofile, if you'd like
 #' # them to persist across sessions):
 #' options(
-#'   .pal_fn = "new_chat_openai",
+#'   .pal_fn = "chat_openai",
 #'   .pal_args = list(model = "gpt-4o-mini")
 #' )
 #' @export
 pal <- function(
     role = NULL, keybinding = NULL,
-    fn = getOption(".pal_fn", default = "new_chat_claude"), ..., .ns = "elmer"
+    fn = getOption(".pal_fn", default = "chat_claude"), ..., .ns = "elmer"
   ) {
   check_role(role)
 

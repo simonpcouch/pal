@@ -13,11 +13,11 @@ test_that("can use other models", {
   withr::local_options(.pal_fn = NULL, .pal_args = NULL)
 
   # respects other argument values
-  expect_snapshot(pal("cli", fn = "new_chat_openai", model = "gpt-4o-mini"))
+  expect_snapshot(pal("cli", fn = "chat_openai", model = "gpt-4o-mini"))
 
   # respects .clipal_* options
   withr::local_options(
-    .clipal_fn = "new_chat_openai",
+    .clipal_fn = "chat_openai",
     .clipal_args = list(model = "gpt-4o-mini")
   )
   expect_snapshot(pal("cli"))

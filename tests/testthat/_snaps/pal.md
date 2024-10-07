@@ -17,7 +17,7 @@
 # can use other models
 
     Code
-      pal("cli", fn = "new_chat_openai", model = "gpt-4o-mini")
+      pal("cli", fn = "chat_openai", model = "gpt-4o-mini")
     Message
       
       -- A cli pal using gpt-4o-mini. 
