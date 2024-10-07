@@ -37,9 +37,9 @@ The model returns approximately the same number of output tokens as it
 receives, so we'll call that 100 output tokens per refactor.
 
 As of the time of writing (October 2024), the default pal model Claude
-Sonnet 3.5 costs \$3 per million input tokens and $15 per million output
+Sonnet 3.5 costs \\$3 per million input tokens and $15 per million output
 tokens. So, using the default model,
-\strong{cli pals cost around \$4 for every 1,000 refactored pieces of code}. GPT-4o
+\strong{cli pals cost around \\$4 for every 1,000 refactored pieces of code}. GPT-4o
 Mini, by contrast, doesn't tend to get many pieces of formatting right and
 often fails to line-break properly, but \emph{does} usually return syntactically
 valid calls to testthat functions, and it would cost around
@@ -70,7 +70,7 @@ regular expression present:
   )
 \})
 #> expect_snapshot(
-#>   .res <- check_ellipses("exponentiate", "tidy", "boop", 
+#>   object_from_warning <- check_ellipses("exponentiate", "tidy", "boop", 
 #>     exponentiate = TRUE, quick = FALSE)
 #> )
 }\if{html}{\out{</div>}}
@@ -85,12 +85,10 @@ regular expression present:
 #>   error = TRUE,
 #>   augment(res_fenegbin, df)
 #> )
-#> 
 #> expect_snapshot(
 #>   error = TRUE,
 #>   augment(res_feNmlm, df)
 #> )
-#> 
 #> expect_snapshot(
 #>   error = TRUE,
 #>   augment(res_fepois, df)
@@ -128,9 +126,7 @@ results so as not to snapshot both the result and the warning:
     '"robust" argument has been deprecated'
   )
 \})
-#> expect_snapshot(
-#>   .res <- tidy(fit, robust = TRUE)
-#> )
+#> expect_snapshot(.res <- tidy(fit, robust = TRUE))
 }\if{html}{\out{</div>}}
 
 Nested expectations can generally be disentangled without issue:
@@ -142,13 +138,12 @@ Nested expectations can generally be disentangled without issue:
   )
 \})
 #> expect_snapshot(\{
-#>   fit_resamples_result <- fit_resamples(decision_tree(cost_complexity = 1), 
+#>   object_from_fit_resamples <- fit_resamples(decision_tree(cost_complexity = 1), 
 #>     bootstraps(mtcars))
-#>   tune_grid_result <- tune_grid(decision_tree(cost_complexity = 1), 
+#>   object_from_tune_grid <- tune_grid(decision_tree(cost_complexity = 1), 
 #>     bootstraps(mtcars))
 #> \})
-#> 
-#> expect_equal(fit_resamples_result, tune_grid_result)
+#> expect_equal(object_from_fit_resamples, object_from_tune_grid)
 }\if{html}{\out{</div>}}
 
 There are also a few edits the pal knows to make to third-edition code.

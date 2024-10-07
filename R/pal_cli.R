@@ -37,9 +37,9 @@
 #' receives, so we'll call that 100 output tokens per refactor.
 #'
 #' As of the time of writing (October 2024), the default pal model Claude
-#' Sonnet 3.5 costs \$3 per million input tokens and $15 per million output
+#' Sonnet 3.5 costs \\$3 per million input tokens and $15 per million output
 #' tokens. So, using the default model,
-#' **cli pals cost around \$15 for every 1,000 refactored pieces of code**. GPT-4o
+#' **cli pals cost around \\$15 for every 1,000 refactored pieces of code**. GPT-4o
 #' Mini, by contrast, doesn't tend to get cli markup classes right but _does_
 #' return syntactically valid calls to cli functions, and it would cost around
 #' 75 cents per 1,000 refactored pieces of code.

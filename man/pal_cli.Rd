@@ -38,9 +38,9 @@ The model returns approximately the same number of output tokens as it
 receives, so we'll call that 100 output tokens per refactor.
 
 As of the time of writing (October 2024), the default pal model Claude
-Sonnet 3.5 costs \$3 per million input tokens and $15 per million output
+Sonnet 3.5 costs \\$3 per million input tokens and $15 per million output
 tokens. So, using the default model,
-\strong{cli pals cost around \$15 for every 1,000 refactored pieces of code}. GPT-4o
+\strong{cli pals cost around \\$15 for every 1,000 refactored pieces of code}. GPT-4o
 Mini, by contrast, doesn't tend to get cli markup classes right but \emph{does}
 return syntactically valid calls to cli functions, and it would cost around
 75 cents per 1,000 refactored pieces of code.
@@ -80,8 +80,8 @@ Some strange vector collapsing and funky line breaking:
   rlang::abort(msg)
 \})
 #> cli::cli_abort(
-#>   "The provided \{.arg grid\} has parameter columns that have 
-#>    not been marked for tuning by \{.fn tune\}: \{extra_grid_params\}."
+#>   "The provided \{.arg grid\} has parameter columns that have not been 
+#>    marked for tuning by \{.fn tune\}: \{extra_grid_params\}."
 #> )
 }\if{html}{\out{</div>}}
 
@@ -99,10 +99,10 @@ A message that probably best lives as two separate elements:
 \})
 #> cli::cli_abort(
 #>   c(
-#>     "Some model parameters require finalization but there are recipe 
-#>      parameters that require tuning.",
+#>     "Some model parameters require finalization but there are recipe parameters 
+#>      that require tuning.",
 #>     "i" = "Please use \{.fn extract_parameter_set_dials\} to set parameter ranges 
-#>          manually and supply the output to the \{.arg param_info\} argument."
+#>           manually and supply the output to the \{.arg param_info\} argument."
 #>   )
 #> )
 }\if{html}{\out{</div>}}
@@ -120,8 +120,10 @@ Gnarly ad-hoc pluralization:
   rlang::inform(msg)
 \})
 #> cli::cli_inform(
-#>   "Creating pre-processing data to finalize unknown parameter\{?s\}: 
-#>    \{.code \{unk_names\}\}"
+#>   c(
+#>     "Creating pre-processing data to finalize unknown parameter\{?s\}: 
+#>      \{.var \{unk_names\}\}"
+#>   )
 #> )
 }\if{html}{\out{</div>}}
 
@@ -135,8 +137,8 @@ Some \code{paste0()} wonk:
   ))
 \})
 #> cli::cli_abort(
-#>   "The workflow has arguments to be tuned that are missing some 
-#>    parameter objects: \{.code \{pset$id[!params]\}\}."
+#>   "The workflow has arguments to be tuned that are missing some parameter
+#>    objects: \{.var \{pset$id[!params]\}\}"
 #> )
 }\if{html}{\out{</div>}}
 
@@ -153,12 +155,7 @@ if (!fine) \{
   rlang::abort(msg)
 \}
 \})
-#> cli::cli_abort(
-#>   c(
-#>     "Argument \{.arg \{deparse(cl$x)\}\} should be a \{cls\} or NULL.",
-#>     "i" = "\{.code \{where\}\}"
-#>   )
-#> )
+#> cli::cli_abort("Argument \{.arg \{deparse(cl$x)\}\} should be a \{cls\} or \{NULL\}\{if (!is.null(where)) paste0(' in ', .code(\{where\}))\}")
 }\if{html}{\out{</div>}}
 
 Sprintf-style statements aren't an issue:
@@ -166,7 +163,7 @@ Sprintf-style statements aren't an issue:
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{cli_pal$chat(\{
   abort(sprintf("No such '\%s' function: `\%s()`.", package, name))
 \})
-#> cli::cli_abort("No such \{.pkg \{package\}\} function: \{.fn \{name\}\}.")
+#> cli::cli_abort("No such \{.fn \{name\}\} function in \{.pkg \{package\}\}.")
 }\if{html}{\out{</div>}}
 }
 
