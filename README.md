@@ -55,7 +55,8 @@ development:
 
 - `"cli"`: [Convert to
   cli](https://simonpcouch.github.io/pal/reference/pal_cli.html)
-- `"testthat"`: Convert to testthat 3
+- `"testthat"`: [Convert to testthat
+  3](https://simonpcouch.github.io/pal/reference/pal_testthat.html)
 - `"roxygen"`: Document functions with roxygen
 
 That said, the package provides infrastructure for others to make LLM

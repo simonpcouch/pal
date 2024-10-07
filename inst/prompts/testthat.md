@@ -54,6 +54,16 @@ expect_error(some_code(), NA)
 expect_no_error(some_code())
 ```
 
+For calls to `expect_warning()`, `expect_message()`, and `expect_condition()` (notably, not `expect_error()`) that just run some code, make sure that code is assigned to some variable name when converting it to snapshots so that the result of the code isn't snapshotted as well as the error.
+
+``` r
+# before
+expect_warning(some_code())
+
+# after:
+expect_snapshot(.res <- some_code())
+```
+
 Disentangle nested expectations. For example:
 
 ``` r
@@ -81,5 +91,17 @@ expect_snapshot({
 })
 expect_equal(object_from_code, object_from_other_code)
 ```
+
+When there's a `class` argument to `expect_error()`, `expect_warning()`, `expect_message()`, or `expect_condition()`, don't do anything to the call:
+
+``` r
+# before:
+expect_error(some_code(), class = "error_subclass")
+
+# after:
+expect_error(some_code(), class = "error_subclass")
+```
+
+In that case, the resulting code should be the same as before.
 
 Transition `expect_known_output()`, `expect_known_value()`, `expect_known_hash()`, and `expect_equal_to_reference()` are all deprecated in favour of `expect_snapshot()`.
