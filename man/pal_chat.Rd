@@ -2,23 +2,22 @@
 % Please edit documentation in R/pal_chat.R
 \name{pal_chat}
 \alias{pal_chat}
-\title{Convert erroring code to use cli}
+\title{Apply pals to code}
 \usage{
 pal_chat(expr, pal = NULL)
 }
 \arguments{
 \item{expr}{Lines of code that raise an error, as an expression.}
 
-\item{pal}{A pal created with \link[=pal_cli]{pal("cli")}.}
+\item{pal}{A pal created with \code{\link[=pal]{pal()}}.}
 }
 \description{
-This help-page documents the function that pals created with \code{pal("cli")}
-apply. For more on cli pals, see \link{pal_cli}.
+Apply pals to code
 }
 \examples{
 \dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 pal <- pal("cli")
 
-.pal_cli(stop("An error message."))
+pal_chat(stop("An error message."))
 \dontshow{\}) # examplesIf}
 }

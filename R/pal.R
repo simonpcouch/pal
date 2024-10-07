@@ -1,9 +1,13 @@
 #' Create a pal
 #'
 #' @description
-#' Pals are persistent LLM-driven helpers designed to help you complete common tasks in interactive data analysis, authoring, and package development. Once created, they can be attached to a keybinding and immediately get to work on repetitive but hard-to-automate tasks.
+#' Pals are persistent LLM-driven helpers designed to help you complete
+#' common tasks in interactive data analysis, authoring, and package
+#' development. Once created, they can be attached to a keybinding and
+#' immediately get to work on repetitive but hard-to-automate tasks.
 #'
-#' To create a pal, simply pass `pal()` the ID of a pre-defined pal and a keybinding you'd like it attached to. For example, to use the cli pal:
+#' To create a pal, simply pass `pal()` the ID of a pre-defined pal and a
+#' keybinding you'd like it attached to. For example, to use the cli pal:
 #'
 #' ```r
 #' pal("cli", "Ctrl+Shift+C")
