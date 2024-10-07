@@ -24,7 +24,7 @@ The cli pal helps you convert your R package to use cli for error messages.
 
 Create a cli pal with:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{pal("cli", "Ctrl+Shift+C")
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{pal("cli")
 }\if{html}{\out{</div>}}
 }
 
@@ -40,7 +40,7 @@ receives, so we'll call that 100 output tokens per refactor.
 As of the time of writing (October 2024), the default pal model Claude
 Sonnet 3.5 costs \$3 per million input tokens and $15 per million output
 tokens. So, using the default model,
-\strong{pals cost around \$15 for every 1,000 refactored pieces of code}. GPT-4o
+\strong{cli pals cost around \$15 for every 1,000 refactored pieces of code}. GPT-4o
 Mini, by contrast, doesn't tend to get cli markup classes right but \emph{does}
 return syntactically valid calls to cli functions, and it would cost around
 75 cents per 1,000 refactored pieces of code.
@@ -80,8 +80,9 @@ Some strange vector collapsing and funky line breaking:
   rlang::abort(msg)
 \})
 #> cli::cli_abort(
-#>   "The provided \{.arg grid\} has parameter columns that have not been
-#>    marked for tuning by \{.fn tune\}: \{.val \{extra_grid_params\}\}."
+#>   "The provided \{.arg grid\} has the parameter column\{?s\} 
+#>    \{.code \{extra_grid_params\}\} that \{?has/have\} not been marked for 
+#>    tuning by \{.fn tune\}."
 #> )
 }\if{html}{\out{</div>}}
 
@@ -135,7 +136,7 @@ Some \code{paste0()} wonk:
   ))
 \})
 #> cli::cli_abort(
-#>   "The workflow has arguments to be tuned that are missing some
+#>   "The workflow has arguments to be tuned that are missing some 
 #>    parameter objects: \{.val \{pset$id[!params]\}\}"
 #> )
 }\if{html}{\out{</div>}}

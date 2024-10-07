@@ -18,7 +18,9 @@ After selecting some code, press the keyboard shortcut you’ve chosen and
 watch your code be rewritten.
 
 **Much of the documentation in this package is aspirational and its
-interface is likely to change rapidly.**
+interface is likely to change rapidly.** Note, especially, that keyboard
+shortcuts will have to registered in the usual way (via Tools \> Modify
+Keyboard Shortcuts \> search “Pal”), for now.
 
 ## Installation
 
@@ -57,3 +59,15 @@ assistants for any task in R, from authoring to interactive data
 analysis. With only a markdown file and a function call, users can
 extend pal to assist with their own repetitive but hard-to-automate
 tasks.
+
+## How much do pals cost?
+
+The cost of using pals depends on 1) the length of the underlying prompt
+for a given pal and 2) the cost per token of the chosen model. Using the
+cli pal with Anthropic’s Claude Sonnet 3.5, for example, costs something
+like \$15 per 1,000 code refactorings, while using the testthat pal with
+OpenAI’s GPT 4o-mini would cost something like \$1 per 1,000
+refactorings. Pals using a locally-served LLM are “free” (in the usual
+sense of code execution, ignoring the cost of increased battery usage).
+
+<!-- TODO: link to `cli_pal` here. -->
