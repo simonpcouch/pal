@@ -124,9 +124,8 @@ and are generated with the default model, Claude Sonnet 3.5.</p>
 <span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; cli::cli_abort(</span></span>
-<span><span class="co">#&gt;   "The provided {.arg grid} has the parameter column{?s}</span></span>
-<span><span class="co">#&gt;    {.code {extra_grid_params}} that {?has/have} not been marked for</span></span>
-<span><span class="co">#&gt;    tuning by {.fn tune}."</span></span>
+<span><span class="co">#&gt;   "The provided {.arg grid} has parameter columns that have</span></span>
+<span><span class="co">#&gt;    not been marked for tuning by {.fn tune}: {extra_grid_params}."</span></span>
 <span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
 <p>A message that probably best lives as two separate elements:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">cli_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
@@ -143,9 +142,8 @@ and are generated with the default model, Claude Sonnet 3.5.</p>
 <span><span class="co">#&gt;   c(</span></span>
 <span><span class="co">#&gt;     "Some model parameters require finalization but there are recipe</span></span>
 <span><span class="co">#&gt;      parameters that require tuning.",</span></span>
-<span><span class="co">#&gt;     "i" = "Please use {.fn extract_parameter_set_dials} to set parameter</span></span>
-<span><span class="co">#&gt;            ranges manually and supply the output to the {.arg param_info}</span></span>
-<span><span class="co">#&gt;            argument."</span></span>
+<span><span class="co">#&gt;     "i" = "Please use {.fn extract_parameter_set_dials} to set parameter ranges</span></span>
+<span><span class="co">#&gt;          manually and supply the output to the {.arg param_info} argument."</span></span>
 <span><span class="co">#&gt;   )</span></span>
 <span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
 <p>Gnarly ad-hoc pluralization:</p>
@@ -160,7 +158,8 @@ and are generated with the default model, Claude Sonnet 3.5.</p>
 <span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">inform</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; cli::cli_inform(</span></span>
-<span><span class="co">#&gt;   "Creating pre-processing data to finalize unknown parameter{?s}: {.val {unk_names}}"</span></span>
+<span><span class="co">#&gt;   "Creating pre-processing data to finalize unknown parameter{?s}:</span></span>
+<span><span class="co">#&gt;    {.code {unk_names}}"</span></span>
 <span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
 <p>Some <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0()</a></code> wonk:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">cli_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
@@ -172,7 +171,7 @@ and are generated with the default model, Claude Sonnet 3.5.</p>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; cli::cli_abort(</span></span>
 <span><span class="co">#&gt;   "The workflow has arguments to be tuned that are missing some</span></span>
-<span><span class="co">#&gt;    parameter objects: {.val {pset$id[!params]}}"</span></span>
+<span><span class="co">#&gt;    parameter objects: {.code {pset$id[!params]}}."</span></span>
 <span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
 <p>The model is instructed to only return a call to a cli function, so
 erroring code that's run conditionally can get borked:</p>
@@ -187,8 +186,10 @@ erroring code that's run conditionally can get borked:</p>
 <span><span class="op">}</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; cli::cli_abort(</span></span>
-<span><span class="co">#&gt;   "Argument {.code {deparse(cl$x)}} should be {?a/an} {cls} or NULL{?</span></span>
-<span><span class="co">#&gt;    in {.code {where}}}"</span></span>
+<span><span class="co">#&gt;   c(</span></span>
+<span><span class="co">#&gt;     "Argument {.arg {deparse(cl$x)}} should be a {cls} or NULL.",</span></span>
+<span><span class="co">#&gt;     "i" = "{.code {where}}"</span></span>
+<span><span class="co">#&gt;   )</span></span>
 <span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
 <p>Sprintf-style statements aren't an issue:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">cli_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
