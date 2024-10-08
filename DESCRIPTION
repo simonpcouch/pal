@@ -15,7 +15,6 @@ BugReports: https://github.com/simonpcouch/pal/issues
 Imports: 
     cli,
     coro,
-    dotenv,
     glue,
     elmer,
     rlang,
