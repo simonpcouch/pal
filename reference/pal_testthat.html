@@ -79,15 +79,15 @@ the third edition of testthat, namely via:</p><ul><li><p>Converting to snapshot 
 
 
 
-<p>The system prompt from a pal includes something like 1,000 tokens.
+<p>The system prompt from a testthat pal includes something like 1,000 tokens.
 Add in (a generous) 100 tokens for the code that's actually highlighted
-and also sent off to the model and you're looking at 4,100 input tokens.
+and also sent off to the model and you're looking at 1,100 input tokens.
 The model returns approximately the same number of output tokens as it
 receives, so we'll call that 100 output tokens per refactor.</p>
 <p>As of the time of writing (October 2024), the default pal model Claude
 Sonnet 3.5 costs \$3 per million input tokens and $15 per million output
 tokens. So, using the default model,
-<strong>cli pals cost around \$4 for every 1,000 refactored pieces of code</strong>. GPT-4o
+<strong>testthat pals cost around \$4 for every 1,000 refactored pieces of code</strong>. GPT-4o
 Mini, by contrast, doesn't tend to get many pieces of formatting right and
 often fails to line-break properly, but <em>does</em> usually return syntactically
 valid calls to testthat functions, and it would cost around
@@ -115,7 +115,7 @@ regular expression present:</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; expect_snapshot(</span></span>
-<span><span class="co">#&gt;   object_from_warning &lt;- check_ellipses("exponentiate", "tidy", "boop",</span></span>
+<span><span class="co">#&gt;   .res &lt;- check_ellipses("exponentiate", "tidy", "boop",</span></span>
 <span><span class="co">#&gt;     exponentiate = TRUE, quick = FALSE)</span></span>
 <span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">testthat_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
@@ -124,18 +124,9 @@ regular expression present:</p>
 <span>  <span class="fu">expect_error</span><span class="op">(</span><span class="fu">augment</span><span class="op">(</span><span class="va">res_feNmlm</span>, <span class="va">df</span><span class="op">)</span>, <span class="va">augment_error</span><span class="op">)</span></span>
 <span>  <span class="fu">expect_error</span><span class="op">(</span><span class="fu">augment</span><span class="op">(</span><span class="va">res_fepois</span>, <span class="va">df</span><span class="op">)</span>, <span class="va">augment_error</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; expect_snapshot(</span></span>
-<span><span class="co">#&gt;   error = TRUE,</span></span>
-<span><span class="co">#&gt;   augment(res_fenegbin, df)</span></span>
-<span><span class="co">#&gt; )</span></span>
-<span><span class="co">#&gt; expect_snapshot(</span></span>
-<span><span class="co">#&gt;   error = TRUE,</span></span>
-<span><span class="co">#&gt;   augment(res_feNmlm, df)</span></span>
-<span><span class="co">#&gt; )</span></span>
-<span><span class="co">#&gt; expect_snapshot(</span></span>
-<span><span class="co">#&gt;   error = TRUE,</span></span>
-<span><span class="co">#&gt;   augment(res_fepois, df)</span></span>
-<span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
+<span><span class="co">#&gt; expect_snapshot(error = TRUE, augment(res_fenegbin, df))</span></span>
+<span><span class="co">#&gt; expect_snapshot(error = TRUE, augment(res_feNmlm, df))</span></span>
+<span><span class="co">#&gt; expect_snapshot(error = TRUE, augment(res_fepois, df))</span></span></code></pre><p></p></div>
 <p>They know about <code>regexp = NA</code>, which means "no error" (or warning, or message):</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">testthat_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="fu">expect_error</span><span class="op">(</span></span>
@@ -169,12 +160,12 @@ results so as not to snapshot both the result and the warning:</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; expect_snapshot({</span></span>
-<span><span class="co">#&gt;   object_from_fit_resamples &lt;- fit_resamples(decision_tree(cost_complexity = 1),</span></span>
+<span><span class="co">#&gt;   resamples_result &lt;- fit_resamples(decision_tree(cost_complexity = 1),</span></span>
 <span><span class="co">#&gt;     bootstraps(mtcars))</span></span>
-<span><span class="co">#&gt;   object_from_tune_grid &lt;- tune_grid(decision_tree(cost_complexity = 1),</span></span>
+<span><span class="co">#&gt;   tune_grid_result &lt;- tune_grid(decision_tree(cost_complexity = 1),</span></span>
 <span><span class="co">#&gt;     bootstraps(mtcars))</span></span>
 <span><span class="co">#&gt; })</span></span>
-<span><span class="co">#&gt; expect_equal(object_from_fit_resamples, object_from_tune_grid)</span></span></code></pre><p></p></div>
+<span><span class="co">#&gt; expect_equal(resamples_result, tune_grid_result)</span></span></code></pre><p></p></div>
 <p>There are also a few edits the pal knows to make to third-edition code.
 For example, it transitions <code>expect_snapshot_error()</code> and friends to
 use <code>expect_snapshot(error = TRUE)</code> so that the error context is snapshotted
@@ -184,10 +175,7 @@ in addition to the message itself:</p>
 <span>    <span class="fu">fit_best</span><span class="op">(</span><span class="va">knn_pca_res</span>, parameters <span class="op">=</span> <span class="fu">tibble</span><span class="op">(</span>neighbors <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; expect_snapshot(</span></span>
-<span><span class="co">#&gt;   error = TRUE,</span></span>
-<span><span class="co">#&gt;   fit_best(knn_pca_res, parameters = tibble(neighbors = 2))</span></span>
-<span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
+<span><span class="co">#&gt; expect_snapshot(error = TRUE, fit_best(knn_pca_res, parameters = tibble(neighbors = 2)))</span></span></code></pre><p></p></div>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
