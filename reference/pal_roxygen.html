@@ -97,6 +97,7 @@ and are generated with the default model, Claude Sonnet 3.5.</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/simonpcouch/pal" class="external-link">pal</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">roxygen_pal</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pal.html">pal</a></span><span class="op">(</span><span class="st">"roxygen"</span><span class="op">)</span></span></code></pre><p></p></div>
+<p>Documenting a function factory:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">roxygen_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="va">deferred_method_transform</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">lambda_expr</span>, <span class="va">transformer</span>, <span class="va">eval_env</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="va">transformer</span> <span class="op">&lt;-</span> <span class="fu">enexpr</span><span class="op">(</span><span class="va">transformer</span><span class="op">)</span></span>
@@ -116,19 +117,22 @@ and are generated with the default model, Claude Sonnet 3.5.</p>
 <span>    <span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; #' Transform a deferred method</span></span>
-<span><span class="co">#&gt; #'</span></span>
-<span><span class="co">#&gt; #' @description</span></span>
-<span><span class="co">#&gt; #' A short description...</span></span>
-<span><span class="co">#&gt; #'</span></span>
-<span><span class="co">#&gt; #' @param lambda_expr A lambda expression.</span></span>
-<span><span class="co">#&gt; #' @param transformer A transformer expression.</span></span>
-<span><span class="co">#&gt; #' @param eval_env An environment in which to evaluate the transformer.</span></span>
-<span><span class="co">#&gt; #'</span></span>
-<span><span class="co">#&gt; #' @returns</span></span>
-<span><span class="co">#&gt; #' A function that, when called, will execute the transformed lambda expression.</span></span>
-<span><span class="co">#&gt; #'</span></span>
-<span><span class="co">#&gt; #' @export</span></span></code></pre><p></p></div>
+<span></span>
+<span><span class="co">#' #' Transform a deferred method</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @description</span></span>
+<span><span class="co">#' A short description...</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @param lambda_expr A lambda expression to transform.</span></span>
+<span><span class="co">#' @param transformer A transformer function or expression.</span></span>
+<span><span class="co">#' @param eval_env The environment in which to evaluate the transformer.</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @returns</span></span>
+<span><span class="co">#' A function that, when called, will evaluate the transformed lambda expression.</span></span>
+<span><span class="co">#' The returned function accepts `...` arguments which are passed to the generated function.</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @export</span></span></code></pre><p></p></div>
+<p>A function that may raise a condition:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">roxygen_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="va">set_default</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">value</span>, <span class="va">default</span>, <span class="va">arg</span> <span class="op">=</span> <span class="fu">caller_arg</span><span class="op">(</span><span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">value</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -141,20 +145,22 @@ and are generated with the default model, Claude Sonnet 3.5.</p>
 <span>    <span class="op">}</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; #' Set default value</span></span>
-<span><span class="co">#&gt; #'</span></span>
-<span><span class="co">#&gt; #' @description</span></span>
-<span><span class="co">#&gt; #' A short description...</span></span>
-<span><span class="co">#&gt; #'</span></span>
-<span><span class="co">#&gt; #' @param value A value, potentially NULL.</span></span>
-<span><span class="co">#&gt; #' @param default The default value to use if `value` is NULL.</span></span>
-<span><span class="co">#&gt; #' @param arg Optional. The name of the argument being set.</span></span>
-<span><span class="co">#&gt; #'</span></span>
-<span><span class="co">#&gt; #' @returns</span></span>
-<span><span class="co">#&gt; #' Returns `value` if it's not NULL, otherwise returns `default`.</span></span>
-<span><span class="co">#&gt; #' Informs the user about using the default value unless in a non-snapshot test environment.</span></span>
-<span><span class="co">#&gt; #'</span></span>
-<span><span class="co">#&gt; #' @export</span></span></code></pre><p></p></div>
+<span></span>
+<span><span class="co">#' Set default value</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @description</span></span>
+<span><span class="co">#' A short description...</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @param value A value to check.</span></span>
+<span><span class="co">#' @param default The default value to use if `value` is NULL.</span></span>
+<span><span class="co">#' @param arg Optional. The name of the argument being set.</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @returns</span></span>
+<span><span class="co">#' Returns `value` if it's not NULL, otherwise returns `default`.</span></span>
+<span><span class="co">#' Informs the user when using the default value.</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @export</span></span></code></pre><p></p></div>
+<p>A function with some tricky indexing:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">roxygen_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="va">find_index</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">left</span>, <span class="va">e_right</span><span class="op">)</span> <span class="op">{</span></span>
 <span>    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">is.list</a></span><span class="op">(</span><span class="va">e_right</span><span class="op">)</span> <span class="op">||</span> <span class="op">!</span><span class="fu">has_name</span><span class="op">(</span><span class="va">e_right</span>, <span class="st">"index"</span><span class="op">)</span> <span class="op">||</span> <span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">is.numeric</a></span><span class="op">(</span><span class="va">e_right</span><span class="op">$</span><span class="va">index</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
@@ -168,18 +174,20 @@ and are generated with the default model, Claude Sonnet 3.5.</p>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">matches_idx</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; #' Find index in a list</span></span>
-<span><span class="co">#&gt; #'</span></span>
-<span><span class="co">#&gt; #' @description</span></span>
-<span><span class="co">#&gt; #' A short description...</span></span>
-<span><span class="co">#&gt; #'</span></span>
-<span><span class="co">#&gt; #' @param left A list to search in.</span></span>
-<span><span class="co">#&gt; #' @param e_right An element to search for, expected to be a list with an 'index' field.</span></span>
-<span><span class="co">#&gt; #'</span></span>
-<span><span class="co">#&gt; #' @returns</span></span>
-<span><span class="co">#&gt; #' The index in `left` where `e_right$index` is found, or `NA` if not found or if inputs are invalid.</span></span>
-<span><span class="co">#&gt; #'</span></span>
-<span><span class="co">#&gt; #' @export</span></span></code></pre><p></p></div>
+<span></span>
+<span><span class="co">#' Find matching index</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @description</span></span>
+<span><span class="co">#' A short description...</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @param left A list of elements, each expected to have an 'index' field.</span></span>
+<span><span class="co">#' @param e_right A list with an 'index' field to search for in `left`.</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @returns</span></span>
+<span><span class="co">#' The numeric index in `left` where `e_right$index` matches, or NA if not found</span></span>
+<span><span class="co">#' or if inputs are invalid. Returns NA if multiple matches are found.</span></span>
+<span><span class="co">#'</span></span>
+<span><span class="co">#' @export</span></span></code></pre><p></p></div>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

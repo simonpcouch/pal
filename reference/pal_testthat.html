@@ -117,36 +117,44 @@ regular expression present:</p>
 <span>    <span class="fu">check_ellipses</span><span class="op">(</span><span class="st">"exponentiate"</span>, <span class="st">"tidy"</span>, <span class="st">"boop"</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, quick <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>,</span>
 <span>    <span class="st">"\\`exponentiate\\` argument is not supported in the \\`tidy\\(\\)\\` method for \\`boop\\` objects"</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; expect_snapshot(</span></span>
-<span><span class="co">#&gt;   .res &lt;- check_ellipses("exponentiate", "tidy", "boop",</span></span>
-<span><span class="co">#&gt;     exponentiate = TRUE, quick = FALSE)</span></span>
-<span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre><p></p></div>
+<p>Returns:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu">expect_snapshot</span><span class="op">(</span></span>
+<span>  <span class="va">.res</span> <span class="op">&lt;-</span> <span class="fu">check_ellipses</span><span class="op">(</span></span>
+<span>    <span class="st">"exponentiate"</span>, <span class="st">"tidy"</span>, <span class="st">"boop"</span>, exponentiate <span class="op">=</span> <span class="cn">TRUE</span>, quick <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span>  <span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre><p></p></div>
+<p>Note, as well, that intermediate results are assigned to an object so as
+not to be snapshotted when their contents weren't previously tests.</p>
+<p>Another example with multiple, redudant calls:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">testthat_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="va">augment_error</span> <span class="op">&lt;-</span> <span class="st">"augment is only supported for fixest models estimated with feols, feglm, or femlm"</span></span>
 <span>  <span class="fu">expect_error</span><span class="op">(</span><span class="fu">augment</span><span class="op">(</span><span class="va">res_fenegbin</span>, <span class="va">df</span><span class="op">)</span>, <span class="va">augment_error</span><span class="op">)</span></span>
 <span>  <span class="fu">expect_error</span><span class="op">(</span><span class="fu">augment</span><span class="op">(</span><span class="va">res_feNmlm</span>, <span class="va">df</span><span class="op">)</span>, <span class="va">augment_error</span><span class="op">)</span></span>
 <span>  <span class="fu">expect_error</span><span class="op">(</span><span class="fu">augment</span><span class="op">(</span><span class="va">res_fepois</span>, <span class="va">df</span><span class="op">)</span>, <span class="va">augment_error</span><span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; expect_snapshot(error = TRUE, augment(res_fenegbin, df))</span></span>
-<span><span class="co">#&gt; expect_snapshot(error = TRUE, augment(res_feNmlm, df))</span></span>
-<span><span class="co">#&gt; expect_snapshot(error = TRUE, augment(res_fepois, df))</span></span></code></pre><p></p></div>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre><p></p></div>
+<p>Returns:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu">expect_snapshot</span><span class="op">(</span>error <span class="op">=</span> <span class="cn">TRUE</span>, <span class="fu">augment</span><span class="op">(</span><span class="va">res_fenegbin</span>, <span class="va">df</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">expect_snapshot</span><span class="op">(</span>error <span class="op">=</span> <span class="cn">TRUE</span>, <span class="fu">augment</span><span class="op">(</span><span class="va">res_feNmlm</span>, <span class="va">df</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="fu">expect_snapshot</span><span class="op">(</span>error <span class="op">=</span> <span class="cn">TRUE</span>, <span class="fu">augment</span><span class="op">(</span><span class="va">res_fepois</span>, <span class="va">df</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>They know about <code>regexp = NA</code>, which means "no error" (or warning, or message):</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">testthat_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="fu">expect_error</span><span class="op">(</span></span>
 <span>    <span class="va">p4_b</span> <span class="op">&lt;-</span> <span class="fu">check_parameters</span><span class="op">(</span><span class="va">w4</span>, <span class="va">p4_a</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span>,</span>
 <span>    regex <span class="op">=</span> <span class="cn">NA</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; expect_no_error(p4_b &lt;- check_parameters(w4, p4_a, data = mtcars))</span></span></code></pre><p></p></div>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre><p></p></div>
+<p>Returns:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu">expect_no_error</span><span class="op">(</span><span class="va">p4_b</span> <span class="op">&lt;-</span> <span class="fu">check_parameters</span><span class="op">(</span><span class="va">w4</span>, <span class="va">p4_a</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>They also know not to adjust calls to those condition expectations when
 there's a <code>class</code> argument present (which usually means that one is
 testing a condition from another package, which should be able to change
 the wording of the message without consequence):</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">testthat_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="fu">expect_error</span><span class="op">(</span><span class="fu">tidy</span><span class="op">(</span><span class="va">pca</span>, matrix <span class="op">=</span> <span class="st">"u"</span><span class="op">)</span>, class <span class="op">=</span> <span class="st">"pca_error"</span><span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; expect_error(tidy(pca, matrix = "u"), class = "pca_error")</span></span></code></pre><p></p></div>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre><p></p></div>
+<p>Returns:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu">expect_error</span><span class="op">(</span><span class="fu">tidy</span><span class="op">(</span><span class="va">pca</span>, matrix <span class="op">=</span> <span class="st">"u"</span><span class="op">)</span>, class <span class="op">=</span> <span class="st">"pca_error"</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>When converting non-erroring code, testthat pals will assign intermediate
 results so as not to snapshot both the result and the warning:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">testthat_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
@@ -154,24 +162,26 @@ results so as not to snapshot both the result and the warning:</p>
 <span>    <span class="fu">tidy</span><span class="op">(</span><span class="va">fit</span>, robust <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
 <span>    <span class="st">'"robust" argument has been deprecated'</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; expect_snapshot(</span></span>
-<span><span class="co">#&gt;   .res &lt;- tidy(fit, robust = TRUE)</span></span>
-<span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre><p></p></div>
+<p>Returns:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu">expect_snapshot</span><span class="op">(</span></span>
+<span>  <span class="va">.res</span> <span class="op">&lt;-</span> <span class="fu">tidy</span><span class="op">(</span><span class="va">fit</span>, robust <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre><p></p></div>
 <p>Nested expectations can generally be disentangled without issue:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">testthat_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="fu">expect_equal</span><span class="op">(</span></span>
 <span>    <span class="fu">fit_resamples</span><span class="op">(</span><span class="fu">decision_tree</span><span class="op">(</span>cost_complexity <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, <span class="fu">bootstraps</span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>    <span class="fu">expect_warning</span><span class="op">(</span><span class="fu">tune_grid</span><span class="op">(</span><span class="fu">decision_tree</span><span class="op">(</span>cost_complexity <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, <span class="fu">bootstraps</span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre><p></p></div>
+<p>Returns:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu">expect_snapshot</span><span class="op">(</span><span class="op">{</span></span>
+<span>  <span class="va">fit_resamples_result</span> <span class="op">&lt;-</span> <span class="fu">fit_resamples</span><span class="op">(</span><span class="fu">decision_tree</span><span class="op">(</span>cost_complexity <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>                                        <span class="fu">bootstraps</span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span>
+<span>  <span class="va">tune_grid_result</span> <span class="op">&lt;-</span> <span class="fu">tune_grid</span><span class="op">(</span><span class="fu">decision_tree</span><span class="op">(</span>cost_complexity <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>,</span>
+<span>                                <span class="fu">bootstraps</span><span class="op">(</span><span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; expect_snapshot({</span></span>
-<span><span class="co">#&gt;   result_fit_resamples &lt;- fit_resamples(decision_tree(cost_complexity = 1),</span></span>
-<span><span class="co">#&gt;     bootstraps(mtcars))</span></span>
-<span><span class="co">#&gt;   result_tune_grid &lt;- tune_grid(decision_tree(cost_complexity = 1),</span></span>
-<span><span class="co">#&gt;     bootstraps(mtcars))</span></span>
-<span><span class="co">#&gt; })</span></span>
-<span><span class="co">#&gt; expect_equal(result_fit_resamples, result_tune_grid)</span></span></code></pre><p></p></div>
+<span><span class="fu">expect_equal</span><span class="op">(</span><span class="va">fit_resamples_result</span>, <span class="va">tune_grid_result</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>There are also a few edits the pal knows to make to third-edition code.
 For example, it transitions <code>expect_snapshot_error()</code> and friends to
 use <code>expect_snapshot(error = TRUE)</code> so that the error context is snapshotted
@@ -180,8 +190,12 @@ in addition to the message itself:</p>
 <span>  <span class="fu">expect_snapshot_error</span><span class="op">(</span></span>
 <span>    <span class="fu">fit_best</span><span class="op">(</span><span class="va">knn_pca_res</span>, parameters <span class="op">=</span> <span class="fu">tibble</span><span class="op">(</span>neighbors <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; expect_snapshot(error = TRUE, fit_best(knn_pca_res, parameters = tibble(neighbors = 2)))</span></span></code></pre><p></p></div>
+<span><span class="op">}</span><span class="op">)</span></span></code></pre><p></p></div>
+<p>Returns:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu">expect_snapshot</span><span class="op">(</span></span>
+<span>  error <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  <span class="fu">fit_best</span><span class="op">(</span><span class="va">knn_pca_res</span>, parameters <span class="op">=</span> <span class="fu">tibble</span><span class="op">(</span>neighbors <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre><p></p></div>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
