@@ -40,10 +40,12 @@ power the pal, see `?pal()` to set default metadata on that model.
 
 To create a pal, simply pass `pal()` a pre-defined “role” and a
 keybinding you’d like it attached to. For example, to use the [cli
-pal](https://simonpcouch.github.io/pal/reference/pal_cli.html):
+pal](https://simonpcouch.github.io/pal/reference/pal_cli.html) with the
+shortcut `Cmd+;+C` ([written
+`Cmd+; Cmd+C`](https://www.emacswiki.org/emacs/key-chord.el)):
 
 ``` r
-pal("cli", "Ctrl+Shift+C")
+pal("cli", "Cmd+; Cmd+C")
 ```
 
 Then, highlight some code, press the keyboard shortcut, and watch your
@@ -53,11 +55,11 @@ code be rewritten:
 As-is, the package provides ergonomic LLM assistants for R package
 development:
 
-- `"cli"`: [Convert to
+- `"cli"` with `Cmd+;+C`: [Convert to
   cli](https://simonpcouch.github.io/pal/reference/pal_cli.html)
-- `"testthat"`: [Convert to testthat
+- `"testthat"` with `Cmd+;+T`: [Convert to testthat
   3](https://simonpcouch.github.io/pal/reference/pal_testthat.html)
-- `"roxygen"`: [Document functions with
+- `"roxygen"` with `Cmd+;+R`: [Document functions with
   roxygen](https://simonpcouch.github.io/pal/reference/pal_roxygen.html)
 
 That said, the package provides infrastructure for others to make LLM

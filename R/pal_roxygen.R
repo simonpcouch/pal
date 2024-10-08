@@ -19,6 +19,11 @@
 #' pal("roxygen")
 #' ```
 #'
+#' We recommended binding the roxygen pal to the keyboard shortcut
+#' `Cmd+;+R` ([written `Cmd+; Cmd+R`](https://www.emacswiki.org/emacs/key-chord.el))
+#' via `Tools > Modify Keyboard Shortcuts > Search "Pal"` in RStudio.
+#' Pals are typically prefixed with `Command + ;` (or `Alt + ;` on non-macOS).
+#'
 #' @section Cost:
 #'
 #' The system prompt from a roxygen pal includes something like 1,000 tokens.

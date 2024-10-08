@@ -22,9 +22,15 @@
 #' Create a cli pal with:
 #'
 #' ```r
-# TODO: add keybinding with `pal("cli", "Ctrl+Shift+C")`
+# TODO: add keybinding with `pal("cli", "Cmd+;+C")`
 #' pal("cli")
 #' ```
+#'
+#'
+#' We recommended binding the cli pal to the keyboard shortcut
+#' `Cmd+;+C` ([written `Cmd+; Cmd+C`](https://www.emacswiki.org/emacs/key-chord.el))
+#' via `Tools > Modify Keyboard Shortcuts > Search "Pal"` in RStudio.
+#' Pals are typically prefixed with `Command + ;` (or `Alt + ;` on non-macOS).
 #'
 #' @section Cost:
 #'

@@ -25,6 +25,11 @@ Create a testthat pal with:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{pal("testthat")
 }\if{html}{\out{</div>}}
+
+We recommended binding the testthat pal to the keyboard shortcut
+\verb{Cmd+;+T} (\href{https://www.emacswiki.org/emacs/key-chord.el}{written \verb{Cmd+; Cmd+T}})
+via \verb{Tools > Modify Keyboard Shortcuts > Search "Pal"} in RStudio.
+Pals are typically prefixed with \verb{Command + ;} (or \verb{Alt + ;} on non-macOS).
 }
 
 \section{Cost}{
@@ -117,7 +122,9 @@ results so as not to snapshot both the result and the warning:
     '"robust" argument has been deprecated'
   )
 \})
-#> expect_snapshot(.res <- tidy(fit, robust = TRUE))
+#> expect_snapshot(
+#>   .res <- tidy(fit, robust = TRUE)
+#> )
 }\if{html}{\out{</div>}}
 
 Nested expectations can generally be disentangled without issue:
@@ -129,12 +136,12 @@ Nested expectations can generally be disentangled without issue:
   )
 \})
 #> expect_snapshot(\{
-#>   resamples_result <- fit_resamples(decision_tree(cost_complexity = 1), 
+#>   result_fit_resamples <- fit_resamples(decision_tree(cost_complexity = 1), 
 #>     bootstraps(mtcars))
-#>   tune_grid_result <- tune_grid(decision_tree(cost_complexity = 1), 
+#>   result_tune_grid <- tune_grid(decision_tree(cost_complexity = 1), 
 #>     bootstraps(mtcars))
 #> \})
-#> expect_equal(resamples_result, tune_grid_result)
+#> expect_equal(result_fit_resamples, result_tune_grid)
 }\if{html}{\out{</div>}}
 
 There are also a few edits the pal knows to make to third-edition code.

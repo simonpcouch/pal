@@ -37,10 +37,10 @@ Then, ensure that you have an [`ANTHROPIC_API_KEY`](https://console.anthropic.co
 
 ## Example
 
-To create a pal, simply pass `pal()` a pre-defined "role" and a keybinding you'd like it attached to. For example, to use the [cli pal](https://simonpcouch.github.io/pal/reference/pal_cli.html):
+To create a pal, simply pass `pal()` a pre-defined "role" and a keybinding you'd like it attached to. For example, to use the [cli pal](https://simonpcouch.github.io/pal/reference/pal_cli.html) with the shortcut `Cmd+;+C` ([written `Cmd+; Cmd+C`](https://www.emacswiki.org/emacs/key-chord.el)):
 
 ```r
-pal("cli", "Ctrl+Shift+C")
+pal("cli", "Cmd+; Cmd+C")
 ```
 
 Then, highlight some code, press the keyboard shortcut, and watch your code be rewritten:
@@ -48,9 +48,9 @@ Then, highlight some code, press the keyboard shortcut, and watch your code be r
 ![](https://github.com/simonpcouch/pal/raw/main/inst/figs/addin.gif)
 As-is, the package provides ergonomic LLM assistants for R package development:
 
-* `"cli"`: [Convert to cli](https://simonpcouch.github.io/pal/reference/pal_cli.html)
-* `"testthat"`: [Convert to testthat 3](https://simonpcouch.github.io/pal/reference/pal_testthat.html)
-* `"roxygen"`: [Document functions with roxygen](https://simonpcouch.github.io/pal/reference/pal_roxygen.html)
+* `"cli"` with `Cmd+;+C`: [Convert to cli](https://simonpcouch.github.io/pal/reference/pal_cli.html)
+* `"testthat"` with `Cmd+;+T`: [Convert to testthat 3](https://simonpcouch.github.io/pal/reference/pal_testthat.html)
+* `"roxygen"` with `Cmd+;+R`: [Document functions with roxygen](https://simonpcouch.github.io/pal/reference/pal_roxygen.html)
 
 That said, the package provides infrastructure for others to make LLM assistants for any task in R, from authoring to interactive data analysis. With only a markdown file and a function call, users can extend pal to assist with their own repetitive but hard-to-automate tasks.
 

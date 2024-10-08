@@ -26,6 +26,11 @@ Create a cli pal with:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{pal("cli")
 }\if{html}{\out{</div>}}
+
+We recommended binding the cli pal to the keyboard shortcut
+\verb{Cmd+;+C} (\href{https://www.emacswiki.org/emacs/key-chord.el}{written \verb{Cmd+; Cmd+C}})
+via \verb{Tools > Modify Keyboard Shortcuts > Search "Pal"} in RStudio.
+Pals are typically prefixed with \verb{Command + ;} (or \verb{Alt + ;} on non-macOS).
 }
 
 \section{Cost}{
@@ -79,10 +84,8 @@ Some strange vector collapsing and funky line breaking:
 
   rlang::abort(msg)
 \})
-#> cli::cli_abort(
-#>   "The provided \{.arg grid\} has parameter columns that have not been 
-#>    marked for tuning by \{.fn tune\}: \{.val \{extra_grid_params\}\}."
-#> )
+#> cli::cli_abort("The provided \{.arg grid\} has parameter columns that have not been 
+#>    marked for tuning by \{.fn tune\}: \{extra_grid_params\}.")
 }\if{html}{\out{</div>}}
 
 A message that probably best lives as two separate elements:
@@ -121,7 +124,7 @@ Gnarly ad-hoc pluralization:
   rlang::inform(msg)
 \})
 #> cli::cli_inform(
-#>   "Creating pre-processing data to finalize unknown parameter\{?s\}: \{.val \{unk_names\}\}"
+#>   "Creating pre-processing data to finalize unknown parameter\{?s\}: \{unk_names\}"
 #> )
 }\if{html}{\out{</div>}}
 
@@ -136,7 +139,7 @@ Some \code{paste0()} wonk:
 \})
 #> cli::cli_abort(
 #>   "The workflow has arguments to be tuned that are missing some 
-#>    parameter objects: \{.val \{pset$id[!params]\}\}"
+#>    parameter objects: \{pset$id[!params]\}"
 #> )
 }\if{html}{\out{</div>}}
 
@@ -154,7 +157,8 @@ if (!fine) \{
 \}
 \})
 #> cli::cli_abort(
-#>   "Argument \{.code \{deparse(cl$x)\}\} should be \{.cls \{cls\}\} or \{.code NULL\}\{?in \{where\}\}."
+#>   "Argument \{.code \{deparse(cl$x)\}\} should be \{?a/\}\{.cls \{cls\}\} or NULL\{?
+#>    in \{.fn \{where\}\}\}"
 #> )
 }\if{html}{\out{</div>}}
 

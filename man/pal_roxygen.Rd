@@ -20,6 +20,11 @@ Create a roxygen pal with:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{pal("roxygen")
 }\if{html}{\out{</div>}}
+
+We recommended binding the roxygen pal to the keyboard shortcut
+\verb{Cmd+;+R} (\href{https://www.emacswiki.org/emacs/key-chord.el}{written \verb{Cmd+; Cmd+R}})
+via \verb{Tools > Modify Keyboard Shortcuts > Search "Pal"} in RStudio.
+Pals are typically prefixed with \verb{Command + ;} (or \verb{Alt + ;} on non-macOS).
 }
 
 \section{Cost}{
@@ -77,13 +82,13 @@ roxygen_pal <- pal("roxygen")
 #> #'
 #> #' @description
 #> #' A short description...
-#> #' 
-#> #' @param lambda_expr An expression.
-#> #' @param transformer A transformer function.
-#> #' @param eval_env An environment for evaluation.
 #> #'
-#> #' @returns 
-#> #' A function that, when called, will evaluate the transformed lambda expression.
+#> #' @param lambda_expr A lambda expression.
+#> #' @param transformer A transformer expression.
+#> #' @param eval_env An environment in which to evaluate the transformer.
+#> #'
+#> #' @returns
+#> #' A function that, when called, will execute the transformed lambda expression.
 #> #'
 #> #' @export
 }\if{html}{\out{</div>}}
@@ -100,19 +105,18 @@ roxygen_pal <- pal("roxygen")
     \}
   \}
 \})
-#> #' Set a default value
+#> #' Set default value
 #> #'
 #> #' @description
 #> #' A short description...
-#> #' 
-#> #' @param value A value to check.
-#> #' @param default A default value to use if `value` is NULL.
-#> #' @param arg Optional. The name of the argument being checked.
 #> #'
-#> #' @returns 
-#> #' Either `value` if it's not NULL, or `default` if `value` is NULL. 
-#> #' When returning the default value, a message is displayed unless in a 
-#> #' testing environment (except during snapshot testing).
+#> #' @param value A value, potentially NULL.
+#> #' @param default The default value to use if `value` is NULL.
+#> #' @param arg Optional. The name of the argument being set.
+#> #'
+#> #' @returns
+#> #' Returns `value` if it's not NULL, otherwise returns `default`. 
+#> #' Informs the user about using the default value unless in a non-snapshot test environment.
 #> #'
 #> #' @export
 }\if{html}{\out{</div>}}
@@ -130,17 +134,16 @@ roxygen_pal <- pal("roxygen")
     which(matches_idx)[[1]]
   \}
 \})
-#> #' Find matching index
+#> #' Find index in a list
 #> #'
 #> #' @description
 #> #' A short description...
-#> #' 
-#> #' @param left A list of elements to search through.
-#> #' @param e_right A single element to match against.
 #> #'
-#> #' @returns 
-#> #' The index in `left` where `e_right$index` matches, or `NA` if no match 
-#> #' is found or if `e_right` doesn't have a valid numeric index.
+#> #' @param left A list to search in.
+#> #' @param e_right An element to search for, expected to be a list with an 'index' field.
+#> #'
+#> #' @returns
+#> #' The index in `left` where `e_right$index` is found, or `NA` if not found or if inputs are invalid.
 #> #'
 #> #' @export
 }\if{html}{\out{</div>}}
