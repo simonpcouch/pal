@@ -56,7 +56,7 @@
 #' ["from the wild"](https://github.com/tidymodels/tune/blob/f8d734ac0fa981fae3a87ed2871a46e9c40d509d/R/checks.R)
 #' and are generated with the default model, Claude Sonnet 3.5.
 #'
-#' ```{r}
+#' ```r
 #' library(pal)
 #'
 #' cli_pal <- pal("cli")
@@ -64,15 +64,21 @@
 #'
 #' At its simplest, a one-line message with a little bit of markup:
 #'
-#' ```{r}
+#' ```r
 #' cli_pal$chat({
 #'   rlang::abort("`save_pred` can only be used if the initial results saved predictions.")
 #' })
 #' ```
 #'
+#' Returns:
+#'
+#' ```r
+#' cli::cli_abort("{.arg save_pred} can only be used if the initial results saved predictions.")
+#' ```
+#'
 #' Some strange vector collapsing and funky line breaking:
 #'
-#' ```{r}
+#' ```r
 #' cli_pal$chat({
 #'   extra_grid_params <- glue::single_quote(extra_grid_params)
 #'   extra_grid_params <- glue::glue_collapse(extra_grid_params, sep = ", ")
@@ -86,9 +92,18 @@
 #' })
 #' ```
 #'
+#' Returns:
+#'
+#' ```r
+#' cli::cli_abort(
+#'   "The provided {.arg grid} has parameter columns that have not been
+#'    marked for tuning by {.fn tune}: {.val {extra_grid_params}}."
+#' )
+#' ```
+#'
 #' A message that probably best lives as two separate elements:
 #'
-#' ```{r}
+#' ```r
 #' cli_pal$chat({
 #'   rlang::abort(
 #'     paste(
@@ -101,9 +116,23 @@
 #' })
 #' ```
 #'
+#' Returns:
+#'
+#' ```r
+#' cli::cli_abort(
+#'   c(
+#'     "Some model parameters require finalization but there are recipe
+#'      parameters that require tuning.",
+#'     "i" = "Please use {.fn extract_parameter_set_dials} to set parameter
+#'            ranges manually and supply the output to the {.arg param_info}
+#'            argument."
+#'   )
+#' )
+#' ```
+#'
 #' Gnarly ad-hoc pluralization:
 #'
-#' ```{r}
+#' ```r
 #' cli_pal$chat({
 #'   msg <- "Creating pre-processing data to finalize unknown parameter"
 #'   unk_names <- pset$id[unk]
@@ -116,9 +145,17 @@
 #' })
 #' ```
 #'
+#' Returns:
+#'
+#' ```r
+#' cli::cli_inform(
+#'   "Creating pre-processing data to finalize unknown parameter{?s}: {.val {unk_names}}"
+#' )
+#' ```
+#'
 #' Some `paste0()` wonk:
 #'
-#' ```{r}
+#' ```r
 #' cli_pal$chat({
 #'   rlang::abort(paste0(
 #'     "The workflow has arguments to be tuned that are missing some ",
@@ -128,10 +165,19 @@
 #' })
 #' ```
 #'
+#' Returns:
+#'
+#' ```r
+#' cli::cli_abort(
+#'   "The workflow has arguments to be tuned that are missing some
+#'    parameter objects: {.val {pset$id[!params]}}"
+#' )
+#' ```
+#'
 #' The model is instructed to only return a call to a cli function, so
 #' erroring code that's run conditionally can get borked:
 #'
-#'   ```{r}
+#' ```r
 #' cli_pal$chat({
 #'   cls <- paste(cls, collapse = " or ")
 #'   if (!fine) {
@@ -144,12 +190,28 @@
 #' })
 #' ```
 #'
+#' Returns:
+#'
+#' ```r
+#' cli::cli_abort(
+#'   "Argument {.code {deparse(cl$x)}} should be {?a/an} {.cls {cls}} or {.code NULL}{?in {where}}."
+#' )
+#' ```
+#'
+#' Note that `?in where` is not valid cli markup.
+#'
 #' Sprintf-style statements aren't an issue:
 #'
-#' ```{r}
+#' ```r
 #' cli_pal$chat({
 #'   abort(sprintf("No such '%s' function: `%s()`.", package, name))
 #' })
+#' ```
+#'
+#' Returns:
+#'
+#' ```r
+#' cli::cli_abort("No such {.pkg {package}} function: {.fn {name}}.")
 #' ```
 #'
 #' @name pal_cli

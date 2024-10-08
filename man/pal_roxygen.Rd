@@ -59,6 +59,8 @@ and are generated with the default model, Claude Sonnet 3.5.
 roxygen_pal <- pal("roxygen")
 }\if{html}{\out{</div>}}
 
+Documenting a function factory:
+
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{roxygen_pal$chat(\{
   deferred_method_transform <- function(lambda_expr, transformer, eval_env) \{
     transformer <- enexpr(transformer)
@@ -78,20 +80,24 @@ roxygen_pal <- pal("roxygen")
     )
   \}
 \})
-#> #' Transform a deferred method
-#> #'
-#> #' @description
-#> #' A short description...
-#> #'
-#> #' @param lambda_expr A lambda expression.
-#> #' @param transformer A transformer expression.
-#> #' @param eval_env An environment in which to evaluate the transformer.
-#> #'
-#> #' @returns
-#> #' A function that, when called, will execute the transformed lambda expression.
-#> #'
-#> #' @export
+
+#' #' Transform a deferred method
+#'
+#' @description
+#' A short description...
+#'
+#' @param lambda_expr A lambda expression to transform.
+#' @param transformer A transformer function or expression.
+#' @param eval_env The environment in which to evaluate the transformer.
+#'
+#' @returns
+#' A function that, when called, will evaluate the transformed lambda expression.
+#' The returned function accepts `...` arguments which are passed to the generated function.
+#'
+#' @export
 }\if{html}{\out{</div>}}
+
+A function that may raise a condition:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{roxygen_pal$chat(\{
   set_default <- function(value, default, arg = caller_arg(value)) \{
@@ -105,21 +111,24 @@ roxygen_pal <- pal("roxygen")
     \}
   \}
 \})
-#> #' Set default value
-#> #'
-#> #' @description
-#> #' A short description...
-#> #'
-#> #' @param value A value, potentially NULL.
-#> #' @param default The default value to use if `value` is NULL.
-#> #' @param arg Optional. The name of the argument being set.
-#> #'
-#> #' @returns
-#> #' Returns `value` if it's not NULL, otherwise returns `default`. 
-#> #' Informs the user about using the default value unless in a non-snapshot test environment.
-#> #'
-#> #' @export
+
+#' Set default value
+#'
+#' @description
+#' A short description...
+#'
+#' @param value A value to check.
+#' @param default The default value to use if `value` is NULL.
+#' @param arg Optional. The name of the argument being set.
+#'
+#' @returns
+#' Returns `value` if it's not NULL, otherwise returns `default`.
+#' Informs the user when using the default value.
+#'
+#' @export
 }\if{html}{\out{</div>}}
+
+A function with some tricky indexing:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{roxygen_pal$chat(\{
   find_index <- function(left, e_right) \{
@@ -134,18 +143,20 @@ roxygen_pal <- pal("roxygen")
     which(matches_idx)[[1]]
   \}
 \})
-#> #' Find index in a list
-#> #'
-#> #' @description
-#> #' A short description...
-#> #'
-#> #' @param left A list to search in.
-#> #' @param e_right An element to search for, expected to be a list with an 'index' field.
-#> #'
-#> #' @returns
-#> #' The index in `left` where `e_right$index` is found, or `NA` if not found or if inputs are invalid.
-#> #'
-#> #' @export
+
+#' Find matching index
+#'
+#' @description
+#' A short description...
+#'
+#' @param left A list of elements, each expected to have an 'index' field.
+#' @param e_right A list with an 'index' field to search for in `left`.
+#'
+#' @returns
+#' The numeric index in `left` where `e_right$index` matches, or NA if not found
+#' or if inputs are invalid. Returns NA if multiple matches are found.
+#'
+#' @export
 }\if{html}{\out{</div>}}
 }
 

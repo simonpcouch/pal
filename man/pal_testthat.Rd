@@ -74,11 +74,21 @@ regular expression present:
     "\\\\`exponentiate\\\\` argument is not supported in the \\\\`tidy\\\\(\\\\)\\\\` method for \\\\`boop\\\\` objects"
   )
 \})
-#> expect_snapshot(
-#>   .res <- check_ellipses("exponentiate", "tidy", "boop", 
-#>     exponentiate = TRUE, quick = FALSE)
-#> )
 }\if{html}{\out{</div>}}
+
+Returns:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{expect_snapshot(
+  .res <- check_ellipses(
+    "exponentiate", "tidy", "boop", exponentiate = TRUE, quick = FALSE
+  )
+)
+}\if{html}{\out{</div>}}
+
+Note, as well, that intermediate results are assigned to an object so as
+not to be snapshotted when their contents weren't previously tests.
+
+Another example with multiple, redudant calls:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{testthat_pal$chat(\{
   augment_error <- "augment is only supported for fixest models estimated with feols, feglm, or femlm"
@@ -86,9 +96,13 @@ regular expression present:
   expect_error(augment(res_feNmlm, df), augment_error)
   expect_error(augment(res_fepois, df), augment_error)
 \})
-#> expect_snapshot(error = TRUE, augment(res_fenegbin, df))
-#> expect_snapshot(error = TRUE, augment(res_feNmlm, df))
-#> expect_snapshot(error = TRUE, augment(res_fepois, df))
+}\if{html}{\out{</div>}}
+
+Returns:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{expect_snapshot(error = TRUE, augment(res_fenegbin, df))
+expect_snapshot(error = TRUE, augment(res_feNmlm, df))
+expect_snapshot(error = TRUE, augment(res_fepois, df))
 }\if{html}{\out{</div>}}
 
 They know about \code{regexp = NA}, which means "no error" (or warning, or message):
@@ -99,7 +113,11 @@ They know about \code{regexp = NA}, which means "no error" (or warning, or messa
     regex = NA
   )
 \})
-#> expect_no_error(p4_b <- check_parameters(w4, p4_a, data = mtcars))
+}\if{html}{\out{</div>}}
+
+Returns:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{expect_no_error(p4_b <- check_parameters(w4, p4_a, data = mtcars))
 }\if{html}{\out{</div>}}
 
 They also know not to adjust calls to those condition expectations when
@@ -110,7 +128,11 @@ the wording of the message without consequence):
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{testthat_pal$chat(\{
   expect_error(tidy(pca, matrix = "u"), class = "pca_error")
 \})
-#> expect_error(tidy(pca, matrix = "u"), class = "pca_error")
+}\if{html}{\out{</div>}}
+
+Returns:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{expect_error(tidy(pca, matrix = "u"), class = "pca_error")
 }\if{html}{\out{</div>}}
 
 When converting non-erroring code, testthat pals will assign intermediate
@@ -122,9 +144,13 @@ results so as not to snapshot both the result and the warning:
     '"robust" argument has been deprecated'
   )
 \})
-#> expect_snapshot(
-#>   .res <- tidy(fit, robust = TRUE)
-#> )
+}\if{html}{\out{</div>}}
+
+Returns:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{expect_snapshot(
+  .res <- tidy(fit, robust = TRUE)
+)
 }\if{html}{\out{</div>}}
 
 Nested expectations can generally be disentangled without issue:
@@ -135,13 +161,17 @@ Nested expectations can generally be disentangled without issue:
     expect_warning(tune_grid(decision_tree(cost_complexity = 1), bootstraps(mtcars)))
   )
 \})
-#> expect_snapshot(\{
-#>   result_fit_resamples <- fit_resamples(decision_tree(cost_complexity = 1), 
-#>     bootstraps(mtcars))
-#>   result_tune_grid <- tune_grid(decision_tree(cost_complexity = 1), 
-#>     bootstraps(mtcars))
-#> \})
-#> expect_equal(result_fit_resamples, result_tune_grid)
+}\if{html}{\out{</div>}}
+
+Returns:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{expect_snapshot(\{
+  fit_resamples_result <- fit_resamples(decision_tree(cost_complexity = 1),
+                                        bootstraps(mtcars))
+  tune_grid_result <- tune_grid(decision_tree(cost_complexity = 1),
+                                bootstraps(mtcars))
+\})
+expect_equal(fit_resamples_result, tune_grid_result)
 }\if{html}{\out{</div>}}
 
 There are also a few edits the pal knows to make to third-edition code.
@@ -154,7 +184,14 @@ in addition to the message itself:
     fit_best(knn_pca_res, parameters = tibble(neighbors = 2))
   )
 \})
-#> expect_snapshot(error = TRUE, fit_best(knn_pca_res, parameters = tibble(neighbors = 2)))
+}\if{html}{\out{</div>}}
+
+Returns:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{expect_snapshot(
+  error = TRUE,
+  fit_best(knn_pca_res, parameters = tibble(neighbors = 2))
+)
 }\if{html}{\out{</div>}}
 }
 

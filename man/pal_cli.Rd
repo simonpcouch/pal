@@ -68,7 +68,11 @@ At its simplest, a one-line message with a little bit of markup:
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{cli_pal$chat(\{
   rlang::abort("`save_pred` can only be used if the initial results saved predictions.")
 \})
-#> cli::cli_abort("\{.arg save_pred\} can only be used if the initial results saved predictions.")
+}\if{html}{\out{</div>}}
+
+Returns:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{cli::cli_abort("\{.arg save_pred\} can only be used if the initial results saved predictions.")
 }\if{html}{\out{</div>}}
 
 Some strange vector collapsing and funky line breaking:
@@ -84,8 +88,14 @@ Some strange vector collapsing and funky line breaking:
 
   rlang::abort(msg)
 \})
-#> cli::cli_abort("The provided \{.arg grid\} has parameter columns that have not been 
-#>    marked for tuning by \{.fn tune\}: \{extra_grid_params\}.")
+}\if{html}{\out{</div>}}
+
+Returns:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{cli::cli_abort(
+  "The provided \{.arg grid\} has parameter columns that have not been
+   marked for tuning by \{.fn tune\}: \{.val \{extra_grid_params\}\}."
+)
 }\if{html}{\out{</div>}}
 
 A message that probably best lives as two separate elements:
@@ -100,15 +110,19 @@ A message that probably best lives as two separate elements:
     )
   )
 \})
-#> cli::cli_abort(
-#>   c(
-#>     "Some model parameters require finalization but there are recipe
-#>      parameters that require tuning.",
-#>     "i" = "Please use \{.fn extract_parameter_set_dials\} to set parameter
-#>            ranges manually and supply the output to the \{.arg param_info\}
-#>            argument."
-#>   )
-#> )
+}\if{html}{\out{</div>}}
+
+Returns:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{cli::cli_abort(
+  c(
+    "Some model parameters require finalization but there are recipe
+     parameters that require tuning.",
+    "i" = "Please use \{.fn extract_parameter_set_dials\} to set parameter
+           ranges manually and supply the output to the \{.arg param_info\}
+           argument."
+  )
+)
 }\if{html}{\out{</div>}}
 
 Gnarly ad-hoc pluralization:
@@ -123,9 +137,13 @@ Gnarly ad-hoc pluralization:
   \}
   rlang::inform(msg)
 \})
-#> cli::cli_inform(
-#>   "Creating pre-processing data to finalize unknown parameter\{?s\}: \{unk_names\}"
-#> )
+}\if{html}{\out{</div>}}
+
+Returns:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{cli::cli_inform(
+  "Creating pre-processing data to finalize unknown parameter\{?s\}: \{.val \{unk_names\}\}"
+)
 }\if{html}{\out{</div>}}
 
 Some \code{paste0()} wonk:
@@ -137,37 +155,50 @@ Some \code{paste0()} wonk:
     paste0("'", pset$id[!params], "'", collapse = ", ")
   ))
 \})
-#> cli::cli_abort(
-#>   "The workflow has arguments to be tuned that are missing some 
-#>    parameter objects: \{pset$id[!params]\}"
-#> )
+}\if{html}{\out{</div>}}
+
+Returns:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{cli::cli_abort(
+  "The workflow has arguments to be tuned that are missing some
+   parameter objects: \{.val \{pset$id[!params]\}\}"
+)
 }\if{html}{\out{</div>}}
 
 The model is instructed to only return a call to a cli function, so
 erroring code that's run conditionally can get borked:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{cli_pal$chat(\{
-cls <- paste(cls, collapse = " or ")
-if (!fine) \{
-  msg <- glue::glue("Argument '\{deparse(cl$x)\}' should be a \{cls\} or NULL")
-  if (!is.null(where)) \{
-    msg <- glue::glue(msg, " in `\{where\}`")
+  cls <- paste(cls, collapse = " or ")
+  if (!fine) \{
+    msg <- glue::glue("Argument '\{deparse(cl$x)\}' should be a \{cls\} or NULL")
+    if (!is.null(where)) \{
+      msg <- glue::glue(msg, " in `\{where\}`")
+    \}
+    rlang::abort(msg)
   \}
-  rlang::abort(msg)
-\}
 \})
-#> cli::cli_abort(
-#>   "Argument \{.code \{deparse(cl$x)\}\} should be \{?a/\}\{.cls \{cls\}\} or NULL\{?
-#>    in \{.fn \{where\}\}\}"
-#> )
 }\if{html}{\out{</div>}}
+
+Returns:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{cli::cli_abort(
+  "Argument \{.code \{deparse(cl$x)\}\} should be \{?a/an\} \{.cls \{cls\}\} or \{.code NULL\}\{?in \{where\}\}."
+)
+}\if{html}{\out{</div>}}
+
+Note that \verb{?in where} is not valid cli markup.
 
 Sprintf-style statements aren't an issue:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{cli_pal$chat(\{
   abort(sprintf("No such '\%s' function: `\%s()`.", package, name))
 \})
-#> cli::cli_abort("No such \{.pkg \{package\}\} function: \{.fn \{name\}\}.")
+}\if{html}{\out{</div>}}
+
+Returns:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{cli::cli_abort("No such \{.pkg \{package\}\} function: \{.fn \{name\}\}.")
 }\if{html}{\out{</div>}}
 }
 

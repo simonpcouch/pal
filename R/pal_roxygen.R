@@ -48,13 +48,15 @@
 #' "[from the wild](https://github.com/hadley/elmer/tree/e497d627e7be01206df6f1420ca36235141dc22a/R)"
 #' and are generated with the default model, Claude Sonnet 3.5.
 #'
-#' ```{r}
+#' ```r
 #' library(pal)
 #'
 #' roxygen_pal <- pal("roxygen")
 #' ```
 #'
-#' ```{r}
+#' Documenting a function factory:
+#'
+#' ```r
 #' roxygen_pal$chat({
 #'   deferred_method_transform <- function(lambda_expr, transformer, eval_env) {
 #'     transformer <- enexpr(transformer)
@@ -74,9 +76,26 @@
 #'     )
 #'   }
 #' })
+#'
+#' #' #' Transform a deferred method
+#' #'
+#' #' @description
+#' #' A short description...
+#' #'
+#' #' @param lambda_expr A lambda expression to transform.
+#' #' @param transformer A transformer function or expression.
+#' #' @param eval_env The environment in which to evaluate the transformer.
+#' #'
+#' #' @returns
+#' #' A function that, when called, will evaluate the transformed lambda expression.
+#' #' The returned function accepts `...` arguments which are passed to the generated function.
+#' #'
+#' #' @export
 #' ```
 #'
-#' ```{r}
+#' A function that may raise a condition:
+#'
+#' ```r
 #' roxygen_pal$chat({
 #'   set_default <- function(value, default, arg = caller_arg(value)) {
 #'     if (is.null(value)) {
@@ -89,9 +108,26 @@
 #'     }
 #'   }
 #' })
+#'
+#' #' Set default value
+#' #'
+#' #' @description
+#' #' A short description...
+#' #'
+#' #' @param value A value to check.
+#' #' @param default The default value to use if `value` is NULL.
+#' #' @param arg Optional. The name of the argument being set.
+#' #'
+#' #' @returns
+#' #' Returns `value` if it's not NULL, otherwise returns `default`.
+#' #' Informs the user when using the default value.
+#' #'
+#' #' @export
 #' ```
 #'
-#' ```{r}
+#' A function with some tricky indexing:
+#'
+#' ```r
 #' roxygen_pal$chat({
 #'   find_index <- function(left, e_right) {
 #'     if (!is.list(e_right) || !has_name(e_right, "index") || !is.numeric(e_right$index)) {
@@ -105,6 +141,20 @@
 #'     which(matches_idx)[[1]]
 #'   }
 #' })
+#'
+#' #' Find matching index
+#' #'
+#' #' @description
+#' #' A short description...
+#' #'
+#' #' @param left A list of elements, each expected to have an 'index' field.
+#' #' @param e_right A list with an 'index' field to search for in `left`.
+#' #'
+#' #' @returns
+#' #' The numeric index in `left` where `e_right$index` matches, or NA if not found
+#' #' or if inputs are invalid. Returns NA if multiple matches are found.
+#' #'
+#' #' @export
 #' ```
 #'
 #' @name pal_roxygen
