@@ -61,6 +61,10 @@ errors and warnings users might encounter.</p></li>
 
 <p>Create a roxygen pal with:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/pal.html">pal</a></span><span class="op">(</span><span class="st">"roxygen"</span><span class="op">)</span></span></code></pre><p></p></div>
+<p>We recommended binding the roxygen pal to the keyboard shortcut
+<code>Cmd+;+R</code> (<a href="https://www.emacswiki.org/emacs/key-chord.el" class="external-link">written <code>Cmd+; Cmd+R</code></a>)
+via <code>Tools &gt; Modify Keyboard Shortcuts &gt; Search "Pal"</code> in RStudio.
+Pals are typically prefixed with <code>Command + ;</code> (or <code>Alt + ;</code> on non-macOS).</p>
     </div>
     <div class="section level2">
     <h2 id="cost">Cost<a class="anchor" aria-label="anchor" href="#cost"></a></h2>
@@ -117,12 +121,12 @@ and are generated with the default model, Claude Sonnet 3.5.</p>
 <span><span class="co">#&gt; #' @description</span></span>
 <span><span class="co">#&gt; #' A short description...</span></span>
 <span><span class="co">#&gt; #'</span></span>
-<span><span class="co">#&gt; #' @param lambda_expr An expression.</span></span>
-<span><span class="co">#&gt; #' @param transformer A transformer function.</span></span>
-<span><span class="co">#&gt; #' @param eval_env An environment for evaluation.</span></span>
+<span><span class="co">#&gt; #' @param lambda_expr A lambda expression.</span></span>
+<span><span class="co">#&gt; #' @param transformer A transformer expression.</span></span>
+<span><span class="co">#&gt; #' @param eval_env An environment in which to evaluate the transformer.</span></span>
 <span><span class="co">#&gt; #'</span></span>
 <span><span class="co">#&gt; #' @returns</span></span>
-<span><span class="co">#&gt; #' A function that, when called, will evaluate the transformed lambda expression.</span></span>
+<span><span class="co">#&gt; #' A function that, when called, will execute the transformed lambda expression.</span></span>
 <span><span class="co">#&gt; #'</span></span>
 <span><span class="co">#&gt; #' @export</span></span></code></pre><p></p></div>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">roxygen_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
@@ -137,19 +141,18 @@ and are generated with the default model, Claude Sonnet 3.5.</p>
 <span>    <span class="op">}</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; #' Set a default value</span></span>
+<span><span class="co">#&gt; #' Set default value</span></span>
 <span><span class="co">#&gt; #'</span></span>
 <span><span class="co">#&gt; #' @description</span></span>
 <span><span class="co">#&gt; #' A short description...</span></span>
 <span><span class="co">#&gt; #'</span></span>
-<span><span class="co">#&gt; #' @param value A value to check.</span></span>
-<span><span class="co">#&gt; #' @param default A default value to use if `value` is NULL.</span></span>
-<span><span class="co">#&gt; #' @param arg Optional. The name of the argument being checked.</span></span>
+<span><span class="co">#&gt; #' @param value A value, potentially NULL.</span></span>
+<span><span class="co">#&gt; #' @param default The default value to use if `value` is NULL.</span></span>
+<span><span class="co">#&gt; #' @param arg Optional. The name of the argument being set.</span></span>
 <span><span class="co">#&gt; #'</span></span>
 <span><span class="co">#&gt; #' @returns</span></span>
-<span><span class="co">#&gt; #' Either `value` if it's not NULL, or `default` if `value` is NULL.</span></span>
-<span><span class="co">#&gt; #' When returning the default value, a message is displayed unless in a</span></span>
-<span><span class="co">#&gt; #' testing environment (except during snapshot testing).</span></span>
+<span><span class="co">#&gt; #' Returns `value` if it's not NULL, otherwise returns `default`.</span></span>
+<span><span class="co">#&gt; #' Informs the user about using the default value unless in a non-snapshot test environment.</span></span>
 <span><span class="co">#&gt; #'</span></span>
 <span><span class="co">#&gt; #' @export</span></span></code></pre><p></p></div>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">roxygen_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
@@ -165,17 +168,16 @@ and are generated with the default model, Claude Sonnet 3.5.</p>
 <span>    <span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">matches_idx</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span>  <span class="op">}</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; #' Find matching index</span></span>
+<span><span class="co">#&gt; #' Find index in a list</span></span>
 <span><span class="co">#&gt; #'</span></span>
 <span><span class="co">#&gt; #' @description</span></span>
 <span><span class="co">#&gt; #' A short description...</span></span>
 <span><span class="co">#&gt; #'</span></span>
-<span><span class="co">#&gt; #' @param left A list of elements to search through.</span></span>
-<span><span class="co">#&gt; #' @param e_right A single element to match against.</span></span>
+<span><span class="co">#&gt; #' @param left A list to search in.</span></span>
+<span><span class="co">#&gt; #' @param e_right An element to search for, expected to be a list with an 'index' field.</span></span>
 <span><span class="co">#&gt; #'</span></span>
 <span><span class="co">#&gt; #' @returns</span></span>
-<span><span class="co">#&gt; #' The index in `left` where `e_right$index` matches, or `NA` if no match</span></span>
-<span><span class="co">#&gt; #' is found or if `e_right` doesn't have a valid numeric index.</span></span>
+<span><span class="co">#&gt; #' The index in `left` where `e_right$index` is found, or `NA` if not found or if inputs are invalid.</span></span>
 <span><span class="co">#&gt; #'</span></span>
 <span><span class="co">#&gt; #' @export</span></span></code></pre><p></p></div>
     </div>

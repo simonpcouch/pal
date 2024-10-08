@@ -76,6 +76,10 @@ tidymodels organizations.</p>
 
 <p>Create a cli pal with:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/pal.html">pal</a></span><span class="op">(</span><span class="st">"cli"</span><span class="op">)</span></span></code></pre><p></p></div>
+<p>We recommended binding the cli pal to the keyboard shortcut
+<code>Cmd+;+C</code> (<a href="https://www.emacswiki.org/emacs/key-chord.el" class="external-link">written <code>Cmd+; Cmd+C</code></a>)
+via <code>Tools &gt; Modify Keyboard Shortcuts &gt; Search "Pal"</code> in RStudio.
+Pals are typically prefixed with <code>Command + ;</code> (or <code>Alt + ;</code> on non-macOS).</p>
     </div>
     <div class="section level2">
     <h2 id="cost">Cost<a class="anchor" aria-label="anchor" href="#cost"></a></h2>
@@ -123,10 +127,8 @@ and are generated with the default model, Claude Sonnet 3.5.</p>
 <span></span>
 <span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
-<span><span class="co">#&gt; cli::cli_abort(</span></span>
-<span><span class="co">#&gt;   "The provided {.arg grid} has parameter columns that have not been</span></span>
-<span><span class="co">#&gt;    marked for tuning by {.fn tune}: {.val {extra_grid_params}}."</span></span>
-<span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
+<span><span class="co">#&gt; cli::cli_abort("The provided {.arg grid} has parameter columns that have not been</span></span>
+<span><span class="co">#&gt;    marked for tuning by {.fn tune}: {extra_grid_params}.")</span></span></code></pre><p></p></div>
 <p>A message that probably best lives as two separate elements:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">cli_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
 <span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort</a></span><span class="op">(</span></span>
@@ -159,7 +161,7 @@ and are generated with the default model, Claude Sonnet 3.5.</p>
 <span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">inform</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; cli::cli_inform(</span></span>
-<span><span class="co">#&gt;   "Creating pre-processing data to finalize unknown parameter{?s}: {.val {unk_names}}"</span></span>
+<span><span class="co">#&gt;   "Creating pre-processing data to finalize unknown parameter{?s}: {unk_names}"</span></span>
 <span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
 <p>Some <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0()</a></code> wonk:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">cli_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
@@ -171,7 +173,7 @@ and are generated with the default model, Claude Sonnet 3.5.</p>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; cli::cli_abort(</span></span>
 <span><span class="co">#&gt;   "The workflow has arguments to be tuned that are missing some</span></span>
-<span><span class="co">#&gt;    parameter objects: {.val {pset$id[!params]}}"</span></span>
+<span><span class="co">#&gt;    parameter objects: {pset$id[!params]}"</span></span>
 <span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
 <p>The model is instructed to only return a call to a cli function, so
 erroring code that's run conditionally can get borked:</p>
@@ -186,7 +188,8 @@ erroring code that's run conditionally can get borked:</p>
 <span><span class="op">}</span></span>
 <span><span class="op">}</span><span class="op">)</span></span>
 <span><span class="co">#&gt; cli::cli_abort(</span></span>
-<span><span class="co">#&gt;   "Argument {.code {deparse(cl$x)}} should be {.cls {cls}} or {.code NULL}{?in {where}}."</span></span>
+<span><span class="co">#&gt;   "Argument {.code {deparse(cl$x)}} should be {?a/}{.cls {cls}} or NULL{?</span></span>
+<span><span class="co">#&gt;    in {.fn {where}}}"</span></span>
 <span><span class="co">#&gt; )</span></span></code></pre><p></p></div>
 <p>Sprintf-style statements aren't an issue:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="va">cli_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
