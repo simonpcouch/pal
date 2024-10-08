@@ -32,9 +32,12 @@ pak::pak("simonpcouch/pal")
 
 Then, ensure that you have an
 [`ANTHROPIC_API_KEY`](https://console.anthropic.com/) set in your
-[`.env`](https://github.com/gaborcsardi/dotenv). If you’d like to use an
-LLM other than Anthropic’s Claude 3.5 Sonnet—like OpenAI’s ChatGPT—to
-power the pal, see `?pal()` to set default metadata on that model.
+`.Renviron`—see
+[usethis::edit_r_environ()](https://usethis.r-lib.org/reference/edit.html)
+for more information. If you’d like to use an LLM other than Anthropic’s
+Claude 3.5 Sonnet—like OpenAI’s ChatGPT—to power the pal, see
+[`?pal()`](https://simonpcouch.github.io/pal/reference/pal.html) for
+information on how to set default metadata on that model.
 
 ## Example
 
