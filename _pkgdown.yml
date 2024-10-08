@@ -2,3 +2,12 @@ url: https://simonpcouch.github.io/pal/
 template:
   bootstrap: 5
 
+reference:
+- title: Create a pal
+  contents: pal
+- title: Pals for package development
+  contents:
+  - pal_roxygen
+  - pal_testthat
+  - pal_cli
+# to come: custom pals
