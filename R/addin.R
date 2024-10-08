@@ -103,10 +103,12 @@ stream_selection <- function(selection, context, pal, n_lines_orig) {
     output_lines,
     context$id
   )
-  rstudioapi::setCursorPosition(selection$range$start)
 
   # reindent the code
+  rstudioapi::setSelectionRanges(selection$range, id = context$id)
   rstudioapi::executeCommand("reindent")
+
+  rstudioapi::setCursorPosition(selection$range$start)
 }
 
 # prefix selection with new code -----------------------------------------------
