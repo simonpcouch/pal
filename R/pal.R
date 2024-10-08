@@ -62,4 +62,4 @@ pal <- function(
   )
 }
 
-supported_roles <- c("cli", "testthat")
+supported_roles <- c("cli", "testthat", "roxygen")

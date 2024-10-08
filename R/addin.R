@@ -1,3 +1,4 @@
+# replace selection with refactored code
 rs_update_selection <- function(context, role) {
   # check if pal exists
   if (exists(paste0(".last_pal_", role))) {
@@ -64,6 +65,7 @@ stream_selection <- function(selection, context, pal, n_lines_orig) {
   output_lines <- character(0)
   stream <- pal[[".__enclos_env__"]][["private"]]$.stream(selection_text)
   coro::loop(for (chunk in stream) {
+    if (identical(chunk, "")) {next}
     output_lines <- paste(output_lines, sub("\n$", "", chunk), sep = "")
     n_lines <- nchar(gsub("[^\n]+", "", output_lines)) + 1
     if (n_lines_orig - n_lines > 0) {
@@ -107,6 +109,48 @@ stream_selection <- function(selection, context, pal, n_lines_orig) {
   rstudioapi::executeCommand("reindent")
 }
 
+# prefix selection with new code -----------------------------------------------
+rs_prefix_selection <- function(context, role) {
+  # check if pal exists
+  if (exists(paste0(".last_pal_", role))) {
+    pal <- get(paste0(".last_pal_", role))
+  } else {
+    tryCatch(
+      pal <- pal(role),
+      error = function(e) {
+        rstudioapi::showDialog("Error", "Unable to create a pal. See `?pal()`.")
+        return(NULL)
+      }
+    )
+  }
+
+  selection <- rstudioapi::primary_selection(context)
+
+  if (selection[["text"]] == "") {
+    rstudioapi::showDialog("Error", "No code selected. Please highlight some code first.")
+    return(NULL)
+  }
+
+  # add one blank line before the selection
+  rstudioapi::modifyRange(selection$range, paste0("\n", selection[["text"]]), context$id)
+
+  # make the "current selection" that blank line
+  first_line <- selection$range
+  first_line$start[["column"]] <- 1
+  first_line$end[["row"]] <- selection$range$start[["row"]]
+  first_line$end[["column"]] <- Inf
+  selection$range <- first_line
+  rstudioapi::setCursorPosition(selection$range$start)
+
+  # start streaming into it--will be interactively appended to if need be
+  tryCatch(
+    stream_selection(selection, context, pal, n_lines_orig = 1),
+    error = function(e) {
+      rstudioapi::showDialog("Error", paste("The pal ran into an issue: ", e$message))
+    }
+  )
+}
+
 # pal-specific helpers ---------------------------------------------------------
 rs_pal_cli <- function(context = rstudioapi::getActiveDocumentContext()) {
   rs_update_selection(context = context, role = "cli")
@@ -114,4 +158,8 @@ rs_pal_cli <- function(context = rstudioapi::getActiveDocumentContext()) {
 
 rs_pal_testthat <- function(context = rstudioapi::getActiveDocumentContext()) {
   rs_update_selection(context = context, role = "testthat")
+}
+
+rs_pal_roxygen <- function(context = rstudioapi::getActiveDocumentContext()) {
+  rs_prefix_selection(context = context, role = "roxygen")
 }

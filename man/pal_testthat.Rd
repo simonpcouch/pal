@@ -30,16 +30,16 @@ Create a testthat pal with:
 \section{Cost}{
 
 
-The system prompt from a pal includes something like 1,000 tokens.
+The system prompt from a testthat pal includes something like 1,000 tokens.
 Add in (a generous) 100 tokens for the code that's actually highlighted
-and also sent off to the model and you're looking at 4,100 input tokens.
+and also sent off to the model and you're looking at 1,100 input tokens.
 The model returns approximately the same number of output tokens as it
 receives, so we'll call that 100 output tokens per refactor.
 
 As of the time of writing (October 2024), the default pal model Claude
 Sonnet 3.5 costs \\$3 per million input tokens and $15 per million output
 tokens. So, using the default model,
-\strong{cli pals cost around \\$4 for every 1,000 refactored pieces of code}. GPT-4o
+\strong{testthat pals cost around \\$4 for every 1,000 refactored pieces of code}. GPT-4o
 Mini, by contrast, doesn't tend to get many pieces of formatting right and
 often fails to line-break properly, but \emph{does} usually return syntactically
 valid calls to testthat functions, and it would cost around
@@ -70,7 +70,7 @@ regular expression present:
   )
 \})
 #> expect_snapshot(
-#>   object_from_warning <- check_ellipses("exponentiate", "tidy", "boop", 
+#>   .res <- check_ellipses("exponentiate", "tidy", "boop", 
 #>     exponentiate = TRUE, quick = FALSE)
 #> )
 }\if{html}{\out{</div>}}
@@ -81,18 +81,9 @@ regular expression present:
   expect_error(augment(res_feNmlm, df), augment_error)
   expect_error(augment(res_fepois, df), augment_error)
 \})
-#> expect_snapshot(
-#>   error = TRUE,
-#>   augment(res_fenegbin, df)
-#> )
-#> expect_snapshot(
-#>   error = TRUE,
-#>   augment(res_feNmlm, df)
-#> )
-#> expect_snapshot(
-#>   error = TRUE,
-#>   augment(res_fepois, df)
-#> )
+#> expect_snapshot(error = TRUE, augment(res_fenegbin, df))
+#> expect_snapshot(error = TRUE, augment(res_feNmlm, df))
+#> expect_snapshot(error = TRUE, augment(res_fepois, df))
 }\if{html}{\out{</div>}}
 
 They know about \code{regexp = NA}, which means "no error" (or warning, or message):
@@ -138,12 +129,12 @@ Nested expectations can generally be disentangled without issue:
   )
 \})
 #> expect_snapshot(\{
-#>   object_from_fit_resamples <- fit_resamples(decision_tree(cost_complexity = 1), 
+#>   resamples_result <- fit_resamples(decision_tree(cost_complexity = 1), 
 #>     bootstraps(mtcars))
-#>   object_from_tune_grid <- tune_grid(decision_tree(cost_complexity = 1), 
+#>   tune_grid_result <- tune_grid(decision_tree(cost_complexity = 1), 
 #>     bootstraps(mtcars))
 #> \})
-#> expect_equal(object_from_fit_resamples, object_from_tune_grid)
+#> expect_equal(resamples_result, tune_grid_result)
 }\if{html}{\out{</div>}}
 
 There are also a few edits the pal knows to make to third-edition code.
@@ -156,10 +147,7 @@ in addition to the message itself:
     fit_best(knn_pca_res, parameters = tibble(neighbors = 2))
   )
 \})
-#> expect_snapshot(
-#>   error = TRUE,
-#>   fit_best(knn_pca_res, parameters = tibble(neighbors = 2))
-#> )
+#> expect_snapshot(error = TRUE, fit_best(knn_pca_res, parameters = tibble(neighbors = 2)))
 }\if{html}{\out{</div>}}
 }
 

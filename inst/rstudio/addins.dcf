@@ -7,3 +7,8 @@ Name: Pal: convert to testthat
 Description: Replaces selected unit testing code with a version adapted to testthat 3
 Binding: rs_pal_testthat
 Interactive: false
+
+Name: Pal: template roxygen documentation
+Description: Prefixes selected function with templated roxygen2 documentation
+Binding: rs_pal_roxygen
+Interactive: false

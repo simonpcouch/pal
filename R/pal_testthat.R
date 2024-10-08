@@ -26,16 +26,16 @@
 #'
 #' @section Cost:
 #'
-#' The system prompt from a pal includes something like 1,000 tokens.
+#' The system prompt from a testthat pal includes something like 1,000 tokens.
 #' Add in (a generous) 100 tokens for the code that's actually highlighted
-#' and also sent off to the model and you're looking at 4,100 input tokens.
+#' and also sent off to the model and you're looking at 1,100 input tokens.
 #' The model returns approximately the same number of output tokens as it
 #' receives, so we'll call that 100 output tokens per refactor.
 #'
 #' As of the time of writing (October 2024), the default pal model Claude
 #' Sonnet 3.5 costs \\$3 per million input tokens and $15 per million output
 #' tokens. So, using the default model,
-#' **cli pals cost around \\$4 for every 1,000 refactored pieces of code**. GPT-4o
+#' **testthat pals cost around \\$4 for every 1,000 refactored pieces of code**. GPT-4o
 #' Mini, by contrast, doesn't tend to get many pieces of formatting right and
 #' often fails to line-break properly, but _does_ usually return syntactically
 #' valid calls to testthat functions, and it would cost around

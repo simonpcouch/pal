@@ -57,7 +57,8 @@ development:
   cli](https://simonpcouch.github.io/pal/reference/pal_cli.html)
 - `"testthat"`: [Convert to testthat
   3](https://simonpcouch.github.io/pal/reference/pal_testthat.html)
-- `"roxygen"`: Document functions with roxygen
+- `"roxygen"`: [Document functions with
+  roxygen](https://simonpcouch.github.io/pal/reference/pal_roxygen.html)
 
 That said, the package provides infrastructure for others to make LLM
 assistants for any task in R, from authoring to interactive data

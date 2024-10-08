@@ -81,7 +81,7 @@ Some strange vector collapsing and funky line breaking:
 \})
 #> cli::cli_abort(
 #>   "The provided \{.arg grid\} has parameter columns that have not been 
-#>    marked for tuning by \{.fn tune\}: \{extra_grid_params\}."
+#>    marked for tuning by \{.fn tune\}: \{.val \{extra_grid_params\}\}."
 #> )
 }\if{html}{\out{</div>}}
 
@@ -99,10 +99,11 @@ A message that probably best lives as two separate elements:
 \})
 #> cli::cli_abort(
 #>   c(
-#>     "Some model parameters require finalization but there are recipe parameters 
-#>      that require tuning.",
-#>     "i" = "Please use \{.fn extract_parameter_set_dials\} to set parameter ranges 
-#>           manually and supply the output to the \{.arg param_info\} argument."
+#>     "Some model parameters require finalization but there are recipe
+#>      parameters that require tuning.",
+#>     "i" = "Please use \{.fn extract_parameter_set_dials\} to set parameter
+#>            ranges manually and supply the output to the \{.arg param_info\}
+#>            argument."
 #>   )
 #> )
 }\if{html}{\out{</div>}}
@@ -120,10 +121,7 @@ Gnarly ad-hoc pluralization:
   rlang::inform(msg)
 \})
 #> cli::cli_inform(
-#>   c(
-#>     "Creating pre-processing data to finalize unknown parameter\{?s\}: 
-#>      \{.var \{unk_names\}\}"
-#>   )
+#>   "Creating pre-processing data to finalize unknown parameter\{?s\}: \{.val \{unk_names\}\}"
 #> )
 }\if{html}{\out{</div>}}
 
@@ -137,8 +135,8 @@ Some \code{paste0()} wonk:
   ))
 \})
 #> cli::cli_abort(
-#>   "The workflow has arguments to be tuned that are missing some parameter
-#>    objects: \{.var \{pset$id[!params]\}\}"
+#>   "The workflow has arguments to be tuned that are missing some 
+#>    parameter objects: \{.val \{pset$id[!params]\}\}"
 #> )
 }\if{html}{\out{</div>}}
 
@@ -155,7 +153,9 @@ if (!fine) \{
   rlang::abort(msg)
 \}
 \})
-#> cli::cli_abort("Argument \{.arg \{deparse(cl$x)\}\} should be a \{cls\} or \{NULL\}\{if (!is.null(where)) paste0(' in ', .code(\{where\}))\}")
+#> cli::cli_abort(
+#>   "Argument \{.code \{deparse(cl$x)\}\} should be \{.cls \{cls\}\} or \{.code NULL\}\{?in \{where\}\}."
+#> )
 }\if{html}{\out{</div>}}
 
 Sprintf-style statements aren't an issue:
@@ -163,7 +163,7 @@ Sprintf-style statements aren't an issue:
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{cli_pal$chat(\{
   abort(sprintf("No such '\%s' function: `\%s()`.", package, name))
 \})
-#> cli::cli_abort("No such \{.fn \{name\}\} function in \{.pkg \{package\}\}.")
+#> cli::cli_abort("No such \{.pkg \{package\}\} function: \{.fn \{name\}\}.")
 }\if{html}{\out{</div>}}
 }
 
