@@ -51,7 +51,8 @@ pal <- function(
     role = NULL, keybinding = NULL,
     fn = getOption(".pal_fn", default = "chat_claude"), ..., .ns = "elmer"
   ) {
-  check_role(role)
+  # TODO: figure out how to reinstate this check
+  #check_role(role)
 
   Pal$new(
     role = role,
