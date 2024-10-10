@@ -153,15 +153,3 @@ rs_prefix_selection <- function(context, role) {
   )
 }
 
-# pal-specific helpers ---------------------------------------------------------
-.pal_rs__cli <- function(context = rstudioapi::getActiveDocumentContext()) {
-  rs_replace_selection(context = context, role = "cli")
-}
-
-.pal_rs__testthat <- function(context = rstudioapi::getActiveDocumentContext()) {
-  rs_replace_selection(context = context, role = "testthat")
-}
-
-.pal_rs__roxygen <- function(context = rstudioapi::getActiveDocumentContext()) {
-  rs_prefix_selection(context = context, role = "roxygen")
-}
