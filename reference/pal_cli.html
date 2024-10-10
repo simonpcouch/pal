@@ -49,7 +49,7 @@ The cli pal helps you convert your R package to use cli for error messages."><me
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.png" class="logo" alt=""><h1>The cli pal</h1>
-      <small class="dont-index">Source: <a href="https://github.com/simonpcouch/pal/blob/main/R/pal_cli.R" class="external-link"><code>R/pal_cli.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/simonpcouch/pal/blob/main/R/doc-pal-cli.R" class="external-link"><code>R/doc-pal-cli.R</code></a></small>
       <div class="d-none name"><code>pal_cli.Rd</code></div>
     </div>
 
@@ -69,18 +69,6 @@ tidymodels organizations.</p>
     </div>
 
 
-    <div class="section level2">
-    <h2 id="creating-a-cli-pal">Creating a cli pal<a class="anchor" aria-label="anchor" href="#creating-a-cli-pal"></a></h2>
-
-
-
-<p>Create a cli pal with:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="fu"><a href="../reference/pal.html">pal</a></span><span class="op">(</span><span class="st">"cli"</span><span class="op">)</span></span></code></pre><p></p></div>
-<p>We recommended binding the cli pal to the keyboard shortcut
-<code>Cmd+;+C</code> (<a href="https://www.emacswiki.org/emacs/key-chord.el" class="external-link">written <code>Cmd+; Cmd+C</code></a>)
-via <code>Tools &gt; Modify Keyboard Shortcuts &gt; Search "Pal"</code> in RStudio.
-Pals are typically prefixed with <code>Command + ;</code> (or <code>Alt + ;</code> on non-macOS).</p>
-    </div>
     <div class="section level2">
     <h2 id="cost">Cost<a class="anchor" aria-label="anchor" href="#cost"></a></h2>
 
@@ -107,43 +95,34 @@ return syntactically valid calls to cli functions, and it would cost around
 <p>This section includes a handful of examples
 <a href="https://github.com/tidymodels/tune/blob/f8d734ac0fa981fae3a87ed2871a46e9c40d509d/R/checks.R" class="external-link">"from the wild"</a>
 and are generated with the default model, Claude Sonnet 3.5.</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/simonpcouch/pal" class="external-link">pal</a></span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">cli_pal</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pal.html">pal</a></span><span class="op">(</span><span class="st">"cli"</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>At its simplest, a one-line message with a little bit of markup:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="va">cli_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
-<span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort</a></span><span class="op">(</span><span class="st">"`save_pred` can only be used if the initial results saved predictions."</span><span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort</a></span><span class="op">(</span><span class="st">"`save_pred` can only be used if the initial results saved predictions."</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>Returns:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/cli_abort.html" class="external-link">cli_abort</a></span><span class="op">(</span><span class="st">"{.arg save_pred} can only be used if the initial results saved predictions."</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>Some strange vector collapsing and funky line breaking:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="va">cli_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
-<span>  <span class="va">extra_grid_params</span> <span class="op">&lt;-</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/quoting.html" class="external-link">single_quote</a></span><span class="op">(</span><span class="va">extra_grid_params</span><span class="op">)</span></span>
-<span>  <span class="va">extra_grid_params</span> <span class="op">&lt;-</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue_collapse.html" class="external-link">glue_collapse</a></span><span class="op">(</span><span class="va">extra_grid_params</span>, sep <span class="op">=</span> <span class="st">", "</span><span class="op">)</span></span>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">extra_grid_params</span> <span class="op">&lt;-</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/quoting.html" class="external-link">single_quote</a></span><span class="op">(</span><span class="va">extra_grid_params</span><span class="op">)</span></span>
+<span><span class="va">extra_grid_params</span> <span class="op">&lt;-</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue_collapse.html" class="external-link">glue_collapse</a></span><span class="op">(</span><span class="va">extra_grid_params</span>, sep <span class="op">=</span> <span class="st">", "</span><span class="op">)</span></span>
 <span></span>
-<span>  <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span></span>
-<span>    <span class="st">"The provided `grid` has the following parameter columns that have "</span>,</span>
-<span>    <span class="st">"not been marked for tuning by `tune()`: {extra_grid_params}."</span></span>
-<span>  <span class="op">)</span></span>
+<span><span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span></span>
+<span>  <span class="st">"The provided `grid` has the following parameter columns that have "</span>,</span>
+<span>  <span class="st">"not been marked for tuning by `tune()`: {extra_grid_params}."</span></span>
+<span><span class="op">)</span></span>
 <span></span>
-<span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span></code></pre><p></p></div>
+<span><span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>Returns:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/cli_abort.html" class="external-link">cli_abort</a></span><span class="op">(</span></span>
 <span>  <span class="st">"The provided {.arg grid} has parameter columns that have not been</span></span>
 <span><span class="st">   marked for tuning by {.fn tune}: {.val {extra_grid_params}}."</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
 <p>A message that probably best lives as two separate elements:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="va">cli_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
-<span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort</a></span><span class="op">(</span></span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span></span>
-<span>      <span class="st">"Some model parameters require finalization but there are recipe"</span>,</span>
-<span>      <span class="st">"parameters that require tuning. Please use "</span>,</span>
-<span>      <span class="st">"`extract_parameter_set_dials()` to set parameter ranges "</span>,</span>
-<span>      <span class="st">"manually and supply the output to the `param_info` argument."</span></span>
-<span>    <span class="op">)</span></span>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort</a></span><span class="op">(</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span></span>
+<span>    <span class="st">"Some model parameters require finalization but there are recipe"</span>,</span>
+<span>    <span class="st">"parameters that require tuning. Please use "</span>,</span>
+<span>    <span class="st">"`extract_parameter_set_dials()` to set parameter ranges "</span>,</span>
+<span>    <span class="st">"manually and supply the output to the `param_info` argument."</span></span>
 <span>  <span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span></code></pre><p></p></div>
+<span><span class="op">)</span></span></code></pre><p></p></div>
 <p>Returns:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/cli_abort.html" class="external-link">cli_abort</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
@@ -155,28 +134,24 @@ and are generated with the default model, Claude Sonnet 3.5.</p>
 <span>  <span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
 <p>Gnarly ad-hoc pluralization:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="va">cli_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
-<span>  <span class="va">msg</span> <span class="op">&lt;-</span> <span class="st">"Creating pre-processing data to finalize unknown parameter"</span></span>
-<span>  <span class="va">unk_names</span> <span class="op">&lt;-</span> <span class="va">pset</span><span class="op">$</span><span class="va">id</span><span class="op">[</span><span class="va">unk</span><span class="op">]</span></span>
-<span>  <span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">unk_names</span><span class="op">)</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">msg</span>, <span class="st">": "</span>, <span class="va">unk_names</span><span class="op">)</span></span>
-<span>  <span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
-<span>    <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">msg</span>, <span class="st">"s: "</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"'"</span>, <span class="va">unk_names</span>, <span class="st">"'"</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span><span class="op">)</span></span>
-<span>  <span class="op">}</span></span>
-<span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">inform</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">msg</span> <span class="op">&lt;-</span> <span class="st">"Creating pre-processing data to finalize unknown parameter"</span></span>
+<span><span class="va">unk_names</span> <span class="op">&lt;-</span> <span class="va">pset</span><span class="op">$</span><span class="va">id</span><span class="op">[</span><span class="va">unk</span><span class="op">]</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">unk_names</span><span class="op">)</span> <span class="op">==</span> <span class="fl">1</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">msg</span>, <span class="st">": "</span>, <span class="va">unk_names</span><span class="op">)</span></span>
+<span><span class="op">}</span> <span class="kw">else</span> <span class="op">{</span></span>
+<span>  <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">msg</span>, <span class="st">"s: "</span>, <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"'"</span>, <span class="va">unk_names</span>, <span class="st">"'"</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span><span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">inform</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>Returns:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/cli_abort.html" class="external-link">cli_inform</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Creating pre-processing data to finalize unknown parameter{?s}: {.val {unk_names}}"</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
 <p>Some <code><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0()</a></code> wonk:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="va">cli_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
-<span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
-<span>    <span class="st">"The workflow has arguments to be tuned that are missing some "</span>,</span>
-<span>    <span class="st">"parameter objects: "</span>,</span>
-<span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"'"</span>, <span class="va">pset</span><span class="op">$</span><span class="va">id</span><span class="op">[</span><span class="op">!</span><span class="va">params</span><span class="op">]</span>, <span class="st">"'"</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span></span>
-<span>  <span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span>
+<span>  <span class="st">"The workflow has arguments to be tuned that are missing some "</span>,</span>
+<span>  <span class="st">"parameter objects: "</span>,</span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"'"</span>, <span class="va">pset</span><span class="op">$</span><span class="va">id</span><span class="op">[</span><span class="op">!</span><span class="va">params</span><span class="op">]</span>, <span class="st">"'"</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span></span>
+<span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>Returns:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/cli_abort.html" class="external-link">cli_abort</a></span><span class="op">(</span></span>
 <span>  <span class="st">"The workflow has arguments to be tuned that are missing some</span></span>
@@ -184,27 +159,34 @@ and are generated with the default model, Claude Sonnet 3.5.</p>
 <span><span class="op">)</span></span></code></pre><p></p></div>
 <p>The model is instructed to only return a call to a cli function, so
 erroring code that's run conditionally can get borked:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="va">cli_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
-<span>  <span class="va">cls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">cls</span>, collapse <span class="op">=</span> <span class="st">" or "</span><span class="op">)</span></span>
-<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="va">fine</span><span class="op">)</span> <span class="op">{</span></span>
-<span>    <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"Argument '{deparse(cl$x)}' should be a {cls} or NULL"</span><span class="op">)</span></span>
-<span>    <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">where</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span>      <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="va">msg</span>, <span class="st">" in `{where}`"</span><span class="op">)</span></span>
-<span>    <span class="op">}</span></span>
-<span>    <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span></span>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">cls</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="va">cls</span>, collapse <span class="op">=</span> <span class="st">" or "</span><span class="op">)</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="va">fine</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="st">"Argument '{deparse(cl$x)}' should be a {cls} or NULL"</span><span class="op">)</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NULL.html" class="external-link">is.null</a></span><span class="op">(</span><span class="va">where</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="va">msg</span> <span class="op">&lt;-</span> <span class="fu">glue</span><span class="fu">::</span><span class="fu"><a href="https://glue.tidyverse.org/reference/glue.html" class="external-link">glue</a></span><span class="op">(</span><span class="va">msg</span>, <span class="st">" in `{where}`"</span><span class="op">)</span></span>
 <span>  <span class="op">}</span></span>
-<span><span class="op">}</span><span class="op">)</span></span></code></pre><p></p></div>
+<span>  <span class="fu">rlang</span><span class="fu">::</span><span class="fu"><a href="https://rlang.r-lib.org/reference/abort.html" class="external-link">abort</a></span><span class="op">(</span><span class="va">msg</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre><p></p></div>
 <p>Returns:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/cli_abort.html" class="external-link">cli_abort</a></span><span class="op">(</span></span>
 <span>  <span class="st">"Argument {.code {deparse(cl$x)}} should be {?a/an} {.cls {cls}} or {.code NULL}{?in {where}}."</span></span>
 <span><span class="op">)</span></span></code></pre><p></p></div>
 <p>Note that <code>?in where</code> is not valid cli markup.</p>
 <p>Sprintf-style statements aren't an issue:</p>
-<p></p><div class="sourceCode r"><pre><code><span><span class="va">cli_pal</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span></span>
-<span>  <span class="fu">abort</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"No such '%s' function: `%s()`."</span>, <span class="va">package</span>, <span class="va">name</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="op">}</span><span class="op">)</span></span></code></pre><p></p></div>
+<p></p><div class="sourceCode r"><pre><code><span><span class="fu">abort</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"No such '%s' function: `%s()`."</span>, <span class="va">package</span>, <span class="va">name</span><span class="op">)</span><span class="op">)</span></span></code></pre><p></p></div>
 <p>Returns:</p>
 <p></p><div class="sourceCode r"><pre><code><span><span class="fu">cli</span><span class="fu">::</span><span class="fu"><a href="https://cli.r-lib.org/reference/cli_abort.html" class="external-link">cli_abort</a></span><span class="op">(</span><span class="st">"No such {.pkg {package}} function: {.fn {name}}."</span><span class="op">)</span></span></code></pre><p></p></div>
+    </div>
+    <div class="section level2">
+    <h2 id="interfacing-manually-with-the-cli-pal">Interfacing manually with the cli pal<a class="anchor" aria-label="anchor" href="#interfacing-manually-with-the-cli-pal"></a></h2>
+
+
+
+<p>Pals are typically interfaced with via the pal addin. To call the cli
+pal directly, use:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">pal_cli</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pal.html">pal</a></span><span class="op">(</span><span class="st">"cli"</span><span class="op">)</span></span></code></pre><p></p></div>
+<p>Then, to submit a query, run:</p>
+<p></p><div class="sourceCode r"><pre><code><span><span class="va">pal_cli</span><span class="op">$</span><span class="fu">chat</span><span class="op">(</span><span class="op">{</span><span class="va">expr</span><span class="op">}</span><span class="op">)</span></span></code></pre><p></p></div>
     </div>
 
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
