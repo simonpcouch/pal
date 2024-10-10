@@ -36,7 +36,7 @@
       pal()
     Condition
       Error in `pal()`:
-      ! `role` must be one of "cli" or "testthat".
+      ! `role` must be a single string, not `NULL`.
 
 ---
 
@@ -44,7 +44,7 @@
       pal(NULL)
     Condition
       Error in `pal()`:
-      ! `role` must be one of "cli" or "testthat".
+      ! `role` must be a single string, not `NULL`.
 
 ---
 
@@ -52,5 +52,6 @@
       pal("beep bop boop")
     Condition
       Error in `pal()`:
-      ! `role` must be one of "cli" or "testthat".
+      ! No pals with role `beep bop boop` registered.
+      i See `pal_add()`.
 
