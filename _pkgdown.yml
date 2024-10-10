@@ -3,8 +3,10 @@ template:
   bootstrap: 5
 
 reference:
-- title: Create a pal
-  contents: pal
+- title: Create pals
+  contents:
+  - pal
+  - pal_add_remove
 - title: Pals for package development
   contents:
   - pal_roxygen
