@@ -12,17 +12,12 @@ status](https://www.r-pkg.org/badges/version/pal)](https://CRAN.R-project.org/pa
 <!-- badges: end -->
 
 Pals are persistent, ergonomic LLM assistants designed to help you
-complete repetitive, hard-to-automate tasks quickly. When created, they
-automatically generate RStudio add-ins registered to keyboard shortcuts.
-After selecting some code, press the keyboard shortcut you’ve chosen and
-watch your code be rewritten.
+complete repetitive, hard-to-automate tasks quickly. After selecting
+some code, press the keyboard shortcut you’ve chosen to trigger the pal
+addin, select the pal, and watch your code be rewritten.
 
 **Much of the documentation in this package is aspirational and its
-interface is likely to change rapidly.** Note, especially, that keyboard
-shortcuts will have to registered in the usual way (via Tools \> Modify
-Keyboard Shortcuts \> search “Pal”), for now.
-
-## Installation
+interface is likely to change rapidly.** \## Installation
 
 You can install pal like so:
 
@@ -41,35 +36,25 @@ information on how to set default metadata on that model.
 
 ## Example
 
-To create a pal, simply pass `pal()` a pre-defined “role” and a
-keybinding you’d like it attached to. For example, to use the [cli
-pal](https://simonpcouch.github.io/pal/reference/pal_cli.html) with the
-shortcut `Cmd+;+C` ([written
-`Cmd+; Cmd+C`](https://www.emacswiki.org/emacs/key-chord.el)):
-
-``` r
-pal("cli", "Cmd+; Cmd+C")
-```
-
-Then, highlight some code, press the keyboard shortcut, and watch your
-code be rewritten:
+Pals are created automatically when users interact with the pal addin.
+Just highlight some code, open the addin, and watch your code be
+rewritten:
 
 ![](https://github.com/simonpcouch/pal/raw/main/inst/figs/addin.gif)
 As-is, the package provides ergonomic LLM assistants for R package
 development:
 
-- `"cli"` with `Cmd+;+C`: [Convert to
+- `"cli"`: [Convert to
   cli](https://simonpcouch.github.io/pal/reference/pal_cli.html)
-- `"testthat"` with `Cmd+;+T`: [Convert to testthat
+- `"testthat"`: [Convert to testthat
   3](https://simonpcouch.github.io/pal/reference/pal_testthat.html)
-- `"roxygen"` with `Cmd+;+R`: [Document functions with
+- `"roxygen"`: [Document functions with
   roxygen](https://simonpcouch.github.io/pal/reference/pal_roxygen.html)
 
-That said, the package provides infrastructure for others to make LLM
-assistants for any task in R, from authoring to interactive data
-analysis. With only a markdown file and a function call, users can
-extend pal to assist with their own repetitive but hard-to-automate
-tasks.
+That said, all you need to create your own pal is a markdown file with
+some instructions on how you’d like it to work.
+
+<!-- TODO: decide the directory where those files would live, implement, and document -->
 
 ## How much do pals cost?
 
