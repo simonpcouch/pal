@@ -19,15 +19,6 @@ tidymodels organizations.
 
 The cli pal helps you convert your R package to use cli for error messages.
 }
-\section{Creating a cli pal}{
-
-
-Create a cli pal with:
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{pal("cli")
-}\if{html}{\out{</div>}}
-}
-
 \section{Cost}{
 
 
@@ -53,16 +44,9 @@ This section includes a handful of examples
 \href{https://github.com/tidymodels/tune/blob/f8d734ac0fa981fae3a87ed2871a46e9c40d509d/R/checks.R}{"from the wild"}
 and are generated with the default model, Claude Sonnet 3.5.
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(pal)
-
-cli_pal <- pal("cli")
-}\if{html}{\out{</div>}}
-
 At its simplest, a one-line message with a little bit of markup:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{cli_pal$chat(\{
-  rlang::abort("`save_pred` can only be used if the initial results saved predictions.")
-\})
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{rlang::abort("`save_pred` can only be used if the initial results saved predictions.")
 }\if{html}{\out{</div>}}
 
 Returns:
@@ -72,17 +56,15 @@ Returns:
 
 Some strange vector collapsing and funky line breaking:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{cli_pal$chat(\{
-  extra_grid_params <- glue::single_quote(extra_grid_params)
-  extra_grid_params <- glue::glue_collapse(extra_grid_params, sep = ", ")
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{extra_grid_params <- glue::single_quote(extra_grid_params)
+extra_grid_params <- glue::glue_collapse(extra_grid_params, sep = ", ")
 
-  msg <- glue::glue(
-    "The provided `grid` has the following parameter columns that have ",
-    "not been marked for tuning by `tune()`: \{extra_grid_params\}."
-  )
+msg <- glue::glue(
+  "The provided `grid` has the following parameter columns that have ",
+  "not been marked for tuning by `tune()`: \{extra_grid_params\}."
+)
 
-  rlang::abort(msg)
-\})
+rlang::abort(msg)
 }\if{html}{\out{</div>}}
 
 Returns:
@@ -95,16 +77,14 @@ Returns:
 
 A message that probably best lives as two separate elements:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{cli_pal$chat(\{
-  rlang::abort(
-    paste(
-      "Some model parameters require finalization but there are recipe",
-      "parameters that require tuning. Please use ",
-      "`extract_parameter_set_dials()` to set parameter ranges ",
-      "manually and supply the output to the `param_info` argument."
-    )
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{rlang::abort(
+  paste(
+    "Some model parameters require finalization but there are recipe",
+    "parameters that require tuning. Please use ",
+    "`extract_parameter_set_dials()` to set parameter ranges ",
+    "manually and supply the output to the `param_info` argument."
   )
-\})
+)
 }\if{html}{\out{</div>}}
 
 Returns:
@@ -122,16 +102,14 @@ Returns:
 
 Gnarly ad-hoc pluralization:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{cli_pal$chat(\{
-  msg <- "Creating pre-processing data to finalize unknown parameter"
-  unk_names <- pset$id[unk]
-  if (length(unk_names) == 1) \{
-    msg <- paste0(msg, ": ", unk_names)
-  \} else \{
-    msg <- paste0(msg, "s: ", paste0("'", unk_names, "'", collapse = ", "))
-  \}
-  rlang::inform(msg)
-\})
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{msg <- "Creating pre-processing data to finalize unknown parameter"
+unk_names <- pset$id[unk]
+if (length(unk_names) == 1) \{
+  msg <- paste0(msg, ": ", unk_names)
+\} else \{
+  msg <- paste0(msg, "s: ", paste0("'", unk_names, "'", collapse = ", "))
+\}
+rlang::inform(msg)
 }\if{html}{\out{</div>}}
 
 Returns:
@@ -143,13 +121,11 @@ Returns:
 
 Some \code{paste0()} wonk:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{cli_pal$chat(\{
-  rlang::abort(paste0(
-    "The workflow has arguments to be tuned that are missing some ",
-    "parameter objects: ",
-    paste0("'", pset$id[!params], "'", collapse = ", ")
-  ))
-\})
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{rlang::abort(paste0(
+  "The workflow has arguments to be tuned that are missing some ",
+  "parameter objects: ",
+  paste0("'", pset$id[!params], "'", collapse = ", ")
+))
 }\if{html}{\out{</div>}}
 
 Returns:
@@ -163,16 +139,14 @@ Returns:
 The model is instructed to only return a call to a cli function, so
 erroring code that's run conditionally can get borked:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{cli_pal$chat(\{
-  cls <- paste(cls, collapse = " or ")
-  if (!fine) \{
-    msg <- glue::glue("Argument '\{deparse(cl$x)\}' should be a \{cls\} or NULL")
-    if (!is.null(where)) \{
-      msg <- glue::glue(msg, " in `\{where\}`")
-    \}
-    rlang::abort(msg)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{cls <- paste(cls, collapse = " or ")
+if (!fine) \{
+  msg <- glue::glue("Argument '\{deparse(cl$x)\}' should be a \{cls\} or NULL")
+  if (!is.null(where)) \{
+    msg <- glue::glue(msg, " in `\{where\}`")
   \}
-\})
+  rlang::abort(msg)
+\}
 }\if{html}{\out{</div>}}
 
 Returns:
@@ -186,14 +160,27 @@ Note that \verb{?in where} is not valid cli markup.
 
 Sprintf-style statements aren't an issue:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{cli_pal$chat(\{
-  abort(sprintf("No such '\%s' function: `\%s()`.", package, name))
-\})
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{abort(sprintf("No such '\%s' function: `\%s()`.", package, name))
 }\if{html}{\out{</div>}}
 
 Returns:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{cli::cli_abort("No such \{.pkg \{package\}\} function: \{.fn \{name\}\}.")
+}\if{html}{\out{</div>}}
+}
+
+\section{Interfacing manually with the cli pal}{
+
+
+Pals are typically interfaced with via the pal addin. To call the cli
+pal directly, use:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{pal_cli <- pal("cli")
+}\if{html}{\out{</div>}}
+
+Then, to submit a query, run:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{pal_cli$chat(\{expr\})
 }\if{html}{\out{</div>}}
 }
 

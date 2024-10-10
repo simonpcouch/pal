@@ -13,15 +13,6 @@ of a complete documentation entry, to be then completed by a developer:
 errors and warnings users might encounter.
 }
 }
-\section{Creating a roxygen pal}{
-
-
-Create a roxygen pal with:
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{pal("roxygen")
-}\if{html}{\out{</div>}}
-}
-
 \section{Cost}{
 
 
@@ -49,34 +40,30 @@ This section includes a handful of examples
 "\href{https://github.com/hadley/elmer/tree/e497d627e7be01206df6f1420ca36235141dc22a/R}{from the wild}"
 and are generated with the default model, Claude Sonnet 3.5.
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(pal)
-
-roxygen_pal <- pal("roxygen")
-}\if{html}{\out{</div>}}
-
 Documenting a function factory:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{roxygen_pal$chat(\{
-  deferred_method_transform <- function(lambda_expr, transformer, eval_env) \{
-    transformer <- enexpr(transformer)
-    force(eval_env)
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{deferred_method_transform <- function(lambda_expr, transformer, eval_env) \{
+  transformer <- enexpr(transformer)
+  force(eval_env)
 
-    unique_id <- new_id()
-    env_bind_lazy(
-      generators,
-      !!unique_id := inject((!!transformer)(!!lambda_expr)),
-      eval.env = eval_env
-    )
+  unique_id <- new_id()
+  env_bind_lazy(
+    generators,
+    !!unique_id := inject((!!transformer)(!!lambda_expr)),
+    eval.env = eval_env
+  )
 
-    inject(
-      function(...) \{
-        (!!generators)[[!!unique_id]](self, private, ...)
-      \}
-    )
-  \}
-\})
+  inject(
+    function(...) \{
+      (!!generators)[[!!unique_id]](self, private, ...)
+    \}
+  )
+\}
+}\if{html}{\out{</div>}}
 
-#' #' Transform a deferred method
+Returns:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{#' #' Transform a deferred method
 #'
 #' @description
 #' A short description...
@@ -94,20 +81,21 @@ Documenting a function factory:
 
 A function that may raise a condition:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{roxygen_pal$chat(\{
-  set_default <- function(value, default, arg = caller_arg(value)) \{
-    if (is.null(value)) \{
-      if (!is_testing() || is_snapshot()) \{
-        cli::cli_inform("Using \{.field \{arg\}\} = \{.val \{default\}\}.")
-      \}
-      default
-    \} else \{
-      value
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{set_default <- function(value, default, arg = caller_arg(value)) \{
+  if (is.null(value)) \{
+    if (!is_testing() || is_snapshot()) \{
+      cli::cli_inform("Using \{.field \{arg\}\} = \{.val \{default\}\}.")
     \}
+    default
+  \} else \{
+    value
   \}
-\})
+\}
+}\if{html}{\out{</div>}}
 
-#' Set default value
+Returns:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{#' Set default value
 #'
 #' @description
 #' A short description...
@@ -125,21 +113,22 @@ A function that may raise a condition:
 
 A function with some tricky indexing:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{roxygen_pal$chat(\{
-  find_index <- function(left, e_right) \{
-    if (!is.list(e_right) || !has_name(e_right, "index") || !is.numeric(e_right$index)) \{
-      return(NA)
-    \}
-
-    matches_idx <- map_lgl(left, function(e_left) e_left$index == e_right$index)
-    if (sum(matches_idx) != 1) \{
-      return(NA)
-    \}
-    which(matches_idx)[[1]]
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{find_index <- function(left, e_right) \{
+  if (!is.list(e_right) || !has_name(e_right, "index") || !is.numeric(e_right$index)) \{
+    return(NA)
   \}
-\})
 
-#' Find matching index
+  matches_idx <- map_lgl(left, function(e_left) e_left$index == e_right$index)
+  if (sum(matches_idx) != 1) \{
+    return(NA)
+  \}
+  which(matches_idx)[[1]]
+\}
+}\if{html}{\out{</div>}}
+
+Returns:
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{#' Find matching index
 #'
 #' @description
 #' A short description...
@@ -152,6 +141,21 @@ A function with some tricky indexing:
 #' or if inputs are invalid. Returns NA if multiple matches are found.
 #'
 #' @export
+}\if{html}{\out{</div>}}
+}
+
+\section{Interfacing manually with the roxygen pal}{
+
+
+Pals are typically interfaced with via the pal addin. To call the roxygen
+pal directly, use:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{pal_roxygen <- pal("roxygen")
+}\if{html}{\out{</div>}}
+
+Then, to submit a query, run:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{pal_roxygen$chat(\{expr\})
 }\if{html}{\out{</div>}}
 }
 

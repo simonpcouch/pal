@@ -18,15 +18,6 @@ the third edition of testthat, namely via:
 \item Transitioning from deprecated functions like \verb{expect_known_*()}
 }
 }
-\section{Creating a testthat pal}{
-
-
-Create a testthat pal with:
-
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{pal("testthat")
-}\if{html}{\out{</div>}}
-}
-
 \section{Cost}{
 
 
@@ -54,21 +45,14 @@ This section includes a handful of examples
 the \href{https://github.com/tidymodels/tune/tree/f8d734ac0fa981fae3a87ed2871a46e9c40d509d/tests}{wild}"
 and are generated with the default model, Claude Sonnet 3.5.
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{library(pal)
-
-testthat_pal <- pal("testthat")
-}\if{html}{\out{</div>}}
-
 Testthat pals convert \code{expect_error()} (and \verb{*_warning()} and \verb{*_message()}
 and \verb{*_condition()}) calls to use \code{expect_snapshot()} when there's a
 regular expression present:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{testthat_pal$chat(\{
-  expect_warning(
-    check_ellipses("exponentiate", "tidy", "boop", exponentiate = TRUE, quick = FALSE),
-    "\\\\`exponentiate\\\\` argument is not supported in the \\\\`tidy\\\\(\\\\)\\\\` method for \\\\`boop\\\\` objects"
-  )
-\})
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{expect_warning(
+  check_ellipses("exponentiate", "tidy", "boop", exponentiate = TRUE, quick = FALSE),
+  "\\\\`exponentiate\\\\` argument is not supported in the \\\\`tidy\\\\(\\\\)\\\\` method for \\\\`boop\\\\` objects"
+)
 }\if{html}{\out{</div>}}
 
 Returns:
@@ -85,12 +69,10 @@ not to be snapshotted when their contents weren't previously tests.
 
 Another example with multiple, redudant calls:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{testthat_pal$chat(\{
-  augment_error <- "augment is only supported for fixest models estimated with feols, feglm, or femlm"
-  expect_error(augment(res_fenegbin, df), augment_error)
-  expect_error(augment(res_feNmlm, df), augment_error)
-  expect_error(augment(res_fepois, df), augment_error)
-\})
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{augment_error <- "augment is only supported for fixest models estimated with feols, feglm, or femlm"
+expect_error(augment(res_fenegbin, df), augment_error)
+expect_error(augment(res_feNmlm, df), augment_error)
+expect_error(augment(res_fepois, df), augment_error)
 }\if{html}{\out{</div>}}
 
 Returns:
@@ -102,12 +84,10 @@ expect_snapshot(error = TRUE, augment(res_fepois, df))
 
 They know about \code{regexp = NA}, which means "no error" (or warning, or message):
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{testthat_pal$chat(\{
-  expect_error(
-    p4_b <- check_parameters(w4, p4_a, data = mtcars),
-    regex = NA
-  )
-\})
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{expect_error(
+  p4_b <- check_parameters(w4, p4_a, data = mtcars),
+  regex = NA
+)
 }\if{html}{\out{</div>}}
 
 Returns:
@@ -120,9 +100,7 @@ there's a \code{class} argument present (which usually means that one is
 testing a condition from another package, which should be able to change
 the wording of the message without consequence):
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{testthat_pal$chat(\{
-  expect_error(tidy(pca, matrix = "u"), class = "pca_error")
-\})
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{expect_error(tidy(pca, matrix = "u"), class = "pca_error")
 }\if{html}{\out{</div>}}
 
 Returns:
@@ -133,12 +111,10 @@ Returns:
 When converting non-erroring code, testthat pals will assign intermediate
 results so as not to snapshot both the result and the warning:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{testthat_pal$chat(\{
-  expect_warning(
-    tidy(fit, robust = TRUE),
-    '"robust" argument has been deprecated'
-  )
-\})
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{expect_warning(
+  tidy(fit, robust = TRUE),
+  '"robust" argument has been deprecated'
+)
 }\if{html}{\out{</div>}}
 
 Returns:
@@ -150,12 +126,10 @@ Returns:
 
 Nested expectations can generally be disentangled without issue:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{testthat_pal$chat(\{
-  expect_equal(
-    fit_resamples(decision_tree(cost_complexity = 1), bootstraps(mtcars)),
-    expect_warning(tune_grid(decision_tree(cost_complexity = 1), bootstraps(mtcars)))
-  )
-\})
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{expect_equal(
+  fit_resamples(decision_tree(cost_complexity = 1), bootstraps(mtcars)),
+  expect_warning(tune_grid(decision_tree(cost_complexity = 1), bootstraps(mtcars)))
+)
 }\if{html}{\out{</div>}}
 
 Returns:
@@ -174,11 +148,9 @@ For example, it transitions \code{expect_snapshot_error()} and friends to
 use \code{expect_snapshot(error = TRUE)} so that the error context is snapshotted
 in addition to the message itself:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{testthat_pal$chat(\{
-  expect_snapshot_error(
-    fit_best(knn_pca_res, parameters = tibble(neighbors = 2))
-  )
-\})
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{expect_snapshot_error(
+  fit_best(knn_pca_res, parameters = tibble(neighbors = 2))
+)
 }\if{html}{\out{</div>}}
 
 Returns:
@@ -187,6 +159,21 @@ Returns:
   error = TRUE,
   fit_best(knn_pca_res, parameters = tibble(neighbors = 2))
 )
+}\if{html}{\out{</div>}}
+}
+
+\section{Interfacing manually with the testthat pal}{
+
+
+Pals are typically interfaced with via the pal addin. To call the testthat
+pal directly, use:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{pal_testthat <- pal("testthat")
+}\if{html}{\out{</div>}}
+
+Then, to submit a query, run:
+
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{pal_testthat$chat(\{expr\})
 }\if{html}{\out{</div>}}
 }
 

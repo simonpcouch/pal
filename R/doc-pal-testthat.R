@@ -15,13 +15,6 @@
 #' * Disentangling nested expectations
 #' * Transitioning from deprecated functions like `expect_known_*()`
 #'
-#' @section Creating a testthat pal:
-#'
-#' Create a testthat pal with:
-#'
-#' ```r
-#' pal("testthat")
-#' ```
 #'
 #' @section Cost:
 #'
@@ -47,23 +40,15 @@
 #' the [wild](https://github.com/tidymodels/tune/tree/f8d734ac0fa981fae3a87ed2871a46e9c40d509d/tests)"
 #' and are generated with the default model, Claude Sonnet 3.5.
 #'
-#' ```r
-#' library(pal)
-#'
-#' testthat_pal <- pal("testthat")
-#' ```
-#'
 #' Testthat pals convert `expect_error()` (and `*_warning()` and `*_message()`
 #' and `*_condition()`) calls to use `expect_snapshot()` when there's a
 #' regular expression present:
 #'
 #' ```r
-#' testthat_pal$chat({
-#'   expect_warning(
-#'     check_ellipses("exponentiate", "tidy", "boop", exponentiate = TRUE, quick = FALSE),
-#'     "\\`exponentiate\\` argument is not supported in the \\`tidy\\(\\)\\` method for \\`boop\\` objects"
-#'   )
-#' })
+#' expect_warning(
+#'   check_ellipses("exponentiate", "tidy", "boop", exponentiate = TRUE, quick = FALSE),
+#'   "\\`exponentiate\\` argument is not supported in the \\`tidy\\(\\)\\` method for \\`boop\\` objects"
+#' )
 #' ```
 #'
 #' Returns:
@@ -82,12 +67,10 @@
 #' Another example with multiple, redudant calls:
 #'
 #' ```r
-#' testthat_pal$chat({
-#'   augment_error <- "augment is only supported for fixest models estimated with feols, feglm, or femlm"
-#'   expect_error(augment(res_fenegbin, df), augment_error)
-#'   expect_error(augment(res_feNmlm, df), augment_error)
-#'   expect_error(augment(res_fepois, df), augment_error)
-#' })
+#' augment_error <- "augment is only supported for fixest models estimated with feols, feglm, or femlm"
+#' expect_error(augment(res_fenegbin, df), augment_error)
+#' expect_error(augment(res_feNmlm, df), augment_error)
+#' expect_error(augment(res_fepois, df), augment_error)
 #' ```
 #'
 #' Returns:
@@ -101,12 +84,10 @@
 #' They know about `regexp = NA`, which means "no error" (or warning, or message):
 #'
 #' ```r
-#' testthat_pal$chat({
-#'   expect_error(
-#'     p4_b <- check_parameters(w4, p4_a, data = mtcars),
-#'     regex = NA
-#'   )
-#' })
+#' expect_error(
+#'   p4_b <- check_parameters(w4, p4_a, data = mtcars),
+#'   regex = NA
+#' )
 #' ```
 #'
 #' Returns:
@@ -121,9 +102,7 @@
 #' the wording of the message without consequence):
 #'
 #' ```r
-#' testthat_pal$chat({
-#'   expect_error(tidy(pca, matrix = "u"), class = "pca_error")
-#' })
+#' expect_error(tidy(pca, matrix = "u"), class = "pca_error")
 #' ```
 #'
 #' Returns:
@@ -136,12 +115,10 @@
 #' results so as not to snapshot both the result and the warning:
 #'
 #' ```r
-#' testthat_pal$chat({
-#'   expect_warning(
-#'     tidy(fit, robust = TRUE),
-#'     '"robust" argument has been deprecated'
-#'   )
-#' })
+#' expect_warning(
+#'   tidy(fit, robust = TRUE),
+#'   '"robust" argument has been deprecated'
+#' )
 #' ```
 #'
 #' Returns:
@@ -155,12 +132,10 @@
 #' Nested expectations can generally be disentangled without issue:
 #'
 #' ```r
-#' testthat_pal$chat({
-#'   expect_equal(
-#'     fit_resamples(decision_tree(cost_complexity = 1), bootstraps(mtcars)),
-#'     expect_warning(tune_grid(decision_tree(cost_complexity = 1), bootstraps(mtcars)))
-#'   )
-#' })
+#' expect_equal(
+#'   fit_resamples(decision_tree(cost_complexity = 1), bootstraps(mtcars)),
+#'   expect_warning(tune_grid(decision_tree(cost_complexity = 1), bootstraps(mtcars)))
+#' )
 #' ```
 #'
 #' Returns:
@@ -181,11 +156,9 @@
 #' in addition to the message itself:
 #'
 #' ```r
-#' testthat_pal$chat({
-#'   expect_snapshot_error(
-#'     fit_best(knn_pca_res, parameters = tibble(neighbors = 2))
-#'   )
-#' })
+#' expect_snapshot_error(
+#'   fit_best(knn_pca_res, parameters = tibble(neighbors = 2))
+#' )
 #' ```
 #'
 #' Returns:
@@ -196,6 +169,9 @@
 #'   fit_best(knn_pca_res, parameters = tibble(neighbors = 2))
 #' )
 #' ```
+#'
+#' @templateVar role testthat
+#' @template manual-interface
 #'
 #' @name pal_testthat
 NULL
