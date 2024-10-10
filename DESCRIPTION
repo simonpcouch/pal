@@ -17,8 +17,10 @@ Imports:
     coro,
     glue,
     elmer,
+    miniUI,
     rlang,
-    rstudioapi
+    rstudioapi,
+    shiny
 Suggests: 
     testthat (>= 3.0.0),
     withr
