@@ -22,7 +22,6 @@
 #' Create a cli pal with:
 #'
 #' ```r
-# TODO: add keybinding with `pal("cli", "Cmd+;+C")`
 #' pal("cli")
 #' ```
 #'

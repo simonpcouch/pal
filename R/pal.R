@@ -61,7 +61,6 @@ pal <- function(
 
   Pal$new(
     role = role,
-    keybinding = keybinding,
     fn = fn,
     ...,
     .ns = .ns

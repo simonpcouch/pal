@@ -20,7 +20,6 @@
 #' Create a testthat pal with:
 #'
 #' ```r
-# TODO: add keybinding with `pal("testthat", "Cmd+;+C")`
 #' pal("testthat")
 #' ```
 #'

@@ -1,7 +1,7 @@
 Pal <- R6::R6Class(
   "Pal",
   public = list(
-    initialize = function(role, keybinding, fn, ..., .ns) {
+    initialize = function(role, fn, ..., .ns) {
       self$role <- role
       args <- list(...)
       default_args <- getOption(".pal_args", default = list())
