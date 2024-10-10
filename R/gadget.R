@@ -1,6 +1,6 @@
 .pal <- function() {
   pal_fn <- .pal_app()
-  if (identical(pal_fn, "rs_pal_")) {
+  if (is.null(pal_fn) || identical(pal_fn, "rs_pal_")) {
     return(NULL)
   }
   try_fetch(
@@ -40,6 +40,9 @@
     )
     shiny::observeEvent(input$done, {
       shiny::stopApp(returnValue = paste0("rs_pal_", input$pal))
+    })
+    shiny::onStop(function() {
+      shiny::stopApp(returnValue = NULL)
     })
   }
 
