@@ -46,6 +46,7 @@ pal_add <- function(
 
 #' @rdname pal_add_remove
 pal_remove <- function(role) {
+  check_string(role)
   if (!role %in% list_pals()) {
     cli::cli_abort("No active pal with the given {.arg role}.")
   }
@@ -54,7 +55,6 @@ pal_remove <- function(role) {
     pal_env(),
     c(paste0("system_prompt_", role), paste0("rs_pal_", role))
   )
-
 
   if (paste0(".last_pal_", role) %in% names(pal_env())) {
     env_unbind(pal_env(), paste0(".last_pal_", role))
@@ -67,7 +67,7 @@ supported_interfaces <- c("replace", "prefix", "suffix")
 
 # given an interface and role, attaches a function binding in pal's
 # additional search env
-parse_interface <- function(interface, role) {
+parse_interface <- function(interface, role, call = caller_env()) {
   if (isTRUE(identical(interface, supported_interfaces))) {
     interface <- interface[1]
   }
@@ -76,13 +76,14 @@ parse_interface <- function(interface, role) {
     !interface %in% supported_interfaces
   )) {
     cli::cli_abort(
-      "{.arg interface} should be one of {.or {.val {supported_interfaces}}}."
+      "{.arg interface} should be one of {.or {.val {supported_interfaces}}}.",
+      call = call
     )
   }
 
   if (interface == "suffix") {
     # TODO: implement suffixing
-    cli::cli_abort("Suffixing not implemented yet.")
+    cli::cli_abort("Suffixing not implemented yet.", call = call)
   }
 
   .stash_binding(

@@ -24,3 +24,37 @@ test_that("pal addition and removal works", {
   expect_false("system_prompt_boopery" %in% names(pal_env()))
   expect_false("rs_pal_boopery" %in% names(pal_env()))
 })
+
+test_that("pal addition with bad inputs", {
+  expect_snapshot(
+    error = TRUE,
+    pal_add(role = identity, prompt = "hey")
+  )
+
+  # TODO: decide on `prompt` interface and test
+
+
+  expect_snapshot(
+    error = TRUE,
+    pal_add(role = "sillyhead", prompt = "hey", interface = "no")
+  )
+  expect_snapshot(
+    error = TRUE,
+    pal_add(role = "sillyhead", prompt = "hey", interface = "suffix")
+  )
+  expect_snapshot(
+    error = TRUE,
+    pal_add(role = "sillyhead", prompt = "hey", interface = NULL)
+  )
+})
+
+test_that("pal remove with bad inputs", {
+  expect_snapshot(
+    error = TRUE,
+    pal_remove(role = identity)
+  )
+  expect_snapshot(
+    error = TRUE,
+    pal_remove(role = "notAnActivePal")
+  )
+})
