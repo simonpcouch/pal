@@ -26,6 +26,7 @@
 #' `NULL`, invisibly. Called for its side effect: a pal with role `role`
 #' is registered with the pal package.
 #'
+#' @name pal_add_remove
 #' @export
 pal_add <- function(
     role,
@@ -43,9 +44,16 @@ pal_add <- function(
   invisible()
 }
 
-# TODO: fn to remove the addin associated with the role
+#' @rdname pal_add_remove
 pal_remove <- function(role) {
-  invisible()
+  if (!role %in% list_pals()) {
+    cli::cli_abort("No active pal with the given {.arg role}.")
+  }
+
+  env_unbind(
+    pal_env(),
+    c(paste0("system_prompt_", role), paste0("rs_pal_", role))
+  )
 }
 
 supported_interfaces <- c("replace", "prefix", "suffix")
