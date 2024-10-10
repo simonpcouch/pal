@@ -4,11 +4,14 @@
 #' Pals are persistent, ergonomic LLM assistants designed to help you complete
 #' repetitive, hard-to-automate tasks quickly. After selecting some code,
 #' press the keyboard shortcut you've chosen to trigger the pal addin (we
-#' suggest Cmd + Ctrl + P), select the pal, and watch your code be rewritten.
+#' suggest `Ctrl+Cmd+P`), select the pal, and watch your code be rewritten.
+#'
+#' **Users typically should not need to call this function.** The pal
+#' addin will create needed pals on-the-fly.
 #'
 #' @param role The identifier for a pal prompt. By default one
-#' of `r glue::glue_collapse(paste0("[", glue::double_quote(default_roles), "]", "[pal_", default_roles, "]"), ", ", last = " or ")`.
-#' Add custom pals with [pal_add()].
+#' of `r glue::glue_collapse(paste0("[", glue::double_quote(default_roles), "]", "[pal_", default_roles, "]"), ", ", last = " or ")`,
+#' though custom pals can be added with [pal_add()].
 #' @param fn A `new_*()` function, likely from the elmer package. Defaults
 #'   to [elmer::chat_claude()]. To set a persistent alternative default,
 #'   set the `.pal_fn` option; see examples below.
@@ -18,11 +21,8 @@
 #'   set the `.pal_args` option; see examples below.
 #'
 #' @details
-#' Upon successfully creating a pal, this function will assign the
-#' result to the search path as `.pal_last`.
-#'
 #' If you have an Anthropic API key (or another API key and the `pal_*()`
-#' options) set and this package installed, you are ready to using the add-in
+#' options) set and this package installed, you are ready to using the addin
 #' in any R session with no setup or library loading required; the addin knows
 #' to look for your API credentials and will call needed functions by itself.
 #'

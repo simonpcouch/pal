@@ -13,8 +13,8 @@ pal(
 }
 \arguments{
 \item{role}{The identifier for a pal prompt. By default one
-of \link[=pal_cli]{"cli"}, \link[=pal_testthat]{"testthat"} or \link[=pal_roxygen]{"roxygen"}.
-Add custom pals with \code{\link[=pal_add]{pal_add()}}.}
+of \link[=pal_cli]{"cli"}, \link[=pal_testthat]{"testthat"} or \link[=pal_roxygen]{"roxygen"},
+though custom pals can be added with \code{\link[=pal_add]{pal_add()}}.}
 
 \item{fn}{A \verb{new_*()} function, likely from the elmer package. Defaults
 to \code{\link[elmer:chat_claude]{elmer::chat_claude()}}. To set a persistent alternative default,
@@ -30,14 +30,14 @@ set the \code{.pal_args} option; see examples below.}
 Pals are persistent, ergonomic LLM assistants designed to help you complete
 repetitive, hard-to-automate tasks quickly. After selecting some code,
 press the keyboard shortcut you've chosen to trigger the pal addin (we
-suggest Cmd + Ctrl + P), select the pal, and watch your code be rewritten.
+suggest \code{Ctrl+Cmd+P}), select the pal, and watch your code be rewritten.
+
+\strong{Users typically should not need to call this function.} The pal
+addin will create needed pals on-the-fly.
 }
 \details{
-Upon successfully creating a pal, this function will assign the
-result to the search path as \code{.pal_last}.
-
 If you have an Anthropic API key (or another API key and the \verb{pal_*()}
-options) set and this package installed, you are ready to using the add-in
+options) set and this package installed, you are ready to using the addin
 in any R session with no setup or library loading required; the addin knows
 to look for your API credentials and will call needed functions by itself.
 }
