@@ -3,6 +3,7 @@
 S3method(print,pal_response)
 export(.stash_last_pal)
 export(pal)
+export(pal_add)
 import(rlang)
 importFrom(elmer,content_image_file)
 importFrom(glue,glue)

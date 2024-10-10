@@ -1,5 +1,5 @@
 # replace selection with refactored code
-rs_update_selection <- function(context, role) {
+rs_replace_selection <- function(context, role) {
   # check if pal exists
   if (exists(paste0(".last_pal_", role))) {
     pal <- get(paste0(".last_pal_", role))
@@ -155,11 +155,11 @@ rs_prefix_selection <- function(context, role) {
 
 # pal-specific helpers ---------------------------------------------------------
 rs_pal_cli <- function(context = rstudioapi::getActiveDocumentContext()) {
-  rs_update_selection(context = context, role = "cli")
+  rs_replace_selection(context = context, role = "cli")
 }
 
 rs_pal_testthat <- function(context = rstudioapi::getActiveDocumentContext()) {
-  rs_update_selection(context = context, role = "testthat")
+  rs_replace_selection(context = context, role = "testthat")
 }
 
 rs_pal_roxygen <- function(context = rstudioapi::getActiveDocumentContext()) {
