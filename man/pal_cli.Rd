@@ -26,11 +26,6 @@ Create a cli pal with:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{pal("cli")
 }\if{html}{\out{</div>}}
-
-We recommended binding the cli pal to the keyboard shortcut
-\verb{Cmd+;+C} (\href{https://www.emacswiki.org/emacs/key-chord.el}{written \verb{Cmd+; Cmd+C}})
-via \verb{Tools > Modify Keyboard Shortcuts > Search "Pal"} in RStudio.
-Pals are typically prefixed with \verb{Command + ;} (or \verb{Alt + ;} on non-macOS).
 }
 
 \section{Cost}{

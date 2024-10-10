@@ -23,11 +23,6 @@
 #' pal("testthat")
 #' ```
 #'
-#' We recommended binding the testthat pal to the keyboard shortcut
-#' `Cmd+;+T` ([written `Cmd+; Cmd+T`](https://www.emacswiki.org/emacs/key-chord.el))
-#' via `Tools > Modify Keyboard Shortcuts > Search "Pal"` in RStudio.
-#' Pals are typically prefixed with `Command + ;` (or `Alt + ;` on non-macOS).
-#'
 #' @section Cost:
 #'
 #' The system prompt from a testthat pal includes something like 1,000 tokens.

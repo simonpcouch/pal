@@ -25,12 +25,6 @@
 #' pal("cli")
 #' ```
 #'
-#'
-#' We recommended binding the cli pal to the keyboard shortcut
-#' `Cmd+;+C` ([written `Cmd+; Cmd+C`](https://www.emacswiki.org/emacs/key-chord.el))
-#' via `Tools > Modify Keyboard Shortcuts > Search "Pal"` in RStudio.
-#' Pals are typically prefixed with `Command + ;` (or `Alt + ;` on non-macOS).
-#'
 #' @section Cost:
 #'
 # TODO: make this a template that takes in the token counts and prices as input

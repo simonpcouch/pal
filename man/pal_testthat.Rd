@@ -25,11 +25,6 @@ Create a testthat pal with:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{pal("testthat")
 }\if{html}{\out{</div>}}
-
-We recommended binding the testthat pal to the keyboard shortcut
-\verb{Cmd+;+T} (\href{https://www.emacswiki.org/emacs/key-chord.el}{written \verb{Cmd+; Cmd+T}})
-via \verb{Tools > Modify Keyboard Shortcuts > Search "Pal"} in RStudio.
-Pals are typically prefixed with \verb{Command + ;} (or \verb{Alt + ;} on non-macOS).
 }
 
 \section{Cost}{

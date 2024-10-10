@@ -2,10 +2,9 @@
 #'
 #' @description
 #' Pals are persistent, ergonomic LLM assistants designed to help you complete
-#' repetitive, hard-to-automate tasks quickly. When created, they automatically
-#' generate RStudio add-ins registered to keyboard shortcuts. After selecting
-#' some code, press the keyboard shortcut you've chosen and watch your code
-#' be rewritten.
+#' repetitive, hard-to-automate tasks quickly. After selecting some code,
+#' press the keyboard shortcut you've chosen to trigger the pal addin (we
+#' suggest Cmd + Ctrl + P), select the pal, and watch your code be rewritten.
 #'
 #' @param role The identifier for a pal prompt. By default one
 #' of `r glue::glue_collapse(paste0("[", glue::double_quote(default_roles), "]", "[pal_", default_roles, "]"), ", ", last = " or ")`.
