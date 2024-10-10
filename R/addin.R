@@ -85,22 +85,17 @@ pal_addin_unparse <- function(parsed_list) {
 }
 
 pal_addin_source <- function() {
-  # TODO: only do whatever it is that kicks in the addins.dcf loading
+  # TODO: this doesn't quite do the trick, as RStudio will only
+  # look for this flag if "devtools::load_all" is run
+  # 1) interactively and 2) from the console
+  # ref: https://github.com/rstudio/rstudio/blob/adcdcb6fe9a88fe7c16d95d54d796f799f343a6c/src/cpp/session/modules/SessionRAddins.cpp#L55-L63
+  # ref: https://github.com/rstudio/rstudio/blob/adcdcb6fe9a88fe7c16d95d54d796f799f343a6c/src/cpp/session/modules/SessionPackageProvidedExtension.cpp#L221
   inst_pal <- pkgload::inst("pal")
-  # this only works with devtools shims active...
-
   shims_active <- "devtools_shims" %in% search()
   if (!shims_active) {
     do.call("attach", list(new.env(), pos = length(search()) + 1,
                            name = "devtools_shims"))
-
+    withr::defer(do.call("detach", list(name = "devtools_shims")))
   }
   devtools::load_all(inst_pal)
-  withr::defer(do.call("detach", list(name = "devtools_shims")))
-
-  #devtools::load_all(".")
-  #rstudioapi::executeCommand("updateAddinRegistry")
-  #rstudioapi::executeCommand("updateAddinRegistry")
-  #rstudioapi::executeCommand("updateAddinRegistry")
-  #invisible()
 }
