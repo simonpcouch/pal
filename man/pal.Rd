@@ -6,19 +6,15 @@
 \usage{
 pal(
   role = NULL,
-  keybinding = NULL,
   fn = getOption(".pal_fn", default = "chat_claude"),
   ...,
   .ns = "elmer"
 )
 }
 \arguments{
-\item{role}{The identifier for a pal prompt. Currently one
-of \link[=pal_cli]{"cli"}, \link[=pal_testthat]{"testthat"} or \link[=pal_roxygen]{"roxygen"}.}
-
-\item{keybinding}{A key binding for the pal. \strong{Currently unused.}
-Keybdings have to be registered in the usual way (via Tools >
-Modify Keyboard Shortcuts), for now.}
+\item{role}{The identifier for a pal prompt. By default one
+of \link[=pal_cli]{"cli"}, \link[=pal_testthat]{"testthat"} or \link[=pal_roxygen]{"roxygen"}.
+Add custom pals with \code{\link[=pal_add]{pal_add()}}.}
 
 \item{fn}{A \verb{new_*()} function, likely from the elmer package. Defaults
 to \code{\link[elmer:chat_claude]{elmer::chat_claude()}}. To set a persistent alternative default,

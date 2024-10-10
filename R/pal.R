@@ -8,7 +8,7 @@
 #' be rewritten.
 #'
 #' @param role The identifier for a pal prompt. By default one
-#' of `r glue::glue_collapse(paste0("[", glue::double_quote(default_roles), "]", "[pal_", supported_roles, "]"), ", ", last = " or ")`.
+#' of `r glue::glue_collapse(paste0("[", glue::double_quote(default_roles), "]", "[pal_", default_roles, "]"), ", ", last = " or ")`.
 #' Add custom pals with [pal_add()].
 #' @param fn A `new_*()` function, likely from the elmer package. Defaults
 #'   to [elmer::chat_claude()]. To set a persistent alternative default,
