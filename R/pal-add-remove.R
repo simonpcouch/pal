@@ -1,0 +1,84 @@
+#' Creating custom pals
+#'
+#' @description
+#' Users can create custom pals using the `pal_add()` function; after passing
+#' the function a role and prompt, the pal will be available on the command
+#' palette.
+#'
+#' @param role A single string giving the [pal()] role.
+# TODO: actually do this once elmer implements
+#' @param prompt A file path to a markdown file giving the system prompt or
+#' the output of [elmer::interpolate()].
+# TODO: only add prefix when not supplied one
+#' @param interface One of `"replace"`, `"prefix"`, or `"suffix"`, describing
+#' how the pal will interact with the selection. For example, the
+#' [cli pal][pal_cli] `"replace"`s the selection, while the
+#' [roxygen pal][pal_roxygen] `"prefixes"` the selected code with documentation.
+#'
+#' @details
+#' `pal_add()` will register the add-in as coming from the pal package
+#' itself—because of this, custom pals will be deleted when the pal
+#' package is reinstalled. Include `pal_add()` code in your `.Rprofile` or
+#' make a pal extension package using `pal_add(package = TRUE)` to create
+#' persistent custom pals.
+#'
+#' @returns
+#' `NULL`, invisibly. Called for its side effect: a pal with role `role`
+#' is registered with the pal package.
+#'
+#' @export
+pal_add <- function(
+    role,
+    prompt = NULL,
+    interface = c("replace", "prefix", "suffix")
+) {
+  # TODO: need to check that there are no spaces (or things that can't be
+  # included in a variable name)
+  check_string(role, allow_empty = FALSE)
+
+  # TODO: make this an elmer interpolate or an .md file
+  prompt <- .stash_prompt(prompt, role)
+  binding <- parse_interface(interface, role)
+
+  invisible()
+}
+
+# TODO: fn to remove the addin associated with the role
+pal_remove <- function(role) {
+  invisible()
+}
+
+supported_interfaces <- c("replace", "prefix", "suffix")
+
+# given an interface and role, attaches a function binding in pal's
+# additional search env
+parse_interface <- function(interface, role) {
+  if (isTRUE(identical(interface, supported_interfaces))) {
+    interface <- interface[1]
+  }
+  if (isTRUE(
+    length(interface) != 1 ||
+    !interface %in% supported_interfaces
+  )) {
+    cli::cli_abort(
+      "{.arg interface} should be one of {.or {.val {supported_interfaces}}}."
+    )
+  }
+
+  if (interface == "suffix") {
+    # TODO: implement suffixing
+    cli::cli_abort("Suffixing not implemented yet.")
+  }
+
+  .stash_binding(
+    role,
+    function(context = rstudioapi::getActiveDocumentContext()) {
+      do.call(
+        paste0("rs_", interface, "_selection"),
+        args = list(context = context, role = role)
+      )
+    }
+  )
+
+  paste0("rs_pal_", role)
+}

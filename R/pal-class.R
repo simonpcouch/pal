@@ -7,9 +7,10 @@ Pal <- R6::R6Class(
       default_args <- getOption(".pal_args", default = list())
       args <- modifyList(default_args, args)
 
-      # TODO: make this an environment initialized on onLoad that folks can
-      # register dynamically
-      args$system_prompt <- get(paste0(role, "_system_prompt"), envir = ns_env("pal"))
+      args$system_prompt <- get(
+        paste0("system_prompt_", role),
+        envir = search_envs()[["pkg:pal"]]
+      )
 
       Chat <- rlang::eval_bare(rlang::call2(fn, !!!args, .ns = .ns))
       private$Chat <- Chat
@@ -51,3 +52,8 @@ Pal <- R6::R6Class(
     }
   )
 )
+
+#' @export
+print.pal_response <- function(x, ...) {
+  cat(x)
+}

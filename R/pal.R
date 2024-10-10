@@ -7,11 +7,9 @@
 #' some code, press the keyboard shortcut you've chosen and watch your code
 #' be rewritten.
 #'
-#' @param role The identifier for a pal prompt. Currently one
-#' of `r glue::glue_collapse(paste0("[", glue::double_quote(supported_roles), "]", "[pal_", supported_roles, "]"), ", ", last = " or ")`.
-#' @param keybinding A key binding for the pal. **Currently unused.**
-#' Keybdings have to be registered in the usual way (via Tools >
-#' Modify Keyboard Shortcuts), for now.
+#' @param role The identifier for a pal prompt. By default one
+#' of `r glue::glue_collapse(paste0("[", glue::double_quote(default_roles), "]", "[pal_", supported_roles, "]"), ", ", last = " or ")`.
+#' Add custom pals with [pal_add()].
 #' @param fn A `new_*()` function, likely from the elmer package. Defaults
 #'   to [elmer::chat_claude()]. To set a persistent alternative default,
 #'   set the `.pal_fn` option; see examples below.
@@ -48,10 +46,18 @@
 #' )
 #' @export
 pal <- function(
-    role = NULL, keybinding = NULL,
-    fn = getOption(".pal_fn", default = "chat_claude"), ..., .ns = "elmer"
+    role = NULL,
+    fn = getOption(".pal_fn", default = "chat_claude"),
+    ...,
+    .ns = "elmer"
   ) {
-  check_role(role)
+  check_string(role, allow_empty = FALSE)
+  if (!role %in% list_pals()) {
+    cli::cli_abort(c(
+      "No pals with role {.arg {role}} registered.",
+      "i" = "See {.fn pal_add}."
+    ))
+  }
 
   Pal$new(
     role = role,
@@ -62,4 +68,4 @@ pal <- function(
   )
 }
 
-supported_roles <- c("cli", "testthat", "roxygen")
+default_roles <- c("cli", "testthat", "roxygen")
