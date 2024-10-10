@@ -34,7 +34,7 @@ suggest Cmd + Ctrl + P), select the pal, and watch your code be rewritten.
 }
 \details{
 Upon successfully creating a pal, this function will assign the
-result to the search path as \code{.last_pal}.
+result to the search path as \code{.pal_last}.
 
 If you have an Anthropic API key (or another API key and the \verb{pal_*()}
 options) set and this package installed, you are ready to using the add-in

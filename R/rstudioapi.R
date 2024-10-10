@@ -1,8 +1,8 @@
 # replace selection with refactored code
 rs_replace_selection <- function(context, role) {
   # check if pal exists
-  if (exists(paste0(".last_pal_", role))) {
-    pal <- get(paste0(".last_pal_", role))
+  if (exists(paste0(".pal_last_", role))) {
+    pal <- get(paste0(".pal_last_", role))
   } else {
     tryCatch(
       pal <- pal(role),
@@ -114,8 +114,8 @@ stream_selection <- function(selection, context, pal, n_lines_orig) {
 # prefix selection with new code -----------------------------------------------
 rs_prefix_selection <- function(context, role) {
   # check if pal exists
-  if (exists(paste0(".last_pal_", role))) {
-    pal <- get(paste0(".last_pal_", role))
+  if (exists(paste0(".pal_last_", role))) {
+    pal <- get(paste0(".pal_last_", role))
   } else {
     tryCatch(
       pal <- pal(role),
@@ -154,14 +154,14 @@ rs_prefix_selection <- function(context, role) {
 }
 
 # pal-specific helpers ---------------------------------------------------------
-rs_pal_cli <- function(context = rstudioapi::getActiveDocumentContext()) {
+.pal_rs__cli <- function(context = rstudioapi::getActiveDocumentContext()) {
   rs_replace_selection(context = context, role = "cli")
 }
 
-rs_pal_testthat <- function(context = rstudioapi::getActiveDocumentContext()) {
+.pal_rs__testthat <- function(context = rstudioapi::getActiveDocumentContext()) {
   rs_replace_selection(context = context, role = "testthat")
 }
 
-rs_pal_roxygen <- function(context = rstudioapi::getActiveDocumentContext()) {
+.pal_rs__roxygen <- function(context = rstudioapi::getActiveDocumentContext()) {
   rs_prefix_selection(context = context, role = "roxygen")
 }

@@ -8,7 +8,7 @@ Pal <- R6::R6Class(
       args <- modifyList(default_args, args)
 
       args$system_prompt <- get(
-        paste0("system_prompt_", role),
+        paste0(".pal_prompt_", role),
         envir = search_envs()[["pkg:pal"]]
       )
 

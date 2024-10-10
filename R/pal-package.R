@@ -6,7 +6,7 @@
 ## usethis namespace: end
 NULL
 
-utils::globalVariables(c(".last_pal", "modifyList"))
+utils::globalVariables(c(".pal_last", "modifyList"))
 
 # address "not imported from" R CMD check error
 #' @importFrom elmer content_image_file
