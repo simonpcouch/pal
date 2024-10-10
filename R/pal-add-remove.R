@@ -54,6 +54,13 @@ pal_remove <- function(role) {
     pal_env(),
     c(paste0("system_prompt_", role), paste0("rs_pal_", role))
   )
+
+
+  if (paste0(".last_pal_", role) %in% names(pal_env())) {
+    env_unbind(pal_env(), paste0(".last_pal_", role))
+  }
+
+  invisible()
 }
 
 supported_interfaces <- c("replace", "prefix", "suffix")
