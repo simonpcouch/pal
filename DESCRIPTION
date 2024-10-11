@@ -1,10 +1,15 @@
 Package: pal
-Title: LLM-driven coding assistants
+Title: LLM assistants for R
 Version: 0.0.1
 Authors@R: 
     person("Simon", "Couch", , "simon.couch@posit.co", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-5676-5107"))
-Description: LLM-driven coding assistants.
+Description: Pals are persistent, ergonomic LLM assistants designed to help you 
+    complete repetitive, hard-to-automate tasks quickly. After selecting some 
+    code, press the keyboard shortcut you've chosen to trigger the pal addin, 
+    select a pal, and watch your code be rewritten. While a number of pals
+    for R package development ship with the package, users can create a suite
+    of custom pals with only a directory of markdown files.
 License: MIT + file LICENSE
 Config/testthat/edition: 3
 Encoding: UTF-8

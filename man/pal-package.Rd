@@ -3,11 +3,11 @@
 \docType{package}
 \name{pal-package}
 \alias{pal-package}
-\title{pal: LLM-driven coding assistants}
+\title{pal: LLM assistants for R}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-LLM-driven coding assistants.
+Pals are persistent, ergonomic LLM assistants designed to help you complete repetitive, hard-to-automate tasks quickly. After selecting some code, press the keyboard shortcut you've chosen to trigger the pal addin, select a pal, and watch your code be rewritten. While a number of pals for R package development ship with the package, users can create a suite of custom pals with only a directory of markdown files.
 }
 \seealso{
 Useful links:
