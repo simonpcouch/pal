@@ -20,9 +20,6 @@ the output of \code{\link[elmer:interpolate]{elmer::interpolate()}}.}
 how the pal will interact with the selection. For example, the
 \link[=pal_cli]{cli pal} \code{"replace"}s the selection, while the
 \link[=pal_roxygen]{roxygen pal} \code{"prefixes"} the selected code with documentation.}
-
-\item{dir}{A directory of markdown files. See "Adding multiple, persistent
-pals" section below.}
 }
 \value{
 \code{NULL}, invisibly. Called for its side effect: a pal with role \code{role}
@@ -32,8 +29,6 @@ is registered with the pal package.
 Users can create custom pals using the \code{.pal_add()} function; after passing
 the function a role and prompt, the pal will be available on the command
 palette.
-}
-\section{Adding multiple, persistent pals}{
 
+To create multiple, persistent pals, see \code{\link[=.pal_add_dir]{.pal_add_dir()}}.
 }
-

@@ -5,6 +5,8 @@
 #' the function a role and prompt, the pal will be available on the command
 #' palette.
 #'
+#' To create multiple, persistent pals, see [.pal_add_dir()].
+#'
 #' @param role A single string giving a descriptor of the pal's functionality.
 # TODO: actually do this once elmer implements
 #' @param prompt A file path to a markdown file giving the system prompt or
@@ -14,10 +16,6 @@
 #' how the pal will interact with the selection. For example, the
 #' [cli pal][pal_cli] `"replace"`s the selection, while the
 #' [roxygen pal][pal_roxygen] `"prefixes"` the selected code with documentation.
-#' @param dir A directory of markdown files. See "Adding multiple, persistent
-#' pals" section below.
-#'
-#' @section Adding multiple, persistent pals:
 #'
 #' @returns
 #' `NULL`, invisibly. Called for its side effect: a pal with role `role`
