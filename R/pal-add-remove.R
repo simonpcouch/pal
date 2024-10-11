@@ -1,7 +1,7 @@
 #' Creating custom pals
 #'
 #' @description
-#' Users can create custom pals using the `pal_add()` function; after passing
+#' Users can create custom pals using the `.pal_add()` function; after passing
 #' the function a role and prompt, the pal will be available on the command
 #' palette.
 #'
@@ -15,20 +15,13 @@
 #' [cli pal][pal_cli] `"replace"`s the selection, while the
 #' [roxygen pal][pal_roxygen] `"prefixes"` the selected code with documentation.
 #'
-#' @details
-#' `pal_add()` will register the add-in as coming from the pal package
-#' itself—because of this, custom pals will be deleted when the pal
-#' package is reinstalled. Include `pal_add()` code in your `.Rprofile` or
-#' make a pal extension package using `pal_add(package = TRUE)` to create
-#' persistent custom pals.
-#'
 #' @returns
 #' `NULL`, invisibly. Called for its side effect: a pal with role `role`
 #' is registered with the pal package.
 #'
 #' @name pal_add_remove
 #' @export
-pal_add <- function(
+.pal_add <- function(
     role,
     prompt = NULL,
     interface = c("replace", "prefix", "suffix")
@@ -45,7 +38,7 @@ pal_add <- function(
 }
 
 #' @rdname pal_add_remove
-pal_remove <- function(role) {
+.pal_remove <- function(role) {
   check_string(role)
   if (!role %in% list_pals()) {
     cli::cli_abort("No active pal with the given {.arg role}.")

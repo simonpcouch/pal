@@ -4,12 +4,12 @@
 #' **Users typically should not need to call this function.**
 #'
 #' * Create new pals that will automatically be registered with this function
-#' with [pal_add()].
+#' with [.pal_add()].
 #' * The [pal addin][.pal_addin()] will initialize needed pals on-the-fly.
 #'
 #' @param role The identifier for a pal prompt. By default one
 #' of `r glue::glue_collapse(paste0("[", glue::double_quote(default_roles), "]", "[pal_", default_roles, "]"), ", ", last = " or ")`,
-#' though custom pals can be added with [pal_add()].
+#' though custom pals can be added with [.pal_add()].
 #' @param fn A `new_*()` function, likely from the elmer package. Defaults
 #'   to [elmer::chat_claude()]. To set a persistent alternative default,
 #'   set the `.pal_fn` option; see examples below.
@@ -52,7 +52,7 @@
   if (!role %in% list_pals()) {
     cli::cli_abort(c(
       "No pals with role {.arg {role}} registered.",
-      "i" = "See {.fn pal_add}."
+      "i" = "See {.fn .pal_add}."
     ))
   }
 

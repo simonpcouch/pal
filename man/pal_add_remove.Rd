@@ -2,16 +2,16 @@
 % Please edit documentation in R/pal-add-remove.R
 \name{pal_add_remove}
 \alias{pal_add_remove}
-\alias{pal_add}
-\alias{pal_remove}
+\alias{.pal_add}
+\alias{.pal_remove}
 \title{Creating custom pals}
 \usage{
-pal_add(role, prompt = NULL, interface = c("replace", "prefix", "suffix"))
+.pal_add(role, prompt = NULL, interface = c("replace", "prefix", "suffix"))
 
-pal_remove(role)
+.pal_remove(role)
 }
 \arguments{
-\item{role}{A single string giving the \code{\link[= .pal_init]{ .pal_init()}} role.}
+\item{role}{A single string giving the \code{\link[=.pal_init]{.pal_init()}} role.}
 
 \item{prompt}{A file path to a markdown file giving the system prompt or
 the output of \code{\link[elmer:interpolate]{elmer::interpolate()}}.}
@@ -26,14 +26,7 @@ how the pal will interact with the selection. For example, the
 is registered with the pal package.
 }
 \description{
-Users can create custom pals using the \code{pal_add()} function; after passing
+Users can create custom pals using the \code{.pal_add()} function; after passing
 the function a role and prompt, the pal will be available on the command
 palette.
-}
-\details{
-\code{pal_add()} will register the add-in as coming from the pal package
-itself—because of this, custom pals will be deleted when the pal
-package is reinstalled. Include \code{pal_add()} code in your \code{.Rprofile} or
-make a pal extension package using \code{pal_add(package = TRUE)} to create
-persistent custom pals.
 }

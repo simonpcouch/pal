@@ -14,7 +14,7 @@
 \arguments{
 \item{role}{The identifier for a pal prompt. By default one
 of \link[=pal_cli]{"cli"}, \link[=pal_testthat]{"testthat"} or \link[=pal_roxygen]{"roxygen"},
-though custom pals can be added with \code{\link[=pal_add]{pal_add()}}.}
+though custom pals can be added with \code{\link[=.pal_add]{.pal_add()}}.}
 
 \item{fn}{A \verb{new_*()} function, likely from the elmer package. Defaults
 to \code{\link[elmer:chat_claude]{elmer::chat_claude()}}. To set a persistent alternative default,
@@ -30,7 +30,7 @@ set the \code{.pal_args} option; see examples below.}
 \strong{Users typically should not need to call this function.}
 \itemize{
 \item Create new pals that will automatically be registered with this function
-with \code{\link[=pal_add]{pal_add()}}.
+with \code{\link[=.pal_add]{.pal_add()}}.
 \item The \link[=.pal_addin]{pal addin} will initialize needed pals on-the-fly.
 }
 }
@@ -43,10 +43,10 @@ to look for your API credentials and will call needed functions by itself.
 \examples{
 \dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # to create a chat with claude:
- .pal_init()
+.pal_init()
 
 # or with OpenAI's 4o-mini:
- .pal_init(
+.pal_init(
   "chat_openai",
   model = "gpt-4o-mini"
 )

@@ -11,7 +11,7 @@
     prompt <- paste0(readLines(prompts[idx]), collapse = "\n")
     interface <- roles_and_interfaces[[idx]][2]
 
-    pal_add(role = role, prompt = prompt, interface = interface)
+    .pal_add(role = role, prompt = prompt, interface = interface)
   }
 }
 

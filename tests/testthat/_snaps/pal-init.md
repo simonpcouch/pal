@@ -53,5 +53,5 @@
     Condition
       Error in `.pal_init()`:
       ! No pals with role `beep bop boop` registered.
-      i See `pal_add()`.
+      i See `.pal_add()`.
 
