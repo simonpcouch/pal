@@ -5,8 +5,10 @@ template:
 reference:
   - title: "Using pal"
     desc: >
-      Users of pal will generally not need to call any functions from the
-      package directly. See the "Getting Started" vignette.
+      **Users of pal will generally not need to call any functions from the
+      package directly.** See the
+      ["Getting Started with pal"](https://simonpcouch.github.io/pal/articles/pal.html)
+      vignette to learn how to work with—and extend—pals.
 #     TODO: add these vignettes
   - title: Pals for package development
     contents:

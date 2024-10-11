@@ -31,9 +31,7 @@ You can install pal like so:
 pak::pak("simonpcouch/pal")
 ```
 
-Then, ensure that you have an [`ANTHROPIC_API_KEY`](https://console.anthropic.com/) set in your `.Renviron`---see [usethis::edit_r_environ()](https://usethis.r-lib.org/reference/edit.html) for more information. If you'd like to use an LLM other than Anthropic's Claude 3.5 Sonnet—like OpenAI's ChatGPT—to power the pal, see [`?.pal_init()`](https://simonpcouch.github.io/pal/reference/pal.html) for information on how to set default metadata on that model. 
-
-<!-- TODO: link to getting started instead of `.?pal_init()` -->
+Then, ensure that you have an [`ANTHROPIC_API_KEY`](https://console.anthropic.com/) environment variable set, and you're ready to go. If you'd like to use an LLM other than Anthropic's Claude 3.5 Sonnet—like OpenAI's ChatGPT—to power the pal, see the [Getting started with pal](https://simonpcouch.github.io/pal/articles/pal.html) vignette.
 
 ## Example
 
