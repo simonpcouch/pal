@@ -9,7 +9,7 @@ Pal <- R6::R6Class(
 
       args$system_prompt <- get(
         paste0(".pal_prompt_", role),
-        envir = search_envs()[["pkg:pal"]]
+        envir = pal_env()
       )
 
       Chat <- rlang::eval_bare(rlang::call2(fn, !!!args, .ns = .ns))

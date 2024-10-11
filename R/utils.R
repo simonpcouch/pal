@@ -18,14 +18,10 @@
   invisible(NULL)
 }
 
+.pal_env <- new_environment()
+
 pal_env <- function() {
-  if (!"pkg:pal" %in% search()) {
-    do.call(
-      "attach",
-      list(new.env(), pos = length(search()), name = "pkg:pal")
-    )
-  }
-  as.environment("pkg:pal")
+  .pal_env
 }
 
 list_pals <- function() {

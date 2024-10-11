@@ -27,7 +27,7 @@
 
   # call the binding associated with the chosen pal
   try_fetch(
-    do.call(pal_fn, args = list()),
+    do.call(env_get(pal_env(), pal_fn), args = list()),
     error = function(e) {
       cli::cli_abort("Unable to locate the requested pal.")
     }

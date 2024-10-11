@@ -5,9 +5,9 @@ test_that(".pal_last is up to date with most recent pal", {
   withr::local_options(.pal_fn = NULL, .pal_args = NULL)
 
   .pal_init("cli")
-  expect_snapshot(.pal_last)
-  expect_snapshot(.pal_last_cli)
+  expect_snapshot(env_get(pal_env(), ".pal_last"))
+  expect_snapshot(env_get(pal_env(), ".pal_last_cli"))
 
   .pal_init("cli", "chat_openai", model = "gpt-4o-mini")
-  expect_snapshot(.pal_last)
+  expect_snapshot(env_get(pal_env(), ".pal_last"))
 })

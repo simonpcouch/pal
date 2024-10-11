@@ -6,10 +6,8 @@ test_that("pal addition and removal works", {
   boop_prompt <- "just reply with beep bop boop regardless of input"
   .pal_add("boopery", boop_prompt)
 
-  expect_equal(.pal_prompt_boopery, boop_prompt)
-  expect_true(is_function(.pal_rs_boopery))
-  expect_true(".pal_prompt_boopery" %in% names(pal_env()))
-  expect_true(".pal_rs_boopery" %in% names(pal_env()))
+  expect_equal(env_get(pal_env(), ".pal_prompt_boopery"), boop_prompt)
+  expect_true(is_function(env_get(pal_env(), ".pal_rs_boopery")))
 
   pal_boopery <- .pal_init("boopery")
   expect_snapshot(pal_boopery)

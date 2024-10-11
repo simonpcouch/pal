@@ -58,8 +58,7 @@
 
 supported_interfaces <- c("replace", "prefix", "suffix")
 
-# given an interface and role, attaches a function binding in pal's
-# additional search env
+# given an interface and role, attaches a function binding in pal's `.pal_env`
 parse_interface <- function(interface, role, call = caller_env()) {
   if (isTRUE(identical(interface, supported_interfaces))) {
     interface <- interface[1]
