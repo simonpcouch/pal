@@ -8,7 +8,7 @@
 
 .stash_binding <- function(role, fn) {
   pal_env <- pal_env()
-  pal_env[[paste0(".pal_rs__", role)]] <- fn
+  pal_env[[paste0(".pal_rs_", role)]] <- fn
   invisible(NULL)
 }
 

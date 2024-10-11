@@ -7,9 +7,9 @@ test_that("pal addition and removal works", {
   pal_add("boopery", boop_prompt)
 
   expect_equal(.pal_prompt_boopery, boop_prompt)
-  expect_true(is_function(.pal_rs__boopery))
+  expect_true(is_function(.pal_rs_boopery))
   expect_true(".pal_prompt_boopery" %in% names(pal_env()))
-  expect_true(".pal_rs__boopery" %in% names(pal_env()))
+  expect_true(".pal_rs_boopery" %in% names(pal_env()))
 
   pal_boopery <- pal("boopery")
   expect_snapshot(pal_boopery)
@@ -22,7 +22,7 @@ test_that("pal addition and removal works", {
 
   expect_false(".pal_last_boopery" %in% names(pal_env()))
   expect_false(".pal_prompt_boopery" %in% names(pal_env()))
-  expect_false(".pal_rs__boopery" %in% names(pal_env()))
+  expect_false(".pal_rs_boopery" %in% names(pal_env()))
 })
 
 test_that("pal addition with bad inputs", {

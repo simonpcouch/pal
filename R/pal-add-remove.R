@@ -53,7 +53,7 @@ pal_remove <- function(role) {
 
   env_unbind(
     pal_env(),
-    c(paste0(".pal_prompt_", role), paste0(".pal_rs__", role))
+    c(paste0(".pal_prompt_", role), paste0(".pal_rs_", role))
   )
 
   if (paste0(".pal_last_", role) %in% names(pal_env())) {
@@ -96,5 +96,5 @@ parse_interface <- function(interface, role, call = caller_env()) {
     }
   )
 
-  paste0(".pal_rs__", role)
+  paste0(".pal_rs_", role)
 }

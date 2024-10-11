@@ -53,7 +53,7 @@
 
   server <- function(input, output, session) {
     shiny::observeEvent(input$done, {
-      shiny::stopApp(returnValue = paste0(".pal_rs__", input$pal))
+      shiny::stopApp(returnValue = paste0(".pal_rs_", input$pal))
     })
     shiny::onStop(function() {
       shiny::stopApp(returnValue = NULL)
