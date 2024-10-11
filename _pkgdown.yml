@@ -17,5 +17,6 @@ reference:
   - title: Infrastructure
     contents:
     - pal_add_remove
+    - pal_add_dir
     - .pal_init
     - .pal_addin
