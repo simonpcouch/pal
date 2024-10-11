@@ -3,15 +3,11 @@
 .onLoad <- function(libname, pkgname) {
   pal_env <- pal_env()
 
-  prompts <- list.files(system.file("prompts", package = "pal"), full.names = TRUE)
-  roles_and_interfaces <- gsub(".md", "", basename(prompts))
-  roles_and_interfaces <- strsplit(roles_and_interfaces, "-")
-  for (idx in seq_along(prompts)) {
-    role <- roles_and_interfaces[[idx]][1]
-    prompt <- paste0(readLines(prompts[idx]), collapse = "\n")
-    interface <- roles_and_interfaces[[idx]][2]
+  .pal_add_dir(system.file("prompts", package = "pal"))
 
-    .pal_add(role = role, prompt = prompt, interface = interface)
+  pal_dir <- getOption(".pal_dir", default = file.path("~", ".config", "pal"))
+  if (dir.exists(pal_dir)) {
+    .pal_add_dir(pal_dir)
   }
 }
 

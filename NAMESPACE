@@ -2,6 +2,7 @@
 
 S3method(print,pal_response)
 export(.pal_add)
+export(.pal_add_dir)
 export(.pal_addin)
 export(.pal_init)
 import(rlang)
