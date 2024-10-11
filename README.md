@@ -14,7 +14,8 @@ status](https://www.r-pkg.org/badges/version/pal)](https://CRAN.R-project.org/pa
 Pals are persistent, ergonomic LLM assistants designed to help you
 complete repetitive, hard-to-automate tasks quickly. After selecting
 some code, press the keyboard shortcut you’ve chosen to trigger the pal
-addin, select the pal, and watch your code be rewritten.
+addin (we suggest `Ctrl+Cmd+P`), select the pal, and watch your code be
+rewritten.
 
 **Much of the documentation in this package is aspirational and its
 interface is likely to change rapidly.** \## Installation
@@ -37,8 +38,8 @@ information on how to set default metadata on that model.
 ## Example
 
 Pals are created automatically when users interact with the pal addin.
-Just highlight some code, open the addin, and watch your code be
-rewritten:
+Just highlight some code, open the addin, begin typing the “role” of
+your pal and press “Return”, and watch your code be rewritten:
 
 ![](https://github.com/simonpcouch/pal/raw/main/inst/figs/addin.gif)
 As-is, the package provides ergonomic LLM assistants for R package
