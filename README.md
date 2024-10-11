@@ -41,7 +41,7 @@ Pals are created automatically when users interact with the pal addin.
 Just highlight some code, open the addin, begin typing the “role” of
 your pal and press “Return”, and watch your code be rewritten:
 
-![](https://github.com/simonpcouch/pal/raw/main/inst/figs/addin.gif)
+![](https://raw.githubusercontent.com/simonpcouch/pal/refs/heads/main/inst/figs/addin.gif)
 As-is, the package provides ergonomic LLM assistants for R package
 development:
 
