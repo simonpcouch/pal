@@ -1,13 +1,11 @@
-#' Create a pal
+#' Initialize a pal
 #'
 #' @description
-#' Pals are persistent, ergonomic LLM assistants designed to help you complete
-#' repetitive, hard-to-automate tasks quickly. After selecting some code,
-#' press the keyboard shortcut you've chosen to trigger the pal addin (we
-#' suggest `Ctrl+Cmd+P`), select the pal, and watch your code be rewritten.
+#' **Users typically should not need to call this function.**
 #'
-#' **Users typically should not need to call this function.** The pal
-#' addin will create needed pals on-the-fly.
+#' * Create new pals that will automatically be registered with this function
+#' with [pal_add()].
+#' * The [pal addin][.pal_addin()] will initialize needed pals on-the-fly.
 #'
 #' @param role The identifier for a pal prompt. By default one
 #' of `r glue::glue_collapse(paste0("[", glue::double_quote(default_roles), "]", "[pal_", default_roles, "]"), ", ", last = " or ")`,
@@ -28,10 +26,10 @@
 #'
 #' @examplesIf FALSE
 #' # to create a chat with claude:
-#' pal()
+#' .pal_init()
 #'
 #' # or with OpenAI's 4o-mini:
-#' pal(
+#' .pal_init(
 #'   "chat_openai",
 #'   model = "gpt-4o-mini"
 #' )
@@ -44,7 +42,7 @@
 #'   .pal_args = list(model = "gpt-4o-mini")
 #' )
 #' @export
-pal <- function(
+.pal_init <- function(
     role = NULL,
     fn = getOption(".pal_fn", default = "chat_claude"),
     ...,

@@ -5,7 +5,7 @@
 #' the function a role and prompt, the pal will be available on the command
 #' palette.
 #'
-#' @param role A single string giving the [pal()] role.
+#' @param role A single string giving the [.pal_init()] role.
 # TODO: actually do this once elmer implements
 #' @param prompt A file path to a markdown file giving the system prompt or
 #' the output of [elmer::interpolate()].

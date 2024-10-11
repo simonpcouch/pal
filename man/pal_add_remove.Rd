@@ -11,7 +11,7 @@ pal_add(role, prompt = NULL, interface = c("replace", "prefix", "suffix"))
 pal_remove(role)
 }
 \arguments{
-\item{role}{A single string giving the \code{\link[=pal]{pal()}} role.}
+\item{role}{A single string giving the \code{\link[= .pal_init]{ .pal_init()}} role.}
 
 \item{prompt}{A file path to a markdown file giving the system prompt or
 the output of \code{\link[elmer:interpolate]{elmer::interpolate()}}.}

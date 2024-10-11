@@ -2,6 +2,7 @@
 % Please edit documentation in R/pal-package.R
 \docType{package}
 \name{pal-package}
+\alias{pal}
 \alias{pal-package}
 \title{pal: LLM assistants for R}
 \description{

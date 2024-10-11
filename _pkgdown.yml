@@ -3,13 +3,19 @@ template:
   bootstrap: 5
 
 reference:
-- title: Create pals
-  contents:
-  - pal
-  - pal_add_remove
-- title: Pals for package development
-  contents:
-  - pal_roxygen
-  - pal_testthat
-  - pal_cli
-# to come: custom pals
+  - title: "Using pal"
+    desc: >
+      Users of pal will generally not need to call any functions from the
+      package directly. See the "Getting Started" vignette to get
+      started and "Custom Pals" to learn how to add your own pals.
+#     TODO: add these vignettes
+  - title: Pals for package development
+    contents:
+    - pal_roxygen
+    - pal_testthat
+    - pal_cli
+  - title: Infrastructure
+    contents:
+    - pal_add_remove
+    - .pal_init
+    - .pal_addin

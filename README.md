@@ -32,7 +32,7 @@ Then, ensure that you have an
 [usethis::edit_r_environ()](https://usethis.r-lib.org/reference/edit.html)
 for more information. If you’d like to use an LLM other than Anthropic’s
 Claude 3.5 Sonnet—like OpenAI’s ChatGPT—to power the pal, see
-[`?pal()`](https://simonpcouch.github.io/pal/reference/pal.html) for
+[`? .pal_init()`](https://simonpcouch.github.io/pal/reference/pal.html) for
 information on how to set default metadata on that model.
 
 ## Example

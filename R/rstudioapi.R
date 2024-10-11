@@ -5,9 +5,9 @@ rs_replace_selection <- function(context, role) {
     pal <- get(paste0(".pal_last_", role))
   } else {
     tryCatch(
-      pal <- pal(role),
+      pal <- .pal_init(role),
       error = function(e) {
-        rstudioapi::showDialog("Error", "Unable to create a pal. See `?pal()`.")
+        rstudioapi::showDialog("Error", "Unable to create a pal. See `?.pal_init()`.")
         return(NULL)
       }
     )
@@ -118,9 +118,9 @@ rs_prefix_selection <- function(context, role) {
     pal <- get(paste0(".pal_last_", role))
   } else {
     tryCatch(
-      pal <- pal(role),
+      pal <- .pal_init(role),
       error = function(e) {
-        rstudioapi::showDialog("Error", "Unable to create a pal. See `?pal()`.")
+        rstudioapi::showDialog("Error", "Unable to create a pal. See `?.pal_init()`.")
         return(NULL)
       }
     )

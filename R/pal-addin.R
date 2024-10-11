@@ -1,4 +1,20 @@
-.pal <- function() {
+#' Run the pal addin
+#'
+#' @description
+#' The pal addin allows users to interactively select a pal to
+#' interface with the current selection. **This function is not
+#' intended to be interfaced with in regular usage of the package.**
+#' To launch the pal addin in RStudio, navigate to `Addins > Pal`
+#' and/or register the addin with a shortcut via
+#' `Tools > Modify Keyboard Shortcuts > Search "Pal"`—we suggest `Ctrl+Cmd+P`
+#' (or `Ctrl+Alt+P` on non-macOS).
+#'
+#' @returns
+#' `NULL`, invisibly. Called for the side effect of launching the pal addin
+#' and interfacing with selected text.
+#'
+#' @export
+.pal_addin <- function() {
   # suppress "Listening on..." message and rethrow errors with new context
   try_fetch(
     suppressMessages(pal_fn <- .pal_app()),

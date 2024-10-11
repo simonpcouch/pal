@@ -150,7 +150,7 @@ Returns:
 Pals are typically interfaced with via the pal addin. To call the roxygen
 pal directly, use:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{pal_roxygen <- pal("roxygen")
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{pal_roxygen <-  .pal_init("roxygen")
 }\if{html}{\out{</div>}}
 
 Then, to submit a query, run:
