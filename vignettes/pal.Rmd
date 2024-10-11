@@ -1,0 +1,86 @@
+---
+title: "Getting started with pal"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Getting started with pal}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+Pals are persistent, ergonomic LLM assistants designed to help you complete repetitive, hard-to-automate tasks quickly.
+
+```r
+library(pal)
+```
+
+The pal package ships with a number of pre-engineered "roles." A pal role is a descriptor that succinctly describes what the pal is intended to do and serves as an identifier to match the pal with its _prompt_ and _interface_. A pal's prompt is just a markdown file with enough context and examples to teach a model to carry out a given task well. A pal's interface determines whether it replaces, prefixes, or suffixes the selected code. For example:
+
+* The `"testthat"` pal helps you transition your R package's unit tests to the third edition of testthat. Its prompt shows the model how to convert to snapshot tests, disentangle nested expectations, and transition from deprecated functions. It replaces the selected code.
+* The `"roxygen"` pal helps you quickly template out royxgen documentation for a function. Its prompt shows the model how to write high-quality stub `@param` and `@returns` entries that can be later extended by the developer. It prefixes the selected code.
+
+## Choosing a model
+
+Under the hood, pals are driven by Large Language Models (LLMs). To use pals, you will need an API key for a commercial model or a connection to a locally hosted model.
+
+Pals use the [elmer](https://github.com/hadley/elmer) package to interface with LLMs. Any model supported by elmer is supported by pal.
+
+As of late October 2024, we highly recommend [Anthropic's Claude Sonnet 3.5](https://www.anthropic.com/news/claude-3-5-sonnet) as the model to power your pals. Compared to other models we've tried, Claude is most likely to generate syntactically valid code that aligns with the pal's prompt well. As such, Claude is the default model used by pal. If you want to use Claude with pal, the only additional setup step you need is to set an [`ANTHROPIC_API_KEY`](https://console.anthropic.com/) in your `.Renviron`---you might use `usethis::edit_r_environ()` to open the file, and then set:
+
+```env
+ANTHROPIC_API_KEY=your.key.here
+```
+
+To use another model to power your pals, use the `.pal_fn` and `.pal_args` options. `.pal_fn` is the name of a `chat_*()` function from elmer, and `.pal_args` is a list of any non-default arguments you'd like to supply to that function. For example, to use models from OpenAI, you might write:
+
+```r
+options(
+  .pal_fn = "chat_openai"
+)
+```
+
+Or, to use GPT 4o mini specifically, you might write:
+
+```r
+options(
+  .pal_fn = "chat_openai",
+  .pal_args = list(model = "gpt-4o-mini")
+)
+```
+
+You'll probably want pal to always use whichever model you're configuring with this option. To make this selection persist across sessions, add that `options()` code to your `.Rprofile`. You might use `usethis::edit_r_environ()` to open the file. After making those changes and restarting R, your pal will use the new model.
+
+## The pal addin
+
+Rather than through package functions directly, pals are interfaced with via the pal addin. Once you have a default model set up, you're ready to use the package in any RStudio session (even if you haven't loaded the package yet).
+
+Just:
+
+* Select some code.
+* Trigger the pal addin.
+* Type in a pal "role." Once it's autocompleted, press Enter.
+* Watch your code be rewritten.
+
+![](https://raw.githubusercontent.com/simonpcouch/pal/refs/heads/main/inst/figs/addin.gif)
+
+For easiest access, the pal addin can be registered with a keyboard shortcut. To do so in RStudio, navigate to `Tools > Modify Keyboard Shortcuts > Search "Pal"`—we suggest `Ctrl+Cmd+P` (or `Ctrl+Alt+P` on non-macOS).
+
+## Adding custom pals
+
+While the pal package comes with three pals for package development, one can use pals for all sorts of coding tasks in R, from interactive data analysis to authoring with Quarto, or even for pieces of code in languages other than R! All you need to set up your own pal is a markdown file.
+
+The pal package, by default, looks for custom prompts in `~/.config/pal`. Prompts are markdown files with the name `role-interface.md`. A `~/.config/pal` directory might look like:
+
+```
+/
+├── .config/
+│   └── pal/
+│       ├── proofread-replace.md
+│       └── summarize-prefix.md
+```
+
+In that case, pal will register two custom pals when you call `library(pal)`. One of them has the role "proofread" and will replace the selected text with a proofread version (according to the instructions contained in the markdown file itself). The other has the role "summarize" and will prefix the selected text with a summarized version (again, according to the markdown file's instructions). Note:
+
+* Files without a `.md` extension are ignored.
+* Files with a `.md` extension must contain only one hyphen in their filename, and the text following the hyphen must be one of `replace`, `prefix`, or `suffix`.
+
+For more in-depth documentation on adding custom pals, see the "Extending pal" vignette.

@@ -6,8 +6,7 @@ reference:
   - title: "Using pal"
     desc: >
       Users of pal will generally not need to call any functions from the
-      package directly. See the "Getting Started" vignette to get
-      started and "Custom Pals" to learn how to add your own pals.
+      package directly. See the "Getting Started" vignette.
 #     TODO: add these vignettes
   - title: Pals for package development
     contents:

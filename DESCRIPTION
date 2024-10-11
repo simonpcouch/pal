@@ -27,7 +27,10 @@ Imports:
     rstudioapi,
     shiny
 Suggests: 
+    knitr,
+    rmarkdown,
     testthat (>= 3.0.0),
     withr
 Remotes:
     hadley/elmer
+VignetteBuilder: knitr
