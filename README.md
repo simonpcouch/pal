@@ -18,7 +18,9 @@ addin (we suggest `Ctrl+Cmd+P`), select the pal, and watch your code be
 rewritten.
 
 **Much of the documentation in this package is aspirational and its
-interface is likely to change rapidly.** \## Installation
+interface is likely to change rapidly.**
+
+## Installation
 
 You can install pal like so:
 

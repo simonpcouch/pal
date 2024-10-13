@@ -4,17 +4,14 @@
 \alias{pal_add_remove}
 \alias{.pal_add}
 \alias{.pal_remove}
-\alias{.pal_add_dir}
 \title{Creating custom pals}
 \usage{
 .pal_add(role, prompt = NULL, interface = c("replace", "prefix", "suffix"))
 
 .pal_remove(role)
-
-.pal_add_dir(dir)
 }
 \arguments{
-\item{role}{A single string giving the \code{\link[=.pal_init]{.pal_init()}} role.}
+\item{role}{A single string giving a descriptor of the pal's functionality.}
 
 \item{prompt}{A file path to a markdown file giving the system prompt or
 the output of \code{\link[elmer:interpolate]{elmer::interpolate()}}.}
@@ -23,9 +20,6 @@ the output of \code{\link[elmer:interpolate]{elmer::interpolate()}}.}
 how the pal will interact with the selection. For example, the
 \link[=pal_cli]{cli pal} \code{"replace"}s the selection, while the
 \link[=pal_roxygen]{roxygen pal} \code{"prefixes"} the selected code with documentation.}
-
-\item{dir}{A directory of markdown files. See "Adding multiple, persistent
-pals" section below.}
 }
 \value{
 \code{NULL}, invisibly. Called for its side effect: a pal with role \code{role}
@@ -35,37 +29,6 @@ is registered with the pal package.
 Users can create custom pals using the \code{.pal_add()} function; after passing
 the function a role and prompt, the pal will be available on the command
 palette.
+
+To create multiple, persistent pals, see \code{\link[=.pal_add_dir]{.pal_add_dir()}}.
 }
-\section{Adding multiple, persistent pals}{
-
-Pals can also be added in batch with \code{.pal_add_dir()}, which takes a directory
-of markdown files. Prompts are markdown files with the
-name \code{role-interface.md}, where interface is one of
-"replace", "prefix" or "suffix".
-An example directory might look like:
-
-\if{html}{\out{<div class="sourceCode">}}\preformatted{/
-├── .config/
-│   └── pal/
-│       ├── proofread-replace.md
-│       └── summarize-prefix.md
-}\if{html}{\out{</div>}}
-
-In that case, pal will register two custom pals when you call \code{library(pal)}.
-One of them has the role "proofread" and will replace the selected text with
-a proofread version (according to the instructions contained in the markdown
-file itself). The other has the role "summarize" and will prefix the selected
-text with a summarized version (again, according to the markdown file's
-instructions). Note:
-\itemize{
-\item Files without a \code{.md} extension are ignored.
-\item Files with a \code{.md} extension must contain only one hyphen in their filename,
-and the text following the hyphen must be one of \code{replace}, \code{prefix}, or
-\code{suffix}.
-}
-
-To load custom prompts every time the package is loaded, place your
-prompts in \verb{~/.config/pal} (or, to use some other folder, set
-\code{options(.pal_dir = some_dir)} before loading the package).
-}
-
