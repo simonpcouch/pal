@@ -44,7 +44,7 @@ standardize_selection <- function(selection, context) {
   }
 
   # ensure that models can fill in characters beyond the current selection's
-  selection$range$end[["column"]] <- Inf
+  selection$range$end[["column"]] <- 100000
 
   rstudioapi::setSelectionRanges(selection$range, id = context$id)
 
@@ -140,7 +140,7 @@ rs_prefix_selection <- function(context, role) {
   first_line <- selection$range
   first_line$start[["column"]] <- 1
   first_line$end[["row"]] <- selection$range$start[["row"]]
-  first_line$end[["column"]] <- Inf
+  first_line$end[["column"]] <- 100000
   selection$range <- first_line
   rstudioapi::setCursorPosition(selection$range$start)
 
