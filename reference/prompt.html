@@ -134,13 +134,24 @@ batch using <code>directory_*()</code> functions.</p></div>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># pull prompts from files on local drives or the web with</span></span></span>
 <span class="r-in"><span><span class="co"># `prompt_new(contents)`. for example, here is a GitHub Gist:</span></span></span>
-<span class="r-in"><span><span class="co"># https://gist.githubusercontent.com/simonpcouch/daaa6c4155918d6f3efd6706d022e584/raw/ed1da68b3f38a25b58dd9fdc8b9c258d58c9b4da/summarize-prefix.md</span></span></span>
+<span class="r-in"><span><span class="co"># paste0(</span></span></span>
+<span class="r-in"><span><span class="co">#  "https://gist.githubusercontent.com/simonpcouch/",</span></span></span>
+<span class="r-in"><span><span class="co">#  "daaa6c4155918d6f3efd6706d022e584/raw/ed1da68b3f38a25b58dd9fdc8b9c258d",</span></span></span>
+<span class="r-in"><span><span class="co">#  "58c9b4da/summarize-prefix.md"</span></span></span>
+<span class="r-in"><span><span class="co"># )</span></span></span>
 <span class="r-in"><span><span class="co">#</span></span></span>
-<span class="r-in"><span><span class="co"># press "Raw" and then supply that url as `contents`:</span></span></span>
+<span class="r-in"><span><span class="co"># press "Raw" and then supply that URL as `contents` (you don't actually</span></span></span>
+<span class="r-in"><span><span class="co"># have to use the paste0() to write out the URL--we're just keeping</span></span></span>
+<span class="r-in"><span><span class="co"># the characters per line under 80):</span></span></span>
 <span class="r-in"><span><span class="fu">prompt_new</span><span class="op">(</span></span></span>
 <span class="r-in"><span>  role <span class="op">=</span> <span class="st">"summarize"</span>,</span></span>
 <span class="r-in"><span>  interface <span class="op">=</span> <span class="st">"prefix"</span>,</span></span>
-<span class="r-in"><span>  contents <span class="op">=</span> <span class="st">"https://gist.githubusercontent.com/simonpcouch/daaa6c4155918d6f3efd6706d022e584/raw/ed1da68b3f38a25b58dd9fdc8b9c258d58c9b4da/summarize-prefix.md"</span></span></span>
+<span class="r-in"><span>  contents <span class="op">=</span></span></span>
+<span class="r-in"><span>    <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>      <span class="st">"https://gist.githubusercontent.com/simonpcouch/"</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"daaa6c4155918d6f3efd6706d022e584/raw/ed1da68b3f38a25b58dd9fdc8b9c258d"</span>,</span></span>
+<span class="r-in"><span>      <span class="st">"58c9b4da/summarize-prefix.md"</span></span></span>
+<span class="r-in"><span>    <span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
