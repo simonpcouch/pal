@@ -83,4 +83,6 @@ In that case, pal will register two custom pals when you call `library(pal)` (or
 * Files without a `.md` extension are ignored.
 * Files with a `.md` extension must contain only one hyphen in their filename, and the text following the hyphen must be one of `replace`, `prefix`, or `suffix`.
 
+Custom pals can also be situated in R package. See [palpable](https://github.com/simonpcouch/palpable) for an example pal extension package.
+
 For more in-depth documentation on adding custom pals, see the documentation for `prompt_new()` and friends as well as `directory_load()` and friends.

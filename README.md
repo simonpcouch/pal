@@ -54,9 +54,10 @@ development:
   roxygen](https://simonpcouch.github.io/pal/reference/pal_roxygen.html)
 
 That said, all you need to create your own pal is a markdown file with
-some instructions on how you’d like it to work.
-
-<!-- TODO: decide the directory where those files would live, implement, and document -->
+some instructions on how you’d like it to work. See `prompt_new()` and
+`directory_load()` for more information, and
+[palpable](https://github.com/simonpcouch/palpable) for an example pal
+extension package.
 
 ## How much do pals cost?
 
