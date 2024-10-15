@@ -11,7 +11,7 @@
 #' The pals created by those functions will be persistent across sessions.
 #'
 #' @param role A single string giving a descriptor of the pal's functionality.
-# TODO: actually do this once elmer implements
+#' Cand only contain letters and numbers.
 #' @param prompt A single string giving the system prompt. In most cases, this
 #' is a rather long string, containing several newlines.
 # TODO: only add prefix when not supplied one
@@ -31,12 +31,9 @@
     prompt = NULL,
     interface = c("replace", "prefix", "suffix")
 ) {
-  # TODO: need to check that there are no spaces (or things that can't be
-  # included in a variable name)
-  check_string(role, allow_empty = FALSE)
+  check_role(role)
   check_string(prompt)
 
-  # TODO: make this an elmer interpolate or an .md file
   .stash_prompt(prompt, role)
   parse_interface(interface, role)
 

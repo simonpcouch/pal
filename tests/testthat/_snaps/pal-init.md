@@ -49,9 +49,9 @@
 ---
 
     Code
-      .init_pal("beep bop boop")
+      .init_pal("beepBopBoop")
     Condition
       Error in `.init_pal()`:
-      ! No pals with role `beep bop boop` registered.
+      ! No pals with role `beepBopBoop` registered.
       i See `.pal_add()`.
 

@@ -11,7 +11,8 @@
 .pal_remove(role)
 }
 \arguments{
-\item{role}{A single string giving a descriptor of the pal's functionality.}
+\item{role}{A single string giving a descriptor of the pal's functionality.
+Cand only contain letters and numbers.}
 
 \item{prompt}{A single string giving the system prompt. In most cases, this
 is a rather long string, containing several newlines.}

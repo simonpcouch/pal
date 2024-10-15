@@ -31,5 +31,23 @@ list_pals <- function() {
   gsub(".pal_prompt_", "", prompt_names)
 }
 
+# ad-hoc check helpers -------
+check_role <- function(role, call = caller_env()) {
+  check_string(role, allow_empty = FALSE, call = call)
+
+  if (!is_valid_role(role)) {
+    cli::cli_abort(
+      "{.arg role} must be a single string containing only letters and digits.",
+      call = call
+    )
+  }
+
+  invisible(role)
+}
+
 # miscellaneous ----------------------------------------------------------------
 interactive <- NULL
+
+is_valid_role <- function(role) {
+  grepl("^[a-zA-Z0-9]+$", role)
+}

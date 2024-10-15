@@ -14,7 +14,8 @@ prompt_remove(role)
 prompt_edit(role)
 }
 \arguments{
-\item{role}{A single string giving a descriptor of the pal's functionality.}
+\item{role}{A single string giving a descriptor of the pal's functionality.
+Cand only contain letters and numbers.}
 
 \item{interface}{One of \code{"replace"}, \code{"prefix"}, or \code{"suffix"}, describing
 how the pal will interact with the selection. For example, the

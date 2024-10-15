@@ -26,5 +26,5 @@ test_that("can use other models", {
 test_that("errors informatively with bad role", {
   expect_snapshot(.init_pal(), error = TRUE)
   expect_snapshot(.init_pal(NULL), error = TRUE)
-  expect_snapshot(.init_pal("beep bop boop"), error = TRUE)
+  expect_snapshot(.init_pal("beepBopBoop"), error = TRUE)
 })

@@ -22,3 +22,19 @@
       
       -- A cli pal using gpt-4o-mini. 
 
+# role checks error informatively
+
+    Code
+      check_role("hey there")
+    Condition
+      Error:
+      ! `role` must be a single string containing only letters and digits.
+
+---
+
+    Code
+      check_role(identity)
+    Condition
+      Error:
+      ! `role` must be a single string, not a function.
+

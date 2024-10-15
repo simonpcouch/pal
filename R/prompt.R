@@ -71,7 +71,7 @@
 #' @rdname prompt
 #' @export
 prompt_new <- function(role, interface, contents = NULL) {
-  check_string(role)
+  check_role(role)
   arg_match0(interface, supported_interfaces)
   check_string(contents, allow_null = TRUE)
 
