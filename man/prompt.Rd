@@ -65,13 +65,24 @@ prompt_remove("boop")
 
 # pull prompts from files on local drives or the web with
 # `prompt_new(contents)`. for example, here is a GitHub Gist:
-# https://gist.githubusercontent.com/simonpcouch/daaa6c4155918d6f3efd6706d022e584/raw/ed1da68b3f38a25b58dd9fdc8b9c258d58c9b4da/summarize-prefix.md
+# paste0(
+#  "https://gist.githubusercontent.com/simonpcouch/",
+#  "daaa6c4155918d6f3efd6706d022e584/raw/ed1da68b3f38a25b58dd9fdc8b9c258d",
+#  "58c9b4da/summarize-prefix.md"
+# )
 #
-# press "Raw" and then supply that url as `contents`:
+# press "Raw" and then supply that URL as `contents` (you don't actually
+# have to use the paste0() to write out the URL--we're just keeping
+# the characters per line under 80):
 prompt_new(
   role = "summarize",
   interface = "prefix",
-  contents = "https://gist.githubusercontent.com/simonpcouch/daaa6c4155918d6f3efd6706d022e584/raw/ed1da68b3f38a25b58dd9fdc8b9c258d58c9b4da/summarize-prefix.md"
+  contents =
+    paste0(
+      "https://gist.githubusercontent.com/simonpcouch/",
+      "daaa6c4155918d6f3efd6706d022e584/raw/ed1da68b3f38a25b58dd9fdc8b9c258d",
+      "58c9b4da/summarize-prefix.md"
+    )
 )
 \dontshow{\}) # examplesIf}
 }

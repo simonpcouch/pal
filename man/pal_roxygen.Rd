@@ -23,9 +23,9 @@ The model returns maybe 10 to 15 lines of relatively barebones royxgen
 documentation, so we'll call that 200 output tokens per refactor.
 
 As of the time of writing (October 2024), the default pal model Claude
-Sonnet 3.5 costs \\$3 per million input tokens and $15 per million output
+Sonnet 3.5 costs $3 per million input tokens and $15 per million output
 tokens. So, using the default model,
-\strong{roxygen pals cost around \\$4 for every 1,000 generated roxygen documentation
+\strong{roxygen pals cost around $4 for every 1,000 generated roxygen documentation
 entries}. GPT-4o Mini, by contrast, doesn't tend to infer argument types
 correctly as often and
 often fails to line-break properly, but \emph{does} usually return syntactically

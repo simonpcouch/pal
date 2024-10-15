@@ -10,3 +10,4 @@ inst/figs/
 ^pkgdown$
 .env
 inst/slides/
+man-roxygen
