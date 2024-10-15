@@ -146,8 +146,8 @@ loaded the package yet).</p>
 <p>For easiest access, the pal addin can be registered with a keyboard
 shortcut. To do so in RStudio, navigate to
 <code>Tools &gt; Modify Keyboard Shortcuts &gt; Search "Pal"</code>—we
-suggest <code>Ctrl+Cmd+P</code> (or <code>Ctrl+Alt+P</code> on
-non-macOS).</p>
+suggest <code>Ctrl+Alt+P</code> (or <code>Ctrl+Cmd+P</code> on
+macOS).</p>
 </div>
 <div class="section level2">
 <h2 id="adding-custom-pals">Adding custom pals<a class="anchor" aria-label="anchor" href="#adding-custom-pals"></a>
@@ -157,22 +157,24 @@ one can use pals for all sorts of coding tasks in R, from interactive
 data analysis to authoring with Quarto, or even for pieces of code in
 languages other than R! All you need to set up your own pal is a
 markdown file.</p>
-<p>The pal package, by default, looks for custom prompts in
-<code>~/.config/pal</code>. Prompts are markdown files with the name
-<code>role-interface.md</code>. A <code>~/.config/pal</code> directory
-might look like:</p>
+<p>The pal package looks for custom prompts in the “prompt directory”,
+which can be located with <code><a href="../reference/directory.html">directory_path()</a></code> and defaults to
+<code>~/.config/pal</code>. Prompts are markdown files (likely created
+with <code><a href="../reference/prompt.html">prompt_new()</a></code>) that live in the prompt directory with a
+name like <code>role-interface.md</code>. A prompt directory might look
+like:</p>
 <pre><code>/
 ├── .config/
 │   └── pal/
 │       ├── proofread-replace.md
 │       └── summarize-prefix.md</code></pre>
 <p>In that case, pal will register two custom pals when you call
-<code><a href="https://github.com/simonpcouch/pal" class="external-link">library(pal)</a></code>. One of them has the role “proofread” and will
-replace the selected text with a proofread version (according to the
-instructions contained in the markdown file itself). The other has the
-role “summarize” and will prefix the selected text with a summarized
-version (again, according to the markdown file’s instructions).
-Note:</p>
+<code><a href="https://github.com/simonpcouch/pal" class="external-link">library(pal)</a></code> (or <code><a href="../reference/directory.html">directory_load()</a></code>. One of them
+has the role <code>"proofread"</code> and will replace the selected text
+with a proofread version (according to the instructions contained in the
+markdown file itself). The other has the role <code>"summarize"</code>
+and will prefix the selected text with a summarized version (again,
+according to the markdown file’s instructions). Note:</p>
 <ul>
 <li>Files without a <code>.md</code> extension are ignored.</li>
 <li>Files with a <code>.md</code> extension must contain only one hyphen
@@ -180,7 +182,8 @@ in their filename, and the text following the hyphen must be one of
 <code>replace</code>, <code>prefix</code>, or <code>suffix</code>.</li>
 </ul>
 <p>For more in-depth documentation on adding custom pals, see the
-“Extending pal” vignette.</p>
+documentation for <code><a href="../reference/prompt.html">prompt_new()</a></code> and friends as well as
+<code><a href="../reference/directory.html">directory_load()</a></code> and friends.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>

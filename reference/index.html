@@ -33,10 +33,33 @@
     <div class="section level2">
       <h2 id="using-pal">Using pal<a class="anchor" aria-label="anchor" href="#using-pal"></a></h2>
 
-      <div class="section-desc"><p><strong>Users of pal will generally not need to call any functions from the package directly.</strong> See the <a href="https://simonpcouch.github.io/pal/articles/pal.html">“Getting Started with pal”</a> vignette to learn how to work with—and extend—pals.</p></div>
+      <div class="section-desc"><p>See the <a href="https://simonpcouch.github.io/pal/articles/pal.html">“Getting Started with pal”</a> vignette to learn how to work with pals.</p></div>
 
 
     </div><div class="section level2">
+      <h2 id="creating-custom-pals">Creating custom pals<a class="anchor" aria-label="anchor" href="#creating-custom-pals"></a></h2>
+
+
+
+
+    </div><div class="section level2">
+
+
+
+
+      <dl><dt>
+
+          <code><a href="prompt.html">prompt_new()</a></code> <code><a href="prompt.html">prompt_remove()</a></code> <code><a href="prompt.html">prompt_edit()</a></code>
+
+        </dt>
+        <dd>Working with pal prompts</dd>
+      </dl><dl><dt>
+
+          <code><a href="directory.html">directory_load()</a></code> <code><a href="directory.html">directory_list()</a></code> <code><a href="directory.html">directory_path()</a></code> <code><a href="directory.html">directory_set()</a></code>
+
+        </dt>
+        <dd>The prompt directory</dd>
+      </dl></div><div class="section level2">
       <h2 id="pals-for-package-development">Pals for package development<a class="anchor" aria-label="anchor" href="#pals-for-package-development"></a></h2>
 
 
@@ -66,7 +89,7 @@
         </dt>
         <dd>The cli pal</dd>
       </dl></div><div class="section level2">
-      <h2 id="infrastructure">Infrastructure<a class="anchor" aria-label="anchor" href="#infrastructure"></a></h2>
+      <h2 id="developer-infrastructure">Developer Infrastructure<a class="anchor" aria-label="anchor" href="#developer-infrastructure"></a></h2>
 
 
 
@@ -81,22 +104,16 @@
           <code><a href="pal_add_remove.html">.pal_add()</a></code> <code><a href="pal_add_remove.html">.pal_remove()</a></code>
 
         </dt>
-        <dd>Creating custom pals</dd>
+        <dd>Registering pals</dd>
       </dl><dl><dt>
 
-          <code><a href="pal_add_dir.html">.pal_add_dir()</a></code> <code><a href="pal_add_dir.html">.pal_dir()</a></code> <code><a href="pal_add_dir.html">.pal_new()</a></code>
+          <code><a href="dot-init_pal.html">.init_pal()</a></code>
 
         </dt>
-        <dd>The pal directory</dd>
+        <dd>Initialize a Pal object</dd>
       </dl><dl><dt>
 
-          <code><a href="dot-pal_init.html">.pal_init()</a></code>
-
-        </dt>
-        <dd>Initialize a pal</dd>
-      </dl><dl><dt>
-
-          <code><a href="dot-pal_addin.html">.pal_addin()</a></code>
+          <code><a href="dot-init_addin.html">.init_addin()</a></code>
 
         </dt>
         <dd>Run the pal addin</dd>
