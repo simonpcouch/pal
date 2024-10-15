@@ -1,4 +1,4 @@
 Name: Pal
 Description: LLM assistants for R
-Binding: .pal_addin
+Binding: .init_addin
 Interactive: false

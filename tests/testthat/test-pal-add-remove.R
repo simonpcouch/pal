@@ -9,7 +9,7 @@ test_that("pal addition and removal works", {
   expect_equal(env_get(pal_env(), ".pal_prompt_boopery"), boop_prompt)
   expect_true(is_function(env_get(pal_env(), ".pal_rs_boopery")))
 
-  pal_boopery <- .pal_init("boopery")
+  pal_boopery <- .init_pal("boopery")
   expect_snapshot(pal_boopery)
   expect_true(".pal_last_boopery" %in% names(pal_env()))
 

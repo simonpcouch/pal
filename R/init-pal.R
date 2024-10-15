@@ -1,11 +1,11 @@
-#' Initialize a pal
+#' Initialize a Pal object
 #'
 #' @description
 #' **Users typically should not need to call this function.**
 #'
 #' * Create new pals that will automatically be registered with this function
-#' with [.pal_add()].
-#' * The [pal addin][.pal_addin()] will initialize needed pals on-the-fly.
+#' with [prompt_new()].
+#' * The [pal addin][.init_addin()] will initialize needed pals on-the-fly.
 #'
 #' @param role The identifier for a pal prompt. By default one
 #' of `r glue::glue_collapse(paste0("[", glue::double_quote(default_roles), "]", "[pal_", default_roles, "]"), ", ", last = " or ")`,
@@ -26,10 +26,10 @@
 #'
 #' @examplesIf FALSE
 #' # to create a chat with claude:
-#' .pal_init()
+#' .init_pal()
 #'
 #' # or with OpenAI's 4o-mini:
-#' .pal_init(
+#' .init_pal(
 #'   "chat_openai",
 #'   model = "gpt-4o-mini"
 #' )
@@ -42,7 +42,7 @@
 #'   .pal_args = list(model = "gpt-4o-mini")
 #' )
 #' @export
-.pal_init <- function(
+.init_pal <- function(
     role = NULL,
     fn = getOption(".pal_fn", default = "chat_claude"),
     ...,

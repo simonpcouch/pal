@@ -1,7 +1,7 @@
 # initializing a pal
 
     Code
-      .pal_init("cli")
+      .init_pal("cli")
     Message
       
       -- A cli pal using claude-3-5-sonnet-20240620. 
@@ -9,7 +9,7 @@
 ---
 
     Code
-      .pal_init("testthat")
+      .init_pal("testthat")
     Message
       
       -- A testthat pal using claude-3-5-sonnet-20240620. 
@@ -17,7 +17,7 @@
 # can use other models
 
     Code
-      .pal_init("cli", fn = "chat_openai", model = "gpt-4o-mini")
+      .init_pal("cli", fn = "chat_openai", model = "gpt-4o-mini")
     Message
       
       -- A cli pal using gpt-4o-mini. 
@@ -25,7 +25,7 @@
 ---
 
     Code
-      .pal_init("cli")
+      .init_pal("cli")
     Message
       
       -- A cli pal using claude-3-5-sonnet-20240620. 
@@ -33,25 +33,25 @@
 # errors informatively with bad role
 
     Code
-      .pal_init()
+      .init_pal()
     Condition
-      Error in `.pal_init()`:
+      Error in `.init_pal()`:
       ! `role` must be a single string, not `NULL`.
 
 ---
 
     Code
-      .pal_init(NULL)
+      .init_pal(NULL)
     Condition
-      Error in `.pal_init()`:
+      Error in `.init_pal()`:
       ! `role` must be a single string, not `NULL`.
 
 ---
 
     Code
-      .pal_init("beep bop boop")
+      .init_pal("beep bop boop")
     Condition
-      Error in `.pal_init()`:
+      Error in `.init_pal()`:
       ! No pals with role `beep bop boop` registered.
       i See `.pal_add()`.
 

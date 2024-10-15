@@ -1,16 +1,19 @@
-#' Creating custom pals
+#' Registering pals
 #'
 #' @description
 #' Users can create custom pals using the `.pal_add()` function; after passing
-#' the function a role and prompt, the pal will be available on the command
-#' palette.
+#' the function a role and prompt, the pal will be available in the
+#' [pal addin][.init_addin].
 #'
-#' To create multiple, persistent pals, see [.pal_add_dir()].
+#' **Most users should not need to interact with these functions.**
+#' [prompt_new()] and friends can be used to create prompts for new pals, and
+#' those pals can be registered with pal using [directory_load()] and friends.
+#' The pals created by those functions will be persistent across sessions.
 #'
 #' @param role A single string giving a descriptor of the pal's functionality.
 # TODO: actually do this once elmer implements
-#' @param prompt A file path to a markdown file giving the system prompt or
-#' the output of [elmer::interpolate()].
+#' @param prompt A single string giving the system prompt. In most cases, this
+#' is a rather long string, containing several newlines.
 # TODO: only add prefix when not supplied one
 #' @param interface One of `"replace"`, `"prefix"`, or `"suffix"`, describing
 #' how the pal will interact with the selection. For example, the
@@ -19,7 +22,7 @@
 #'
 #' @returns
 #' `NULL`, invisibly. Called for its side effect: a pal with role `role`
-#' is registered with the pal package.
+#' is registered (or unregistered) with the pal package.
 #'
 #' @name pal_add_remove
 #' @export
@@ -31,10 +34,11 @@
   # TODO: need to check that there are no spaces (or things that can't be
   # included in a variable name)
   check_string(role, allow_empty = FALSE)
+  check_string(prompt)
 
   # TODO: make this an elmer interpolate or an .md file
-  prompt <- .stash_prompt(prompt, role)
-  binding <- parse_interface(interface, role)
+  .stash_prompt(prompt, role)
+  parse_interface(interface, role)
 
   invisible()
 }

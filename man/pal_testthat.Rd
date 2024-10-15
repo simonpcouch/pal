@@ -168,7 +168,7 @@ Returns:
 Pals are typically interfaced with via the pal addin. To call the testthat
 pal directly, use:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{pal_testthat <- .pal_init("testthat")
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{pal_testthat <- .init_pal("testthat")
 }\if{html}{\out{</div>}}
 
 Then, to submit a query, run:

@@ -4,7 +4,7 @@
 \alias{pal_add_remove}
 \alias{.pal_add}
 \alias{.pal_remove}
-\title{Creating custom pals}
+\title{Registering pals}
 \usage{
 .pal_add(role, prompt = NULL, interface = c("replace", "prefix", "suffix"))
 
@@ -13,8 +13,8 @@
 \arguments{
 \item{role}{A single string giving a descriptor of the pal's functionality.}
 
-\item{prompt}{A file path to a markdown file giving the system prompt or
-the output of \code{\link[elmer:interpolate]{elmer::interpolate()}}.}
+\item{prompt}{A single string giving the system prompt. In most cases, this
+is a rather long string, containing several newlines.}
 
 \item{interface}{One of \code{"replace"}, \code{"prefix"}, or \code{"suffix"}, describing
 how the pal will interact with the selection. For example, the
@@ -23,12 +23,15 @@ how the pal will interact with the selection. For example, the
 }
 \value{
 \code{NULL}, invisibly. Called for its side effect: a pal with role \code{role}
-is registered with the pal package.
+is registered (or unregistered) with the pal package.
 }
 \description{
 Users can create custom pals using the \code{.pal_add()} function; after passing
-the function a role and prompt, the pal will be available on the command
-palette.
+the function a role and prompt, the pal will be available in the
+\link[=.init_addin]{pal addin}.
 
-To create multiple, persistent pals, see \code{\link[=.pal_add_dir]{.pal_add_dir()}}.
+\strong{Most users should not need to interact with these functions.}
+\code{\link[=prompt_new]{prompt_new()}} and friends can be used to create prompts for new pals, and
+those pals can be registered with pal using \code{\link[=directory_load]{directory_load()}} and friends.
+The pals created by those functions will be persistent across sessions.
 }

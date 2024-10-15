@@ -5,18 +5,20 @@ template:
 reference:
   - title: "Using pal"
     desc: >
-      **Users of pal will generally not need to call any functions from the
-      package directly.** See the
+      See the
       ["Getting Started with pal"](https://simonpcouch.github.io/pal/articles/pal.html)
-      vignette to learn how to work with—and extend—pals.
+      vignette to learn how to work with pals.
+  - title: Creating custom pals
+    contents:
+    - starts_with("prompt")
+    - starts_with("directory")
   - title: Pals for package development
     contents:
     - pal_roxygen
     - pal_testthat
     - pal_cli
-  - title: Infrastructure
+  - title: Developer Infrastructure
     contents:
     - pal_add_remove
-    - pal_add_dir
-    - .pal_init
-    - .pal_addin
+    - .init_pal
+    - .init_addin

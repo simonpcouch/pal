@@ -62,13 +62,13 @@ Just:
 
 ![](https://raw.githubusercontent.com/simonpcouch/pal/refs/heads/main/inst/figs/addin.gif)
 
-For easiest access, the pal addin can be registered with a keyboard shortcut. To do so in RStudio, navigate to `Tools > Modify Keyboard Shortcuts > Search "Pal"`—we suggest `Ctrl+Cmd+P` (or `Ctrl+Alt+P` on non-macOS).
+For easiest access, the pal addin can be registered with a keyboard shortcut. To do so in RStudio, navigate to `Tools > Modify Keyboard Shortcuts > Search "Pal"`—we suggest `Ctrl+Alt+P` (or `Ctrl+Cmd+P` on macOS).
 
 ## Adding custom pals
 
 While the pal package comes with three pals for package development, one can use pals for all sorts of coding tasks in R, from interactive data analysis to authoring with Quarto, or even for pieces of code in languages other than R! All you need to set up your own pal is a markdown file.
 
-The pal package, by default, looks for custom prompts in `~/.config/pal`. Prompts are markdown files with the name `role-interface.md`. A `~/.config/pal` directory might look like:
+The pal package looks for custom prompts in the "prompt directory", which can be located with `directory_path()` and defaults to `~/.config/pal`. Prompts are markdown files (likely created with `prompt_new()`) that live in the prompt directory with a name like `role-interface.md`. A prompt directory might look like:
 
 ```
 /
@@ -78,9 +78,9 @@ The pal package, by default, looks for custom prompts in `~/.config/pal`. Prompt
 │       └── summarize-prefix.md
 ```
 
-In that case, pal will register two custom pals when you call `library(pal)`. One of them has the role "proofread" and will replace the selected text with a proofread version (according to the instructions contained in the markdown file itself). The other has the role "summarize" and will prefix the selected text with a summarized version (again, according to the markdown file's instructions). Note:
+In that case, pal will register two custom pals when you call `library(pal)` (or `directory_load()`. One of them has the role `"proofread"` and will replace the selected text with a proofread version (according to the instructions contained in the markdown file itself). The other has the role `"summarize"` and will prefix the selected text with a summarized version (again, according to the markdown file's instructions). Note:
 
 * Files without a `.md` extension are ignored.
 * Files with a `.md` extension must contain only one hyphen in their filename, and the text following the hyphen must be one of `replace`, `prefix`, or `suffix`.
 
-For more in-depth documentation on adding custom pals, see the "Extending pal" vignette.
+For more in-depth documentation on adding custom pals, see the documentation for `prompt_new()` and friends as well as `directory_load()` and friends.

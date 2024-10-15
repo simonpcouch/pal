@@ -4,7 +4,7 @@
 #' pal directly, use:
 #'
 #' ```r
-#' pal_<%= role %> <- .pal_init("<%= role %>")
+#' pal_<%= role %> <- .init_pal("<%= role %>")
 #' ```
 #'
 #' Then, to submit a query, run:

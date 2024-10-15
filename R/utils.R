@@ -57,3 +57,6 @@ check_prompt <- function(prompt, call = caller_env()) {
 is_markdown_file <- function(x) {
   grepl("\\.(md|markdown)$", x, ignore.case = TRUE)
 }
+
+# miscellaneous ----------------------------------------------------------------
+interactive <- NULL

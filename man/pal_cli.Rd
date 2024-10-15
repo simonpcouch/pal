@@ -175,7 +175,7 @@ Returns:
 Pals are typically interfaced with via the pal addin. To call the cli
 pal directly, use:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{pal_cli <- .pal_init("cli")
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{pal_cli <- .init_pal("cli")
 }\if{html}{\out{</div>}}
 
 Then, to submit a query, run:
