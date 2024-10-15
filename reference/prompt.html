@@ -6,6 +6,8 @@ prompt_*() functions allow users to conveniently create, edit, remove,
 the prompts in pal's &quot;prompt directory.&quot;
 prompt_new() creates a new markdown file that will automatically
 create a pal with the specified role, prompt, and interface on package load.
+Specify a contents argument to prefill with contents from a markdown file
+on your computer or the web.
 prompt_edit() and prompt_remove() open and delete, respectively, the
 file that defines the given role's system prompt.
 
@@ -18,6 +20,8 @@ prompt_*() functions allow users to conveniently create, edit, remove,
 the prompts in pal's &quot;prompt directory.&quot;
 prompt_new() creates a new markdown file that will automatically
 create a pal with the specified role, prompt, and interface on package load.
+Specify a contents argument to prefill with contents from a markdown file
+on your computer or the web.
 prompt_edit() and prompt_remove() open and delete, respectively, the
 file that defines the given role's system prompt.
 
@@ -62,7 +66,9 @@ System prompts are what instruct pals on how to behave and provide
 information to live in the models' "short-term memory."</p>
 <p><code>prompt_*()</code> functions allow users to conveniently create, edit, remove,
 the prompts in pal's "<a href="directory.html">prompt directory</a>."</p><ul><li><p><code>prompt_new()</code> creates a new markdown file that will automatically
-create a pal with the specified role, prompt, and interface on package load.</p></li>
+create a pal with the specified role, prompt, and interface on package load.
+Specify a <code>contents</code> argument to prefill with contents from a markdown file
+on your computer or the web.</p></li>
 <li><p><code>prompt_edit()</code> and <code>prompt_remove()</code> open and delete, respectively, the
 file that defines the given role's system prompt.</p></li>
 </ul><p>Load the prompts you create with these functions using <code><a href="directory.html">directory_load()</a></code>
@@ -71,7 +77,7 @@ file that defines the given role's system prompt.</p></li>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">prompt_new</span><span class="op">(</span><span class="va">role</span>, <span class="va">interface</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">prompt_new</span><span class="op">(</span><span class="va">role</span>, <span class="va">interface</span>, contents <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">prompt_remove</span><span class="op">(</span><span class="va">role</span><span class="op">)</span></span>
 <span></span>
@@ -91,6 +97,13 @@ file that defines the given role's system prompt.</p></li>
 how the pal will interact with the selection. For example, the
 <a href="pal_cli.html">cli pal</a> <code>"replace"</code>s the selection, while the
 <a href="pal_roxygen.html">roxygen pal</a> <code>"prefixes"</code> the selected code with documentation.</p></dd>
+
+
+<dt id="arg-contents">contents<a class="anchor" aria-label="anchor" href="#arg-contents"></a></dt>
+<dd><p>Optional. Path to a markdown file with contents that will
+"pre-fill" the file. Anything file ending in <code>.md</code> or <code>.markdown</code> that can be
+read with <code><a href="https://rdrr.io/r/base/readLines.html" class="external-link">readLines()</a></code> is fair game; this could be a local file, a "raw"
+URL to a GitHub Gist or file in a GitHub repository, etc.</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -118,6 +131,17 @@ batch using <code>directory_*()</code> functions.</p></div>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># remove the prompt (next time the package is loaded) with:</span></span></span>
 <span class="r-in"><span><span class="fu">prompt_remove</span><span class="op">(</span><span class="st">"boop"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># pull prompts from files on local drives or the web with</span></span></span>
+<span class="r-in"><span><span class="co"># `prompt_new(contents)`. for example, here is a GitHub Gist:</span></span></span>
+<span class="r-in"><span><span class="co"># https://gist.githubusercontent.com/simonpcouch/daaa6c4155918d6f3efd6706d022e584/raw/ed1da68b3f38a25b58dd9fdc8b9c258d58c9b4da/summarize-prefix.md</span></span></span>
+<span class="r-in"><span><span class="co">#</span></span></span>
+<span class="r-in"><span><span class="co"># press "Raw" and then supply that url as `contents`:</span></span></span>
+<span class="r-in"><span><span class="fu">prompt_new</span><span class="op">(</span></span></span>
+<span class="r-in"><span>  role <span class="op">=</span> <span class="st">"summarize"</span>,</span></span>
+<span class="r-in"><span>  interface <span class="op">=</span> <span class="st">"prefix"</span>,</span></span>
+<span class="r-in"><span>  contents <span class="op">=</span> <span class="st">"https://gist.githubusercontent.com/simonpcouch/daaa6c4155918d6f3efd6706d022e584/raw/ed1da68b3f38a25b58dd9fdc8b9c258d58c9b4da/summarize-prefix.md"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">}</span></span></span>
 </code></pre></div>
     </div>
