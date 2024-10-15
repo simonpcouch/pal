@@ -10,6 +10,8 @@
 #'
 #' * `prompt_new()` creates a new markdown file that will automatically
 #' create a pal with the specified role, prompt, and interface on package load.
+#' Specify a `contents` argument to prefill with contents from a markdown file
+#' on your computer or the web.
 #' * `prompt_edit()` and `prompt_remove()` open and delete, respectively, the
 #' file that defines the given role's system prompt.
 #'
@@ -17,6 +19,10 @@
 #' (which is automatically called when the package loads).
 #'
 #' @inheritParams pal_add_remove
+#' @param contents Optional. Path to a markdown file with contents that will
+#' "pre-fill" the file. Anything file ending in `.md` or `.markdown` that can be
+#' read with `readLines()` is fair game; this could be a local file, a "raw"
+#' URL to a GitHub Gist or file in a GitHub repository, etc.
 #'
 #' @seealso The [directory] help-page for more on working with prompts in
 #' batch using `directory_*()` functions.
@@ -38,14 +44,25 @@
 #' # remove the prompt (next time the package is loaded) with:
 #' prompt_remove("boop")
 #'
+#' # pull prompts from files on local drives or the web with
+#' # `prompt_new(contents)`. for example, here is a GitHub Gist:
+#' # https://gist.githubusercontent.com/simonpcouch/daaa6c4155918d6f3efd6706d022e584/raw/ed1da68b3f38a25b58dd9fdc8b9c258d58c9b4da/summarize-prefix.md
+#' #
+#' # press "Raw" and then supply that url as `contents`:
+#' prompt_new(
+#'   role = "summarize",
+#'   interface = "prefix",
+#'   contents = "https://gist.githubusercontent.com/simonpcouch/daaa6c4155918d6f3efd6706d022e584/raw/ed1da68b3f38a25b58dd9fdc8b9c258d58c9b4da/summarize-prefix.md"
+#' )
+#'
 #' @name prompt
 
 #' @rdname prompt
 #' @export
-# TODO: function to bring in a prompt from a connection/URL to a given role/interface
-prompt_new <- function(role, interface) {
+prompt_new <- function(role, interface, contents = NULL) {
   check_string(role)
   arg_match0(interface, supported_interfaces)
+  check_string(contents, allow_null = TRUE)
 
   current_path <- try_fetch(prompt_locate(role), error = function(cnd) {NULL})
   suggestion <- character(0)
@@ -60,11 +77,13 @@ prompt_new <- function(role, interface) {
   }
 
   path <- paste0(directory_path(), "/", role, "-", interface, ".md")
-  # TODO: should there be some pre-filled instructions on how to write
-  # prompts here?
+
   # TODO: should this message "Register with `directory_load()`" or
   # something as it creates the file?
   file.create(path)
+  if (!is.null(contents)) {
+    prompt_prefill(path = path, contents = contents)
+  }
   if (interactive()) {
     file.edit(path)
   }
@@ -77,6 +96,10 @@ prompt_new <- function(role, interface) {
 prompt_remove <- function(role) {
   path <- prompt_locate(role)
   file.remove(path)
+
+  # TODO: this doesn't do enough to remove s.t. a new
+  # prompt with the same role can be added
+
   invisible(path)
 }
 
@@ -104,4 +127,40 @@ prompt_locate <- function(role, call = caller_env()) {
   }
 
   file.path(path, base_names[match])
+}
+
+prompt_prefill <- function(path, contents, call = caller_env()) {
+  if (!is_markdown_file(contents)) {
+    cli::cli_abort(
+      "{.arg contents} must be a connection to a markdown file.",
+      call = call
+    )
+  }
+
+  if (!is.null(contents)) {
+    suppressWarnings(
+      try_fetch(
+        {
+          lines <- base::readLines(contents)
+          writeLines(text = lines, con = path)
+        },
+        error = function(cnd) {
+          cli::cli_abort(
+            "An error occurred while pre-filling the prompt with {.arg contents}.",
+            call = call,
+            parent = cnd
+          )
+        }
+      )
+    )
+  }
+
+  # TODO: should there be some pre-filled instructions on how to write
+  # prompts here in `else`?
+
+  invisible(path)
+}
+
+is_markdown_file <- function(x) {
+  grepl("\\.(md|markdown)$", x, ignore.case = TRUE)
 }

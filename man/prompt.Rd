@@ -7,7 +7,7 @@
 \alias{prompt_edit}
 \title{Working with pal prompts}
 \usage{
-prompt_new(role, interface)
+prompt_new(role, interface, contents = NULL)
 
 prompt_remove(role)
 
@@ -20,6 +20,11 @@ prompt_edit(role)
 how the pal will interact with the selection. For example, the
 \link[=pal_cli]{cli pal} \code{"replace"}s the selection, while the
 \link[=pal_roxygen]{roxygen pal} \code{"prefixes"} the selected code with documentation.}
+
+\item{contents}{Optional. Path to a markdown file with contents that will
+"pre-fill" the file. Anything file ending in \code{.md} or \code{.markdown} that can be
+read with \code{readLines()} is fair game; this could be a local file, a "raw"
+URL to a GitHub Gist or file in a GitHub repository, etc.}
 }
 \value{
 Each \verb{prompt_*()} function returns the file path to the created, edited, or
@@ -35,6 +40,8 @@ the prompts in pal's "\link[=directory]{prompt directory}."
 \itemize{
 \item \code{prompt_new()} creates a new markdown file that will automatically
 create a pal with the specified role, prompt, and interface on package load.
+Specify a \code{contents} argument to prefill with contents from a markdown file
+on your computer or the web.
 \item \code{prompt_edit()} and \code{prompt_remove()} open and delete, respectively, the
 file that defines the given role's system prompt.
 }
@@ -55,6 +62,17 @@ prompt_edit("boop")
 
 # remove the prompt (next time the package is loaded) with:
 prompt_remove("boop")
+
+# pull prompts from files on local drives or the web with
+# `prompt_new(contents)`. for example, here is a GitHub Gist:
+# https://gist.githubusercontent.com/simonpcouch/daaa6c4155918d6f3efd6706d022e584/raw/ed1da68b3f38a25b58dd9fdc8b9c258d58c9b4da/summarize-prefix.md
+#
+# press "Raw" and then supply that url as `contents`:
+prompt_new(
+  role = "summarize",
+  interface = "prefix",
+  contents = "https://gist.githubusercontent.com/simonpcouch/daaa6c4155918d6f3efd6706d022e584/raw/ed1da68b3f38a25b58dd9fdc8b9c258d58c9b4da/summarize-prefix.md"
+)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
