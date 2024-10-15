@@ -11,4 +11,3 @@ inst/figs/
 .env
 inst/slides/
 man-roxygen
-^codecov\.yml$

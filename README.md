@@ -10,8 +10,6 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 [![CRAN
 status](https://www.r-pkg.org/badges/version/pal)](https://CRAN.R-project.org/package=pal)
 [![R-CMD-check](https://github.com/simonpcouch/pal/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/simonpcouch/pal/actions/workflows/R-CMD-check.yaml)
-[![Codecov test
-coverage](https://codecov.io/gh/simonpcouch/pal/graph/badge.svg)](https://app.codecov.io/gh/simonpcouch/pal)
 <!-- badges: end -->
 
 Pals are persistent, ergonomic LLM assistants designed to help you
