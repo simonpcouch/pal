@@ -36,6 +36,36 @@ than Anthropic’s Claude 3.5 Sonnet—like OpenAI’s ChatGPT—to power the
 pal, see the [Getting started with
 pal](https://simonpcouch.github.io/pal/articles/pal.html) vignette.
 
+Pals are interfaced with the via the pal addin. For easiest access, we
+recommend registering the pal addin to a keyboard shortcut.
+
+**In RStudio**, navigate to
+`Tools > Modify Keyboard Shortcuts > Search "Pal"`—we suggest
+`Ctrl+Alt+P` (or `Ctrl+Cmd+P` on macOS).
+
+**In Positron**, you’ll need to open the command palette, run “Open
+Keyboard Shortcuts (JSON)”, and paste the following into your
+`keybindings.json`:
+
+``` json
+    {
+        "key": "Ctrl+Cmd+P",
+        "command": "workbench.action.executeCode.console",
+        "when": "editorTextFocus",
+        "args": {
+            "langId": "r",
+            "code": "pal::.init_addin()",
+            "focus": true
+        }
+    }
+```
+
+The analogous keybinding on non-macOS is `Ctrl+Alt+P`. That said, change
+the `"key"` entry to any keybinding you wish!
+
+Once those steps are completed, you’re ready to use pals with a keyboard
+shortcut.
+
 ## Example
 
 Pals are created automatically when users interact with the pal addin.
