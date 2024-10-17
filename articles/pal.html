@@ -143,11 +143,30 @@ loaded the package yet).</p>
 <li>Watch your code be rewritten.</li>
 </ul>
 <p><img src="https://raw.githubusercontent.com/simonpcouch/pal/refs/heads/main/inst/figs/addin.gif"></p>
-<p>For easiest access, the pal addin can be registered with a keyboard
-shortcut. To do so in RStudio, navigate to
+<p>Pals are interfaced with the via the pal addin. For easiest access,
+we recommend registering the pal addin to a keyboard shortcut.</p>
+<p><strong>In RStudio</strong>, navigate to
 <code>Tools &gt; Modify Keyboard Shortcuts &gt; Search "Pal"</code>—we
 suggest <code>Ctrl+Alt+P</code> (or <code>Ctrl+Cmd+P</code> on
 macOS).</p>
+<p><strong>In Positron</strong>, you’ll need to open the command
+palette, run “Open Keyboard Shortcuts (JSON)”, and paste the following
+into your <code>keybindings.json()</code>:</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode json"><code class="sourceCode json"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a>    <span class="fu">{</span></span>
+<span id="cb5-2"><a href="#cb5-2" tabindex="-1"></a>        <span class="dt">"key"</span><span class="fu">:</span> <span class="st">"Ctrl+Cmd+P"</span><span class="fu">,</span></span>
+<span id="cb5-3"><a href="#cb5-3" tabindex="-1"></a>        <span class="dt">"command"</span><span class="fu">:</span> <span class="st">"workbench.action.executeCode.console"</span><span class="fu">,</span></span>
+<span id="cb5-4"><a href="#cb5-4" tabindex="-1"></a>        <span class="dt">"when"</span><span class="fu">:</span> <span class="st">"editorTextFocus"</span><span class="fu">,</span></span>
+<span id="cb5-5"><a href="#cb5-5" tabindex="-1"></a>        <span class="dt">"args"</span><span class="fu">:</span> <span class="fu">{</span></span>
+<span id="cb5-6"><a href="#cb5-6" tabindex="-1"></a>            <span class="dt">"langId"</span><span class="fu">:</span> <span class="st">"r"</span><span class="fu">,</span></span>
+<span id="cb5-7"><a href="#cb5-7" tabindex="-1"></a>            <span class="dt">"code"</span><span class="fu">:</span> <span class="st">"pal::.init_addin()"</span><span class="fu">,</span></span>
+<span id="cb5-8"><a href="#cb5-8" tabindex="-1"></a>            <span class="dt">"focus"</span><span class="fu">:</span> <span class="kw">true</span></span>
+<span id="cb5-9"><a href="#cb5-9" tabindex="-1"></a>        <span class="fu">}</span></span>
+<span id="cb5-10"><a href="#cb5-10" tabindex="-1"></a>    <span class="fu">}</span></span></code></pre></div>
+<p>The analogous keybinding on non-macOS is <code>Ctrl+Alt+P</code>.
+That said, change the <code>"key"</code> entry to any keybinding you
+wish!</p>
+<p>Once those steps are completed, you’re ready to use pals with a
+keyboard shortcut.</p>
 </div>
 <div class="section level2">
 <h2 id="adding-custom-pals">Adding custom pals<a class="anchor" aria-label="anchor" href="#adding-custom-pals"></a>
