@@ -18,8 +18,8 @@ some code, press the keyboard shortcut you’ve chosen to trigger the pal
 addin (we suggest `Ctrl+Cmd+P`), select the pal, and watch your code be
 rewritten.
 
-**Much of the documentation in this package is aspirational and its
-interface is likely to change rapidly.**
+**This package is highly experimental and its interface is likely to
+change rapidly.**
 
 ## Installation
 
