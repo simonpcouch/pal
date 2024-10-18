@@ -87,7 +87,11 @@ prompt_new <- function(role, interface, contents = NULL) {
     ))
   }
 
-  path <- paste0(directory_path(), "/", role, "-", interface, ".md")
+  dir_path <- directory_path()
+  if (!dir.exists(dir_path)) {
+    dir.create(dir_path, recursive = TRUE)
+  }
+  path <- paste0(dir_path, "/", role, "-", interface, ".md")
 
   # TODO: should this message "Register with `directory_load()`" or
   # something as it creates the file?

@@ -35,6 +35,24 @@ test_that("prompt_new errors informatively with redundant role", {
   expect_snapshot(error = TRUE, prompt_new("cli", "replace"))
 })
 
+test_that("prompt_new works when directory doesn't exist yet (#47)", {
+  subdir <- "test-prompt-dir/subdir"
+  withr::local_options(.pal_dir = subdir)
+  testthat::local_mocked_bindings(interactive = function(...) {FALSE})
+
+  if (dir.exists(subdir)) {unlink(subdir, recursive = TRUE)}
+  if ("floop" %in% list_pals()) {.pal_remove("floop")}
+
+  withr::defer({
+    if (dir.exists(subdir)) {unlink(subdir, recursive = TRUE)}
+    if ("floop" %in% list_pals()) {.pal_remove("floop")}
+  })
+
+  .res <- prompt_new("floop", "replace")
+  expect_equal(.res, paste0(subdir, "/floop-replace.md"))
+  expect_true(file.exists(.res))
+})
+
 test_that("prompt_remove errors informatively with bad role", {
   # contains two prompts, `boop-replace` and `wop-prefix`
   withr::local_options(.pal_dir = "test-prompt-dir")
