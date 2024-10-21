@@ -64,6 +64,19 @@ expect_warning(some_code())
 expect_snapshot(.res <- some_code())
 ```
 
+That said, if the code already assigns to a variable name, don't change it.
+
+``` r
+# before:
+expect_warning(obj <- some_code())
+
+# good:
+expect_snapshot(obj <- some_code())
+
+# bad:
+expect_snapshot(.res <- some_code())
+```
+
 Disentangle nested expectations. For example:
 
 ``` r
