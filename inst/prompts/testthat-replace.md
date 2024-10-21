@@ -34,6 +34,25 @@ expect_snapshot(
 )
 ```
 
+Often, when converting to snapshots, the total number of characters will be under 80 once the regular expression is removed. In that case, collapse all of the error expectation onto one line.
+
+``` r
+# before:
+expect_error(
+  some_function_call(), 
+  "A regex on a newline that has many characters."
+)
+
+# good:
+expect_snapshot(error = TRUE, some_function_call())
+
+# bad:
+expect_snapshot(
+  error = TRUE, 
+  some_function_call()
+)
+```
+
 Sometimes there's no regex argument. The solution is the same in that case:
 
 ``` r
