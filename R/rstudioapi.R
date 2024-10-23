@@ -106,14 +106,7 @@ stream_selection <- function(selection, context, pal, n_lines_orig) {
 
   # reindent the code
   rstudioapi::setSelectionRanges(selection$range, id = context$id)
-  if (is_positron()) {
-    # TODO: this is not public api. we actually want to make a PR to
-    # positron to map reindent -> this_command in the rstudioapi shims (#46)
-    .ps.ui.executeCommand("editor.action.reindentselectedlines")
-  } else {
-    rstudioapi::executeCommand("reindent")
-  }
-
+  rstudioapi::executeCommand("reindent")
 
   rstudioapi::setCursorPosition(selection$range$start)
 }
