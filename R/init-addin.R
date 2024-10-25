@@ -17,21 +17,23 @@
 .init_addin <- function() {
   # suppress "Listening on..." message and rethrow errors with new context
   try_fetch(
-    suppressMessages(pal_fn <- .pal_app()),
+    suppressMessages(pal_fn_name <- .pal_app()),
     error = function(cnd) {cli::cli_abort(conditionMessage(cnd), call = NULL)}
   )
 
-  if (is.null(pal_fn) || identical(pal_fn, ".pal_rs_")) {
+  if (is.null(pal_fn_name) || identical(pal_fn_name, ".pal_rs_")) {
     return(invisible())
   }
 
   # call the binding associated with the chosen pal
   try_fetch(
-    do.call(env_get(pal_env(), pal_fn), args = list()),
+    pal_fn <- env_get(pal_env(), pal_fn_name),
     error = function(e) {
       cli::cli_abort("Unable to locate the requested pal.")
     }
   )
+
+  do.call(pal_fn, args = list())
 
   invisible()
 }
