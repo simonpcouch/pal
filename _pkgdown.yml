@@ -12,6 +12,7 @@ reference:
     contents:
     - starts_with("prompt")
     - starts_with("directory")
+    - pal_options
   - title: Pals for package development
     contents:
     - pal_roxygen
