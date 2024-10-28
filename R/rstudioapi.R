@@ -21,7 +21,9 @@ rs_replace_selection <- function(context, role) {
   }
 
   # make the format of the "final position" consistent
-  selection <- standardize_selection(selection, context)
+  selection_portions <- standardize_selection(selection, context)
+  selection <- selection_portions$selection
+  selection_remainder <- selection_portions$remainder
   n_lines_orig <- max(selection$range$end[["row"]] - selection$range$start[["row"]], 1)
 
   # fill selection with empty lines
@@ -29,7 +31,7 @@ rs_replace_selection <- function(context, role) {
 
   # start streaming
   tryCatch(
-    stream_selection(selection, context, pal, n_lines_orig),
+    stream_selection(selection, context, pal, n_lines_orig, remainder = selection_remainder),
     error = function(e) {
       rstudioapi::showDialog("Error", paste("The pal ran into an issue: ", e$message))
     }
@@ -44,11 +46,19 @@ standardize_selection <- function(selection, context) {
   }
 
   # ensure that models can fill in characters beyond the current selection's
+  # while also ensuring that characters after the selection in the final
+  # line are preserved (#35)
+  selection_text <- selection[["text"]]
   selection$range$end[["column"]] <- 100000
 
   rstudioapi::setSelectionRanges(selection$range, id = context$id)
+  full_text <- rstudioapi::primary_selection(
+    rstudioapi::getSourceEditorContext(id = context$id)
+  )$text
+  remainder <- gsub(gsub("\n$", "", selection_text), "", full_text, fixed = TRUE)
+  remainder <- gsub("\n", "", remainder, fixed = TRUE)
 
-  selection
+  list(selection = selection, remainder = remainder)
 }
 
 # fill selection with empty lines
@@ -60,7 +70,7 @@ wipe_selection <- function(selection, context) {
   selection
 }
 
-stream_selection <- function(selection, context, pal, n_lines_orig) {
+stream_selection <- function(selection, context, pal, n_lines_orig, remainder) {
   selection_text <- selection[["text"]]
   output_lines <- character(0)
   stream <- pal[[".__enclos_env__"]][["private"]]$.stream(selection_text)
@@ -100,7 +110,7 @@ stream_selection <- function(selection, context, pal, n_lines_orig) {
   # unpadded version to remove unneeded newlines
   rstudioapi::modifyRange(
     selection$range,
-    output_lines,
+    paste0(output_lines, remainder),
     context$id
   )
 
