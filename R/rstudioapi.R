@@ -70,7 +70,7 @@ wipe_selection <- function(selection, context) {
   selection
 }
 
-stream_selection <- function(selection, context, pal, n_lines_orig, remainder) {
+stream_selection <- function(selection, context, pal, n_lines_orig, remainder = "") {
   selection_text <- selection[["text"]]
   output_lines <- character(0)
   stream <- pal[[".__enclos_env__"]][["private"]]$.stream(selection_text)
