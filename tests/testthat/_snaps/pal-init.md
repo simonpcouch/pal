@@ -4,7 +4,7 @@
       .init_pal("cli")
     Message
       
-      -- A cli pal using claude-3-5-sonnet-20240620. 
+      -- A cli pal using claude-3-5-sonnet-latest. 
 
 ---
 
@@ -12,7 +12,7 @@
       .init_pal("testthat")
     Message
       
-      -- A testthat pal using claude-3-5-sonnet-20240620. 
+      -- A testthat pal using claude-3-5-sonnet-latest. 
 
 # can use other models
 
@@ -28,7 +28,7 @@
       .init_pal("cli")
     Message
       
-      -- A cli pal using claude-3-5-sonnet-20240620. 
+      -- A cli pal using claude-3-5-sonnet-latest. 
 
 # errors informatively with bad role
 

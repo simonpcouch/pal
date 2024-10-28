@@ -4,7 +4,7 @@
       pal_boopery
     Message
       
-      -- A boopery pal using claude-3-5-sonnet-20240620. 
+      -- A boopery pal using claude-3-5-sonnet-latest. 
 
 # pal addition with bad inputs
 
