@@ -50,7 +50,16 @@
                               create = FALSE,
                               placeholder = 'Type to filter or select a pal',
                               onDropdownOpen = I("function($dropdown) {this.clear();}"),
-                              onBlur = I("function() {this.clear();}")
+                              onBlur = I("function() {this.clear();}"),
+                              score = I("function(search) {
+                                           return function(item) {
+                                             const text = (item.value || item.text || '').toLowerCase();
+                                             const searchLower = search.toLowerCase();
+                                             if (text.startsWith(searchLower)) return 1;
+                                             if (text.includes(searchLower)) return 0.5;
+                                             return 0;
+                                           };
+                                         }")
                             )
       ),
       shiny::verbatimTextOutput("result"),
