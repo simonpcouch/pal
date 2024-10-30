@@ -1,17 +1,6 @@
 # replace selection with refactored code
 rs_replace_selection <- function(context, role) {
-  # check if pal exists
-  if (exists(paste0(".pal_last_", role))) {
-    pal <- get(paste0(".pal_last_", role))
-  } else {
-    tryCatch(
-      pal <- .init_pal(role),
-      error = function(e) {
-        rstudioapi::showDialog("Error", "Unable to create a pal. See `?.init_pal()`.")
-        return(NULL)
-      }
-    )
-  }
+  pal <- retrieve_pal(role)
 
   selection <- rstudioapi::primary_selection(context)
 
@@ -36,6 +25,22 @@ rs_replace_selection <- function(context, role) {
       rstudioapi::showDialog("Error", paste("The pal ran into an issue: ", e$message))
     }
   )
+}
+
+retrieve_pal <- function(role) {
+  if (exists(paste0(".pal_last_", role))) {
+    pal <- get(paste0(".pal_last_", role))
+  } else {
+    tryCatch(
+      pal <- .init_pal(role),
+      error = function(e) {
+        rstudioapi::showDialog("Error", "Unable to create a pal. See `?.init_pal()`.")
+        return(NULL)
+      }
+    )
+  }
+
+  pal
 }
 
 standardize_selection <- function(selection, context) {
@@ -123,18 +128,7 @@ stream_selection <- function(selection, context, pal, n_lines_orig, remainder = 
 
 # prefix selection with new code -----------------------------------------------
 rs_prefix_selection <- function(context, role) {
-  # check if pal exists
-  if (exists(paste0(".pal_last_", role))) {
-    pal <- get(paste0(".pal_last_", role))
-  } else {
-    tryCatch(
-      pal <- .init_pal(role),
-      error = function(e) {
-        rstudioapi::showDialog("Error", "Unable to create a pal. See `?.init_pal()`.")
-        return(NULL)
-      }
-    )
-  }
+  pal <- retrieve_pal(role)
 
   selection <- rstudioapi::primary_selection(context)
 
@@ -165,18 +159,7 @@ rs_prefix_selection <- function(context, role) {
 
 # suffix selection with new code -----------------------------------------------
 rs_suffix_selection <- function(context, role) {
-  # check if pal exists
-  if (exists(paste0(".pal_last_", role))) {
-    pal <- get(paste0(".pal_last_", role))
-  } else {
-    tryCatch(
-      pal <- .init_pal(role),
-      error = function(e) {
-        rstudioapi::showDialog("Error", "Unable to create a pal. See `?.init_pal()`.")
-        return(NULL)
-      }
-    )
-  }
+  pal <- retrieve_pal(role)
 
   selection <- rstudioapi::primary_selection(context)
 
