@@ -75,11 +75,6 @@ parse_interface <- function(interface, role, call = caller_env()) {
     )
   }
 
-  if (interface == "suffix") {
-    # TODO: implement suffixing
-    cli::cli_abort("Suffixing not implemented yet.", call = call)
-  }
-
   .stash_binding(
     role,
     function(context = rstudioapi::getActiveDocumentContext()) {

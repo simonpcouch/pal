@@ -25,14 +25,6 @@
 ---
 
     Code
-      .pal_add(role = "sillyhead", prompt = "hey", interface = "suffix")
-    Condition
-      Error in `.pal_add()`:
-      ! Suffixing not implemented yet.
-
----
-
-    Code
       .pal_add(role = "sillyhead", prompt = "hey", interface = NULL)
     Condition
       Error in `.pal_add()`:

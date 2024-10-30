@@ -35,10 +35,6 @@ test_that("pal addition with bad inputs", {
   )
   expect_snapshot(
     error = TRUE,
-    .pal_add(role = "sillyhead", prompt = "hey", interface = "suffix")
-  )
-  expect_snapshot(
-    error = TRUE,
     .pal_add(role = "sillyhead", prompt = "hey", interface = NULL)
   )
 })

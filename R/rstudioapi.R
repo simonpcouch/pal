@@ -163,3 +163,45 @@ rs_prefix_selection <- function(context, role) {
   )
 }
 
+# suffix selection with new code -----------------------------------------------
+rs_suffix_selection <- function(context, role) {
+  # check if pal exists
+  if (exists(paste0(".pal_last_", role))) {
+    pal <- get(paste0(".pal_last_", role))
+  } else {
+    tryCatch(
+      pal <- .init_pal(role),
+      error = function(e) {
+        rstudioapi::showDialog("Error", "Unable to create a pal. See `?.init_pal()`.")
+        return(NULL)
+      }
+    )
+  }
+
+  selection <- rstudioapi::primary_selection(context)
+
+  if (selection[["text"]] == "") {
+    rstudioapi::showDialog("Error", "No code selected. Please highlight some code first.")
+    return(NULL)
+  }
+
+  # add one blank line after the selection
+  rstudioapi::modifyRange(selection$range, paste0(selection[["text"]], "\n"), context$id)
+
+  # make the "current selection" that blank line
+  last_line <- selection$range
+  last_line$start[["row"]] <- selection$range$end[["row"]] + 1
+  last_line$end[["row"]] <- selection$range$end[["row"]] + 1
+  last_line$start[["column"]] <- 1
+  last_line$end[["column"]] <- 100000
+  selection$range <- last_line
+  rstudioapi::setCursorPosition(selection$range$start)
+
+  # start streaming into it--will be interactively appended to if need be
+  tryCatch(
+    stream_selection(selection, context, pal, n_lines_orig = 1),
+    error = function(e) {
+      rstudioapi::showDialog("Error", paste("The pal ran into an issue: ", e$message))
+    }
+  )
+}
