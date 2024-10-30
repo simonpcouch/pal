@@ -47,6 +47,10 @@ and delete the prompts in pal's prompt directory."><meta property="og:image" con
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="nav-item"><a class="nav-link" href="../articles/pal.html">Get started</a></li>
 <li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/custom.html">Custom pals</a></li>
+  </ul></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
 <li class="nav-item"><a class="external-link nav-link" href="https://github.com/simonpcouch/pal/" aria-label="GitHub"><span class="fa fab fa-github fa-lg"></span></a></li>
@@ -124,6 +128,12 @@ prompts in <code>directory_path()</code>. To change the prompt directory without
 loading the package, just set the <code>.pal_dir</code> option with
 <code>options(.pal_dir = some_dir)</code>. To load a directory of files that's not
 the prompt directory, provide a <code>dir</code> argument to <code>directory_load()</code>.</p>
+    </div>
+    <div class="section level2">
+    <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
+    <div class="dont-index"><p>The "Custom pals" vignette, at <code><a href="../articles/custom.html">vignette("custom", package = "pal")</a></code>,
+for more on adding your own pal prompts, sharing them with others, and
+using prompts from others.</p></div>
     </div>
 
     <div class="section level2">

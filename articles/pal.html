@@ -37,6 +37,12 @@
       <ul class="navbar-nav me-auto">
 <li class="active nav-item"><a class="nav-link" href="../articles/pal.html">Get started</a></li>
 <li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
+<li class="nav-item dropdown">
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/custom.html">Custom pals</a></li>
+  </ul>
+</li>
       </ul>
 <ul class="navbar-nav">
 <li class="nav-item"><form class="form-inline" role="search">
@@ -69,12 +75,12 @@ complete repetitive, hard-to-automate tasks quickly.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://github.com/simonpcouch/pal" class="external-link">pal</a></span><span class="op">)</span></span></code></pre></div>
 <p>The pal package ships with a number of pre-engineered “roles.” A pal
-role is a descriptor that succinctly describes what the pal is intended
-to do and serves as an identifier to match the pal with its
-<em>prompt</em> and <em>interface</em>. A pal’s prompt is just a
-markdown file with enough context and examples to teach a model to carry
-out a given task well. A pal’s interface determines whether it replaces,
-prefixes, or suffixes the selected code. For example:</p>
+role is a keyword that succinctly describes what the pal is intended to
+do and serves as an identifier to match the pal with its <em>prompt</em>
+and <em>interface</em>. A pal’s prompt is just a markdown file with
+enough context and examples to teach a model to carry out a given task
+well. A pal’s interface determines whether it replaces, prefixes, or
+suffixes the selected code. For example:</p>
 <ul>
 <li>The <code>"testthat"</code> pal helps you transition your R
 package’s unit tests to the third edition of testthat. Its prompt shows
@@ -173,38 +179,12 @@ keyboard shortcut.</p>
 </h2>
 <p>While the pal package comes with three pals for package development,
 one can use pals for all sorts of coding tasks in R, from interactive
-data analysis to authoring with Quarto, or even for pieces of code in
+data analysis to authoring with Quarto, or even for coding tasks in
 languages other than R! All you need to set up your own pal is a
 markdown file.</p>
-<p>The pal package looks for custom prompts in the “prompt directory”,
-which can be located with <code><a href="../reference/directory.html">directory_path()</a></code> and defaults to
-<code>~/.config/pal</code>. Prompts are markdown files (likely created
-with <code><a href="../reference/prompt.html">prompt_new()</a></code>) that live in the prompt directory with a
-name like <code>role-interface.md</code>. A prompt directory might look
-like:</p>
-<pre><code>/
-├── .config/
-│   └── pal/
-│       ├── proofread-replace.md
-│       └── summarize-prefix.md</code></pre>
-<p>In that case, pal will register two custom pals when you call
-<code><a href="https://github.com/simonpcouch/pal" class="external-link">library(pal)</a></code> (or <code><a href="../reference/directory.html">directory_load()</a></code>. One of them
-has the role <code>"proofread"</code> and will replace the selected text
-with a proofread version (according to the instructions contained in the
-markdown file itself). The other has the role <code>"summarize"</code>
-and will prefix the selected text with a summarized version (again,
-according to the markdown file’s instructions). Note:</p>
-<ul>
-<li>Files without a <code>.md</code> extension are ignored.</li>
-<li>Files with a <code>.md</code> extension must contain only one hyphen
-in their filename, and the text following the hyphen must be one of
-<code>replace</code>, <code>prefix</code>, or <code>suffix</code>.</li>
-</ul>
-<p>Custom pals can also be situated in R package. See <a href="https://github.com/simonpcouch/palpable" class="external-link">palpable</a> for an
-example pal extension package.</p>
-<p>For more in-depth documentation on adding custom pals, see the
-documentation for <code><a href="../reference/prompt.html">prompt_new()</a></code> and friends as well as
-<code><a href="../reference/directory.html">directory_load()</a></code> and friends.</p>
+<p>To learn more about adding custom pals as well as how to share them
+with others, see the <a href="custom.html">“Custom pals” vignette</a>
+with <code><a href="../articles/custom.html">vignette("custom", package = "pal")</a></code>.</p>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
