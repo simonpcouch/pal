@@ -1,4 +1,4 @@
-# replace selection with refactored code
+# replace selection with refactored code ---------------------------------------
 rs_replace_selection <- function(context, role) {
   pal <- retrieve_pal(role)
   selection <- get_primary_selection(context)
@@ -16,6 +16,48 @@ rs_replace_selection <- function(context, role) {
   stream_selection(selection, context, pal, n_lines_orig, selection_remainder)
 }
 
+# prefix selection with new code -----------------------------------------------
+rs_prefix_selection <- function(context, role) {
+  pal <- retrieve_pal(role)
+  selection <- get_primary_selection(context)
+
+  # add one blank line before the selection
+  rstudioapi::modifyRange(selection$range, paste0("\n", selection[["text"]]), context$id)
+
+  # make the "current selection" that blank line
+  first_line <- selection$range
+  first_line$start[["column"]] <- 1
+  first_line$end[["row"]] <- selection$range$start[["row"]]
+  first_line$end[["column"]] <- 100000
+  selection$range <- first_line
+  rstudioapi::setCursorPosition(selection$range$start)
+
+  # start streaming into it--will be interactively appended to if need be
+  stream_selection(selection, context, pal, n_lines_orig = 1)
+}
+
+# suffix selection with new code -----------------------------------------------
+rs_suffix_selection <- function(context, role) {
+  pal <- retrieve_pal(role)
+  selection <- get_primary_selection(context)
+
+  # add one blank line after the selection
+  rstudioapi::modifyRange(selection$range, paste0(selection[["text"]], "\n"), context$id)
+
+  # make the "current selection" that blank line
+  last_line <- selection$range
+  last_line$start[["row"]] <- selection$range$end[["row"]] + 1
+  last_line$end[["row"]] <- selection$range$end[["row"]] + 1
+  last_line$start[["column"]] <- 1
+  last_line$end[["column"]] <- 100000
+  selection$range <- last_line
+  rstudioapi::setCursorPosition(selection$range$start)
+
+  # start streaming into it--will be interactively appended to if need be
+  stream_selection(selection, context, pal, n_lines_orig = 1)
+}
+
+# helpers ----------------------------------------------------------------------
 retrieve_pal <- function(role) {
   if (exists(paste0(".pal_last_", role))) {
     pal <- get(paste0(".pal_last_", role))
@@ -140,45 +182,4 @@ stream_selection_impl <- function(selection, context, pal, n_lines_orig, remaind
   rstudioapi::executeCommand("reindent")
 
   rstudioapi::setCursorPosition(selection$range$start)
-}
-
-# prefix selection with new code -----------------------------------------------
-rs_prefix_selection <- function(context, role) {
-  pal <- retrieve_pal(role)
-  selection <- get_primary_selection(context)
-
-  # add one blank line before the selection
-  rstudioapi::modifyRange(selection$range, paste0("\n", selection[["text"]]), context$id)
-
-  # make the "current selection" that blank line
-  first_line <- selection$range
-  first_line$start[["column"]] <- 1
-  first_line$end[["row"]] <- selection$range$start[["row"]]
-  first_line$end[["column"]] <- 100000
-  selection$range <- first_line
-  rstudioapi::setCursorPosition(selection$range$start)
-
-  # start streaming into it--will be interactively appended to if need be
-  stream_selection(selection, context, pal, n_lines_orig = 1)
-}
-
-# suffix selection with new code -----------------------------------------------
-rs_suffix_selection <- function(context, role) {
-  pal <- retrieve_pal(role)
-  selection <- get_primary_selection(context)
-
-  # add one blank line after the selection
-  rstudioapi::modifyRange(selection$range, paste0(selection[["text"]], "\n"), context$id)
-
-  # make the "current selection" that blank line
-  last_line <- selection$range
-  last_line$start[["row"]] <- selection$range$end[["row"]] + 1
-  last_line$end[["row"]] <- selection$range$end[["row"]] + 1
-  last_line$start[["column"]] <- 1
-  last_line$end[["column"]] <- 100000
-  selection$range <- last_line
-  rstudioapi::setCursorPosition(selection$range$start)
-
-  # start streaming into it--will be interactively appended to if need be
-  stream_selection(selection, context, pal, n_lines_orig = 1)
 }
