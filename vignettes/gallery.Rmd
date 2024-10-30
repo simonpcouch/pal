@@ -11,7 +11,7 @@ vignette: >
 
 ```{r}
 #| echo: false
-#| eval: !expr rlang::is_installed(c("commonmark", "DT", "tibble"))
+#| eval: !expr rlang::is_installed(c("gt", "tibble"))
 # Contributors: to add your pal to this table, add one row per pal in the
 # following `tribble()` call. If you've authored a pal extension that includes
 # multiple pals, include a row for each pal.
@@ -26,8 +26,11 @@ gallery <-
     "[Always reply 'beep bop boop'](https://github.com/simonpcouch/palpable)", "boop", "replace", "Simon Couch", "pak::pak(\"simonpcouch/palpable\"); library(palpable)"
   ) 
 
-gallery$description <- sapply(gallery$description, commonmark::markdown_html)
-gallery$`Use it via...` <- paste0("<code>", gallery$`Use it via...`, "</code>")
+gallery$`Use it via...` <- paste0("`", gallery$`Use it via...`, "`")
 
-DT::datatable(gallery, escape = FALSE)
+library(gt)
+
+gt(gallery) %>%
+  fmt_markdown(c(Description, `Use it via...`)) %>%
+  opt_interactive(use_search = TRUE)
 ```

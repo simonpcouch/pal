@@ -27,8 +27,7 @@ Imports:
     rstudioapi,
     shiny
 Suggests: 
-    commonmark,
-    DT,
+    gt,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
