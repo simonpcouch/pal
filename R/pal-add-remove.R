@@ -14,7 +14,6 @@
 #' Cand only contain letters and numbers.
 #' @param prompt A single string giving the system prompt. In most cases, this
 #' is a rather long string, containing several newlines.
-# TODO: only add prefix when not supplied one
 #' @param interface One of `"replace"`, `"prefix"`, or `"suffix"`, describing
 #' how the pal will interact with the selection. For example, the
 #' [cli pal][pal_cli] `"replace"`s the selection, while the

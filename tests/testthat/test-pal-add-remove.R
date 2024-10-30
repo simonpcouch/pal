@@ -29,9 +29,6 @@ test_that("pal addition with bad inputs", {
     .pal_add(role = identity, prompt = "hey")
   )
 
-  # TODO: decide on `prompt` interface and test
-
-
   expect_snapshot(
     error = TRUE,
     .pal_add(role = "sillyhead", prompt = "hey", interface = "no")

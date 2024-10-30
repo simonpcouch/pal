@@ -19,8 +19,6 @@
 #'
 #' @section Cost:
 #'
-# TODO: make this a template that takes in the token counts and prices as input
-#'
 #' The system prompt from a pal includes something like 4,000 tokens.
 #' Add in (a generous) 100 tokens for the code that's actually highlighted
 #' and also sent off to the model and you're looking at 4,100 input tokens.

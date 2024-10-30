@@ -188,7 +188,3 @@ filter_interfaces <- function(x) {
 
   x[recognized]
 }
-
-
-# TODO: make a test directory in tests/testthat that can be relied on
-# for consistent output
