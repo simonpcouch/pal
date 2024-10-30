@@ -13,12 +13,7 @@ rs_replace_selection <- function(context, role) {
   selection <- wipe_selection(selection, context)
 
   # start streaming
-  tryCatch(
-    stream_selection(selection, context, pal, n_lines_orig, remainder = selection_remainder),
-    error = function(e) {
-      rstudioapi::showDialog("Error", paste("The pal ran into an issue: ", e$message))
-    }
-  )
+  stream_selection(selection, context, pal, n_lines_orig, selection_remainder)
 }
 
 retrieve_pal <- function(role) {
@@ -80,7 +75,23 @@ wipe_selection <- function(selection, context) {
   selection
 }
 
+
 stream_selection <- function(selection, context, pal, n_lines_orig, remainder = "") {
+  tryCatch(
+    stream_selection_impl(
+      selection = selection,
+      context = context,
+      pal = pal,
+      n_lines_orig = n_lines_orig,
+      remainder = remainder
+    ),
+    error = function(e) {
+      rstudioapi::showDialog("Error", paste("The pal ran into an issue: ", e$message))
+    }
+  )
+}
+
+stream_selection_impl <- function(selection, context, pal, n_lines_orig, remainder = "") {
   selection_text <- selection[["text"]]
   output_lines <- character(0)
   stream <- pal[[".__enclos_env__"]][["private"]]$.stream(selection_text)
@@ -148,12 +159,7 @@ rs_prefix_selection <- function(context, role) {
   rstudioapi::setCursorPosition(selection$range$start)
 
   # start streaming into it--will be interactively appended to if need be
-  tryCatch(
-    stream_selection(selection, context, pal, n_lines_orig = 1),
-    error = function(e) {
-      rstudioapi::showDialog("Error", paste("The pal ran into an issue: ", e$message))
-    }
-  )
+  stream_selection(selection, context, pal, n_lines_orig = 1)
 }
 
 # suffix selection with new code -----------------------------------------------
@@ -174,10 +180,5 @@ rs_suffix_selection <- function(context, role) {
   rstudioapi::setCursorPosition(selection$range$start)
 
   # start streaming into it--will be interactively appended to if need be
-  tryCatch(
-    stream_selection(selection, context, pal, n_lines_orig = 1),
-    error = function(e) {
-      rstudioapi::showDialog("Error", paste("The pal ran into an issue: ", e$message))
-    }
-  )
+  stream_selection(selection, context, pal, n_lines_orig = 1)
 }
