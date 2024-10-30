@@ -1,13 +1,7 @@
 # replace selection with refactored code
 rs_replace_selection <- function(context, role) {
   pal <- retrieve_pal(role)
-
-  selection <- rstudioapi::primary_selection(context)
-
-  if (selection[["text"]] == "") {
-    rstudioapi::showDialog("Error", "No code selected. Please highlight some code first.")
-    return(NULL)
-  }
+  selection <- get_primary_selection(context)
 
   # make the format of the "final position" consistent
   selection_portions <- standardize_selection(selection, context)
@@ -41,6 +35,17 @@ retrieve_pal <- function(role) {
   }
 
   pal
+}
+
+get_primary_selection <- function(context) {
+  selection <- rstudioapi::primary_selection(context)
+
+  if (selection[["text"]] == "") {
+    rstudioapi::showDialog("Error", "No code selected. Please highlight some code first.")
+    return(NULL)
+  }
+
+  selection
 }
 
 standardize_selection <- function(selection, context) {
@@ -129,13 +134,7 @@ stream_selection <- function(selection, context, pal, n_lines_orig, remainder = 
 # prefix selection with new code -----------------------------------------------
 rs_prefix_selection <- function(context, role) {
   pal <- retrieve_pal(role)
-
-  selection <- rstudioapi::primary_selection(context)
-
-  if (selection[["text"]] == "") {
-    rstudioapi::showDialog("Error", "No code selected. Please highlight some code first.")
-    return(NULL)
-  }
+  selection <- get_primary_selection(context)
 
   # add one blank line before the selection
   rstudioapi::modifyRange(selection$range, paste0("\n", selection[["text"]]), context$id)
@@ -160,13 +159,7 @@ rs_prefix_selection <- function(context, role) {
 # suffix selection with new code -----------------------------------------------
 rs_suffix_selection <- function(context, role) {
   pal <- retrieve_pal(role)
-
-  selection <- rstudioapi::primary_selection(context)
-
-  if (selection[["text"]] == "") {
-    rstudioapi::showDialog("Error", "No code selected. Please highlight some code first.")
-    return(NULL)
-  }
+  selection <- get_primary_selection(context)
 
   # add one blank line after the selection
   rstudioapi::modifyRange(selection$range, paste0(selection[["text"]], "\n"), context$id)
