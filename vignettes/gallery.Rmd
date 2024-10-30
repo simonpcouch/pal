@@ -17,16 +17,17 @@ vignette: >
 # multiple pals, include a row for each pal.
 gallery <- 
   tibble::tribble(
-    ~description, ~role, ~interface,  ~type, 
-    "[Convert erroring code to use cli](https://simonpcouch.github.io/pal/reference/pal_cli.html)", "cli", "replace", "built-in",
-    "[Convert unit tests to testthat 3e](https://simonpcouch.github.io/pal/reference/pal_testthat.html)", "testthat", "replace", "built-in",
-    "[Template function documentation with roxygen](https://simonpcouch.github.io/pal/reference/pal_roxygen.html)", "roxygen", "prefix", "built-in",
-    "[Transition to Quarto-style chunk headers](https://gist.githubusercontent.com/hfrick/1ca8fc2cb2a4409b743e8120c6cc2223/raw/a9703edfbd4e83839af0278c33add1b33e243d02/quartochunk-replace.md)", "quartochunk", "replace", "markdown",
+    ~Description, ~Role, ~Interface, ~Author, ~`Use it via...`,
+    "[Convert erroring code to use cli](https://simonpcouch.github.io/pal/reference/pal_cli.html)", "cli", "replace", "Simon Couch", "library(pal)",
+    "[Convert unit tests to testthat 3e](https://simonpcouch.github.io/pal/reference/pal_testthat.html)", "testthat", "replace", "Simon Couch", "library(pal)",
+    "[Template function documentation with roxygen](https://simonpcouch.github.io/pal/reference/pal_roxygen.html)", "roxygen", "prefix", "Simon Couch", "library(pal)",
+    "[Transition to Quarto-style chunk headers](https://gist.github.com/hfrick/1ca8fc2cb2a4409b743e8120c6cc2223)", "quartochunk", "replace", "Hannah Frick", "prompt_new(\"quartochunk\", \"replace\", \"https://gist.githubusercontent.com/hfrick/1ca8fc2cb2a4409b743e8120c6cc2223/raw/a9703edfbd4e83839af0278c33add1b33e243d02/quartochunk-replace.md\")",
     # silly example to be removed once there are other pal extension pkgs
-    "[Always reply 'beep bop boop'](https://github.com/simonpcouch/palpable)", "boop", "replace", "extension"
+    "[Always reply 'beep bop boop'](https://github.com/simonpcouch/palpable)", "boop", "replace", "Simon Couch", "pak::pak(\"simonpcouch/palpable\"); library(palpable)"
   ) 
 
 gallery$description <- sapply(gallery$description, commonmark::markdown_html)
+gallery$`Use it via...` <- paste0("<code>", gallery$`Use it via...`, "</code>")
 
 DT::datatable(gallery, escape = FALSE)
 ```
