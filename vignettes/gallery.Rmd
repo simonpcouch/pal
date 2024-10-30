@@ -1,0 +1,32 @@
+---
+title: "Gallery"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Gallery}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+<br><br>
+
+```{r}
+#| echo: false
+#| eval: !expr rlang::is_installed(c("commonmark", "DT", "tibble"))
+# Contributors: to add your pal to this table, add one row per pal in the
+# following `tribble()` call. If you've authored a pal extension that includes
+# multiple pals, include a row for each pal.
+gallery <- 
+  tibble::tribble(
+    ~description, ~role, ~interface,  ~type, 
+    "[Convert erroring code to use cli](https://simonpcouch.github.io/pal/reference/pal_cli.html)", "cli", "replace", "built-in",
+    "[Convert unit tests to testthat 3e](https://simonpcouch.github.io/pal/reference/pal_testthat.html)", "testthat", "replace", "built-in",
+    "[Template function documentation with roxygen](https://simonpcouch.github.io/pal/reference/pal_roxygen.html)", "roxygen", "prefix", "built-in",
+    "[Transition to Quarto-style chunk headers](https://gist.githubusercontent.com/hfrick/1ca8fc2cb2a4409b743e8120c6cc2223/raw/a9703edfbd4e83839af0278c33add1b33e243d02/quartochunk-replace.md)", "quartochunk", "replace", "markdown",
+    # silly example to be removed once there are other pal extension pkgs
+    "[Always reply 'beep bop boop'](https://github.com/simonpcouch/palpable)", "boop", "replace", "extension"
+  ) 
+
+gallery$description <- sapply(gallery$description, commonmark::markdown_html)
+
+DT::datatable(gallery, escape = FALSE)
+```
