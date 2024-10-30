@@ -1,6 +1,64 @@
-# replace selection with refactored code
+# replace selection with refactored code ---------------------------------------
 rs_replace_selection <- function(context, role) {
-  # check if pal exists
+  pal <- retrieve_pal(role)
+  selection <- get_primary_selection(context)
+
+  # make the format of the "final position" consistent
+  selection_portions <- standardize_selection(selection, context)
+  selection <- selection_portions$selection
+  selection_remainder <- selection_portions$remainder
+  n_lines_orig <- max(selection$range$end[["row"]] - selection$range$start[["row"]], 1)
+
+  # fill selection with empty lines
+  selection <- wipe_selection(selection, context)
+
+  # start streaming
+  stream_selection(selection, context, pal, n_lines_orig, selection_remainder)
+}
+
+# prefix selection with new code -----------------------------------------------
+rs_prefix_selection <- function(context, role) {
+  pal <- retrieve_pal(role)
+  selection <- get_primary_selection(context)
+
+  # add one blank line before the selection
+  rstudioapi::modifyRange(selection$range, paste0("\n", selection[["text"]]), context$id)
+
+  # make the "current selection" that blank line
+  first_line <- selection$range
+  first_line$start[["column"]] <- 1
+  first_line$end[["row"]] <- selection$range$start[["row"]]
+  first_line$end[["column"]] <- 100000
+  selection$range <- first_line
+  rstudioapi::setCursorPosition(selection$range$start)
+
+  # start streaming into it--will be interactively appended to if need be
+  stream_selection(selection, context, pal, n_lines_orig = 1)
+}
+
+# suffix selection with new code -----------------------------------------------
+rs_suffix_selection <- function(context, role) {
+  pal <- retrieve_pal(role)
+  selection <- get_primary_selection(context)
+
+  # add one blank line after the selection
+  rstudioapi::modifyRange(selection$range, paste0(selection[["text"]], "\n"), context$id)
+
+  # make the "current selection" that blank line
+  last_line <- selection$range
+  last_line$start[["row"]] <- selection$range$end[["row"]] + 1
+  last_line$end[["row"]] <- selection$range$end[["row"]] + 1
+  last_line$start[["column"]] <- 1
+  last_line$end[["column"]] <- 100000
+  selection$range <- last_line
+  rstudioapi::setCursorPosition(selection$range$start)
+
+  # start streaming into it--will be interactively appended to if need be
+  stream_selection(selection, context, pal, n_lines_orig = 1)
+}
+
+# helpers ----------------------------------------------------------------------
+retrieve_pal <- function(role) {
   if (exists(paste0(".pal_last_", role))) {
     pal <- get(paste0(".pal_last_", role))
   } else {
@@ -13,6 +71,10 @@ rs_replace_selection <- function(context, role) {
     )
   }
 
+  pal
+}
+
+get_primary_selection <- function(context) {
   selection <- rstudioapi::primary_selection(context)
 
   if (selection[["text"]] == "") {
@@ -20,22 +82,7 @@ rs_replace_selection <- function(context, role) {
     return(NULL)
   }
 
-  # make the format of the "final position" consistent
-  selection_portions <- standardize_selection(selection, context)
-  selection <- selection_portions$selection
-  selection_remainder <- selection_portions$remainder
-  n_lines_orig <- max(selection$range$end[["row"]] - selection$range$start[["row"]], 1)
-
-  # fill selection with empty lines
-  selection <- wipe_selection(selection, context)
-
-  # start streaming
-  tryCatch(
-    stream_selection(selection, context, pal, n_lines_orig, remainder = selection_remainder),
-    error = function(e) {
-      rstudioapi::showDialog("Error", paste("The pal ran into an issue: ", e$message))
-    }
-  )
+  selection
 }
 
 standardize_selection <- function(selection, context) {
@@ -70,7 +117,23 @@ wipe_selection <- function(selection, context) {
   selection
 }
 
+
 stream_selection <- function(selection, context, pal, n_lines_orig, remainder = "") {
+  tryCatch(
+    stream_selection_impl(
+      selection = selection,
+      context = context,
+      pal = pal,
+      n_lines_orig = n_lines_orig,
+      remainder = remainder
+    ),
+    error = function(e) {
+      rstudioapi::showDialog("Error", paste("The pal ran into an issue: ", e$message))
+    }
+  )
+}
+
+stream_selection_impl <- function(selection, context, pal, n_lines_orig, remainder = "") {
   selection_text <- selection[["text"]]
   output_lines <- character(0)
   stream <- pal[[".__enclos_env__"]][["private"]]$.stream(selection_text)
@@ -119,89 +182,4 @@ stream_selection <- function(selection, context, pal, n_lines_orig, remainder = 
   rstudioapi::executeCommand("reindent")
 
   rstudioapi::setCursorPosition(selection$range$start)
-}
-
-# prefix selection with new code -----------------------------------------------
-rs_prefix_selection <- function(context, role) {
-  # check if pal exists
-  if (exists(paste0(".pal_last_", role))) {
-    pal <- get(paste0(".pal_last_", role))
-  } else {
-    tryCatch(
-      pal <- .init_pal(role),
-      error = function(e) {
-        rstudioapi::showDialog("Error", "Unable to create a pal. See `?.init_pal()`.")
-        return(NULL)
-      }
-    )
-  }
-
-  selection <- rstudioapi::primary_selection(context)
-
-  if (selection[["text"]] == "") {
-    rstudioapi::showDialog("Error", "No code selected. Please highlight some code first.")
-    return(NULL)
-  }
-
-  # add one blank line before the selection
-  rstudioapi::modifyRange(selection$range, paste0("\n", selection[["text"]]), context$id)
-
-  # make the "current selection" that blank line
-  first_line <- selection$range
-  first_line$start[["column"]] <- 1
-  first_line$end[["row"]] <- selection$range$start[["row"]]
-  first_line$end[["column"]] <- 100000
-  selection$range <- first_line
-  rstudioapi::setCursorPosition(selection$range$start)
-
-  # start streaming into it--will be interactively appended to if need be
-  tryCatch(
-    stream_selection(selection, context, pal, n_lines_orig = 1),
-    error = function(e) {
-      rstudioapi::showDialog("Error", paste("The pal ran into an issue: ", e$message))
-    }
-  )
-}
-
-# suffix selection with new code -----------------------------------------------
-rs_suffix_selection <- function(context, role) {
-  # check if pal exists
-  if (exists(paste0(".pal_last_", role))) {
-    pal <- get(paste0(".pal_last_", role))
-  } else {
-    tryCatch(
-      pal <- .init_pal(role),
-      error = function(e) {
-        rstudioapi::showDialog("Error", "Unable to create a pal. See `?.init_pal()`.")
-        return(NULL)
-      }
-    )
-  }
-
-  selection <- rstudioapi::primary_selection(context)
-
-  if (selection[["text"]] == "") {
-    rstudioapi::showDialog("Error", "No code selected. Please highlight some code first.")
-    return(NULL)
-  }
-
-  # add one blank line after the selection
-  rstudioapi::modifyRange(selection$range, paste0(selection[["text"]], "\n"), context$id)
-
-  # make the "current selection" that blank line
-  last_line <- selection$range
-  last_line$start[["row"]] <- selection$range$end[["row"]] + 1
-  last_line$end[["row"]] <- selection$range$end[["row"]] + 1
-  last_line$start[["column"]] <- 1
-  last_line$end[["column"]] <- 100000
-  selection$range <- last_line
-  rstudioapi::setCursorPosition(selection$range$start)
-
-  # start streaming into it--will be interactively appended to if need be
-  tryCatch(
-    stream_selection(selection, context, pal, n_lines_orig = 1),
-    error = function(e) {
-      rstudioapi::showDialog("Error", paste("The pal ran into an issue: ", e$message))
-    }
-  )
 }
