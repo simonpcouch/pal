@@ -83,6 +83,10 @@ development:
 - `"roxygen"`: [Document functions with
   roxygen](https://simonpcouch.github.io/pal/reference/pal_roxygen.html)
 
+Users have also contributed a number of pals for a wide range of
+tasks–see `vignette("gallery", package = "pal")` for a gallery of
+user-contributed pals!
+
 That said, all you need to create your own pal is a markdown file with
 some instructions on how you’d like it to work. See `prompt_new()` and
 `directory_load()` for more information, and

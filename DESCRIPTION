@@ -27,9 +27,11 @@ Imports:
     rstudioapi,
     shiny
 Suggests: 
+    gt,
     knitr,
     rmarkdown,
     testthat (>= 3.0.0),
+    tibble,
     withr
 Remotes:
     hadley/elmer
