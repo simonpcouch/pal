@@ -25,7 +25,8 @@
 #' URL to a GitHub Gist or file in a GitHub repository, etc.
 #'
 #' @seealso The [directory] help-page for more on working with prompts in
-#' batch using `directory_*()` functions.
+#' batch using `directory_*()` functions, and `vignette("custom", package = "pal")`
+#' for more on sharing pal prompts and using prompts from others.
 #'
 #' @returns
 #' Each `prompt_*()` function returns the file path to the created, edited, or

@@ -95,3 +95,8 @@ directory_set("some/folder")
 options(.pal_dir = "some/folder")
 \dontshow{\}) # examplesIf}
 }
+\seealso{
+The "Custom pals" vignette, at \code{vignette("custom", package = "pal")},
+for more on adding your own pal prompts, sharing them with others, and
+using prompts from others.
+}

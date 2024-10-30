@@ -53,6 +53,10 @@
 #' the prompt directory, provide a `dir` argument to `directory_load()`.
 #' @name directory
 #'
+#' @seealso The "Custom pals" vignette, at `vignette("custom", package = "pal")`,
+#' for more on adding your own pal prompts, sharing them with others, and
+#' using prompts from others.
+#'
 #' @examplesIf FALSE
 #' # print out the current prompt directory
 #' directory_get()

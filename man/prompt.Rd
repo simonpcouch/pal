@@ -89,5 +89,6 @@ prompt_new(
 }
 \seealso{
 The \link{directory} help-page for more on working with prompts in
-batch using \verb{directory_*()} functions.
+batch using \verb{directory_*()} functions, and \code{vignette("custom", package = "pal")}
+for more on sharing pal prompts and using prompts from others.
 }

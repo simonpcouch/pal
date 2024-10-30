@@ -13,7 +13,7 @@ Pals are persistent, ergonomic LLM assistants designed to help you complete repe
 library(pal)
 ```
 
-The pal package ships with a number of pre-engineered "roles." A pal role is a descriptor that succinctly describes what the pal is intended to do and serves as an identifier to match the pal with its _prompt_ and _interface_. A pal's prompt is just a markdown file with enough context and examples to teach a model to carry out a given task well. A pal's interface determines whether it replaces, prefixes, or suffixes the selected code. For example:
+The pal package ships with a number of pre-engineered "roles." A pal role is a keyword that succinctly describes what the pal is intended to do and serves as an identifier to match the pal with its _prompt_ and _interface_. A pal's prompt is just a markdown file with enough context and examples to teach a model to carry out a given task well. A pal's interface determines whether it replaces, prefixes, or suffixes the selected code. For example:
 
 * The `"testthat"` pal helps you transition your R package's unit tests to the third edition of testthat. Its prompt shows the model how to convert to snapshot tests, disentangle nested expectations, and transition from deprecated functions. It replaces the selected code.
 * The `"roxygen"` pal helps you quickly template out royxgen documentation for a function. Its prompt shows the model how to write high-quality stub `@param` and `@returns` entries that can be later extended by the developer. It prefixes the selected code.
@@ -87,23 +87,6 @@ Once those steps are completed, you're ready to use pals with a keyboard shortcu
 
 ## Adding custom pals
 
-While the pal package comes with three pals for package development, one can use pals for all sorts of coding tasks in R, from interactive data analysis to authoring with Quarto, or even for pieces of code in languages other than R! All you need to set up your own pal is a markdown file.
+While the pal package comes with three pals for package development, one can use pals for all sorts of coding tasks in R, from interactive data analysis to authoring with Quarto, or even for coding tasks in languages other than R! All you need to set up your own pal is a markdown file.
 
-The pal package looks for custom prompts in the "prompt directory", which can be located with `directory_path()` and defaults to `~/.config/pal`. Prompts are markdown files (likely created with `prompt_new()`) that live in the prompt directory with a name like `role-interface.md`. A prompt directory might look like:
-
-```
-/
-├── .config/
-│   └── pal/
-│       ├── proofread-replace.md
-│       └── summarize-prefix.md
-```
-
-In that case, pal will register two custom pals when you call `library(pal)` (or `directory_load()`. One of them has the role `"proofread"` and will replace the selected text with a proofread version (according to the instructions contained in the markdown file itself). The other has the role `"summarize"` and will prefix the selected text with a summarized version (again, according to the markdown file's instructions). Note:
-
-* Files without a `.md` extension are ignored.
-* Files with a `.md` extension must contain only one hyphen in their filename, and the text following the hyphen must be one of `replace`, `prefix`, or `suffix`.
-
-Custom pals can also be situated in R package. See [palpable](https://github.com/simonpcouch/palpable) for an example pal extension package.
-
-For more in-depth documentation on adding custom pals, see the documentation for `prompt_new()` and friends as well as `directory_load()` and friends.
+To learn more about adding custom pals as well as how to share them with others, see the ["Custom pals" vignette](custom.html) with `vignette("custom", package = "pal")`.
