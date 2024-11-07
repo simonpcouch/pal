@@ -84,6 +84,20 @@ test_that("new prompts can be pre-filled with contents", {
   expect_true(grepl("Given some text", lines))
 })
 
+test_that("new prompts are pre-filled with a template by default (#57)", {
+  skip_if_offline()
+  # contains two prompts, `boop-replace` and `wop-prefix`
+  withr::local_options(.pal_dir = "test-prompt-dir")
+  testthat::local_mocked_bindings(interactive = function(...) {FALSE})
+  withr::defer(prompt_remove("template"))
+
+  path <- prompt_new("template", "prefix")
+
+  lines <- base::readLines(path)
+
+  expect_equal(lines[1], "# Template pal")
+})
+
 test_that("new prompts error informatively with bad pre-fill contents", {
   skip_if_offline()
   # contains two prompts, `boop-replace` and `wop-prefix`

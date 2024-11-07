@@ -97,9 +97,7 @@ prompt_new <- function(role, interface, contents = NULL) {
   # TODO: should this message "Register with `directory_load()`" or
   # something as it creates the file?
   file.create(path)
-  if (!is.null(contents)) {
-    prompt_prefill(path = path, contents = contents)
-  }
+  prompt_prefill(path = path, contents = contents, role = role)
   if (interactive()) {
     file.edit(path)
   }
@@ -145,34 +143,33 @@ prompt_locate <- function(role, call = caller_env()) {
   file.path(path, base_names[match])
 }
 
-prompt_prefill <- function(path, contents, call = caller_env()) {
-  if (!is_markdown_file(contents)) {
+prompt_prefill <- function(path, contents, role, call = caller_env()) {
+  if (!is.null(contents) && !is_markdown_file(contents)) {
     cli::cli_abort(
       "{.arg contents} must be a connection to a markdown file.",
       call = call
     )
   }
 
-  if (!is.null(contents)) {
-    suppressWarnings(
-      try_fetch(
-        {
-          lines <- base::readLines(contents)
-          writeLines(text = lines, con = path)
-        },
-        error = function(cnd) {
-          cli::cli_abort(
-            "An error occurred while pre-filling the prompt with {.arg contents}.",
-            call = call,
-            parent = cnd
-          )
-        }
-      )
-    )
+  if (is.null(contents)) {
+    contents <- system.file("template.md", package = "pal")
   }
 
-  # TODO: should there be some pre-filled instructions on how to write
-  # prompts here in `else`?
+  suppressWarnings(
+    try_fetch(
+      {
+        lines <- base::readLines(contents)
+        writeLines(text = lines, con = path)
+      },
+      error = function(cnd) {
+        cli::cli_abort(
+          "An error occurred while pre-filling the prompt with {.arg contents}.",
+          call = call,
+          parent = cnd
+        )
+      }
+    )
+  )
 
   invisible(path)
 }
