@@ -116,6 +116,19 @@ test_that("new prompts error informatively with bad pre-fill contents", {
   )
 })
 
+test_that("prompts can be added, removed, and added again without restart (#58)", {
+  skip_if_offline()
+  # contains two prompts, `boop-replace` and `wop-prefix`
+  withr::local_options(.pal_dir = "test-prompt-dir")
+  testthat::local_mocked_bindings(interactive = function(...) {FALSE})
+  withr::defer(prompt_remove("template"))
+
+  path <- prompt_new("template", "prefix")
+  prompt_remove("template")
+  prompt_new("template", "prefix")
+
+  expect_true(file.exists(path))
+})
 
 test_that("is_markdown_file works", {
   expect_true(is_markdown_file("some_file.md"))

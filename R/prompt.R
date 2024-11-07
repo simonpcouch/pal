@@ -111,8 +111,9 @@ prompt_remove <- function(role) {
   path <- prompt_locate(role)
   file.remove(path)
 
-  # TODO: this doesn't do enough to remove s.t. a new
-  # prompt with the same role can be added
+  pal_env <- pal_env()
+  rlang::env_unbind(pal_env, paste0(".pal_prompt_", role))
+  rlang::env_unbind(pal_env, paste0(".pal_rs_", role))
 
   invisible(path)
 }
