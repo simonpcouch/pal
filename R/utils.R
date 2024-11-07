@@ -42,6 +42,13 @@ check_role <- function(role, call = caller_env()) {
     )
   }
 
+  if (role %in% default_roles & is.null(getOption(".pal_on_load"))) {
+    cli::cli_abort(
+      "Default roles cannot be edited or removed.",
+      call = call
+    )
+  }
+
   invisible(role)
 }
 

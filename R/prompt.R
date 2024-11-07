@@ -108,6 +108,7 @@ prompt_new <- function(role, interface, contents = NULL) {
 #' @rdname prompt
 #' @export
 prompt_remove <- function(role) {
+  check_role(role)
   path <- prompt_locate(role)
   file.remove(path)
 
@@ -121,6 +122,7 @@ prompt_remove <- function(role) {
 #' @rdname prompt
 #' @export
 prompt_edit <- function(role) {
+  check_role(role)
   path <- prompt_locate(role)
   if (interactive()) {
     file.edit(path)

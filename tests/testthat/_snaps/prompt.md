@@ -16,14 +16,6 @@
       ! There's already a pal with role "boop".
       i You can edit it with `prompt_edit("boop")`
 
----
-
-    Code
-      prompt_new("cli", "replace")
-    Condition
-      Error in `prompt_new()`:
-      ! There's already a pal with role "cli".
-
 # prompt_remove errors informatively with bad role
 
     Code
@@ -46,4 +38,28 @@
     Condition
       Error in `prompt_new()`:
       ! `contents` must be a connection to a markdown file.
+
+# default roles can't be overwritten or deleted (#59)
+
+    Code
+      prompt_new("cli", "replace")
+    Condition
+      Error in `prompt_new()`:
+      ! Default roles cannot be edited or removed.
+
+---
+
+    Code
+      prompt_edit("cli")
+    Condition
+      Error in `prompt_edit()`:
+      ! Default roles cannot be edited or removed.
+
+---
+
+    Code
+      prompt_remove("cli")
+    Condition
+      Error in `prompt_remove()`:
+      ! Default roles cannot be edited or removed.
 

@@ -31,8 +31,6 @@ test_that("prompt_new errors informatively with redundant role", {
 
   expect_snapshot(error = TRUE, prompt_new("boop", "replace"))
   expect_snapshot(error = TRUE, prompt_new("boop", "prefix"))
-
-  expect_snapshot(error = TRUE, prompt_new("cli", "replace"))
 })
 
 test_that("prompt_new works when directory doesn't exist yet (#47)", {
@@ -128,6 +126,12 @@ test_that("prompts can be added, removed, and added again without restart (#58)"
   prompt_new("template", "prefix")
 
   expect_true(file.exists(path))
+})
+
+test_that("default roles can't be overwritten or deleted (#59)", {
+  expect_snapshot(error = TRUE, prompt_new("cli", "replace"))
+  expect_snapshot(error = TRUE, prompt_edit("cli"))
+  expect_snapshot(error = TRUE, prompt_remove("cli"))
 })
 
 test_that("is_markdown_file works", {

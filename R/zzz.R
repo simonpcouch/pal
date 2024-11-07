@@ -2,6 +2,7 @@
 
 .onLoad <- function(libname, pkgname) {
   pal_env <- pal_env()
+  withr::local_options(.pal_on_load = TRUE)
 
   directory_load(system.file("prompts", package = "pal"))
 
