@@ -32,7 +32,9 @@ list_pals <- function() {
 }
 
 # ad-hoc check helpers -------
-check_role <- function(role, call = caller_env()) {
+check_role <- function(role,
+                       allow_default = !is.null(getOption(".pal_on_load")),
+                       call = caller_env()) {
   check_string(role, allow_empty = FALSE, call = call)
 
   if (!is_valid_role(role)) {
@@ -42,7 +44,7 @@ check_role <- function(role, call = caller_env()) {
     )
   }
 
-  if (role %in% default_roles & is.null(getOption(".pal_on_load"))) {
+  if (role %in% default_roles & !allow_default) {
     cli::cli_abort(
       "Default roles cannot be edited or removed.",
       call = call

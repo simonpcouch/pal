@@ -48,7 +48,7 @@
     ...,
     .ns = "elmer"
   ) {
-  check_role(role)
+  check_role(role, allow_default = TRUE)
   if (!role %in% list_pals()) {
     cli::cli_abort(c(
       "No pals with role {.arg {role}} registered.",
