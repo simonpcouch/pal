@@ -12,11 +12,11 @@ status](https://www.r-pkg.org/badges/version/pal)](https://CRAN.R-project.org/pa
 [![R-CMD-check](https://github.com/simonpcouch/pal/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/simonpcouch/pal/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-Pals are persistent, ergonomic LLM assistants designed to help you
-complete repetitive, hard-to-automate tasks quickly. After selecting
-some code, press the keyboard shortcut you’ve chosen to trigger the pal
-addin (we suggest `Ctrl+Cmd+P`), select the pal, and watch your code be
-rewritten.
+The pal package provides a library of ergonomic LLM assistants designed
+to help you complete repetitive, hard-to-automate tasks quickly. After
+selecting some code, press the keyboard shortcut you’ve chosen to
+trigger the pal addin (we suggest `Ctrl+Cmd+P`), select the pal, and
+watch your code be rewritten.
 
 ## Installation
 

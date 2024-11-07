@@ -4,7 +4,7 @@ Version: 0.0.2
 Authors@R: 
     person("Simon", "Couch", , "simon.couch@posit.co", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-5676-5107"))
-Description: Pals are persistent, ergonomic LLM assistants designed to help you 
+Description: Provides a library of ergonomic LLM assistants designed to help you 
     complete repetitive, hard-to-automate tasks quickly. After selecting some 
     code, press the keyboard shortcut you've chosen to trigger the pal addin, 
     select a pal, and watch your code be rewritten. While a number of pals
