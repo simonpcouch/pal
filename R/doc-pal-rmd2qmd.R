@@ -18,7 +18,7 @@
 #' ```{r srch, fig.width = 9, warning = FALSE, echo = FALSE, out.width = '100%', fig.height = 4, fig.cap = "Some examples.",  message = FALSE}
 #' ````
 #'
-#' are converted to
+#' is converted to
 #'
 #' ````
 #' ```{r}

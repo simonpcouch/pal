@@ -22,7 +22,7 @@ As an example, the following set of bookdown options:
 \if{html}{\out{<div class="sourceCode">}}\preformatted{```\{r srch, fig.width = 9, warning = FALSE, echo = FALSE, out.width = '100\%', fig.height = 4, fig.cap = "Some examples.",  message = FALSE\}
 }\if{html}{\out{</div>}}
 
-are converted to
+is converted to
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{```\{r\}
 #| label: srch
