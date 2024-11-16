@@ -32,6 +32,19 @@
 #' #| out-width: 100%
 #' ````
 #'
+#' As of Novermber 2024, [knitr::convert_chunk_header()] converts it to
+#'
+#' ````
+#'```{r}
+#' label = "selection-search",
+#' fig.width = 9,
+#' warning = FALSE,
+#' echo = FALSE,
+#' out.width = "100%",
+#' fig.height = 4,
+#' fig.cap = "Examples of search methods.",
+#' message = FALSE
+#' ````
 #' @templateVar role rmd2qmd
 #' @template manual-interface
 #'

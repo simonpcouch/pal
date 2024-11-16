@@ -34,6 +34,19 @@ are converted to
 #| fig-cap: "Examples of search methods."
 #| out-width: 100\%
 }\if{html}{\out{</div>}}
+
+As of Novermber 2024, \code{\link[knitr:convert_chunk_header]{knitr::convert_chunk_header()}} converts it to
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{```\{r\}
+label = "selection-search",
+fig.width = 9,
+warning = FALSE,
+echo = FALSE,
+out.width = "100\%",
+fig.height = 4,
+fig.cap = "Examples of search methods.",
+message = FALSE
+}\if{html}{\out{</div>}}
 }
 
 \section{Interfacing manually with the rmd2qmd pal}{
