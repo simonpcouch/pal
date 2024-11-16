@@ -19,32 +19,32 @@ The system prompt from a pal includes something
 
 As an example, the following set of bookdown options:
 
-\if{html}{\out{<div class="sourceCode">}}\preformatted{```\{r selection-search, fig.width = 9, warning = FALSE, echo = FALSE, out.width = '100\%', fig.height = 4, fig.cap = "Examples of search methods.",  message = FALSE\}
+\if{html}{\out{<div class="sourceCode">}}\preformatted{```\{r srch, fig.width = 9, warning = FALSE, echo = FALSE, out.width = '100\%', fig.height = 4, fig.cap = "Some examples.",  message = FALSE\}
 }\if{html}{\out{</div>}}
 
 are converted to
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{```\{r\}
-#| label: selection-search
+#| label: srch
 #| warning: false
 #| echo: false
 #| message: false
 #| fig-width: 9
 #| fig-height: 4
-#| fig-cap: "Examples of search methods."
+#| fig-cap: "Some examples."
 #| out-width: 100\%
 }\if{html}{\out{</div>}}
 
 As of Novermber 2024, \code{\link[knitr:convert_chunk_header]{knitr::convert_chunk_header()}} converts it to
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{```\{r\}
-label = "selection-search",
+label = "srch",
 fig.width = 9,
 warning = FALSE,
 echo = FALSE,
 out.width = "100\%",
 fig.height = 4,
-fig.cap = "Examples of search methods.",
+fig.cap = "Some examples.",
 message = FALSE
 }\if{html}{\out{</div>}}
 }

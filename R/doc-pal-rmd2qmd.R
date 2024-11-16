@@ -15,20 +15,20 @@
 #' As an example, the following set of bookdown options:
 #'
 #' ````
-#' ```{r selection-search, fig.width = 9, warning = FALSE, echo = FALSE, out.width = '100%', fig.height = 4, fig.cap = "Examples of search methods.",  message = FALSE}
+#' ```{r srch, fig.width = 9, warning = FALSE, echo = FALSE, out.width = '100%', fig.height = 4, fig.cap = "Some examples.",  message = FALSE}
 #' ````
 #'
 #' are converted to
 #'
 #' ````
 #' ```{r}
-#' #| label: selection-search
+#' #| label: srch
 #' #| warning: false
 #' #| echo: false
 #' #| message: false
 #' #| fig-width: 9
 #' #| fig-height: 4
-#' #| fig-cap: "Examples of search methods."
+#' #| fig-cap: "Some examples."
 #' #| out-width: 100%
 #' ````
 #'
@@ -36,13 +36,13 @@
 #'
 #' ````
 #'```{r}
-#' label = "selection-search",
+#' label = "srch",
 #' fig.width = 9,
 #' warning = FALSE,
 #' echo = FALSE,
 #' out.width = "100%",
 #' fig.height = 4,
-#' fig.cap = "Examples of search methods.",
+#' fig.cap = "Some examples.",
 #' message = FALSE
 #' ````
 #' @templateVar role rmd2qmd
