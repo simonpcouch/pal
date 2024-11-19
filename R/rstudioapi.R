@@ -136,7 +136,7 @@ stream_selection <- function(selection, context, pal, n_lines_orig, remainder = 
 stream_selection_impl <- function(selection, context, pal, n_lines_orig, remainder = "") {
   selection_text <- selection[["text"]]
   output_lines <- character(0)
-  stream <- pal[[".__enclos_env__"]][["private"]]$.stream(selection_text)
+  stream <- pal$clone()[[".__enclos_env__"]][["private"]]$.stream(selection_text)
   coro::loop(for (chunk in stream) {
     if (identical(chunk, "")) {next}
     output_lines <- paste(output_lines, sub("\n$", "", chunk), sep = "")
