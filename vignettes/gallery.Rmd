@@ -22,6 +22,13 @@ quartochunk_code <-
   "https://gist.githubusercontent.com/hfrick/1ca8fc2cb2a4409b743e8120c6cc2223/raw/a9703edfbd4e83839af0278c33add1b33e243d02/quartochunk-replace.md"
 )'
 
+revealjs_theming_code <-
+'prompt_new(
+  "revealjstheming",
+  "replace",
+  "https://gist.githubusercontent.com/EmilHvitfeldt/c2a3f8f294aec242144a9e135db2e2a3/raw/79298f9f5178a558e2c3422d745e7393fd483396/revealjs-scss-theming-prompt.md"
+)'
+
 gallery <- 
   tibble::tribble(
     ~Description, ~Role, ~Interface, ~Author, ~`Use it via...`,
@@ -29,6 +36,7 @@ gallery <-
     "[Convert unit tests to testthat 3e](https://simonpcouch.github.io/pal/reference/pal_testthat.html)", "testthat", "replace", "Simon Couch", "library(pal)",
     "[Template function documentation with roxygen](https://simonpcouch.github.io/pal/reference/pal_roxygen.html)", "roxygen", "prefix", "Simon Couch", "library(pal)",
     "[Transition to Quarto-style chunk headers](https://gist.github.com/hfrick/1ca8fc2cb2a4409b743e8120c6cc2223)", "quartochunk", "replace", "Hannah Frick", quartochunk_code,
+    "[Add or modify revealjs scss theming](https://gist.github.com/EmilHvitfeldt/c2a3f8f294aec242144a9e135db2e2a3)", "revealjstheming", "replace", "Emil Hansen", revealjs_theming_code,
     # silly example to be removed once there are other pal extension pkgs
     "[Always reply 'beep bop boop'](https://github.com/simonpcouch/palpable)", "boop", "replace", "Simon Couch", "pak::pak(\"simonpcouch/palpable\")\nlibrary(palpable)"
   ) 
