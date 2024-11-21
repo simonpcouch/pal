@@ -64,14 +64,25 @@ retrieve_pal <- function(role) {
   } else {
     tryCatch(
       pal <- .init_pal(role),
-      error = function(e) {
-        rstudioapi::showDialog("Error", "Unable to create a pal. See `?.init_pal()`.")
+      error = function(cnd) {
+        # rethrow condition message directly rather than setting
+        # `cli::cli_abort(parent)` so that rstudioapi::showDialog is able
+        # to handle the formatting (#62)
+        stop(condition_message(cnd), call. = FALSE)
         return(NULL)
       }
     )
   }
 
   pal
+}
+
+condition_message <- function(cnd) {
+  if ("message" %in% names(cnd)) {
+    return(cnd$message)
+  }
+
+  cnd_message(cnd, inherit = FALSE, prefix = FALSE)
 }
 
 get_primary_selection <- function(context) {
