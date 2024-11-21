@@ -47,6 +47,15 @@ options(
 )
 ```
 
+To use a local model with ollama, you might write:
+
+```r
+options(
+  .pal_fn = "chat_ollama",
+  .pal_args = list(model = "qwen2.5-coder:14b")
+)
+```
+
 You'll probably want pal to always use whichever model you're configuring with this option. To make this selection persist across sessions, add that `options()` code to your `.Rprofile`. You might use `usethis::edit_r_profile()` to open the file. After making those changes and restarting R, your pal will use the new model.
 
 ## The pal addin
