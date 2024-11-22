@@ -29,7 +29,7 @@
   try_fetch(
     pal_fn <- env_get(pal_env(), pal_fn_name),
     error = function(e) {
-      cli::cli_abort("Unable to locate the requested pal.")
+      cli::cli_abort("Unable to locate the requested pal.", call = NULL)
     }
   )
 
