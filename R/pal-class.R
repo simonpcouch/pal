@@ -7,12 +7,8 @@ Pal <- R6::R6Class(
       default_args <- getOption(".pal_args", default = list())
       args <- modifyList(default_args, args)
 
-      args$system_prompt <- get(
-        paste0(".pal_prompt_", role),
-        envir = pal_env()
-      )
-
       Chat <- rlang::eval_bare(rlang::call2(fn, !!!args, .ns = .ns))
+      Chat$set_system_prompt(get(paste0(".pal_prompt_", role), envir = pal_env()))
       private$Chat <- Chat
 
       .stash_last_pal(self)
