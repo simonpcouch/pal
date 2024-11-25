@@ -180,7 +180,7 @@ pal directly, use:
 
 Then, to submit a query, run:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{pal_cli$chat(\{expr\})
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{pal_cli$chat(\{x\})
 }\if{html}{\out{</div>}}
 }
 

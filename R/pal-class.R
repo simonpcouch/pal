@@ -13,9 +13,8 @@ Pal <- R6::R6Class(
 
       .stash_last_pal(self)
     },
-    chat = function(expr) {
-      request <- deparse(substitute(expr))
-      private$.chat(request)
+    chat = function(...) {
+      private$Chat$chat(...)
     },
     stream = function(expr) {
       request <- deparse(substitute(expr))
@@ -31,15 +30,6 @@ Pal <- R6::R6Class(
   ),
   private = list(
     Chat = NULL,
-    .chat = function(request, call = caller_env()) {
-      if (identical(request, "")) {
-        cli::cli_abort("Please supply a non-empty chat request.", call = call)
-      }
-      structure(
-        private$Chat$chat(paste0(request, collapse = "\n")),
-        class = c("pal_response", "character")
-      )
-    },
     .stream = function(request, call = caller_env()) {
       if (identical(request, "")) {
         cli::cli_abort("Please supply a non-empty chat request.", call = call)

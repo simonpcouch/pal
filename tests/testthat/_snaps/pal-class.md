@@ -3,6 +3,6 @@
     Code
       cli_pal$chat()
     Condition
-      Error in `cli_pal$chat()`:
-      ! Please supply a non-empty chat request.
+      Error in `user_turn()`:
+      ! Must supply at least one input.
 

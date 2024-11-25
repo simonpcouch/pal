@@ -4,8 +4,7 @@ test_that("can find the previous pal", {
   withr::local_options(.pal_fn = NULL, .pal_args = NULL)
 
   cli_pal <- .init_pal("cli")
-  expect_no_error(response <- cli_pal$chat(stop("Error message here")))
-  expect_s3_class(response, "pal_response")
+  expect_no_error(response <- cli_pal$chat("stop(\"Error message here\")"))
 })
 
 test_that("chat errors informatively with no input", {
@@ -23,12 +22,12 @@ test_that("pal_chat effectively integrates system prompt", {
   withr::local_options(.pal_fn = NULL, .pal_args = NULL)
 
   cli_pal <- .init_pal("cli")
-  response <- cli_pal$chat(stop("Error message here"))
+  response <- cli_pal$chat("stop(\"Error message here\")")
   expect_true(grepl("cli_abort", response))
   expect_true(grepl("Error message here", response))
 
   testthat_pal <- .init_pal("testthat")
-  response <- testthat_pal$chat(expect_error(beep_bop_boop()))
+  response <- testthat_pal$chat("expect_error(beep_bop_boop())")
   expect_true(grepl("expect_snapshot", response))
   expect_true(grepl("beep_bop_boop", response))
 })

@@ -10,6 +10,6 @@
 #' Then, to submit a query, run:
 #'
 #' ```r
-#' pal_<%= role %>$chat({expr})
+#' pal_<%= role %>$chat({x})
 #' ```
 #' @md

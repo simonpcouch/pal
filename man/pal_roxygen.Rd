@@ -155,7 +155,7 @@ pal directly, use:
 
 Then, to submit a query, run:
 
-\if{html}{\out{<div class="sourceCode r">}}\preformatted{pal_roxygen$chat(\{expr\})
+\if{html}{\out{<div class="sourceCode r">}}\preformatted{pal_roxygen$chat(\{x\})
 }\if{html}{\out{</div>}}
 }
 
