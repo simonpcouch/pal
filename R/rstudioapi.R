@@ -89,8 +89,7 @@ get_primary_selection <- function(context) {
   selection <- rstudioapi::primary_selection(context)
 
   if (selection[["text"]] == "") {
-    rstudioapi::showDialog("Error", "No code selected. Please highlight some code first.")
-    return(NULL)
+    stop("No code selected. Please highlight some code first.", call. = FALSE)
   }
 
   selection
