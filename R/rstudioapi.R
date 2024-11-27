@@ -173,10 +173,6 @@ stream_selection_impl <- function(selection, context, pal, n_lines_orig, remaind
     if (n_selection < n_lines_res) {
       selection$range$end[["row"]] <- selection$range$start[["row"]] + n_lines_res
     }
-
-    # `modifyRange()` changes the cursor position to the end of the
-    # range, so manually override
-    rstudioapi::setCursorPosition(selection$range$start)
   })
 
   # once the generator is finished, modify the range with the
