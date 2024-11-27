@@ -13,7 +13,7 @@
 }
 \arguments{
 \item{role}{The identifier for a pal prompt. By default one
-of \link[=pal_cli]{"cli"}, \link[=pal_testthat]{"testthat"} or \link[=pal_roxygen]{"roxygen"},
+of \link[=pal_cli]{"cli"}, \link[=pal_testthat]{"testthat"}, \link[=pal_roxygen]{"roxygen"} or \link[=pal_rmd2qmd]{"rmd2qmd"},
 though custom pals can be added with \code{\link[=.pal_add]{.pal_add()}}.}
 
 \item{fn}{A \verb{new_*()} function, likely from the elmer package. Defaults

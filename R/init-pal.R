@@ -64,4 +64,4 @@
   )
 }
 
-default_roles <- c("cli", "testthat", "roxygen")
+default_roles <- c("cli", "testthat", "roxygen", "rmd2qmd")
