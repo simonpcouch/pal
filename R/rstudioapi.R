@@ -179,7 +179,7 @@ stream_selection_impl <- function(selection, context, pal, n_lines_orig, remaind
   # unpadded version to remove unneeded newlines
   rstudioapi::modifyRange(
     selection$range,
-    paste0(output_lines, remainder),
+    string <- sub("\n$", "", paste0(output_lines, remainder)),
     context$id
   )
 
