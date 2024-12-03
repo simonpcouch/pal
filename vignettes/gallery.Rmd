@@ -37,8 +37,7 @@ gallery <-
     "[Template function documentation with roxygen](https://simonpcouch.github.io/pal/reference/pal_roxygen.html)", "roxygen", "prefix", "Simon Couch", "library(pal)",
     "[Transition to Quarto-style chunk headers](https://gist.github.com/hfrick/1ca8fc2cb2a4409b743e8120c6cc2223)", "quartochunk", "replace", "Hannah Frick", quartochunk_code,
     "[Add or modify revealjs scss theming](https://gist.github.com/EmilHvitfeldt/c2a3f8f294aec242144a9e135db2e2a3)", "revealjstheming", "replace", "Emil Hansen", revealjs_theming_code,
-    # silly example to be removed once there are other pal extension pkgs
-    "[Always reply 'beep bop boop'](https://github.com/simonpcouch/palpable)", "boop", "replace", "Simon Couch", "pak::pak(\"simonpcouch/palpable\")\nlibrary(palpable)"
+    "[A ggplot2 assistant](https://github.com/frankiethull/ggpal2)", "ggplot2", "replace", "Frank Hull", "pak::pak(\"frankiethull/ggpal2\")\nlibrary(ggpal2)"
   ) 
 
 gallery$`Use it via...` <- paste0("```\n", gallery$`Use it via...`, "\n```")
