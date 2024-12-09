@@ -151,25 +151,20 @@ stream_selection_impl <- function(selection, context, pal, n_lines_orig, remaind
     if (identical(chunk, "")) {next}
     output_lines <- paste(output_lines, chunk, sep = "")
     n_lines <- nchar(gsub("[^\n]+", "", output_lines)) + 1
-    if (n_lines_orig - n_lines > 0) {
-      output_padded <-
-        paste0(
-          output_lines,
-          paste0(rep("\n", n_lines_orig - n_lines + 1), collapse = "")
-        )
-    } else {
-      output_padded <- paste(output_lines, "\n")
-    }
+    output_padded <- paste0(
+      output_lines,
+      paste0(rep("\n", max(n_lines_orig - n_lines + 1, 1)), collapse = "")
+    )
 
     rstudioapi::modifyRange(
       selection$range,
-      output_padded %||% output_lines,
+      output_padded,
       context$id
     )
 
     # there may be more lines in the output than there are in the range
     n_selection <- selection$range$end[[1]] - selection$range$start[[1]]
-    n_lines_res <- nchar(gsub("[^\n]+", "", output_padded %||% output_lines))
+    n_lines_res <- nchar(gsub("[^\n]+", "", output_padded))
     selection$range$end[["row"]] <- selection$range$start[["row"]] + n_lines_res
   })
 
