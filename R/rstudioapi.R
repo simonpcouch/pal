@@ -161,17 +161,37 @@ stream_selection_impl <- function(selection, context, pal, n_lines_orig, remaind
       output_lines_no_trailing_newline,
       paste0(rep("\n", max(n_lines_orig - n_lines, 0)), collapse = "")
     )
+    
+    row_start_before <- selection$range[[1]][[1]]
+    row_end_before <- selection$range[[2]][[1]]
+    before_lines <- rstudioapi::getActiveDocumentContext()
+    before_lines <- before_lines$contents[row_start_before:row_end_before]
 
-    rstudioapi::modifyRange(
+    res <- rstudioapi::modifyRange(
       selection$range,
       output_padded,
       context$id
     )
+    res$text <- strsplit(res$text, "\n")[[1]]
 
     # there may be more lines in the output than there are in the range
     n_selection <- selection$range$end[[1]] - selection$range$start[[1]]
     n_lines_res <- nchar(gsub("[^\n]+", "", output_padded))
     selection$range$end[["row"]] <- selection$range$start[["row"]] + n_lines_res
+
+    row_start_after <- selection$range[[1]][[1]]
+    row_end_after <- selection$range[[2]][[1]]
+    after_lines <- rstudioapi::getActiveDocumentContext()
+    after_lines <- after_lines$contents[row_start_after:row_end_after]
+
+    io$last_run <- c(
+      io$last_run, 
+      list(
+        before = list(row_start_end = c(row_start_before, row_end_before), before = before_lines), 
+        during = res,
+        after = list(row_start_end = c(row_start_after, row_end_after), new_lines = after_lines)
+      )
+    )
   })
 
   # once the generator is finished, modify the range with the
@@ -188,3 +208,5 @@ stream_selection_impl <- function(selection, context, pal, n_lines_orig, remaind
 
   rstudioapi::setCursorPosition(selection$range$start)
 }
+
+io <- new_environment()
