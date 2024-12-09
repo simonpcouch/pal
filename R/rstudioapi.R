@@ -152,10 +152,14 @@ stream_selection_impl <- function(selection, context, pal, n_lines_orig, remaind
     if (identical(chunk, "")) {next}
 
     output_lines <- paste(output_lines, chunk, sep = "")
-    n_lines <- nchar(gsub("[^\n]+", "", output_lines)) + 1
+    output_lines_no_trailing_newline <- gsub("\n+$", "", output_lines)
+    n_lines <- nchar(gsub("[^\n]+", "", output_lines_no_trailing_newline)) + 1
+
+    # add trailing newlines so that the output at least extends to the n_lines
+    # of the original selection (for visual effect only)
     output_padded <- paste0(
-      output_lines,
-      paste0(rep("\n", max(n_lines_orig - n_lines + 1, 1)), collapse = "")
+      output_lines_no_trailing_newline,
+      paste0(rep("\n", max(n_lines_orig - n_lines, 0)), collapse = "")
     )
 
     rstudioapi::modifyRange(
