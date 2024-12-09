@@ -170,9 +170,7 @@ stream_selection_impl <- function(selection, context, pal, n_lines_orig, remaind
     # there may be more lines in the output than there are in the range
     n_selection <- selection$range$end[[1]] - selection$range$start[[1]]
     n_lines_res <- nchar(gsub("[^\n]+", "", output_padded %||% output_lines))
-    if (n_selection < n_lines_res) {
-      selection$range$end[["row"]] <- selection$range$start[["row"]] + n_lines_res
-    }
+    selection$range$end[["row"]] <- selection$range$start[["row"]] + n_lines_res
   })
 
   # once the generator is finished, modify the range with the
