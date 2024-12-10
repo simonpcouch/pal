@@ -60,3 +60,7 @@ interactive <- NULL
 is_valid_role <- function(role) {
   grepl("^[a-zA-Z0-9]+$", role)
 }
+
+is_positron <- function() {
+  Sys.getenv("POSITRON") == "1"
+}

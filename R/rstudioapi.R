@@ -129,14 +129,23 @@ wipe_selection <- function(selection, context) {
 
 
 stream_selection <- function(selection, context, pal, n_lines_orig, remainder = "") {
-  tryCatch(
-    stream_selection_impl(
-      selection = selection,
-      context = context,
-      pal = pal,
-      n_lines_orig = n_lines_orig,
-      remainder = remainder
-    ),
+  tryCatch({
+    if (is_positron()) {
+      chat_selection_impl(
+        selection = selection,
+        context = context,
+        pal = pal,
+        remainder = remainder
+      )
+    } else {
+      stream_selection_impl(
+        selection = selection,
+        context = context,
+        pal = pal,
+        n_lines_orig = n_lines_orig,
+        remainder = remainder
+      )
+    }},
     error = function(e) {
       rstudioapi::showDialog("Error", paste("The pal ran into an issue: ", e$message))
     }
@@ -187,4 +196,17 @@ stream_selection_impl <- function(selection, context, pal, n_lines_orig, remaind
   rstudioapi::executeCommand("reindent")
 
   rstudioapi::setCursorPosition(selection$range$start)
+}
+
+# in Positron, calls to `rstudioapi::modifyRange()` shims are entangled,
+# so just chat rather than stream (#68)
+chat_selection_impl <- function(selection, context, pal, remainder = "") {
+  selection_text <- selection[["text"]]
+  output_lines <- pal$clone()$chat(selection_text)
+
+  rstudioapi::modifyRange(
+    selection$range,
+    paste0(output_lines, remainder),
+    context$id
+  )
 }
