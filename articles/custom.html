@@ -125,12 +125,12 @@ directory is a folder of markdown files that serves as a library of
 possible pals. By default, the prompt directory lives at
 <code>~/.config/pal</code>, but that default can be changed by adding a
 <code>.pal_dir</code> option in your <code>.Rprofile</code> using
-<code>options(pal_dir = some/dir/</code>). <code><a href="../reference/directory.html">directory_path()</a></code>
-returns the path to the directory, <code><a href="../reference/directory.html">directory_set()</a></code> changes
-it, <code><a href="../reference/directory.html">directory_list()</a></code> enumerates all of the prompts that
-currently live in it, and <code><a href="../reference/directory.html">directory_load()</a></code>
-registers/refreshes all of the prompts in the directory with the pal
-package.</p>
+<code>options(.pal_dir = some/dir/</code>).
+<code><a href="../reference/directory.html">directory_path()</a></code> returns the path to the directory,
+<code><a href="../reference/directory.html">directory_set()</a></code> changes it, <code><a href="../reference/directory.html">directory_list()</a></code>
+enumerates all of the prompts that currently live in it, and
+<code><a href="../reference/directory.html">directory_load()</a></code> registers/refreshes all of the prompts in
+the directory with the pal package.</p>
 <p>To create a new pal, add a prompt to pal’s prompt directory with
 <code><a href="../reference/prompt.html">prompt_new()</a></code>. You’ll need to supply a <code>role</code> (a
 single keyword describing what the pal does, like
