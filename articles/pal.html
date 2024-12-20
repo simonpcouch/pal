@@ -100,8 +100,8 @@ selected code.</li>
 <p>Under the hood, pals are driven by Large Language Models (LLMs). To
 use pals, you will need an API key for a commercial model or a
 connection to a locally hosted model.</p>
-<p>Pals use the <a href="https://github.com/hadley/elmer" class="external-link">elmer</a>
-package to interface with LLMs. Any model supported by elmer is
+<p>Pals use the <a href="https://github.com/tidyverse/ellmer" class="external-link">ellmer</a>
+package to interface with LLMs. Any model supported by ellmer is
 supported by pal.</p>
 <p>As of October 2024, we highly recommend <a href="https://www.anthropic.com/news/claude-3-5-sonnet" class="external-link">Anthropic’s
 Claude Sonnet 3.5</a> as the model to power your pals. Compared to other
@@ -115,7 +115,7 @@ set:</p>
 <pre class="env"><code><span><span class="va">ANTHROPIC_API_KEY</span><span class="op">=</span><span class="va">your.key.here</span></span></code></pre>
 <p>To use another model to power your pals, use the <code>.pal_fn</code>
 and <code>.pal_args</code> options. <code>.pal_fn</code> is the name of
-a <code>chat_*()</code> function from elmer, and <code>.pal_args</code>
+a <code>chat_*()</code> function from ellmer, and <code>.pal_args</code>
 is a list of any non-default arguments you’d like to supply to that
 function. For example, to use models from OpenAI, you might write:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
