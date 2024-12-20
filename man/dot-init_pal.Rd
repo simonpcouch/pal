@@ -8,7 +8,7 @@
   role = NULL,
   fn = getOption(".pal_fn", default = "chat_claude"),
   ...,
-  .ns = "elmer"
+  .ns = "ellmer"
 )
 }
 \arguments{
@@ -16,8 +16,8 @@
 of \link[=pal_cli]{"cli"}, \link[=pal_testthat]{"testthat"} or \link[=pal_roxygen]{"roxygen"},
 though custom pals can be added with \code{\link[=.pal_add]{.pal_add()}}.}
 
-\item{fn}{A \verb{new_*()} function, likely from the elmer package. Defaults
-to \code{\link[elmer:chat_claude]{elmer::chat_claude()}}. To set a persistent alternative default,
+\item{fn}{A \verb{new_*()} function, likely from the ellmer package. Defaults
+to \code{\link[ellmer:chat_claude]{ellmer::chat_claude()}}. To set a persistent alternative default,
 set the \code{.pal_fn} option; see examples below.}
 
 \item{...}{Additional arguments to \code{fn}. The \code{system_prompt} argument will

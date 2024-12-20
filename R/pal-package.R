@@ -11,6 +11,6 @@ utils::globalVariables(
 )
 
 # address "not imported from" R CMD check error
-#' @importFrom elmer content_image_file
+#' @importFrom ellmer content_image_file
 #' @importFrom glue glue
 NULL

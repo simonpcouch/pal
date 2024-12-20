@@ -29,8 +29,8 @@ pak::pak("simonpcouch/pal")
 Then, ensure that you have an
 [`ANTHROPIC_API_KEY`](https://console.anthropic.com/) environment
 variable set, and you’re ready to go. If you’d like to use an LLM other
-than Anthropic’s Claude 3.5 Sonnet—like OpenAI’s ChatGPT or a local ollama model—to power the
-pal, see the [Getting started with
+than Anthropic’s Claude 3.5 Sonnet—like OpenAI’s ChatGPT or a local
+ollama model—to power the pal, see the [Getting started with
 pal](https://simonpcouch.github.io/pal/articles/pal.html) vignette.
 
 Pals are interfaced with the via the pal addin. For easiest access, we

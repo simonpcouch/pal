@@ -22,7 +22,7 @@ The pal package ships with a number of pre-engineered "roles." A pal role is a k
 
 Under the hood, pals are driven by Large Language Models (LLMs). To use pals, you will need an API key for a commercial model or a connection to a locally hosted model.
 
-Pals use the [elmer](https://github.com/hadley/elmer) package to interface with LLMs. Any model supported by elmer is supported by pal.
+Pals use the [ellmer](https://github.com/tidyverse/ellmer) package to interface with LLMs. Any model supported by ellmer is supported by pal.
 
 As of October 2024, we highly recommend [Anthropic's Claude Sonnet 3.5](https://www.anthropic.com/news/claude-3-5-sonnet) as the model to power your pals. Compared to other models we've tried, Claude is most likely to generate syntactically valid code that aligns with the pal's prompt well. As such, Claude is the default model used by pal. If you want to use Claude with pal, the only additional setup step you need is to set an [`ANTHROPIC_API_KEY`](https://console.anthropic.com/) in your `.Renviron`---you might use `usethis::edit_r_environ()` to open the file, and then set:
 
@@ -30,7 +30,7 @@ As of October 2024, we highly recommend [Anthropic's Claude Sonnet 3.5](https://
 ANTHROPIC_API_KEY=your.key.here
 ```
 
-To use another model to power your pals, use the `.pal_fn` and `.pal_args` options. `.pal_fn` is the name of a `chat_*()` function from elmer, and `.pal_args` is a list of any non-default arguments you'd like to supply to that function. For example, to use models from OpenAI, you might write:
+To use another model to power your pals, use the `.pal_fn` and `.pal_args` options. `.pal_fn` is the name of a `chat_*()` function from ellmer, and `.pal_args` is a list of any non-default arguments you'd like to supply to that function. For example, to use models from OpenAI, you might write:
 
 ```r
 options(

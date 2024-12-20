@@ -10,8 +10,8 @@
 #' @param role The identifier for a pal prompt. By default one
 #' of `r glue::glue_collapse(paste0("[", glue::double_quote(default_roles), "]", "[pal_", default_roles, "]"), ", ", last = " or ")`,
 #' though custom pals can be added with [.pal_add()].
-#' @param fn A `new_*()` function, likely from the elmer package. Defaults
-#'   to [elmer::chat_claude()]. To set a persistent alternative default,
+#' @param fn A `new_*()` function, likely from the ellmer package. Defaults
+#'   to [ellmer::chat_claude()]. To set a persistent alternative default,
 #'   set the `.pal_fn` option; see examples below.
 #' @param .ns The package that the `new_*()` function is exported from.
 #' @param ... Additional arguments to `fn`. The `system_prompt` argument will
@@ -46,7 +46,7 @@
     role = NULL,
     fn = getOption(".pal_fn", default = "chat_claude"),
     ...,
-    .ns = "elmer"
+    .ns = "ellmer"
   ) {
   check_role(role, allow_default = TRUE)
   if (!role %in% list_pals()) {
