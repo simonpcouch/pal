@@ -77,3 +77,20 @@ test_that("directory_set works", {
   expect_equal(directory_path(), .res)
   expect_equal(directory_path(), path_new)
 })
+
+test_that("directory_load() doesn't warn with no trailing newline (#75)", {
+  tmp_dir <- withr::local_tempdir()
+
+  writeLines(
+    text = "Example prompt.",
+    con = file.path(tmp_dir, "test-replace.md"),
+    sep = ""
+  )
+
+  withr::defer(
+    try_fetch({.pal_remove("test")}, error = function(e) {invisible()})
+  )
+
+  expect_no_warning(directory_load(tmp_dir))
+  expect_true("test" %in% list_pals())
+})

@@ -86,7 +86,10 @@ directory_load <- function(dir = directory_path()) {
 
   for (idx in seq_along(prompt_base_names)) {
     role <- roles_and_interfaces[[idx]][1]
-    prompt <- paste0(readLines(prompt_paths[idx]), collapse = "\n")
+    prompt <- paste0(
+      suppressWarnings(readLines(prompt_paths[idx])),
+      collapse = "\n"
+    )
     interface <- roles_and_interfaces[[idx]][2]
 
     .pal_add(role = role, prompt = prompt, interface = interface)
