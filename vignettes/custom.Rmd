@@ -63,9 +63,7 @@ In that case, pal would register two custom pals when you call `library(pal)` (o
 * Files without a `.md` extension are ignored.
 * Files with a `.md` extension must contain only one hyphen in their filename, and the text following the hyphen must be one of `replace`, `prefix`, or `suffix`.
 
-The best way to register pals for your own personal use is via the prompt directory. However, if you intend to share pals with others, you may be interested in creating a pal extension package.
-
-<!-- TODO: add note on how to add to the pal gallery -->
+The best way to register pals for your own personal use is via the prompt directory. However, if you intend to share pals with others, you may be interested in creating a pal extension package. (If you do so, please add them to the pal gallery! Check it out at `vignette("gallery", package = "pal")`.)
 
 ## Extension packages
 
@@ -77,8 +75,6 @@ Pal extension packages allow you to more flexibly share pal prompts with others.
 For an example pal extension, see [simonpcouch/palpable](https://github.com/simonpcouch/palpable).
 
 Pal extension packages also allow you to document what your pals are for and how they tend to behave in context; situate your documentation files at `?pal_role`, replacing `role` with your new pal role. Then, with your package loaded, users can view a high-level description of the pal's behavior and a gallery of examples. See `?pal_cli` for an example pal help-page, with source code [here](https://github.com/simonpcouch/pal/blob/main/R/doc-pal-cli.R).
-
-<!-- TODO: add note on how to add to the pal gallery -->
 
 ## Using others' custom pals
 
