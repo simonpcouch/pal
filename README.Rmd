@@ -61,6 +61,8 @@ Once those steps are completed, you're ready to use pals with a keyboard shortcu
 Pals are created automatically when users interact with the pal addin. Just highlight some code, open the addin, begin typing the "role" of your pal and press "Return", and watch your code be rewritten:
 
 ```{r}
+#| label: addin-gif
+#| echo: false
 #| fig-alt: "A screencast of an RStudio session. An .R file is open in the editor with a function definition. The user selects various subsets of the function and, after selecting from a dropdown menu, the pal assistant converts erroring code and drafts function documentation."
 knitr::include_graphics("https://raw.githubusercontent.com/simonpcouch/pal/refs/heads/main/inst/figs/addin.gif")
 ```
