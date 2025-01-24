@@ -69,7 +69,10 @@ Just:
 * Type in a pal "role." Once it's autocompleted, press Enter.
 * Watch your code be rewritten.
 
-![](https://raw.githubusercontent.com/simonpcouch/pal/refs/heads/main/inst/figs/addin.gif)
+```{r}
+#| fig-alt: "A screencast of an RStudio session. An .R file is open in the editor with a function definition. The user selects various subsets of the function and, after selecting from a dropdown menu, the pal assistant converts erroring code and drafts function documentation."
+knitr::include_graphics("https://raw.githubusercontent.com/simonpcouch/pal/refs/heads/main/inst/figs/addin.gif")
+```
 
 Pals are interfaced with the via the pal addin. For easiest access, we recommend registering the pal addin to a keyboard shortcut.
 
