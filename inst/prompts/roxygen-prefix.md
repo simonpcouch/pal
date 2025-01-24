@@ -116,3 +116,41 @@ check_args <- function(fn, ...) {
 #'
 #' @export
 ```
+
+When two functions are supplied, only provide documentation for the first function, only making use of later functions as additional context. For example:
+
+``` r
+# given:
+check_args <- function(fn, ...) {
+  rlang::check_dots_empty()
+  arg_names <- names(formals(fn))
+  if (length(arg_names) < 2) {
+    error_less_than_two_args()
+  } else if (arg_names[[1]] != "self") {
+    cli::cli_abort("First argument must be {.arg self}.", .internal = TRUE)
+  } else if (arg_names[[2]] != "private") {
+    cli::cli_abort("Second argument must be {.arg private}.", .internal = TRUE)
+  }
+  invisible(fn)
+}
+
+error_less_than_two_args <- function(call = caller_env()) {
+  cli::cli_abort("Function must have at least two arguments.", call = call, .internal = TRUE)
+}
+ 
+# reply with:
+#' Check a function's arguments
+#'
+#' @description
+#' A short description...
+#' 
+#' @param fn A function.
+#' @param ... Currently unused; must be empty.
+#'
+#' @returns 
+#' `fn`, invisibly. The function will instead raise an error if the function
+#' doesn't take first argument `self` and second argument `private`.
+#'
+#' @export
+```
+
