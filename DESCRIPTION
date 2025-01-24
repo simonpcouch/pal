@@ -25,7 +25,8 @@ Imports:
     miniUI (>= 0.1.1.1),
     rlang (>= 1.1.4),
     rstudioapi (>= 0.17.1),
-    shiny (>= 1.9.1)
+    shiny (>= 1.9.1),
+    streamy
 Suggests: 
     gt,
     knitr,
@@ -34,5 +35,5 @@ Suggests:
     tibble,
     withr
 Remotes:
-    tidyverse/ellmer
+    simonpcouch/streamy
 VignetteBuilder: knitr

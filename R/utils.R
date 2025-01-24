@@ -31,6 +31,43 @@ list_pals <- function() {
   gsub(".pal_prompt_", "", prompt_names)
 }
 
+retrieve_pal <- function(role) {
+  if (exists(paste0(".pal_last_", role))) {
+    pal <- get(paste0(".pal_last_", role))
+  } else {
+    tryCatch(
+      pal <- .init_pal(role),
+      error = function(cnd) {
+        # rethrow condition message directly rather than setting
+        # `cli::cli_abort(parent)` so that rstudioapi::showDialog is able
+        # to handle the formatting (#62)
+        stop(condition_message(cnd), call. = FALSE)
+        return(NULL)
+      }
+    )
+  }
+
+  pal
+}
+
+condition_message <- function(cnd) {
+  if ("message" %in% names(cnd)) {
+    return(cnd$message)
+  }
+
+  cnd_message(cnd, inherit = FALSE, prefix = FALSE)
+}
+
+get_primary_selection <- function(context) {
+  selection <- rstudioapi::primary_selection(context)
+
+  if (selection[["text"]] == "") {
+    stop("No code selected. Please highlight some code first.", call. = FALSE)
+  }
+
+  selection
+}
+
 # ad-hoc check helpers -------
 check_role <- function(role,
                        allow_default = !is.null(getOption(".pal_on_load")),

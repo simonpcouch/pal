@@ -78,9 +78,15 @@ parse_interface <- function(interface, role, call = caller_env()) {
   .stash_binding(
     role,
     function(context = rstudioapi::getActiveDocumentContext()) {
-      do.call(
-        paste0("rs_", interface, "_selection"),
-        args = list(context = context, role = role)
+      selection <- get_primary_selection(context)
+      pal <- retrieve_pal(role)$clone()
+      streamy::stream(
+        generator =
+          # TODO: this is gnarly--revisit when pals are just Chats
+          # or ensure selection$text isn't substituted
+          pal[[".__enclos_env__"]][["private"]]$.stream(selection$text),
+        context = context,
+        interface = interface
       )
     }
   )
