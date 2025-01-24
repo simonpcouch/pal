@@ -94,3 +94,13 @@ test_that("directory_load() doesn't warn with no trailing newline (#75)", {
   expect_no_warning(directory_load(tmp_dir))
   expect_true("test" %in% list_pals())
 })
+
+test_that("directory_list returns empty and messages informatively when no files", {
+  tmp_dir <- withr::local_tempdir()
+  withr::local_options(.pal_dir = tmp_dir)
+  testthat::local_mocked_bindings(interactive = function(...) {TRUE})
+
+  expect_snapshot(res <- directory_list())
+  expect_equal(res, character(0))
+})
+

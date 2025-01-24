@@ -101,6 +101,17 @@ directory_load <- function(dir = directory_path()) {
 directory_list <- function() {
   prompt_dir <- directory_path()
   prompt_base_names <- directory_base_names(prompt_dir)
+
+  if (identical(prompt_base_names, character(0))) {
+    if (interactive()) {
+      cli::cli_h3("No custom prompts.")
+      cli::cli_bullets(c(
+        "i" = "Create a new prompt with {.help [{.fun prompt_new}](pal::prompt_new)}."
+      ))
+    }
+    return(invisible(character(0)))
+  }
+
   prompt_paths <- paste0(prompt_dir, "/", prompt_base_names)
   if (interactive()) {
     cli::cli_h3("Prompts: ")

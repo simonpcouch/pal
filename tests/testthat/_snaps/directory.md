@@ -65,3 +65,12 @@
       ! `dir` doesn't exist.
       i If desired, create it with `dir.create("some/nonexistent/path", recursive = TRUE)`.
 
+# directory_list returns empty and messages informatively when no files
+
+    Code
+      res <- directory_list()
+    Message
+      
+      -- No custom prompts. 
+      i Create a new prompt with `prompt_new()` (`?pal::prompt_new()`).
+
