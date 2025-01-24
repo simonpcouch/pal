@@ -29,6 +29,13 @@ revealjs_theming_code <-
   "https://gist.githubusercontent.com/EmilHvitfeldt/c2a3f8f294aec242144a9e135db2e2a3/raw/79298f9f5178a558e2c3422d745e7393fd483396/revealjs-scss-theming-prompt.md"
 )'
 
+news_code <-
+'prompt_new(
+  "news",
+  "replace",
+  "https://gist.githubusercontent.com/simonpcouch/8dbb3cd1fd79f9525bc1476d6fa7b668/raw/aec0da47f8edaf6cd758d7731e5ca5da0b981eb9/news-replace.md"
+)'
+
 gallery <- 
   tibble::tribble(
     ~Description, ~Role, ~Interface, ~Author, ~`Use it via...`,
@@ -36,6 +43,7 @@ gallery <-
     "[Convert unit tests to testthat 3e](https://simonpcouch.github.io/pal/reference/pal_testthat.html)", "testthat", "replace", "Simon Couch", "library(pal)",
     "[Template function documentation with roxygen](https://simonpcouch.github.io/pal/reference/pal_roxygen.html)", "roxygen", "prefix", "Simon Couch", "library(pal)",
     "[Transition to Quarto-style chunk headers](https://gist.github.com/hfrick/1ca8fc2cb2a4409b743e8120c6cc2223)", "quartochunk", "replace", "Hannah Frick", quartochunk_code,
+    "[Format NEWS files](https://gist.github.com/simonpcouch/8dbb3cd1fd79f9525bc1476d6fa7b668)", "news", "replace", "Hadley Wickham", news_code,
     "[Add or modify revealjs scss theming](https://gist.github.com/EmilHvitfeldt/c2a3f8f294aec242144a9e135db2e2a3)", "revealjstheming", "replace", "Emil Hansen", revealjs_theming_code,
     "[A ggplot2 assistant](https://github.com/frankiethull/ggpal2)", "ggplot2", "replace", "Frank Hull", "pak::pak(\"frankiethull/ggpal2\")\nlibrary(ggpal2)"
   ) 
@@ -49,4 +57,3 @@ gt(gallery) %>%
   opt_interactive(use_search = TRUE) %>%
   cols_width(c(Description, `Use it via...`) ~ px(220))
 ```
-
