@@ -2,13 +2,15 @@
 % Please edit documentation in R/options.R
 \name{pal_options}
 \alias{pal_options}
+\alias{.pal_dir}
+\alias{.pal_chat}
 \title{Options used by the pal package}
 \description{
 The pal package makes use of three notable user-facing options:
 \itemize{
 \item \code{.pal_dir} is the directory where pal prompts live. See the pal \link{directory}
 help-page for more information.
-\item \code{.pal_fn} and \code{.pal_args} determine the underlying LLM powering each pal.
+\item \code{.pal_chat} determines the underlying LLM powering each pal.
 See the "Choosing a model" section of \code{vignette("pal", package = "pal")}
 for more information.
 }

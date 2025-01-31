@@ -15,6 +15,10 @@
 #'
 #' @export
 .init_addin <- function() {
+  if (is.null(fetch_pal_chat())) {
+    return(invisible())
+  }
+
   # suppress "Listening on..." message and rethrow errors with new context
   try_fetch(
     suppressMessages(pal_fn_name <- .pal_app()),
