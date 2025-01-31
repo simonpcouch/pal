@@ -20,21 +20,27 @@ watch your code be rewritten.
 
 ## Installation
 
-You can install pal like so:
+Getting started with pal takes three steps.
+
+**1)** Install the pal package like so:
 
 ``` r
 pak::pak("simonpcouch/pal")
 ```
 
-Then, ensure that you have an
-[`ANTHROPIC_API_KEY`](https://console.anthropic.com/) environment
-variable set, and you’re ready to go. If you’d like to use an LLM other
-than Anthropic’s Claude 3.5 Sonnet—like OpenAI’s ChatGPT or a local
-ollama model—to power the pal, see the [Getting started with
+**2)** Then, you need to configure pal with an
+[ellmer](https://ellmer.tidyverse.org/) model. pal uses ellmer under the
+hood, so any model that you can chat with through ellmer is also
+supported by pal. To configure pal with ellmer, set the option
+`.pal_chat` to a function that returns an ellmer Chat. For example, to
+use Claude, you’d write
+`options(.pal_chat = function() ellmer::chat_github())`, possibly in
+your `.Rprofile` so that pal is ready to go every time you stat R. To
+learn more, see the [Getting started with
 pal](https://simonpcouch.github.io/pal/articles/pal.html) vignette.
 
-Pals are interfaced with the via the pal addin. For easiest access, we
-recommend registering the pal addin to a keyboard shortcut.
+**3)** Pals are interfaced with the via the pal addin. For easiest
+access, we recommend registering the pal addin to a keyboard shortcut.
 
 **In RStudio**, navigate to
 `Tools > Modify Keyboard Shortcuts > Search "Pal"`—we suggest
