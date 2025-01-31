@@ -1,7 +1,7 @@
 test_that("can find the previous pal", {
   skip_if(identical(Sys.getenv("ANTHROPIC_API_KEY"), ""))
   skip_if_not_installed("withr")
-  withr::local_options(.pal_fn = NULL, .pal_args = NULL)
+  withr::local_options(.pal_chat = function() ellmer::chat_claude())
 
   cli_pal <- .init_pal("cli")
   expect_no_error(response <- cli_pal$chat("stop(\"Error message here\")"))
@@ -10,7 +10,7 @@ test_that("can find the previous pal", {
 test_that("chat errors informatively with no input", {
   skip_if(identical(Sys.getenv("ANTHROPIC_API_KEY"), ""))
   skip_if_not_installed("withr")
-  withr::local_options(.pal_fn = NULL, .pal_args = NULL)
+  withr::local_options(.pal_chat = function() ellmer::chat_claude())
 
   cli_pal <- .init_pal("cli")
   expect_snapshot(error = TRUE, cli_pal$chat())
@@ -19,7 +19,7 @@ test_that("chat errors informatively with no input", {
 test_that("pal_chat effectively integrates system prompt", {
   skip_if(identical(Sys.getenv("ANTHROPIC_API_KEY"), ""))
   skip_if_not_installed("withr")
-  withr::local_options(.pal_fn = NULL, .pal_args = NULL)
+  withr::local_options(.pal_chat = function() ellmer::chat_claude())
 
   cli_pal <- .init_pal("cli")
   response <- cli_pal$chat("stop(\"Error message here\")")

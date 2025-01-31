@@ -18,12 +18,7 @@
 #'   be ignored if supplied. To set persistent defaults,
 #'   set the `.pal_args` option; see examples below.
 #'
-#' @details
-#' If you have an Anthropic API key (or another API key and the `pal_*()`
-#' options) set and this package installed, you are ready to using the addin
-#' in any R session with no setup or library loading required; the addin knows
-#' to look for your API credentials and will call needed functions by itself.
-#'
+
 #' @examplesIf FALSE
 #' # to create a chat with claude:
 #' .init_pal()
@@ -44,9 +39,7 @@
 #' @export
 .init_pal <- function(
     role = NULL,
-    fn = getOption(".pal_fn", default = "chat_claude"),
-    ...,
-    .ns = "ellmer"
+    .pal_chat = getOption(".pal_chat")
   ) {
   check_role(role, allow_default = TRUE)
   if (!role %in% list_pals()) {
@@ -56,12 +49,7 @@
     ))
   }
 
-  Pal$new(
-    role = role,
-    fn = fn,
-    ...,
-    .ns = .ns
-  )
+  Pal$new(role = role, .pal_chat = .pal_chat)
 }
 
 default_roles <- c("cli", "testthat", "roxygen")
