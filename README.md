@@ -35,7 +35,7 @@ supported by pal. To configure pal with ellmer, set the option
 `.pal_chat` to a function that returns an ellmer Chat. For example, to
 use Claude, you’d write
 `options(.pal_chat = function() ellmer::chat_github())`, possibly in
-your `.Rprofile` so that pal is ready to go every time you stat R. To
+your `.Rprofile` so that pal is ready to go every time you start R. To
 learn more, see the [Getting started with
 pal](https://simonpcouch.github.io/pal/articles/pal.html) vignette.
 
