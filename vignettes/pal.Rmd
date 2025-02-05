@@ -20,43 +20,17 @@ The pal package ships with a number of pre-engineered "roles." A pal role is a k
 
 ## Choosing a model
 
-Under the hood, pals are driven by Large Language Models (LLMs). To use pals, you will need an API key for a commercial model or a connection to a locally hosted model.
+The pal addin supports any model supported by [ellmer](https://ellmer.tidyverse.org/). When choosing a model for use with pal, you'll want to the use the most performant model possible that satisfies your privacy needs; pal automatically passes along your selected code to your chosen model, so it's especially important to consider data privacy when using LLMs with pal.
 
-Pals use the [ellmer](https://github.com/tidyverse/ellmer) package to interface with LLMs. Any model supported by ellmer is supported by pal.
+pal uses the `.pal_chat` option to configure which model powers the addin. `.pal_chat` should be set to an ellmer Chat object. For example, to use OpenAI's GPT-4o-mini, you might write `options(.pal_chat = ellmer::chat_claude())`. Paste that code in your `.Rprofile` via `usethis::edit_r_profile()` to always use the same model every time you start an R session.
 
-As of October 2024, we highly recommend [Anthropic's Claude Sonnet 3.5](https://www.anthropic.com/news/claude-3-5-sonnet) as the model to power your pals. Compared to other models we've tried, Claude is most likely to generate syntactically valid code that aligns with the pal's prompt well. As such, Claude is the default model used by pal. If you want to use Claude with pal, the only additional setup step you need is to set an [`ANTHROPIC_API_KEY`](https://console.anthropic.com/) in your `.Renviron`---you might use `usethis::edit_r_environ()` to open the file, and then set:
+If you're using ellmer inside a organization, you'll be limited to what your IT department allows, which is likely to be one provided by a big cloud provider, e.g. `chat_azure()`, `chat_bedrock()`, `chat_databricks()`, or `chat_snowflake()`. If you're using ellmer for your own exploration, you'll have a lot more freedom, so we have a few recommendations to help you get started:
 
-```env
-ANTHROPIC_API_KEY=your.key.here
-```
+- As of early 2025, Anthropic's **Claude Sonnet 3.5** is a very powerful model for code assistance and is the model I've used while developing the package. If you want to use Claude, you'll need to register an [API key](https://console.anthropic.com/) to the environment variable `ANTHROPIC_API_KEY` and then set `options(.pal_chat = ellmer::chat_claude())`. 
 
-To use another model to power your pals, use the `.pal_fn` and `.pal_args` options. `.pal_fn` is the name of a `chat_*()` function from ellmer, and `.pal_args` is a list of any non-default arguments you'd like to supply to that function. For example, to use models from OpenAI, you might write:
+* Regarding OpenAI's models, `chat_openai()` defaults to **GPT-4o**, but you can use `model = "gpt-4o-mini"` for a cheaper, lower-quality model; to use an OpenAI model, you'll need to set the options `options(.pal_chat = ellmer::chat_openai(model = "gpt-4o"))` and register your OpenAI API key with the `OPENAI_API_KEY` environment variable.
 
-```r
-options(
-  .pal_fn = "chat_openai"
-)
-```
-
-Or, to use GPT 4o mini specifically, you might write:
-
-```r
-options(
-  .pal_fn = "chat_openai",
-  .pal_args = list(model = "gpt-4o-mini")
-)
-```
-
-To use a local model with ollama, you might write:
-
-```r
-options(
-  .pal_fn = "chat_ollama",
-  .pal_args = list(model = "qwen2.5-coder:14b")
-)
-```
-
-You'll probably want pal to always use whichever model you're configuring with this option. To make this selection persist across sessions, add that `options()` code to your `.Rprofile`. You might use `usethis::edit_r_profile()` to open the file. After making those changes and restarting R, your pal will use the new model.
+- You can use a **local model** with `chat_ollama()`, which uses [Ollama](https://ollama.com) and allows you to run models on your own computer. While the biggest models you can run locally aren't as good as the state of the art hosted models, they don't share your data and are effectively free. To use an ollama model, run the model locally and then set `options(.pal_chat = ellmer::chat_ollama(model = "model-name"))`. Instead of `model-name`, you'd substitute in the name of the model that appears when you run `ollama list` at the console.
 
 ## The pal addin
 

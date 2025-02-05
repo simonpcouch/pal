@@ -1,7 +1,7 @@
 test_that("pal addition and removal works", {
   skip_if(identical(Sys.getenv("ANTHROPIC_API_KEY"), ""))
   skip_if_not_installed("withr")
-  withr::local_options(.pal_fn = NULL, .pal_args = NULL)
+  withr::local_options(.pal_chat = ellmer::chat_claude())
 
   boop_prompt <- "just reply with beep bop boop regardless of input"
   .pal_add("boopery", boop_prompt)

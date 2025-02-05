@@ -4,27 +4,17 @@
 \alias{.init_pal}
 \title{Initialize a Pal object}
 \usage{
-.init_pal(
-  role = NULL,
-  fn = getOption(".pal_fn", default = "chat_claude"),
-  ...,
-  .ns = "ellmer"
-)
+.init_pal(role = NULL, .pal_chat = getOption(".pal_chat"))
 }
 \arguments{
 \item{role}{The identifier for a pal prompt. By default one
 of \link[=pal_cli]{"cli"}, \link[=pal_testthat]{"testthat"} or \link[=pal_roxygen]{"roxygen"},
 though custom pals can be added with \code{\link[=.pal_add]{.pal_add()}}.}
 
-\item{fn}{A \verb{new_*()} function, likely from the ellmer package. Defaults
-to \code{\link[ellmer:chat_claude]{ellmer::chat_claude()}}. To set a persistent alternative default,
-set the \code{.pal_fn} option; see examples below.}
-
-\item{...}{Additional arguments to \code{fn}. The \code{system_prompt} argument will
-be ignored if supplied. To set persistent defaults,
-set the \code{.pal_args} option; see examples below.}
-
-\item{.ns}{The package that the \verb{new_*()} function is exported from.}
+\item{.pal_chat}{An ellmer Chat, e.g.
+\code{function() ellmer::chat_claude()}. Defaults to the option by the same name,
+so e.g. set \verb{options(.pal_chat = ellmer::chat_claude()} in your
+\code{.Rprofile} to configure pal with ellmer every time you start a new R session.}
 }
 \description{
 \strong{Users typically should not need to call this function.}
@@ -34,29 +24,19 @@ with \code{\link[=prompt_new]{prompt_new()}}.
 \item The \link[=.init_addin]{pal addin} will initialize needed pals on-the-fly.
 }
 }
-\details{
-If you have an Anthropic API key (or another API key and the \verb{pal_*()}
-options) set and this package installed, you are ready to using the addin
-in any R session with no setup or library loading required; the addin knows
-to look for your API credentials and will call needed functions by itself.
-}
 \examples{
 \dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
 # to create a chat with claude:
 .init_pal()
 
 # or with OpenAI's 4o-mini:
-.init_pal(
-  "chat_openai",
-  model = "gpt-4o-mini"
-)
+.init_pal(.pal_chat = ellmer::chat_openai(model = "gpt-4o-mini"))
 
-# to set OpenAI's 4o-mini as the default, for example, set the
-# following options (possibly in your .Rprofile, if you'd like
+# to set OpenAI's 4o-mini as the default model powering pal, for example,
+# set the following option (possibly in your .Rprofile, if you'd like
 # them to persist across sessions):
 options(
-  .pal_fn = "chat_openai",
-  .pal_args = list(model = "gpt-4o-mini")
+  .pal_chat = ellmer::chat_openai(model = "gpt-4o-mini")
 )
 \dontshow{\}) # examplesIf}
 }

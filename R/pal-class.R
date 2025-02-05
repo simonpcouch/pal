@@ -1,13 +1,11 @@
 Pal <- R6::R6Class(
   "Pal",
   public = list(
-    initialize = function(role, fn, ..., .ns) {
+    initialize = function(role, .pal_chat = getOption(".pal_chat")) {
       self$role <- role
-      args <- list(...)
-      default_args <- getOption(".pal_args", default = list())
-      args <- modifyList(default_args, args)
 
-      Chat <- rlang::eval_bare(rlang::call2(fn, !!!args, .ns = .ns))
+      Chat <- .pal_chat$clone()
+
       Chat$set_system_prompt(get(paste0(".pal_prompt_", role), envir = pal_env()))
       private$Chat <- Chat
 
@@ -38,6 +36,57 @@ Pal <- R6::R6Class(
     }
   )
 )
+
+# this function fails with messages and a NULL return value rather than errors
+# so that, when called from inside the addin, there's no dialog box raised by RStudio
+fetch_pal_chat <- function(.pal_chat = getOption(".pal_chat")) {
+  # first, check for old options
+  .pal_fn <- getOption(".pal_fn")
+  .pal_args <- getOption(".pal_args")
+  if (!is.null(.pal_fn) && is.null(.pal_chat)) {
+    new_option <-
+      cli::format_inline("{deparse(rlang::call2(.pal_fn, !!!.pal_args))}")
+    cli::cli_inform(c(
+      "{.pkg pal} now uses the option {cli::col_blue('.pal_chat')} instead
+      of {cli::col_blue('.pal_fn')} and {cli::col_blue('.pal_args')}.",
+      "i" = "Set
+      {.code options(.pal_chat = {deparse(rlang::call2(.pal_fn, !!!.pal_args))})}
+      instead."
+    ), call = NULL)
+    return(NULL)
+  }
+
+  if (is.null(.pal_chat)) {
+    cli::cli_inform(
+      c(
+        "!" = "pal requires configuring an ellmer Chat with the
+        {cli::col_blue('.pal_chat')} option.",
+        "i" = "Set e.g.
+        {.code {cli::col_green('options(.pal_chat = ellmer::chat_claude()')}}
+        in your {.file ~/.Rprofile} and restart R.",
+        "i" = "See \"Choosing a model\" in
+        {.code vignette(\"pal\", package = \"pal\")} to learn more."
+      ),
+      call = NULL
+    )
+    return(NULL)
+  }
+
+  if (!inherits(.pal_chat, "Chat")) {
+    cli::cli_inform(
+      c(
+        "!" = "The option {cli::col_blue('.pal_chat')} must be an ellmer
+         Chat object, not {.obj_type_friendly { .pal_chat}}.",
+        "i" = "See \"Choosing a model\" in
+        {.code vignette(\"pal\", package = \"pal\")} to learn more."
+      ),
+      call = NULL
+    )
+    return(NULL)
+  }
+
+  .pal_chat
+}
 
 #' @export
 print.pal_response <- function(x, ...) {

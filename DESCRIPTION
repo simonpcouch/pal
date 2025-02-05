@@ -1,6 +1,6 @@
 Package: pal
 Title: LLM assistants for R
-Version: 0.0.3
+Version: 0.0.4
 Authors@R: 
     person("Simon", "Couch", , "simon.couch@posit.co", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0001-5676-5107"))

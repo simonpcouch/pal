@@ -17,18 +17,10 @@
 # can use other models
 
     Code
-      .init_pal("cli", fn = "chat_openai", model = "gpt-4o-mini")
+      .init_pal("cli", .pal_chat = ellmer::chat_openai(model = "gpt-4o-mini"))
     Message
       
       -- A cli pal using gpt-4o-mini. 
-
----
-
-    Code
-      .init_pal("cli")
-    Message
-      
-      -- A cli pal using claude-3-5-sonnet-latest. 
 
 # errors informatively with bad role
 
