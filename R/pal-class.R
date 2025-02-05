@@ -6,10 +6,6 @@ Pal <- R6::R6Class(
 
       Chat <- .pal_chat$clone()
 
-      if (is.null(Chat)) {
-        return()
-      }
-
       Chat$set_system_prompt(get(paste0(".pal_prompt_", role), envir = pal_env()))
       private$Chat <- Chat
 
