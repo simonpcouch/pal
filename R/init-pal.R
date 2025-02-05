@@ -10,9 +10,9 @@
 #' @param role The identifier for a pal prompt. By default one
 #' of `r glue::glue_collapse(paste0("[", glue::double_quote(default_roles), "]", "[pal_", default_roles, "]"), ", ", last = " or ")`,
 #' though custom pals can be added with [.pal_add()].
-#' @param .pal_chat A function that outputs an ellmer Chat, e.g.
+#' @param .pal_chat An ellmer Chat, e.g.
 #' `function() ellmer::chat_claude()`. Defaults to the option by the same name,
-#' so e.g. set `options(.pal_chat = function() ellmer::chat_claude())` in your
+#' so e.g. set `options(.pal_chat = ellmer::chat_claude()` in your
 #' `.Rprofile` to configure pal with ellmer every time you start a new R session.
 #'
 #' @examplesIf FALSE
@@ -20,13 +20,13 @@
 #' .init_pal()
 #'
 #' # or with OpenAI's 4o-mini:
-#' .init_pal(.pal_chat = function() {ellmer::chat_openai(model = "gpt-4o-mini")})
+#' .init_pal(.pal_chat = ellmer::chat_openai(model = "gpt-4o-mini"))
 #'
 #' # to set OpenAI's 4o-mini as the default model powering pal, for example,
 #' # set the following option (possibly in your .Rprofile, if you'd like
 #' # them to persist across sessions):
 #' options(
-#'   .pal_chat = function() {ellmer::chat_openai(model = "gpt-4o-mini")}
+#'   .pal_chat = ellmer::chat_openai(model = "gpt-4o-mini")
 #' )
 #' @export
 .init_pal <- function(

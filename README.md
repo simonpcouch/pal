@@ -32,11 +32,10 @@ pak::pak("simonpcouch/pal")
 [ellmer](https://ellmer.tidyverse.org/) model. pal uses ellmer under the
 hood, so any model that you can chat with through ellmer is also
 supported by pal. To configure pal with ellmer, set the option
-`.pal_chat` to a function that returns an ellmer Chat. For example, to
-use Claude, you’d write
-`options(.pal_chat = function() ellmer::chat_github())`, possibly in
-your `.Rprofile` so that pal is ready to go every time you start R. To
-learn more, see the [Getting started with
+`.pal_chat` to any ellmer Chat. For example, to use Claude, you’d write
+`options(.pal_chat = ellmer::chat_claude()`, possibly in your
+`.Rprofile` so that pal is ready to go every time you start R. To learn
+more, see the [Getting started with
 pal](https://simonpcouch.github.io/pal/articles/pal.html) vignette.
 
 **3)** Pals are interfaced with the via the pal addin. For easiest

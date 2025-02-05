@@ -11,9 +11,9 @@
 of \link[=pal_cli]{"cli"}, \link[=pal_testthat]{"testthat"} or \link[=pal_roxygen]{"roxygen"},
 though custom pals can be added with \code{\link[=.pal_add]{.pal_add()}}.}
 
-\item{.pal_chat}{A function that outputs an ellmer Chat, e.g.
+\item{.pal_chat}{An ellmer Chat, e.g.
 \code{function() ellmer::chat_claude()}. Defaults to the option by the same name,
-so e.g. set \code{options(.pal_chat = function() ellmer::chat_claude())} in your
+so e.g. set \verb{options(.pal_chat = ellmer::chat_claude()} in your
 \code{.Rprofile} to configure pal with ellmer every time you start a new R session.}
 }
 \description{
@@ -30,13 +30,13 @@ with \code{\link[=prompt_new]{prompt_new()}}.
 .init_pal()
 
 # or with OpenAI's 4o-mini:
-.init_pal(.pal_chat = function() {ellmer::chat_openai(model = "gpt-4o-mini")})
+.init_pal(.pal_chat = ellmer::chat_openai(model = "gpt-4o-mini"))
 
 # to set OpenAI's 4o-mini as the default model powering pal, for example,
 # set the following option (possibly in your .Rprofile, if you'd like
 # them to persist across sessions):
 options(
-  .pal_chat = function() {ellmer::chat_openai(model = "gpt-4o-mini")}
+  .pal_chat = ellmer::chat_openai(model = "gpt-4o-mini")
 )
 \dontshow{\}) # examplesIf}
 }
