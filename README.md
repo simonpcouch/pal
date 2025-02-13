@@ -42,7 +42,7 @@ pal](https://simonpcouch.github.io/pal/articles/pal.html) vignette.
 access, we recommend registering the pal addin to a keyboard shortcut.
 
 **In RStudio**, navigate to
-`Tools > Modify Keyboard Shortcuts > Search "Pal"`—we suggest
+`Tools > Modify Keyboard Shortcuts > Search "Pal"`---we suggest
 `Ctrl+Alt+P` (or `Ctrl+Cmd+P` on macOS).
 
 **In Positron**, you’ll need to open the command palette, run “Open

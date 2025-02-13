@@ -16,6 +16,6 @@ interface with the current selection. \strong{This function is not
 intended to be interfaced with in regular usage of the package.}
 To launch the pal addin in RStudio, navigate to \code{Addins > Pal}
 and/or register the addin with a shortcut via
-\verb{Tools > Modify Keyboard Shortcuts > Search "Pal"}—we suggest \code{Ctrl+Alt+P}
+\verb{Tools > Modify Keyboard Shortcuts > Search "Pal"}--we suggest \code{Ctrl+Alt+P}
 (or \code{Ctrl+Cmd+P} on macOS).
 }

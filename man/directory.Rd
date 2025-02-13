@@ -46,10 +46,10 @@ name \code{role-interface.md}, where interface is one of
 An example directory might look like:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{/
-├── .config/
-│   └── pal/
-│       ├── proofread-replace.md
-│       └── summarize-prefix.md
+|-- .config/
+|   |-- pal/
+|       |-- proofread-replace.md
+|       |-- summarize-prefix.md
 }\if{html}{\out{</div>}}
 
 In that case, pal will register two custom pals when you call \code{library(pal)}.

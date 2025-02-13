@@ -28,10 +28,10 @@
 #'
 #' ```
 #' /
-#' ├── .config/
-#' │   └── pal/
-#' │       ├── proofread-replace.md
-#' │       └── summarize-prefix.md
+#' |-- .config/
+#' |   |-- pal/
+#' |       |-- proofread-replace.md
+#' |       |-- summarize-prefix.md
 #' ```
 #'
 #' In that case, pal will register two custom pals when you call `library(pal)`.

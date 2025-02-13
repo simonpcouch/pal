@@ -37,7 +37,7 @@ pak::pak("simonpcouch/pal")
 
 **3)** Pals are interfaced with the via the pal addin. For easiest access, we recommend registering the pal addin to a keyboard shortcut.
 
-**In RStudio**, navigate to `Tools > Modify Keyboard Shortcuts > Search "Pal"`—we suggest `Ctrl+Alt+P` (or `Ctrl+Cmd+P` on macOS).
+**In RStudio**, navigate to `Tools > Modify Keyboard Shortcuts > Search "Pal"`---we suggest `Ctrl+Alt+P` (or `Ctrl+Cmd+P` on macOS).
 
 **In Positron**, you'll need to open the command palette, run "Open Keyboard Shortcuts (JSON)", and paste the following into your `keybindings.json`:
 

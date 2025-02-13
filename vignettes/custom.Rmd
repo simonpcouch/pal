@@ -52,10 +52,10 @@ Would result in a prompt directory that looks like:
 
 ```
 /
-├── .config/
-│   └── pal/
-│       ├── proofread-replace.md
-│       └── summarize-prefix.md
+|-- .config/
+|   |-- pal/
+|       |-- proofread-replace.md
+|       |-- summarize-prefix.md
 ```
 
 In that case, pal would register two custom pals when you call `library(pal)` (or `directory_load()`. One of them has the role `"proofread"` and will replace the selected text with a proofread version (according to the instructions contained in the markdown file itself). The other has the role `"summarize"` and will prefix the selected text with a summarized version (again, according to the markdown file's instructions).
