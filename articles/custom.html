@@ -146,10 +146,10 @@ pal will interact with the selection (one of <code>"replace"</code>,
 <span><span class="fu"><a href="../reference/prompt.html">prompt_new</a></span><span class="op">(</span><span class="st">"summarize"</span>, <span class="st">"prefix"</span><span class="op">)</span></span></code></pre></div>
 <p>Would result in a prompt directory that looks like:</p>
 <pre><code>/
-├── .config/
-│   └── pal/
-│       ├── proofread-replace.md
-│       └── summarize-prefix.md</code></pre>
+|-- .config/
+|   |-- pal/
+|       |-- proofread-replace.md
+|       |-- summarize-prefix.md</code></pre>
 <p>In that case, pal would register two custom pals when you call
 <code><a href="https://github.com/simonpcouch/pal" class="external-link">library(pal)</a></code> (or <code><a href="../reference/directory.html">directory_load()</a></code>. One of them
 has the role <code>"proofread"</code> and will replace the selected text
