@@ -8,7 +8,7 @@
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Provides a collection of ergonomic large language model assistants designed to help you complete repetitive, hard-to-automate tasks quickly. After selecting some code, press the keyboard shortcut you've chosen to trigger the package addin, select an assistent, and watch your code be rewritten. While the package ships with a number of pals for R package development, users can create custom pals just by writing some instructions in a markdown file.
+Provides a collection of ergonomic large language model assistants designed to help you complete repetitive, hard-to-automate tasks quickly. After selecting some code, press the keyboard shortcut you've chosen to trigger the package app, select an assistant, and watch your code be rewritten. While the package ships with a number of pals for R package development, users can create custom pals just by writing some instructions in a markdown file.
 }
 \seealso{
 Useful links:
