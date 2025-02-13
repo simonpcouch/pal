@@ -21,7 +21,6 @@ URL: https://github.com/simonpcouch/pal, https://simonpcouch.github.io/pal/
 BugReports: https://github.com/simonpcouch/pal/issues
 Imports: 
     cli (>= 3.6.3),
-    coro (>= 1.1.0),
     glue (>= 1.8.0),
     ellmer,
     miniUI (>= 0.1.1.1),
