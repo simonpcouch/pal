@@ -34,6 +34,4 @@ Suggests:
     testthat (>= 3.0.0),
     tibble,
     withr
-Remotes:
-    simonpcouch/streamy
 VignetteBuilder: knitr
