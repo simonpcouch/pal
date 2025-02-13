@@ -4,11 +4,11 @@
 \name{pal-package}
 \alias{pal}
 \alias{pal-package}
-\title{pal: LLM assistants for R}
+\title{pal: A Collection of Large Language Model Assistants}
 \description{
 \if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
-Provides a library of ergonomic LLM assistants designed to help you complete repetitive, hard-to-automate tasks quickly. After selecting some code, press the keyboard shortcut you've chosen to trigger the pal addin, select a pal, and watch your code be rewritten. While a number of pals for R package development ship with the package, users can create a suite of custom pals with only a directory of markdown files.
+Provides a collection of ergonomic large language model assistants designed to help you complete repetitive, hard-to-automate tasks quickly. After selecting some code, press the keyboard shortcut you've chosen to trigger the package addin, select an assistent, and watch your code be rewritten. While the package ships with a number of pals for R package development, users can create custom pals just by writing some instructions in a markdown file.
 }
 \seealso{
 Useful links:
