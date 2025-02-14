@@ -1,6 +1,6 @@
 #' @section Interfacing manually with the <%= chore %> helper:
 #'
-#' Pals are typically interfaced with via the chores addin. To call the <%= chore %>
+#' Chore helpers are typically interfaced with via the chores addin. To call the <%= chore %>
 #' helper directly, use:
 #'
 #' ```r

@@ -165,7 +165,7 @@ Returns:
 \section{Interfacing manually with the testthat helper}{
 
 
-Pals are typically interfaced with via the chores addin. To call the testthat
+Chore helpers are typically interfaced with via the chores addin. To call the testthat
 helper directly, use:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{helper_testthat <- .init_helper("testthat")

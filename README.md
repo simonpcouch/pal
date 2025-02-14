@@ -38,11 +38,11 @@ supported by chores. To configure chores with ellmer, set the option
 more, see the [Getting started with
 chores](https://simonpcouch.github.io/chores/articles/chores.html) vignette.
 
-**3)** Pals are interfaced with the via the chores addin. For easiest
+**3)** Chore helpers are interfaced with the via the chores addin. For easiest
 access, we recommend registering the chores addin to a keyboard shortcut.
 
 **In RStudio**, navigate to
-`Tools > Modify Keyboard Shortcuts > Search "Pal"`---we suggest
+`Tools > Modify Keyboard Shortcuts > Search "Chores"`---we suggest
 `Ctrl+Alt+P` (or `Ctrl+Cmd+P` on macOS).
 
 **In Positron**, you’ll need to open the command palette, run “Open
@@ -70,7 +70,7 @@ shortcut.
 
 ## Example
 
-Pals are created automatically when users interact with the chores addin.
+Chore helpers are created automatically when users interact with the chores addin.
 Just highlight some code, open the addin, begin typing the “chore” of
 your chores and press “Return”, and watch your code be rewritten:
 
@@ -105,5 +105,5 @@ something
 like](https://simonpcouch.github.io/chores/reference/cli_helper.html#cost)
 \$15 per 1,000 code refactorings, while using the testthat helper with
 OpenAI’s GPT 4o-mini would cost something like \$1 per 1,000
-refactorings. Pals using a locally-served LLM are “free” (in the usual
+refactorings. Chore helpers using a locally-served LLM are “free” (in the usual
 sense of code execution, ignoring the cost of increased battery usage).

@@ -28,7 +28,7 @@ When building a custom chore helper, you should first ask yourself a few questio
 
 Users interface with helpers via the active selection. **Would a selection provide enough context for the helper to do its job?** That is, besides the fixed system prompt attached to your helper, the only information the LLM has about your problem is the text that you've selected with your cursor. Would the model need access to a whole file, or a whole project, in order to do its job? In that case, some interface other than a helper may be a better fit.
 
-Pals return output by replacing, prefixing, or suffixing the current selection. **Is this the right place for output in your use case?** If output ultimately needs to be cut and pasted into a different file, for example, helpers may not be the right tool.
+Chore helpers return output by replacing, prefixing, or suffixing the current selection. **Is this the right place for output in your use case?** If output ultimately needs to be cut and pasted into a different file, for example, helpers may not be the right tool.
 
 Finally, **is this kind of output immediately verifiable?** The first element to consider here is how much stuff the model ultimately generates. A few sentences or a couple lines of code can be quickly audited and confirmed to be sound. The second element to consider is whether the output can be programmatically checked. For example, does generated code run without error (or, at least, is it syntactically valid)?
 
@@ -67,18 +67,18 @@ The best way to register helpers for your own personal use is via the prompt dir
 
 ## Extension packages
 
-Pal extension packages allow you to more flexibly share helper prompts with others. Putting together a helper extension package is straightforward:
+chores extension packages allow you to more flexibly share helper prompts with others. Putting together a helper extension package is straightforward:
 
 * Place one markdown file per new chore helper in `inst/prompts/`. This folder will take the same format as the prompt directory described above.
 * Place a call to `chores::directory_load()` in the package's `.onLoad()`, referencing the extension package's `system.file("prompts", package = "yourpackage")`. This will automatically register your package's prompts with chores when the extension is loaded.
 
 For an example chores extension, see [simonpcouch/chorespable](https://github.com/simonpcouch/chorespable).
 
-Pal extension packages also allow you to document what your helpers are for and how they tend to behave in context; situate your documentation files at `?chore_helper`, replacing `chore` with your new chore helper's name. Then, with your package loaded, users can view a high-level description of the helper's behavior and a gallery of examples. See `?cli_helper` for an example helper help-page, with source code [here](https://github.com/simonpcouch/chores/blob/main/R/doc-chores-cli.R).
+chores extension packages also allow you to document what your helpers are for and how they tend to behave in context; situate your documentation files at `?chore_helper`, replacing `chore` with your new chore helper's name. Then, with your package loaded, users can view a high-level description of the helper's behavior and a gallery of examples. See `?cli_helper` for an example helper help-page, with source code [here](https://github.com/simonpcouch/chores/blob/main/R/doc-chores-cli.R).
 
 ## Using others' custom helpers
 
-Pal is designed to make it as easy as possible to always have the helpers you need on hand.
+chores is designed to make it as easy as possible to always have the helpers you need on hand.
 
 **To use others' custom helpers that aren't situated in extension packages**, use `prompt_new()` with a `contents` argument. For example, Hannah Frick wrote a helper to transition R code chunks from R Markdown-style chunk headers to Quarto's yaml syntax and uploaded it as a GitHub Gist [here](https://gist.github.com/hfrick/1ca8fc2cb2a4409b743e8120c6cc2223#file-quartochunk-replace-md). To use her helper, we could write:
 

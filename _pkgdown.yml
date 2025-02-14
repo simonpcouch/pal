@@ -13,7 +13,7 @@ reference:
     - starts_with("prompt")
     - starts_with("directory")
     - helper_options
-  - title: Pals for package development
+  - title: Chore helpers for package development
     contents:
     - roxygen_helper
     - testthat_helper

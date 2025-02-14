@@ -14,8 +14,8 @@ and interfacing with selected text.
 The chores addin allows users to interactively select a chore helper to
 interface with the current selection. \strong{This function is not
 intended to be interfaced with in regular usage of the package.}
-To launch the chores addin in RStudio, navigate to \code{Addins > Pal}
+To launch the chores addin in RStudio, navigate to \code{Addins > Chores}
 and/or register the addin with a shortcut via
-\verb{Tools > Modify Keyboard Shortcuts > Search "Pal"}--we suggest \code{Ctrl+Alt+P}
+\verb{Tools > Modify Keyboard Shortcuts > Search "Chores"}--we suggest \code{Ctrl+Alt+P}
 (or \code{Ctrl+Cmd+P} on macOS).
 }

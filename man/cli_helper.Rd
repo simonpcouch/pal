@@ -172,7 +172,7 @@ Returns:
 \section{Interfacing manually with the cli helper}{
 
 
-Pals are typically interfaced with via the chores addin. To call the cli
+Chore helpers are typically interfaced with via the chores addin. To call the cli
 helper directly, use:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{helper_cli <- .init_helper("cli")

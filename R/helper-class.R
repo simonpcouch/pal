@@ -1,5 +1,5 @@
-Pal <- R6::R6Class(
-  "Pal",
+Helper <- R6::R6Class(
+  "Helper",
   public = list(
     initialize = function(chore, .chores_chat = getOption(".chores_chat")) {
       self$chore <- chore

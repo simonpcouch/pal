@@ -4,9 +4,9 @@
 #' The chores addin allows users to interactively select a chore helper to
 #' interface with the current selection. **This function is not
 #' intended to be interfaced with in regular usage of the package.**
-#' To launch the chores addin in RStudio, navigate to `Addins > Pal`
+#' To launch the chores addin in RStudio, navigate to `Addins > Chores`
 #' and/or register the addin with a shortcut via
-#' `Tools > Modify Keyboard Shortcuts > Search "Pal"`--we suggest `Ctrl+Alt+P`
+#' `Tools > Modify Keyboard Shortcuts > Search "Chores"`--we suggest `Ctrl+Alt+P`
 #' (or `Ctrl+Cmd+P` on macOS).
 #'
 #' @returns
@@ -91,6 +91,6 @@
     })
   }
 
-  viewer <- shiny::dialogViewer("Pal", width = 300, height = 10)
+  viewer <- shiny::dialogViewer("Chore helper", width = 300, height = 10)
   shiny::runGadget(ui, server, viewer = viewer)
 }

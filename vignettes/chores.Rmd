@@ -7,7 +7,7 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-Pals are persistent, ergonomic LLM assistants designed to help you complete repetitive, hard-to-automate tasks quickly.
+Chore helpers are persistent, ergonomic LLM assistants designed to help you complete repetitive, hard-to-automate tasks quickly.
 
 ```r
 library(chores)
@@ -48,9 +48,9 @@ Just:
 knitr::include_graphics("https://raw.githubusercontent.com/simonpcouch/chores/refs/heads/main/inst/figs/addin.gif")
 ```
 
-Pals are interfaced with the via the chores addin. For easiest access, we recommend registering the chores addin to a keyboard shortcut.
+Chore helpers are interfaced with the via the chores addin. For easiest access, we recommend registering the chores addin to a keyboard shortcut.
 
-**In RStudio**, navigate to `Tools > Modify Keyboard Shortcuts > Search "Pal"`---we suggest `Ctrl+Alt+P` (or `Ctrl+Cmd+P` on macOS).
+**In RStudio**, navigate to `Tools > Modify Keyboard Shortcuts > Search "Chores"`---we suggest `Ctrl+Alt+P` (or `Ctrl+Cmd+P` on macOS).
 
 **In Positron**, you'll need to open the command palette, run "Open Keyboard Shortcuts (JSON)", and paste the following into your `keybindings.json()`:
 

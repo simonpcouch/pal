@@ -1,4 +1,4 @@
-#' Initialize a Pal object
+#' Initialize a Helper object
 #'
 #' @description
 #' **Users typically should not need to call this function.**
@@ -41,7 +41,7 @@
     ))
   }
 
-  Pal$new(chore = chore, .chores_chat = .chores_chat)
+  Helper$new(chore = chore, .chores_chat = .chores_chat)
 }
 
 default_chores <- c("cli", "testthat", "roxygen")

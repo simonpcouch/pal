@@ -147,7 +147,7 @@ Returns:
 \section{Interfacing manually with the roxygen helper}{
 
 
-Pals are typically interfaced with via the chores addin. To call the roxygen
+Chore helpers are typically interfaced with via the chores addin. To call the roxygen
 helper directly, use:
 
 \if{html}{\out{<div class="sourceCode r">}}\preformatted{helper_roxygen <- .init_helper("roxygen")

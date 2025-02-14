@@ -46,6 +46,6 @@ test_that("helper remove with bad inputs", {
   )
   expect_snapshot(
     error = TRUE,
-    .helper_remove(chore = "notAnActivePal")
+    .helper_remove(chore = "notAnActiveHelper")
   )
 })

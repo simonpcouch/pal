@@ -2,7 +2,7 @@
 % Please edit documentation in R/init-helper.R
 \name{.init_helper}
 \alias{.init_helper}
-\title{Initialize a Pal object}
+\title{Initialize a Helper object}
 \usage{
 .init_helper(chore = NULL, .chores_chat = getOption(".chores_chat"))
 }
