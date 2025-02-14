@@ -4,14 +4,16 @@
 
 ## Notable changes pre-CRAN submission
 
-Early adopters of the package will note two changes made shortly before the 
+Early adopters of the package will note a few changes made shortly before the 
 release of the package to CRAN:
 
-* The configuration options `.helper_fn` and `.helper_args` have been 
-  transitioned to one option, `.chores_chat`. That option takes an ellmer Chat, e.g. 
-  `options(.chores_chat = ellmer::chat_claude())`.
-  If you've configured an ellmer model using the previous options, you'll get
-  an error that automatically translates to the new code you need to use.
+* The package was renamed from pal to chores, and the grammar surrounding the 
+  package shifted a bit in the process: "a pal from the pal package with a 
+  given role" is now "a helper from the chores package for a given chore."
+
+* The configuration options `.pal_fn` and `.pal_args` have been 
+  transitioned to one option, `.chores_chat`. That option takes an ellmer Chat, 
+  e.g. `options(.chores_chat = ellmer::chat_claude())`.
 
 * There is no longer a default ellmer model. Early in the development
   of chores, if you had an `ANTHROPIC_API_KEY` set up, the addin would
