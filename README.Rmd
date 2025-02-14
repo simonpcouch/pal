@@ -23,6 +23,8 @@ knitr::opts_chunk$set(
 
 The chores package provides a library of ergonomic LLM assistants designed to help you complete repetitive, hard-to-automate tasks quickly. After selecting some code, press the keyboard shortcut you've chosen to trigger the chores addin (we suggest `Ctrl+Cmd+C`), select the helper, and watch your code be rewritten.
 
+> This package used to be called pal.
+
 ## Installation
 
 Getting started with chores takes three steps.
