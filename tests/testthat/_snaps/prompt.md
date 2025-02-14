@@ -1,10 +1,10 @@
-# prompt_new errors informatively with redundant role
+# prompt_new errors informatively with redundant chore
 
     Code
       prompt_new("boop", "replace")
     Condition
       Error in `prompt_new()`:
-      ! There's already a pal with role "boop".
+      ! There's already a helper for chore "boop".
       i You can edit it with `prompt_edit("boop")`
 
 ---
@@ -13,16 +13,16 @@
       prompt_new("boop", "prefix")
     Condition
       Error in `prompt_new()`:
-      ! There's already a pal with role "boop".
+      ! There's already a helper for chore "boop".
       i You can edit it with `prompt_edit("boop")`
 
-# prompt_remove errors informatively with bad role
+# prompt_remove errors informatively with bad chore
 
     Code
-      prompt_remove("nonexistentrole")
+      prompt_remove("nonexistentchore")
     Condition
       Error in `prompt_remove()`:
-      ! No prompts for `role` "nonexistentrole" found in the prompt directory
+      ! No prompts for `chore` "nonexistentchore" found in the prompt directory
 
 # new prompts can be pre-filled with contents
 
@@ -39,13 +39,13 @@
       Error in `prompt_new()`:
       ! `contents` must be a connection to a markdown file.
 
-# default roles can't be overwritten or deleted (#59)
+# default chores can't be overwritten or deleted (#59)
 
     Code
       prompt_new("cli", "replace")
     Condition
       Error in `prompt_new()`:
-      ! Default roles cannot be edited or removed.
+      ! Default chores cannot be edited or removed.
 
 ---
 
@@ -53,7 +53,7 @@
       prompt_edit("cli")
     Condition
       Error in `prompt_edit()`:
-      ! Default roles cannot be edited or removed.
+      ! Default chores cannot be edited or removed.
 
 ---
 
@@ -61,5 +61,5 @@
       prompt_remove("cli")
     Condition
       Error in `prompt_remove()`:
-      ! Default roles cannot be edited or removed.
+      ! Default chores cannot be edited or removed.
 

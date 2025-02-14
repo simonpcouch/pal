@@ -2,11 +2,11 @@
 # It is recommended that you do not modify it.
 #
 # Where should you do additional test configuration?
-# Learn more about the roles of various files in:
+# Learn more about the chores of various files in:
 # * https://r-pkgs.org/testing-design.html#sec-tests-files-overview
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(pal)
+library(chores)
 
-test_check("pal")
+test_check("chores")

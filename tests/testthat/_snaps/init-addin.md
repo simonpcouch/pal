@@ -1,4 +1,4 @@
-# errors informatively on .pal_app error
+# errors informatively on .chores_app error
 
     Code
       .init_addin()
@@ -12,7 +12,7 @@
       .init_addin()
     Condition
       Error:
-      ! Unable to locate the requested pal.
+      ! Unable to locate the requested helper.
 
 # .init_addin executes found binding
 

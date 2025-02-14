@@ -2,20 +2,20 @@
 % Please edit documentation in R/init-addin.R
 \name{.init_addin}
 \alias{.init_addin}
-\title{Run the pal addin}
+\title{Run the chores addin}
 \usage{
 .init_addin()
 }
 \value{
-\code{NULL}, invisibly. Called for the side effect of launching the pal addin
+\code{NULL}, invisibly. Called for the side effect of launching the chores addin
 and interfacing with selected text.
 }
 \description{
-The pal addin allows users to interactively select a pal to
+The chores addin allows users to interactively select a chore helper to
 interface with the current selection. \strong{This function is not
 intended to be interfaced with in regular usage of the package.}
-To launch the pal addin in RStudio, navigate to \code{Addins > Pal}
+To launch the chores addin in RStudio, navigate to \code{Addins > Chores}
 and/or register the addin with a shortcut via
-\verb{Tools > Modify Keyboard Shortcuts > Search "Pal"}--we suggest \code{Ctrl+Alt+P}
-(or \code{Ctrl+Cmd+P} on macOS).
+\verb{Tools > Modify Keyboard Shortcuts > Search "Chores"}--we suggest \code{Ctrl+Alt+C}
+(or \code{Ctrl+Cmd+C} on macOS).
 }

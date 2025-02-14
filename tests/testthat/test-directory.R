@@ -12,14 +12,14 @@ test_that("directory_load works", {
 
   withr::defer(
     try_fetch(
-      {.pal_remove("boop"); .pal_remove("wop")},
+      {.helper_remove("boop"); .helper_remove("wop")},
       error = function(e) {invisible()}
     )
   )
 
   directory_load(tmp_dir)
 
-  expect_true(all(c("beep", "wop") %in% list_pals()))
+  expect_true(all(c("beep", "wop") %in% list_helpers()))
 })
 
 test_that("filter_single_hyphenated messages informatively", {
@@ -43,7 +43,7 @@ test_that("filter_interfaces messages informatively", {
 
 test_that("directory_list works", {
   # contains two prompts, `boop-replace` and `wop-prefix`
-  withr::local_options(.pal_dir = "test-prompt-dir")
+  withr::local_options(.chores_dir = "test-prompt-dir")
   testthat::local_mocked_bindings(interactive = function(...) {TRUE})
   expect_snapshot(directory_list())
 
@@ -53,14 +53,14 @@ test_that("directory_list works", {
 
 test_that("directory_list works", {
   # contains two prompts, `boop-replace` and `wop-prefix`
-  withr::local_options(.pal_dir = "test-prompt-dir")
+  withr::local_options(.chores_dir = "test-prompt-dir")
   expect_equal(directory_path(), "test-prompt-dir")
 })
 
 test_that("directory_set works", {
   expect_snapshot(error = TRUE, directory_set(identity))
 
-  withr::local_options(.pal_dir = "test-prompt-dir")
+  withr::local_options(.chores_dir = "test-prompt-dir")
   path <- directory_path()
   withr::defer(directory_set(path))
 
@@ -88,16 +88,16 @@ test_that("directory_load() doesn't warn with no trailing newline (#75)", {
   )
 
   withr::defer(
-    try_fetch({.pal_remove("test")}, error = function(e) {invisible()})
+    try_fetch({.helper_remove("test")}, error = function(e) {invisible()})
   )
 
   expect_no_warning(directory_load(tmp_dir))
-  expect_true("test" %in% list_pals())
+  expect_true("test" %in% list_helpers())
 })
 
 test_that("directory_list returns empty and messages informatively when no files", {
   tmp_dir <- withr::local_tempdir()
-  withr::local_options(.pal_dir = tmp_dir)
+  withr::local_options(.chores_dir = tmp_dir)
   testthat::local_mocked_bindings(interactive = function(...) {TRUE})
 
   expect_snapshot(res <- directory_list())

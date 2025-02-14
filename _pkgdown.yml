@@ -1,25 +1,25 @@
-url: https://simonpcouch.github.io/pal/
+url: https://simonpcouch.github.io/chores/
 template:
   bootstrap: 5
 
 reference:
-  - title: "Using pal"
+  - title: "Using chores"
     desc: >
       See the
-      ["Getting Started with pal"](https://simonpcouch.github.io/pal/articles/pal.html)
-      vignette to learn how to work with pals.
-  - title: Creating custom pals
+      ["Getting Started with chores"](https://simonpcouch.github.io/chores/articles/chores.html)
+      vignette to learn how to work with helpers.
+  - title: Creating custom helpers
     contents:
     - starts_with("prompt")
     - starts_with("directory")
-    - pal_options
-  - title: Pals for package development
+    - helper_options
+  - title: Chore helpers for package development
     contents:
-    - pal_roxygen
-    - pal_testthat
-    - pal_cli
+    - roxygen_helper
+    - testthat_helper
+    - cli_helper
   - title: Developer Infrastructure
     contents:
-    - pal_add_remove
-    - .init_pal
+    - helper_add_remove
+    - .init_helper
     - .init_addin

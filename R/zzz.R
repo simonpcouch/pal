@@ -1,14 +1,14 @@
 # nocov start
 
 .onLoad <- function(libname, pkgname) {
-  pal_env <- pal_env()
-  withr::local_options(.pal_on_load = TRUE)
+  chores_env <- chores_env()
+  withr::local_options(.helper_on_load = TRUE)
 
-  directory_load(system.file("prompts", package = "pal"))
+  directory_load(system.file("prompts", package = "chores"))
 
-  pal_dir <- getOption(".pal_dir", default = file.path("~", ".config", "pal"))
-  if (dir.exists(pal_dir)) {
-    directory_load(pal_dir)
+  chores_dir <- getOption(".chores_dir", default = file.path("~", ".config", "chores"))
+  if (dir.exists(chores_dir)) {
+    directory_load(chores_dir)
   }
 }
 

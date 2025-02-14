@@ -1,15 +1,15 @@
-#' @section Interfacing manually with the <%= role %> pal:
+#' @section Interfacing manually with the <%= chore %> helper:
 #'
-#' Pals are typically interfaced with via the pal addin. To call the <%= role %>
-#' pal directly, use:
+#' Chore helpers are typically interfaced with via the chores addin. To call the <%= chore %>
+#' helper directly, use:
 #'
 #' ```r
-#' pal_<%= role %> <- .init_pal("<%= role %>")
+#' helper_<%= chore %> <- .init_helper("<%= chore %>")
 #' ```
 #'
 #' Then, to submit a query, run:
 #'
 #' ```r
-#' pal_<%= role %>$chat({x})
+#' helper_<%= chore %>$chat({x})
 #' ```
 #' @md

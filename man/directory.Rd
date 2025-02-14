@@ -20,42 +20,42 @@ directory_set(dir)
 \item{dir}{Path to a directory of markdown files--see \code{Details} for more.}
 }
 \description{
-The pal package's prompt directory is a directory of markdown files that
-is automatically registered with the pal package on package load.
+The chores package's prompt directory is a directory of markdown files that
+is automatically registered with the chores package on package load.
 \verb{directory_*()} functions allow users to interface with the directory,
-making new "roles" available:
+making new "chores" available:
 \itemize{
 \item \code{directory_path()} returns the path to the prompt directory, which
-defaults to \verb{~/.config/pal}.
+defaults to \verb{~/.config/chores}.
 \item \code{directory_set()} changes the path to the prompt directory (by setting
-the option \code{.pal_dir}).
+the option \code{.chores_dir}).
 \item \code{directory_list()} enumerates all of the different prompts that currently
 live in the directory (and provides clickable links to each).
 \item \code{directory_load()} registers each of the prompts in the prompt
-directory with the pal package (via \code{\link[=.pal_add]{.pal_add()}}).
+directory with the chores package (via \code{\link[=.helper_add]{.helper_add()}}).
 }
 
 \link[=prompt]{Functions prefixed with} \verb{prompt*()} allow users to conveniently create, edit,
-and delete the prompts in pal's prompt directory.
+and delete the prompts in chores' prompt directory.
 }
 \section{Format of the prompt directory}{
 
 Prompts are markdown files with the
-name \code{role-interface.md}, where interface is one of
+name \code{chore-interface.md}, where interface is one of
 "replace", "prefix" or "suffix".
 An example directory might look like:
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{/
 |-- .config/
-|   |-- pal/
+|   |-- chores/
 |       |-- proofread-replace.md
 |       |-- summarize-prefix.md
 }\if{html}{\out{</div>}}
 
-In that case, pal will register two custom pals when you call \code{library(pal)}.
-One of them has the role "proofread" and will replace the selected text with
+In that case, chores will register two custom helpers when you call \code{library(chores)}.
+One of them is for the "proofread" chore and will replace the selected text with
 a proofread version (according to the instructions contained in the markdown
-file itself). The other has the role "summarize" and will prefix the selected
+file itself). The other is for the "summarize" chore and will prefix the selected
 text with a summarized version (again, according to the markdown file's
 instructions). Note:
 \itemize{
@@ -67,8 +67,8 @@ and the text following the hyphen must be one of \code{replace}, \code{prefix}, 
 
 To load custom prompts every time the package is loaded, place your
 prompts in \code{directory_path()}. To change the prompt directory without
-loading the package, just set the \code{.pal_dir} option with
-\code{options(.pal_dir = some_dir)}. To load a directory of files that's not
+loading the package, just set the \code{.chores_dir} option with
+\code{options(.chores_dir = some_dir)}. To load a directory of files that's not
 the prompt directory, provide a \code{dir} argument to \code{directory_load()}.
 }
 
@@ -92,11 +92,11 @@ directory_load()
 
 # these are equivalent:
 directory_set("some/folder")
-options(.pal_dir = "some/folder")
+options(.chores_dir = "some/folder")
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-The "Custom pals" vignette, at \code{vignette("custom", package = "pal")},
-for more on adding your own pal prompts, sharing them with others, and
+The "Custom helpers" vignette, at \code{vignette("custom", package = "chores")},
+for more on adding your own helper prompts, sharing them with others, and
 using prompts from others.
 }

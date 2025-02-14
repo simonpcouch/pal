@@ -1,14 +1,14 @@
 test_that("prompt_* functions work", {
   # contains two prompts, `boop-replace` and `wop-prefix`
-  withr::local_options(.pal_dir = "test-prompt-dir")
+  withr::local_options(.chores_dir = "test-prompt-dir")
   testthat::local_mocked_bindings(interactive = function(...) {FALSE})
 
   path <- "test-prompt-dir/floop-replace.md"
   if (file.exists(path)) {file.remove(path)}
   withr::defer({if (file.exists(path)) {file.remove(path)}})
 
-  if ("floop" %in% list_pals()) {
-    .pal_remove("floop")
+  if ("floop" %in% list_helpers()) {
+    .helper_remove("floop")
   }
 
   .res <- prompt_new("floop", "replace")
@@ -24,9 +24,9 @@ test_that("prompt_* functions work", {
   expect_false(file.exists(.res))
 })
 
-test_that("prompt_new errors informatively with redundant role", {
+test_that("prompt_new errors informatively with redundant chore", {
   # contains two prompts, `boop-replace` and `wop-prefix`
-  withr::local_options(.pal_dir = "test-prompt-dir")
+  withr::local_options(.chores_dir = "test-prompt-dir")
   testthat::local_mocked_bindings(interactive = function(...) {FALSE})
 
   expect_snapshot(error = TRUE, prompt_new("boop", "replace"))
@@ -35,15 +35,15 @@ test_that("prompt_new errors informatively with redundant role", {
 
 test_that("prompt_new works when directory doesn't exist yet (#47)", {
   subdir <- "test-prompt-dir/subdir"
-  withr::local_options(.pal_dir = subdir)
+  withr::local_options(.chores_dir = subdir)
   testthat::local_mocked_bindings(interactive = function(...) {FALSE})
 
   if (dir.exists(subdir)) {unlink(subdir, recursive = TRUE)}
-  if ("floop" %in% list_pals()) {.pal_remove("floop")}
+  if ("floop" %in% list_helpers()) {.helper_remove("floop")}
 
   withr::defer({
     if (dir.exists(subdir)) {unlink(subdir, recursive = TRUE)}
-    if ("floop" %in% list_pals()) {.pal_remove("floop")}
+    if ("floop" %in% list_helpers()) {.helper_remove("floop")}
   })
 
   .res <- prompt_new("floop", "replace")
@@ -51,18 +51,18 @@ test_that("prompt_new works when directory doesn't exist yet (#47)", {
   expect_true(file.exists(.res))
 })
 
-test_that("prompt_remove errors informatively with bad role", {
+test_that("prompt_remove errors informatively with bad chore", {
   # contains two prompts, `boop-replace` and `wop-prefix`
-  withr::local_options(.pal_dir = "test-prompt-dir")
+  withr::local_options(.chores_dir = "test-prompt-dir")
   testthat::local_mocked_bindings(interactive = function(...) {FALSE})
 
-  expect_snapshot(error = TRUE, prompt_remove("nonexistentrole"))
+  expect_snapshot(error = TRUE, prompt_remove("nonexistentchore"))
 })
 
 test_that("new prompts can be pre-filled with contents", {
   skip_if_offline()
   # contains two prompts, `boop-replace` and `wop-prefix`
-  withr::local_options(.pal_dir = "test-prompt-dir")
+  withr::local_options(.chores_dir = "test-prompt-dir")
   testthat::local_mocked_bindings(interactive = function(...) {FALSE})
   withr::defer(prompt_remove("summarizeAlt"))
 
@@ -85,7 +85,7 @@ test_that("new prompts can be pre-filled with contents", {
 test_that("new prompts are pre-filled with a template by default (#57)", {
   skip_if_offline()
   # contains two prompts, `boop-replace` and `wop-prefix`
-  withr::local_options(.pal_dir = "test-prompt-dir")
+  withr::local_options(.chores_dir = "test-prompt-dir")
   testthat::local_mocked_bindings(interactive = function(...) {FALSE})
   withr::defer(prompt_remove("template"))
 
@@ -93,13 +93,13 @@ test_that("new prompts are pre-filled with a template by default (#57)", {
 
   lines <- base::readLines(path)
 
-  expect_equal(lines[1], "# Template pal")
+  expect_equal(lines[1], "# Template chore helper")
 })
 
 test_that("new prompts error informatively with bad pre-fill contents", {
   skip_if_offline()
   # contains two prompts, `boop-replace` and `wop-prefix`
-  withr::local_options(.pal_dir = "test-prompt-dir")
+  withr::local_options(.chores_dir = "test-prompt-dir")
   testthat::local_mocked_bindings(interactive = function(...) {FALSE})
   withr::defer(prompt_remove("summarizeAlt"))
 
@@ -117,7 +117,7 @@ test_that("new prompts error informatively with bad pre-fill contents", {
 test_that("prompts can be added, removed, and added again without restart (#58)", {
   skip_if_offline()
   # contains two prompts, `boop-replace` and `wop-prefix`
-  withr::local_options(.pal_dir = "test-prompt-dir")
+  withr::local_options(.chores_dir = "test-prompt-dir")
   testthat::local_mocked_bindings(interactive = function(...) {FALSE})
   withr::defer(prompt_remove("template"))
 
@@ -128,7 +128,7 @@ test_that("prompts can be added, removed, and added again without restart (#58)"
   expect_true(file.exists(path))
 })
 
-test_that("default roles can't be overwritten or deleted (#59)", {
+test_that("default chores can't be overwritten or deleted (#59)", {
   expect_snapshot(error = TRUE, prompt_new("cli", "replace"))
   expect_snapshot(error = TRUE, prompt_edit("cli"))
   expect_snapshot(error = TRUE, prompt_remove("cli"))

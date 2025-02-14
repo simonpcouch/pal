@@ -1,58 +1,58 @@
-#' Run the pal addin
+#' Run the chores addin
 #'
 #' @description
-#' The pal addin allows users to interactively select a pal to
+#' The chores addin allows users to interactively select a chore helper to
 #' interface with the current selection. **This function is not
 #' intended to be interfaced with in regular usage of the package.**
-#' To launch the pal addin in RStudio, navigate to `Addins > Pal`
+#' To launch the chores addin in RStudio, navigate to `Addins > Chores`
 #' and/or register the addin with a shortcut via
-#' `Tools > Modify Keyboard Shortcuts > Search "Pal"`--we suggest `Ctrl+Alt+P`
-#' (or `Ctrl+Cmd+P` on macOS).
+#' `Tools > Modify Keyboard Shortcuts > Search "Chores"`--we suggest `Ctrl+Alt+C`
+#' (or `Ctrl+Cmd+C` on macOS).
 #'
 #' @returns
-#' `NULL`, invisibly. Called for the side effect of launching the pal addin
+#' `NULL`, invisibly. Called for the side effect of launching the chores addin
 #' and interfacing with selected text.
 #'
 #' @export
 .init_addin <- function() {
-  if (is.null(fetch_pal_chat())) {
+  if (is.null(fetch_chores_chat())) {
     return(invisible())
   }
 
   # suppress "Listening on..." message and rethrow errors with new context
   try_fetch(
-    suppressMessages(pal_fn_name <- .pal_app()),
+    suppressMessages(helper_fn_name <- .chores_app()),
     error = function(cnd) {cli::cli_abort(conditionMessage(cnd), call = NULL)}
   )
 
-  if (is.null(pal_fn_name) || identical(pal_fn_name, ".pal_rs_")) {
+  if (is.null(helper_fn_name) || identical(helper_fn_name, ".helper_rs_")) {
     return(invisible())
   }
 
-  # call the binding associated with the chosen pal
+  # call the binding associated with the chosen helper
   try_fetch(
-    pal_fn <- env_get(pal_env(), pal_fn_name),
+    helper_fn <- env_get(chores_env(), helper_fn_name),
     error = function(e) {
-      cli::cli_abort("Unable to locate the requested pal.", call = NULL)
+      cli::cli_abort("Unable to locate the requested helper.", call = NULL)
     }
   )
 
-  do.call(pal_fn, args = list())
+  do.call(helper_fn, args = list())
 
   invisible()
 }
 
-.pal_app <- function() {
-  pal_choices <- list_pals()
+.chores_app <- function() {
+  helper_choices <- list_helpers()
 
   ui <- miniUI::miniPage(
     miniUI::miniContentPanel(
-      shiny::selectizeInput("pal", "Select a pal:",
-                            choices = pal_choices,
+      shiny::selectizeInput("helper", "Select a helper:",
+                            choices = helper_choices,
                             multiple = FALSE,
                             options = list(
                               create = FALSE,
-                              placeholder = 'Type to filter or select a pal',
+                              placeholder = 'Type to filter or select a helper',
                               onDropdownOpen = I("function($dropdown) {this.clear();}"),
                               onBlur = I("function() {this.clear();}"),
                               score = I("function(search) {
@@ -84,13 +84,13 @@
 
   server <- function(input, output, session) {
     shiny::observeEvent(input$done, {
-      shiny::stopApp(returnValue = paste0(".pal_rs_", input$pal))
+      shiny::stopApp(returnValue = paste0(".helper_rs_", input$helper))
     })
     shiny::onStop(function() {
       shiny::stopApp(returnValue = NULL)
     })
   }
 
-  viewer <- shiny::dialogViewer("Pal", width = 300, height = 10)
+  viewer <- shiny::dialogViewer("Chore helper", width = 300, height = 10)
   shiny::runGadget(ui, server, viewer = viewer)
 }
