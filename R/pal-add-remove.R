@@ -1,31 +1,31 @@
-#' Registering pals
+#' Registering helpers
 #'
 #' @description
-#' Users can create custom pals using the `.pal_add()` function; after passing
-#' the function a role and prompt, the pal will be available in the
-#' [pal addin][.init_addin].
+#' Users can create custom helpers using the `.helper_add()` function; after passing
+#' the function a role and prompt, the helper will be available in the
+#' [chores addin][.init_addin].
 #'
 #' **Most users should not need to interact with these functions.**
-#' [prompt_new()] and friends can be used to create prompts for new pals, and
-#' those pals can be registered with pal using [directory_load()] and friends.
-#' The pals created by those functions will be persistent across sessions.
+#' [prompt_new()] and friends can be used to create prompts for new helpers, and
+#' those helpers can be registered with chores using [directory_load()] and friends.
+#' The helpers created by those functions will be persistent across sessions.
 #'
-#' @param role A single string giving a descriptor of the pal's functionality.
+#' @param role A single string giving a descriptor of the helper's functionality.
 #' Cand only contain letters and numbers.
 #' @param prompt A single string giving the system prompt. In most cases, this
 #' is a rather long string, containing several newlines.
 #' @param interface One of `"replace"`, `"prefix"`, or `"suffix"`, describing
-#' how the pal will interact with the selection. For example, the
-#' [cli pal][pal_cli] `"replace"`s the selection, while the
-#' [roxygen pal][pal_roxygen] `"prefixes"` the selected code with documentation.
+#' how the helper will interact with the selection. For example, the
+#' [cli helper][cli_helper] `"replace"`s the selection, while the
+#' [roxygen helper][roxygen_helper] `"prefixes"` the selected code with documentation.
 #'
 #' @returns
-#' `NULL`, invisibly. Called for its side effect: a pal with role `role`
-#' is registered (or unregistered) with the pal package.
+#' `NULL`, invisibly. Called for its side effect: a helper with role `role`
+#' is registered (or unregistered) with the chores package.
 #'
-#' @name pal_add_remove
+#' @name helper_add_remove
 #' @export
-.pal_add <- function(
+.helper_add <- function(
     role,
     prompt = NULL,
     interface = c("replace", "prefix", "suffix")
@@ -39,20 +39,20 @@
   invisible()
 }
 
-#' @rdname pal_add_remove
-.pal_remove <- function(role) {
+#' @rdname helper_add_remove
+.helper_remove <- function(role) {
   check_string(role)
-  if (!role %in% list_pals()) {
-    cli::cli_abort("No active pal with the given {.arg role}.")
+  if (!role %in% list_helpers()) {
+    cli::cli_abort("No active helper with the given {.arg role}.")
   }
 
   env_unbind(
-    pal_env(),
-    c(paste0(".pal_prompt_", role), paste0(".pal_rs_", role))
+    chores_env(),
+    c(paste0(".helper_prompt_", role), paste0(".helper_rs_", role))
   )
 
-  if (paste0(".pal_last_", role) %in% names(pal_env())) {
-    env_unbind(pal_env(), paste0(".pal_last_", role))
+  if (paste0(".helper_last_", role) %in% names(chores_env())) {
+    env_unbind(chores_env(), paste0(".helper_last_", role))
   }
 
   invisible()
@@ -60,7 +60,7 @@
 
 supported_interfaces <- c("replace", "prefix", "suffix")
 
-# given an interface and role, attaches a function binding in pal's `.pal_env`
+# given an interface and role, attaches a function binding in chores' `.chores_env`
 parse_interface <- function(interface, role, call = caller_env()) {
   if (isTRUE(identical(interface, supported_interfaces))) {
     interface <- interface[1]
@@ -79,17 +79,17 @@ parse_interface <- function(interface, role, call = caller_env()) {
     role,
     function(context = rstudioapi::getActiveDocumentContext()) {
       selection <- get_primary_selection(context)
-      pal <- retrieve_pal(role)$clone()
+      helper <- retrieve_helper(role)$clone()
       streamy::stream(
         generator =
-          # TODO: this is gnarly--revisit when pals are just Chats
+          # TODO: this is gnarly--revisit when helpers are just Chats
           # or ensure selection$text isn't substituted
-          pal[[".__enclos_env__"]][["private"]]$.stream(selection$text),
+          helper[[".__enclos_env__"]][["private"]]$.stream(selection$text),
         context = context,
         interface = interface
       )
     }
   )
 
-  paste0(".pal_rs_", role)
+  paste0(".helper_rs_", role)
 }

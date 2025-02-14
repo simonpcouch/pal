@@ -1,9 +1,9 @@
-#' The roxygen pal
+#' The roxygen helper
 #'
 #' @description
 #'
-#' The roxygen pal prefixes the selected function with a minimal roxygen2
-#' documentation template. The pal is instructed to only generate a subset
+#' The roxygen helper prefixes the selected function with a minimal roxygen2
+#' documentation template. The helper is instructed to only generate a subset
 #' of a complete documentation entry, to be then completed by a developer:
 #'
 #' * Stub `@param` descriptions based on defaults and inferred types
@@ -13,16 +13,16 @@
 #'
 #' @section Cost:
 #'
-#' The system prompt from a roxygen pal includes something like 1,000 tokens.
+#' The system prompt from a roxygen helper includes something like 1,000 tokens.
 #' Add in 200 tokens for the code that's actually highlighted
 #' and also sent off to the model and you're looking at 1,200 input tokens.
 #' The model returns maybe 10 to 15 lines of relatively barebones royxgen
 #' documentation, so we'll call that 200 output tokens per refactor.
 #'
-#' As of the time of writing (October 2024), the default pal model Claude
+#' As of the time of writing (October 2024), the recommended chores model Claude
 #' Sonnet 3.5 costs $3 per million input tokens and $15 per million output
-#' tokens. So, using the default model,
-#' **roxygen pals cost around $4 for every 1,000 generated roxygen documentation
+#' tokens. So, using the recommended model,
+#' **roxygen helpers cost around $4 for every 1,000 generated roxygen documentation
 #' entries**. GPT-4o Mini, by contrast, doesn't tend to infer argument types
 #' correctly as often and
 #' often fails to line-break properly, but _does_ usually return syntactically
@@ -33,7 +33,7 @@
 #'
 #' This section includes a handful of examples
 #' "[from the wild](https://github.com/hadley/elmer/tree/e497d627e7be01206df6f1420ca36235141dc22a/R)"
-#' and are generated with the default model, Claude Sonnet 3.5.
+#' and are generated with the recommended model, Claude Sonnet 3.5.
 #'
 #' Documenting a function factory:
 #'
@@ -147,5 +147,5 @@
 #' @templateVar role roxygen
 #' @template manual-interface
 #'
-#' @name pal_roxygen
+#' @name roxygen_helper
 NULL

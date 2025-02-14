@@ -1,15 +1,15 @@
-#' Working with pal prompts
+#' Working with helper prompts
 #'
 #' @description
-#' The pal package provides a number of tools for working on system _prompts_.
-#' System prompts are what instruct pals on how to behave and provide
+#' The chores package provides a number of tools for working on system _prompts_.
+#' System prompts are what instruct helpers on how to behave and provide
 #' information to live in the models' "short-term memory."
 #'
 #' `prompt_*()` functions allow users to conveniently create, edit, remove,
-#' the prompts in pal's "[prompt directory][directory]."
+#' the prompts in chores' "[prompt directory][directory]."
 #'
 #' * `prompt_new()` creates a new markdown file that will automatically
-#' create a pal with the specified role, prompt, and interface on package load.
+#' create a helper with the specified role, prompt, and interface on package load.
 #' Specify a `contents` argument to prefill with contents from a markdown file
 #' on your computer or the web.
 #' * `prompt_edit()` and `prompt_remove()` open and delete, respectively, the
@@ -18,25 +18,25 @@
 #' Load the prompts you create with these functions using [directory_load()]
 #' (which is automatically called when the package loads).
 #'
-#' @inheritParams pal_add_remove
+#' @inheritParams helper_add_remove
 #' @param contents Optional. Path to a markdown file with contents that will
 #' "pre-fill" the file. Anything file ending in `.md` or `.markdown` that can be
 #' read with `readLines()` is fair game; this could be a local file, a "raw"
 #' URL to a GitHub Gist or file in a GitHub repository, etc.
 #'
 #' @seealso The [directory] help-page for more on working with prompts in
-#' batch using `directory_*()` functions, and `vignette("custom", package = "pal")`
-#' for more on sharing pal prompts and using prompts from others.
+#' batch using `directory_*()` functions, and `vignette("custom", package = "chores")`
+#' for more on sharing helper prompts and using prompts from others.
 #'
 #' @returns
 #' Each `prompt_*()` function returns the file path to the created, edited, or
 #' removed filepath, invisibly.
 #'
 #' @examplesIf FALSE
-#' # create a new pal with role `"boop"` that replaces the selected text:
+#' # create a new helper with role `"boop"` that replaces the selected text:
 #' prompt_new("boop")
 #'
-#' # after writing a prompt, register it with the pal package with:
+#' # after writing a prompt, register it with the chores package with:
 #' directory_load()
 #'
 #' # after closing the file, reopen with:
@@ -81,9 +81,9 @@ prompt_new <- function(role, interface, contents = NULL) {
   if (!role %in% default_roles || !is.null(current_path)) {
     suggestion <- c("i" = "You can edit it with {.code prompt_edit({.val {role}})}")
   }
-  if (role %in% list_pals() || !is.null(current_path)) {
+  if (role %in% list_helpers() || !is.null(current_path)) {
     cli::cli_abort(c(
-      "There's already a pal with role {.val {role}}.",
+      "There's already a helper with role {.val {role}}.",
       suggestion
     ))
   }
@@ -112,9 +112,9 @@ prompt_remove <- function(role) {
   path <- prompt_locate(role)
   file.remove(path)
 
-  pal_env <- pal_env()
-  rlang::env_unbind(pal_env, paste0(".pal_prompt_", role))
-  rlang::env_unbind(pal_env, paste0(".pal_rs_", role))
+  chores_env <- chores_env()
+  rlang::env_unbind(chores_env, paste0(".helper_prompt_", role))
+  rlang::env_unbind(chores_env, paste0(".helper_rs_", role))
 
   invisible(path)
 }
@@ -155,7 +155,7 @@ prompt_prefill <- function(path, contents, role, call = caller_env()) {
   }
 
   if (is.null(contents)) {
-    contents <- system.file("template.md", package = "pal")
+    contents <- system.file("template.md", package = "chores")
   }
 
   suppressWarnings(

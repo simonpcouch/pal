@@ -1,15 +1,15 @@
 Pal <- R6::R6Class(
   "Pal",
   public = list(
-    initialize = function(role, .pal_chat = getOption(".pal_chat")) {
+    initialize = function(role, .chores_chat = getOption(".chores_chat")) {
       self$role <- role
 
-      Chat <- .pal_chat$clone()
+      Chat <- .chores_chat$clone()
 
-      Chat$set_system_prompt(get(paste0(".pal_prompt_", role), envir = pal_env()))
+      Chat$set_system_prompt(get(paste0(".helper_prompt_", role), envir = chores_env()))
       private$Chat <- Chat
 
-      .stash_last_pal(self)
+      .stash_last_helper(self)
     },
     chat = function(...) {
       private$Chat$chat(...)
@@ -22,7 +22,7 @@ Pal <- R6::R6Class(
     print = function(...) {
       model <- private$Chat[[".__enclos_env__"]][["private"]][["provider"]]@model
       cli::cli_h3(
-        "A {.field {self$role}} pal using {.field {model}}."
+        "A {.field {self$role}} chore helper using {.field {model}}."
       )
     }
   ),
@@ -39,56 +39,56 @@ Pal <- R6::R6Class(
 
 # this function fails with messages and a NULL return value rather than errors
 # so that, when called from inside the addin, there's no dialog box raised by RStudio
-fetch_pal_chat <- function(.pal_chat = getOption(".pal_chat")) {
+fetch_chores_chat <- function(.chores_chat = getOption(".chores_chat")) {
   # first, check for old options
-  .pal_fn <- getOption(".pal_fn")
-  .pal_args <- getOption(".pal_args")
-  if (!is.null(.pal_fn) && is.null(.pal_chat)) {
+  .helper_fn <- getOption(".helper_fn")
+  .helper_args <- getOption(".helper_args")
+  if (!is.null(.helper_fn) && is.null(.chores_chat)) {
     new_option <-
-      cli::format_inline("{deparse(rlang::call2(.pal_fn, !!!.pal_args))}")
+      cli::format_inline("{deparse(rlang::call2(.helper_fn, !!!.helper_args))}")
     cli::cli_inform(c(
-      "{.pkg pal} now uses the option {cli::col_blue('.pal_chat')} instead
-      of {cli::col_blue('.pal_fn')} and {cli::col_blue('.pal_args')}.",
+      "{.pkg chores} now uses the option {cli::col_blue('.chores_chat')} instead
+      of {cli::col_blue('.helper_fn')} and {cli::col_blue('.helper_args')}.",
       "i" = "Set
-      {.code options(.pal_chat = {deparse(rlang::call2(.pal_fn, !!!.pal_args))})}
+      {.code options(.chores_chat = {deparse(rlang::call2(.helper_fn, !!!.helper_args))})}
       instead."
     ), call = NULL)
     return(NULL)
   }
 
-  if (is.null(.pal_chat)) {
+  if (is.null(.chores_chat)) {
     cli::cli_inform(
       c(
-        "!" = "pal requires configuring an ellmer Chat with the
-        {cli::col_blue('.pal_chat')} option.",
+        "!" = "chores requires configuring an ellmer Chat with the
+        {cli::col_blue('.chores_chat')} option.",
         "i" = "Set e.g.
-        {.code {cli::col_green('options(.pal_chat = ellmer::chat_claude()')}}
+        {.code {cli::col_green('options(.chores_chat = ellmer::chat_claude()')}}
         in your {.file ~/.Rprofile} and restart R.",
         "i" = "See \"Choosing a model\" in
-        {.code vignette(\"pal\", package = \"pal\")} to learn more."
+        {.code vignette(\"chores\", package = \"chores\")} to learn more."
       ),
       call = NULL
     )
     return(NULL)
   }
 
-  if (!inherits(.pal_chat, "Chat")) {
+  if (!inherits(.chores_chat, "Chat")) {
     cli::cli_inform(
       c(
-        "!" = "The option {cli::col_blue('.pal_chat')} must be an ellmer
-         Chat object, not {.obj_type_friendly { .pal_chat}}.",
+        "!" = "The option {cli::col_blue('.chores_chat')} must be an ellmer
+         Chat object, not {.obj_type_friendly { .chores_chat}}.",
         "i" = "See \"Choosing a model\" in
-        {.code vignette(\"pal\", package = \"pal\")} to learn more."
+        {.code vignette(\"chores\", package = \"chores\")} to learn more."
       ),
       call = NULL
     )
     return(NULL)
   }
 
-  .pal_chat
+  .chores_chat
 }
 
 #' @export
-print.pal_response <- function(x, ...) {
+print.helper_response <- function(x, ...) {
   cat(x)
 }

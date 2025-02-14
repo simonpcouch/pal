@@ -1,26 +1,26 @@
-# .pal_last is up to date with most recent pal
+# .helper_last is up to date with most recent chores
 
     Code
-      env_get(pal_env(), ".pal_last")
+      env_get(chores_env(), ".helper_last")
     Message
       
-      -- A cli pal using claude-3-5-sonnet-latest. 
+      -- A cli helper using claude-3-5-sonnet-latest. 
 
 ---
 
     Code
-      env_get(pal_env(), ".pal_last_cli")
+      env_get(chores_env(), ".helper_last_cli")
     Message
       
-      -- A cli pal using claude-3-5-sonnet-latest. 
+      -- A cli helper using claude-3-5-sonnet-latest. 
 
 ---
 
     Code
-      env_get(pal_env(), ".pal_last")
+      env_get(chores_env(), ".helper_last")
     Message
       
-      -- A cli pal using gpt-4o-mini. 
+      -- A cli helper using gpt-4o-mini. 
 
 # role checks error informatively
 

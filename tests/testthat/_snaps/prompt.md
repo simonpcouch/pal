@@ -4,7 +4,7 @@
       prompt_new("boop", "replace")
     Condition
       Error in `prompt_new()`:
-      ! There's already a pal with role "boop".
+      ! There's already a chores with role "boop".
       i You can edit it with `prompt_edit("boop")`
 
 ---
@@ -13,7 +13,7 @@
       prompt_new("boop", "prefix")
     Condition
       Error in `prompt_new()`:
-      ! There's already a pal with role "boop".
+      ! There's already a chores with role "boop".
       i You can edit it with `prompt_edit("boop")`
 
 # prompt_remove errors informatively with bad role

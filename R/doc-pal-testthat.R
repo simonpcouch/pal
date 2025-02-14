@@ -1,4 +1,4 @@
-#' The testthat pal
+#' The testthat helper
 #'
 #' @description
 #'
@@ -8,7 +8,7 @@
 #'
 #' While some of the task of converting legacy unit testing code to testthat
 #' 3e is quite is pretty straightforward, other components can be quite tedious.
-#' The testthat pal helps you transition your R package's unit tests to
+#' The testthat helper helps you transition your R package's unit tests to
 #' the third edition of testthat, namely via:
 #'
 #' * Converting to snapshot tests
@@ -18,16 +18,16 @@
 #'
 #' @section Cost:
 #'
-#' The system prompt from a testthat pal includes something like 1,000 tokens.
+#' The system prompt from a testthat helper includes something like 1,000 tokens.
 #' Add in (a generous) 100 tokens for the code that's actually highlighted
 #' and also sent off to the model and you're looking at 1,100 input tokens.
 #' The model returns approximately the same number of output tokens as it
 #' receives, so we'll call that 100 output tokens per refactor.
 #'
-#' As of the time of writing (October 2024), the default pal model Claude
+#' As of the time of writing (October 2024), the recommended chores model Claude
 #' Sonnet 3.5 costs $3 per million input tokens and $15 per million output
-#' tokens. So, using the default model,
-#' **testthat pals cost around $4 for every 1,000 refactored pieces of code**. GPT-4o
+#' tokens. So, using the recommended model,
+#' **testthat helpers cost around $4 for every 1,000 refactored pieces of code**. GPT-4o
 #' Mini, by contrast, doesn't tend to get many pieces of formatting right and
 #' often fails to line-break properly, but _does_ usually return syntactically
 #' valid calls to testthat functions, and it would cost around
@@ -38,9 +38,9 @@
 #' This section includes a handful of examples
 #' "[from](https://github.com/tidymodels/broom/tree/7fa26488ab522bf577092e99aad1f2003f21b327/tests)
 #' the [wild](https://github.com/tidymodels/tune/tree/f8d734ac0fa981fae3a87ed2871a46e9c40d509d/tests)"
-#' and are generated with the default model, Claude Sonnet 3.5.
+#' and are generated with the recommended model, Claude Sonnet 3.5.
 #'
-#' Testthat pals convert `expect_error()` (and `*_warning()` and `*_message()`
+#' Testthat helpers convert `expect_error()` (and `*_warning()` and `*_message()`
 #' and `*_condition()`) calls to use `expect_snapshot()` when there's a
 #' regular expression present:
 #'
@@ -111,7 +111,7 @@
 #' expect_error(tidy(pca, matrix = "u"), class = "pca_error")
 #' ```
 #'
-#' When converting non-erroring code, testthat pals will assign intermediate
+#' When converting non-erroring code, testthat helpers will assign intermediate
 #' results so as not to snapshot both the result and the warning:
 #'
 #' ```r
@@ -150,7 +150,7 @@
 #' expect_equal(fit_resamples_result, tune_grid_result)
 #' ```
 #'
-#' There are also a few edits the pal knows to make to third-edition code.
+#' There are also a few edits the helper knows to make to third-edition code.
 #' For example, it transitions `expect_snapshot_error()` and friends to
 #' use `expect_snapshot(error = TRUE)` so that the error context is snapshotted
 #' in addition to the message itself:
@@ -173,5 +173,5 @@
 #' @templateVar role testthat
 #' @template manual-interface
 #'
-#' @name pal_testthat
+#' @name testthat_helper
 NULL

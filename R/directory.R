@@ -1,22 +1,22 @@
 #' The prompt directory
 #'
 #' @description
-#' The pal package's prompt directory is a directory of markdown files that
-#' is automatically registered with the pal package on package load.
+#' The chores package's prompt directory is a directory of markdown files that
+#' is automatically registered with the chores package on package load.
 #' `directory_*()` functions allow users to interface with the directory,
 #' making new "roles" available:
 #'
 #' * `directory_path()` returns the path to the prompt directory, which
-#' defaults to `~/.config/pal`.
+#' defaults to `~/.config/chores`.
 #' * `directory_set()` changes the path to the prompt directory (by setting
-#'   the option `.pal_dir`).
+#'   the option `.chores_dir`).
 #' * `directory_list()` enumerates all of the different prompts that currently
 #'   live in the directory (and provides clickable links to each).
 #' * `directory_load()` registers each of the prompts in the prompt
-#'   directory with the pal package (via [.pal_add()]).
+#'   directory with the chores package (via [.helper_add()]).
 #'
 #' [Functions prefixed with][prompt] `prompt*()` allow users to conveniently create, edit,
-#' and delete the prompts in pal's prompt directory.
+#' and delete the prompts in chores' prompt directory.
 #'
 #' @param dir Path to a directory of markdown files--see `Details` for more.
 #'
@@ -29,12 +29,12 @@
 #' ```
 #' /
 #' |-- .config/
-#' |   |-- pal/
+#' |   |-- chores/
 #' |       |-- proofread-replace.md
 #' |       |-- summarize-prefix.md
 #' ```
 #'
-#' In that case, pal will register two custom pals when you call `library(pal)`.
+#' In that case, chores will register two custom helpers when you call `library(chores)`.
 #' One of them has the role "proofread" and will replace the selected text with
 #' a proofread version (according to the instructions contained in the markdown
 #' file itself). The other has the role "summarize" and will prefix the selected
@@ -48,13 +48,13 @@
 #'
 #' To load custom prompts every time the package is loaded, place your
 #' prompts in `directory_path()`. To change the prompt directory without
-#' loading the package, just set the `.pal_dir` option with
-#' `options(.pal_dir = some_dir)`. To load a directory of files that's not
+#' loading the package, just set the `.chores_dir` option with
+#' `options(.chores_dir = some_dir)`. To load a directory of files that's not
 #' the prompt directory, provide a `dir` argument to `directory_load()`.
 #' @name directory
 #'
-#' @seealso The "Custom pals" vignette, at `vignette("custom", package = "pal")`,
-#' for more on adding your own pal prompts, sharing them with others, and
+#' @seealso The "Custom helpers" vignette, at `vignette("custom", package = "chores")`,
+#' for more on adding your own helper prompts, sharing them with others, and
 #' using prompts from others.
 #'
 #' @examplesIf FALSE
@@ -76,7 +76,7 @@
 #'
 #' # these are equivalent:
 #' directory_set("some/folder")
-#' options(.pal_dir = "some/folder")
+#' options(.chores_dir = "some/folder")
 #'
 #' @export
 directory_load <- function(dir = directory_path()) {
@@ -92,7 +92,7 @@ directory_load <- function(dir = directory_path()) {
     )
     interface <- roles_and_interfaces[[idx]][2]
 
-    .pal_add(role = role, prompt = prompt, interface = interface)
+    .helper_add(role = role, prompt = prompt, interface = interface)
   }
 }
 
@@ -106,7 +106,7 @@ directory_list <- function() {
     if (interactive()) {
       cli::cli_h3("No custom prompts.")
       cli::cli_bullets(c(
-        "i" = "Create a new prompt with {.help [{.fun prompt_new}](pal::prompt_new)}."
+        "i" = "Create a new prompt with {.help [{.fun prompt_new}](chores::prompt_new)}."
       ))
     }
     return(invisible(character(0)))
@@ -131,7 +131,7 @@ directory_list <- function() {
 #' @rdname directory
 #' @export
 directory_path <- function() {
-  getOption(".pal_dir", default = file.path("~", ".config", "pal"))
+  getOption(".chores_dir", default = file.path("~", ".config", "chores"))
 }
 
 #' @rdname directory
@@ -147,7 +147,7 @@ directory_set <- function(dir) {
     )
   }
 
-  options(.pal_dir = dir)
+  options(.chores_dir = dir)
 
   invisible(dir)
 }
@@ -175,7 +175,7 @@ filter_single_hyphenated <- function(x) {
     cli::cli_inform(
       "Prompt{?s} {.val {paste0(x[!has_one_hyphen], '.md')}} must contain
        a single hyphen in {?its/their} filename{?s} and will not
-       be registered with pal.",
+       be registered with chores.",
       call = NULL
     )
   }
@@ -192,7 +192,7 @@ filter_interfaces <- function(x) {
       c(
         "Prompt{?s} {.val {paste0(prompts[!recognized], '.md')}} {?has/have} an
        unrecognized {.arg interface} noted in {?its/their} filename{?s}
-       and will not be registered with pal.",
+       and will not be registered with chores.",
         "{.arg interface} (following the hyphen) must be one of
         {.or {.code {supported_interfaces}}}."
       ),

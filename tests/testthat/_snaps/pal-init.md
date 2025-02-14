@@ -1,49 +1,49 @@
-# initializing a pal
+# initializing a chores
 
     Code
-      .init_pal("cli")
+      .init_helper("cli")
     Message
       
-      -- A cli pal using claude-3-5-sonnet-latest. 
+      -- A cli helper using claude-3-5-sonnet-latest. 
 
 ---
 
     Code
-      .init_pal("testthat")
+      .init_helper("testthat")
     Message
       
-      -- A testthat pal using claude-3-5-sonnet-latest. 
+      -- A testthat helper using claude-3-5-sonnet-latest. 
 
 # can use other models
 
     Code
-      .init_pal("cli", .pal_chat = ellmer::chat_openai(model = "gpt-4o-mini"))
+      .init_helper("cli", .chores_chat = ellmer::chat_openai(model = "gpt-4o-mini"))
     Message
       
-      -- A cli pal using gpt-4o-mini. 
+      -- A cli helper using gpt-4o-mini. 
 
 # errors informatively with bad role
 
     Code
-      .init_pal()
+      .init_helper()
     Condition
-      Error in `.init_pal()`:
+      Error in `.init_helper()`:
       ! `role` must be a single string, not `NULL`.
 
 ---
 
     Code
-      .init_pal(NULL)
+      .init_helper(NULL)
     Condition
-      Error in `.init_pal()`:
+      Error in `.init_helper()`:
       ! `role` must be a single string, not `NULL`.
 
 ---
 
     Code
-      .init_pal("beepBopBoop")
+      .init_helper("beepBopBoop")
     Condition
-      Error in `.init_pal()`:
-      ! No pals with role `beepBopBoop` registered.
-      i See `.pal_add()`.
+      Error in `.init_helper()`:
+      ! No helpers with role `beepBopBoop` registered.
+      i See `.helper_add()`.
 

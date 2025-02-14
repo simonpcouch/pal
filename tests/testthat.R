@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(pal)
+library(chores)
 
-test_check("pal")
+test_check("chores")

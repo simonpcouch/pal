@@ -5,7 +5,7 @@
 \alias{prompt_new}
 \alias{prompt_remove}
 \alias{prompt_edit}
-\title{Working with pal prompts}
+\title{Working with helper prompts}
 \usage{
 prompt_new(role, interface, contents = NULL)
 
@@ -14,13 +14,13 @@ prompt_remove(role)
 prompt_edit(role)
 }
 \arguments{
-\item{role}{A single string giving a descriptor of the pal's functionality.
+\item{role}{A single string giving a descriptor of the helper's functionality.
 Cand only contain letters and numbers.}
 
 \item{interface}{One of \code{"replace"}, \code{"prefix"}, or \code{"suffix"}, describing
-how the pal will interact with the selection. For example, the
-\link[=pal_cli]{cli pal} \code{"replace"}s the selection, while the
-\link[=pal_roxygen]{roxygen pal} \code{"prefixes"} the selected code with documentation.}
+how the helper will interact with the selection. For example, the
+\link[=cli_helper]{cli helper} \code{"replace"}s the selection, while the
+\link[=roxygen_helper]{roxygen helper} \code{"prefixes"} the selected code with documentation.}
 
 \item{contents}{Optional. Path to a markdown file with contents that will
 "pre-fill" the file. Anything file ending in \code{.md} or \code{.markdown} that can be
@@ -32,15 +32,15 @@ Each \verb{prompt_*()} function returns the file path to the created, edited, or
 removed filepath, invisibly.
 }
 \description{
-The pal package provides a number of tools for working on system \emph{prompts}.
-System prompts are what instruct pals on how to behave and provide
+The chores package provides a number of tools for working on system \emph{prompts}.
+System prompts are what instruct helpers on how to behave and provide
 information to live in the models' "short-term memory."
 
 \verb{prompt_*()} functions allow users to conveniently create, edit, remove,
-the prompts in pal's "\link[=directory]{prompt directory}."
+the prompts in chores' "\link[=directory]{prompt directory}."
 \itemize{
 \item \code{prompt_new()} creates a new markdown file that will automatically
-create a pal with the specified role, prompt, and interface on package load.
+create a helper with the specified role, prompt, and interface on package load.
 Specify a \code{contents} argument to prefill with contents from a markdown file
 on your computer or the web.
 \item \code{prompt_edit()} and \code{prompt_remove()} open and delete, respectively, the
@@ -52,10 +52,10 @@ Load the prompts you create with these functions using \code{\link[=directory_lo
 }
 \examples{
 \dontshow{if (FALSE) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
-# create a new pal with role `"boop"` that replaces the selected text:
+# create a new helper with role `"boop"` that replaces the selected text:
 prompt_new("boop")
 
-# after writing a prompt, register it with the pal package with:
+# after writing a prompt, register it with the chores package with:
 directory_load()
 
 # after closing the file, reopen with:
@@ -89,6 +89,6 @@ prompt_new(
 }
 \seealso{
 The \link{directory} help-page for more on working with prompts in
-batch using \verb{directory_*()} functions, and \code{vignette("custom", package = "pal")}
-for more on sharing pal prompts and using prompts from others.
+batch using \verb{directory_*()} functions, and \code{vignette("custom", package = "chores")}
+for more on sharing helper prompts and using prompts from others.
 }

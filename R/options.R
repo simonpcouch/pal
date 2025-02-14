@@ -1,15 +1,15 @@
-#' Options used by the pal package
+#' Options used by the chores package
 #'
 #' @description
-#' The pal package makes use of three notable user-facing options:
+#' The chores package makes use of three notable user-facing options:
 #'
-#' * `.pal_dir` is the directory where pal prompts live. See the pal [directory]
+#' * `.chores_dir` is the directory where helper prompts live. See the helper [directory]
 #'   help-page for more information.
-#' * `.pal_chat` determines the underlying LLM powering each pal.
-#'   See the "Choosing a model" section of `vignette("pal", package = "pal")`
+#' * `.chores_chat` determines the underlying LLM powering each helper.
+#'   See the "Choosing a model" section of `vignette("chores", package = "chores")`
 #'   for more information.
 #'
-#' @name pal_options
-#' @aliases .pal_dir
-#' @aliases .pal_chat
+#' @name helper_options
+#' @aliases .chores_dir
+#' @aliases .chores_chat
 NULL

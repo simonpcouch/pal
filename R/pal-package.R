@@ -7,7 +7,7 @@
 NULL
 
 utils::globalVariables(
-  c(".pal_last", ".ps.ui.executeCommand", "file.edit", "modifyList")
+  c(".helper_last", ".ps.ui.executeCommand", "file.edit", "modifyList")
 )
 
 # address "not imported from" R CMD check error
