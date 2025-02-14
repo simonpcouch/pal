@@ -13,7 +13,7 @@ though custom helpers can be added with \code{\link[=.helper_add]{.helper_add()}
 
 \item{.chores_chat}{An ellmer Chat, e.g.
 \code{function() ellmer::chat_claude()}. Defaults to the option by the same name,
-so e.g. set \verb{options(.chores_chat = ellmer::chat_claude()} in your
+so e.g. set \code{options(.chores_chat = ellmer::chat_claude())} in your
 \code{.Rprofile} to configure chores with ellmer every time you start a new R session.}
 }
 \description{

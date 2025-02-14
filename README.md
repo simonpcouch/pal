@@ -33,7 +33,7 @@ pak::pak("simonpcouch/chores")
 hood, so any model that you can chat with through ellmer is also
 supported by chores. To configure chores with ellmer, set the option
 `.chores_chat` to any ellmer Chat. For example, to use Claude, you’d write
-`options(.chores_chat = ellmer::chat_claude()`, possibly in your
+`options(.chores_chat = ellmer::chat_claude())`, possibly in your
 `.Rprofile` so that chores is ready to go every time you start R. To learn
 more, see the [Getting started with
 chores](https://simonpcouch.github.io/chores/articles/chores.html) vignette.

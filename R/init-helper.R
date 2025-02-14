@@ -12,7 +12,7 @@
 #' though custom helpers can be added with [.helper_add()].
 #' @param .chores_chat An ellmer Chat, e.g.
 #' `function() ellmer::chat_claude()`. Defaults to the option by the same name,
-#' so e.g. set `options(.chores_chat = ellmer::chat_claude()` in your
+#' so e.g. set `options(.chores_chat = ellmer::chat_claude())` in your
 #' `.Rprofile` to configure chores with ellmer every time you start a new R session.
 #'
 #' @examplesIf FALSE
