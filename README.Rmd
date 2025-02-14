@@ -60,7 +60,7 @@ Once those steps are completed, you're ready to use helpers with a keyboard shor
 
 ## Example
 
-Chore helpers are created automatically when users interact with the chores addin. Just highlight some code, open the addin, begin typing the "role" of your chores and press "Return", and watch your code be rewritten:
+Chore helpers are created automatically when users interact with the chores addin. Just highlight some code, open the addin, begin typing the "chore" of your chores and press "Return", and watch your code be rewritten:
 
 ```{r}
 #| label: addin-gif

@@ -170,7 +170,7 @@
 #' )
 #' ```
 #'
-#' @templateVar role testthat
+#' @templateVar chore testthat
 #' @template manual-interface
 #'
 #' @name testthat_helper

@@ -40,7 +40,7 @@ Just:
 
 * Select some code.
 * Trigger the chores addin.
-* Type in a helper "role." Once it's autocompleted, press Enter.
+* Type in a helper "chore." Once it's autocompleted, press Enter.
 * Watch your code be rewritten.
 
 ```{r}

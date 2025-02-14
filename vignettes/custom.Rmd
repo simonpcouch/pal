@@ -38,7 +38,7 @@ Answering these questions can help you better understand whether your problem is
 
 The easiest way to write a new chore helper that's loaded every time you load R is to add a markdown file to the _prompt directory_. The prompt directory is a folder of markdown files that serves as a library of possible helpers. By default, the prompt directory lives at `~/.config/chores`, but that default can be changed by adding a `.chores_dir` option in your `.Rprofile` using `options(.chores_dir = some/dir/`). `directory_path()` returns the path to the directory, `directory_set()` changes it, `directory_list()` enumerates all of the prompts that currently live in it, and `directory_load()` registers/refreshes all of the prompts in the directory with the chores package.
 
-To create a new helper, add a prompt to chores' prompt directory with `prompt_new()`. You'll need to supply a `role` (a single keyword describing what the helper does, like `"roxygen"`) and an `interface` describing how the helper will interact with the selection (one of `"replace"`, `"prefix"`, or `"suffix"`). You can also "pre-fill" the contents of the prompt by supplying a file path with the `contents` argument.
+To create a new helper, add a prompt to chores' prompt directory with `prompt_new()`. You'll need to supply a `chore` (a single keyword describing what the helper does, like `"roxygen"`) and an `interface` describing how the helper will interact with the selection (one of `"replace"`, `"prefix"`, or `"suffix"`). You can also "pre-fill" the contents of the prompt by supplying a file path with the `contents` argument.
 
 For example, running:
 
@@ -58,7 +58,7 @@ Would result in a prompt directory that looks like:
 |       |-- summarize-prefix.md
 ```
 
-In that case, chores would register two custom helpers when you call `library(chores)` (or `directory_load()`. One of them has the role `"proofread"` and will replace the selected text with a proofread version (according to the instructions contained in the markdown file itself). The other has the role `"summarize"` and will prefix the selected text with a summarized version (again, according to the markdown file's instructions).
+In that case, chores would register two custom helpers when you call `library(chores)` (or `directory_load()`. One of them is for the `"proofread"` chore and will replace the selected text with a proofread version (according to the instructions contained in the markdown file itself). The other is for the chore `"summarize"` and will prefix the selected text with a summarized version (again, according to the markdown file's instructions).
 
 * Files without a `.md` extension are ignored.
 * Files with a `.md` extension must contain only one hyphen in their filename, and the text following the hyphen must be one of `replace`, `prefix`, or `suffix`.
@@ -74,7 +74,7 @@ Pal extension packages allow you to more flexibly share helper prompts with othe
 
 For an example chores extension, see [simonpcouch/chorespable](https://github.com/simonpcouch/chorespable).
 
-Pal extension packages also allow you to document what your helpers are for and how they tend to behave in context; situate your documentation files at `?role_helper`, replacing `role` with your new chore helper's name. Then, with your package loaded, users can view a high-level description of the helper's behavior and a gallery of examples. See `?cli_helper` for an example helper help-page, with source code [here](https://github.com/simonpcouch/chores/blob/main/R/doc-chores-cli.R).
+Pal extension packages also allow you to document what your helpers are for and how they tend to behave in context; situate your documentation files at `?chore_helper`, replacing `chore` with your new chore helper's name. Then, with your package loaded, users can view a high-level description of the helper's behavior and a gallery of examples. See `?cli_helper` for an example helper help-page, with source code [here](https://github.com/simonpcouch/chores/blob/main/R/doc-chores-cli.R).
 
 ## Using others' custom helpers
 

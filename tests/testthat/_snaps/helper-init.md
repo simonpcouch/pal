@@ -22,13 +22,13 @@
       
       -- A cli chore helper using gpt-4o-mini. 
 
-# errors informatively with bad role
+# errors informatively with bad chore
 
     Code
       .init_helper()
     Condition
       Error in `.init_helper()`:
-      ! `role` must be a single string, not `NULL`.
+      ! `chore` must be a single string, not `NULL`.
 
 ---
 
@@ -36,7 +36,7 @@
       .init_helper(NULL)
     Condition
       Error in `.init_helper()`:
-      ! `role` must be a single string, not `NULL`.
+      ! `chore` must be a single string, not `NULL`.
 
 ---
 
@@ -44,6 +44,6 @@
       .init_helper("beepBopBoop")
     Condition
       Error in `.init_helper()`:
-      ! No helpers with role `beepBopBoop` registered.
+      ! No helpers for chore `beepBopBoop` registered.
       i See `.helper_add()`.
 

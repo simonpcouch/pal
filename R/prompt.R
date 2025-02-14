@@ -9,11 +9,11 @@
 #' the prompts in chores' "[prompt directory][directory]."
 #'
 #' * `prompt_new()` creates a new markdown file that will automatically
-#' create a helper with the specified role, prompt, and interface on package load.
+#' create a helper with the specified chore, prompt, and interface on package load.
 #' Specify a `contents` argument to prefill with contents from a markdown file
 #' on your computer or the web.
 #' * `prompt_edit()` and `prompt_remove()` open and delete, respectively, the
-#' file that defines the given role's system prompt.
+#' file that defines the given chore's system prompt.
 #'
 #' Load the prompts you create with these functions using [directory_load()]
 #' (which is automatically called when the package loads).
@@ -33,7 +33,7 @@
 #' removed filepath, invisibly.
 #'
 #' @examplesIf FALSE
-#' # create a new helper with role `"boop"` that replaces the selected text:
+#' # create a new helper for chore `"boop"` that replaces the selected text:
 #' prompt_new("boop")
 #'
 #' # after writing a prompt, register it with the chores package with:
@@ -57,7 +57,7 @@
 #' # have to use the paste0() to write out the URL--we're just keeping
 #' # the characters per line under 80):
 #' prompt_new(
-#'   role = "summarize",
+#'   chore = "summarize",
 #'   interface = "prefix",
 #'   contents =
 #'     paste0(
@@ -71,19 +71,19 @@
 
 #' @rdname prompt
 #' @export
-prompt_new <- function(role, interface, contents = NULL) {
-  check_role(role)
+prompt_new <- function(chore, interface, contents = NULL) {
+  check_chore(chore)
   arg_match0(interface, supported_interfaces)
   check_string(contents, allow_null = TRUE)
 
-  current_path <- try_fetch(prompt_locate(role), error = function(cnd) {NULL})
+  current_path <- try_fetch(prompt_locate(chore), error = function(cnd) {NULL})
   suggestion <- character(0)
-  if (!role %in% default_roles || !is.null(current_path)) {
-    suggestion <- c("i" = "You can edit it with {.code prompt_edit({.val {role}})}")
+  if (!chore %in% default_chores || !is.null(current_path)) {
+    suggestion <- c("i" = "You can edit it with {.code prompt_edit({.val {chore}})}")
   }
-  if (role %in% list_helpers() || !is.null(current_path)) {
+  if (chore %in% list_helpers() || !is.null(current_path)) {
     cli::cli_abort(c(
-      "There's already a helper with role {.val {role}}.",
+      "There's already a helper for chore {.val {chore}}.",
       suggestion
     ))
   }
@@ -92,12 +92,12 @@ prompt_new <- function(role, interface, contents = NULL) {
   if (!dir.exists(dir_path)) {
     dir.create(dir_path, recursive = TRUE)
   }
-  path <- paste0(dir_path, "/", role, "-", interface, ".md")
+  path <- paste0(dir_path, "/", chore, "-", interface, ".md")
 
   # TODO: should this message "Register with `directory_load()`" or
   # something as it creates the file?
   file.create(path)
-  prompt_prefill(path = path, contents = contents, role = role)
+  prompt_prefill(path = path, contents = contents, chore = chore)
   if (interactive()) {
     file.edit(path)
   }
@@ -107,38 +107,38 @@ prompt_new <- function(role, interface, contents = NULL) {
 
 #' @rdname prompt
 #' @export
-prompt_remove <- function(role) {
-  check_role(role)
-  path <- prompt_locate(role)
+prompt_remove <- function(chore) {
+  check_chore(chore)
+  path <- prompt_locate(chore)
   file.remove(path)
 
   chores_env <- chores_env()
-  rlang::env_unbind(chores_env, paste0(".helper_prompt_", role))
-  rlang::env_unbind(chores_env, paste0(".helper_rs_", role))
+  rlang::env_unbind(chores_env, paste0(".helper_prompt_", chore))
+  rlang::env_unbind(chores_env, paste0(".helper_rs_", chore))
 
   invisible(path)
 }
 
 #' @rdname prompt
 #' @export
-prompt_edit <- function(role) {
-  check_role(role)
-  path <- prompt_locate(role)
+prompt_edit <- function(chore) {
+  check_chore(chore)
+  path <- prompt_locate(chore)
   if (interactive()) {
     file.edit(path)
   }
   invisible(path)
 }
 
-prompt_locate <- function(role, call = caller_env()) {
+prompt_locate <- function(chore, call = caller_env()) {
   path <- directory_path()
   base_names <- directory_base_names(path)
-  roles <- gsub("-replace\\.md|-prefix\\.md|-suffix\\.md", "", base_names)
-  match <- which(roles == role)
+  chores <- gsub("-replace\\.md|-prefix\\.md|-suffix\\.md", "", base_names)
+  match <- which(chores == chore)
 
   if (identical(match, integer(0))) {
     cli::cli_abort(
-      "No prompts for {.arg role} {.val {role}} found in the prompt directory",
+      "No prompts for {.arg chore} {.val {chore}} found in the prompt directory",
       call = call
     )
   }
@@ -146,7 +146,7 @@ prompt_locate <- function(role, call = caller_env()) {
   file.path(path, base_names[match])
 }
 
-prompt_prefill <- function(path, contents, role, call = caller_env()) {
+prompt_prefill <- function(path, contents, chore, call = caller_env()) {
   if (!is.null(contents) && !is_markdown_file(contents)) {
     cli::cli_abort(
       "{.arg contents} must be a connection to a markdown file.",

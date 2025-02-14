@@ -4,10 +4,10 @@
 \alias{.init_helper}
 \title{Initialize a Pal object}
 \usage{
-.init_helper(role = NULL, .chores_chat = getOption(".chores_chat"))
+.init_helper(chore = NULL, .chores_chat = getOption(".chores_chat"))
 }
 \arguments{
-\item{role}{The identifier for a helper prompt. By default one
+\item{chore}{The identifier for a helper prompt. By default one
 of \link[=helper_cli]{"cli"}, \link[=helper_testthat]{"testthat"} or \link[=helper_roxygen]{"roxygen"},
 though custom helpers can be added with \code{\link[=.helper_add]{.helper_add()}}.}
 

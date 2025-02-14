@@ -6,12 +6,12 @@
 \alias{.helper_remove}
 \title{Registering helpers}
 \usage{
-.helper_add(role, prompt = NULL, interface = c("replace", "prefix", "suffix"))
+.helper_add(chore, prompt = NULL, interface = c("replace", "prefix", "suffix"))
 
-.helper_remove(role)
+.helper_remove(chore)
 }
 \arguments{
-\item{role}{A single string giving a descriptor of the helper's functionality.
+\item{chore}{A single string giving a descriptor of the helper's functionality.
 Cand only contain letters and numbers.}
 
 \item{prompt}{A single string giving the system prompt. In most cases, this
@@ -23,12 +23,12 @@ how the helper will interact with the selection. For example, the
 \link[=roxygen_helper]{roxygen helper} \code{"prefixes"} the selected code with documentation.}
 }
 \value{
-\code{NULL}, invisibly. Called for its side effect: a helper with role \code{role}
+\code{NULL}, invisibly. Called for its side effect: a helper for chore \code{chore}
 is registered (or unregistered) with the chores package.
 }
 \description{
 Users can create custom helpers using the \code{.helper_add()} function; after passing
-the function a role and prompt, the helper will be available in the
+the function a chore and prompt, the helper will be available in the
 \link[=.init_addin]{chores addin}.
 
 \strong{Most users should not need to interact with these functions.}

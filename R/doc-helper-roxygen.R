@@ -144,7 +144,7 @@
 #' #' @export
 #' ```
 #'
-#' @templateVar role roxygen
+#' @templateVar chore roxygen
 #' @template manual-interface
 #'
 #' @name roxygen_helper

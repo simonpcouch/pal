@@ -177,7 +177,7 @@
 #' cli::cli_abort("No such {.pkg {package}} function: {.fn {name}}.")
 #' ```
 #'
-#' @templateVar role cli
+#' @templateVar chore cli
 #' @template manual-interface
 #'
 #' @name cli_helper

@@ -26,26 +26,26 @@ test_that("helper addition and removal works", {
 test_that("helper addition with bad inputs", {
   expect_snapshot(
     error = TRUE,
-    .helper_add(role = identity, prompt = "hey")
+    .helper_add(chore = identity, prompt = "hey")
   )
 
   expect_snapshot(
     error = TRUE,
-    .helper_add(role = "sillyhead", prompt = "hey", interface = "no")
+    .helper_add(chore = "sillyhead", prompt = "hey", interface = "no")
   )
   expect_snapshot(
     error = TRUE,
-    .helper_add(role = "sillyhead", prompt = "hey", interface = NULL)
+    .helper_add(chore = "sillyhead", prompt = "hey", interface = NULL)
   )
 })
 
 test_that("helper remove with bad inputs", {
   expect_snapshot(
     error = TRUE,
-    .helper_remove(role = identity)
+    .helper_remove(chore = identity)
   )
   expect_snapshot(
     error = TRUE,
-    .helper_remove(role = "notAnActivePal")
+    .helper_remove(chore = "notAnActivePal")
   )
 })

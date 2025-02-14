@@ -71,7 +71,7 @@ shortcut.
 ## Example
 
 Pals are created automatically when users interact with the chores addin.
-Just highlight some code, open the addin, begin typing the “role” of
+Just highlight some code, open the addin, begin typing the “chore” of
 your chores and press “Return”, and watch your code be rewritten:
 
 <img src="https://raw.githubusercontent.com/simonpcouch/chores/refs/heads/main/inst/figs/addin.gif" alt="A screencast of an RStudio session. An .R file is open in the editor with a function definition. The user selects various subsets of the function and, after selecting from a dropdown menu, the helper assistant converts erroring code and drafts function documentation." width="100%" />

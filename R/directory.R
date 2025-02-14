@@ -4,7 +4,7 @@
 #' The chores package's prompt directory is a directory of markdown files that
 #' is automatically registered with the chores package on package load.
 #' `directory_*()` functions allow users to interface with the directory,
-#' making new "roles" available:
+#' making new "chores" available:
 #'
 #' * `directory_path()` returns the path to the prompt directory, which
 #' defaults to `~/.config/chores`.
@@ -22,7 +22,7 @@
 #'
 #' @section Format of the prompt directory:
 #' Prompts are markdown files with the
-#' name `role-interface.md`, where interface is one of
+#' name `chore-interface.md`, where interface is one of
 #' `r glue::glue_collapse(glue::double_quote(supported_interfaces), ", ", last = " or ")`.
 #' An example directory might look like:
 #'
@@ -35,9 +35,9 @@
 #' ```
 #'
 #' In that case, chores will register two custom helpers when you call `library(chores)`.
-#' One of them has the role "proofread" and will replace the selected text with
+#' One of them is for the "proofread" chore and will replace the selected text with
 #' a proofread version (according to the instructions contained in the markdown
-#' file itself). The other has the role "summarize" and will prefix the selected
+#' file itself). The other is for the "summarize" chore and will prefix the selected
 #' text with a summarized version (again, according to the markdown file's
 #' instructions). Note:
 #'
@@ -81,18 +81,18 @@
 #' @export
 directory_load <- function(dir = directory_path()) {
   prompt_base_names <- directory_base_names(dir)
-  roles_and_interfaces <- roles_and_interfaces(prompt_base_names)
+  chores_and_interfaces <- chores_and_interfaces(prompt_base_names)
   prompt_paths <- file.path(dir, prompt_base_names)
 
   for (idx in seq_along(prompt_base_names)) {
-    role <- roles_and_interfaces[[idx]][1]
+    chore <- chores_and_interfaces[[idx]][1]
     prompt <- paste0(
       suppressWarnings(readLines(prompt_paths[idx])),
       collapse = "\n"
     )
-    interface <- roles_and_interfaces[[idx]][2]
+    interface <- chores_and_interfaces[[idx]][2]
 
-    .helper_add(role = role, prompt = prompt, interface = interface)
+    .helper_add(chore = chore, prompt = prompt, interface = interface)
   }
 }
 
@@ -161,12 +161,12 @@ directory_base_names <- function(dir) {
 }
 
 # this function assumes its input is directory_base_names() output
-roles_and_interfaces <- function(prompt_base_names) {
-  roles_and_interfaces <- gsub("\\.md$", "", prompt_base_names)
-  roles_and_interfaces <- strsplit(roles_and_interfaces, "-")
-  roles_and_interfaces <- filter_interfaces(roles_and_interfaces)
+chores_and_interfaces <- function(prompt_base_names) {
+  chores_and_interfaces <- gsub("\\.md$", "", prompt_base_names)
+  chores_and_interfaces <- strsplit(chores_and_interfaces, "-")
+  chores_and_interfaces <- filter_interfaces(chores_and_interfaces)
 
-  roles_and_interfaces
+  chores_and_interfaces
 }
 
 filter_single_hyphenated <- function(x) {

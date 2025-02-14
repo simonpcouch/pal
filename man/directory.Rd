@@ -23,7 +23,7 @@ directory_set(dir)
 The chores package's prompt directory is a directory of markdown files that
 is automatically registered with the chores package on package load.
 \verb{directory_*()} functions allow users to interface with the directory,
-making new "roles" available:
+making new "chores" available:
 \itemize{
 \item \code{directory_path()} returns the path to the prompt directory, which
 defaults to \verb{~/.config/chores}.
@@ -41,7 +41,7 @@ and delete the prompts in chores' prompt directory.
 \section{Format of the prompt directory}{
 
 Prompts are markdown files with the
-name \code{role-interface.md}, where interface is one of
+name \code{chore-interface.md}, where interface is one of
 "replace", "prefix" or "suffix".
 An example directory might look like:
 
@@ -53,9 +53,9 @@ An example directory might look like:
 }\if{html}{\out{</div>}}
 
 In that case, chores will register two custom helpers when you call \code{library(chores)}.
-One of them has the role "proofread" and will replace the selected text with
+One of them is for the "proofread" chore and will replace the selected text with
 a proofread version (according to the instructions contained in the markdown
-file itself). The other has the role "summarize" and will prefix the selected
+file itself). The other is for the "summarize" chore and will prefix the selected
 text with a summarized version (again, according to the markdown file's
 instructions). Note:
 \itemize{

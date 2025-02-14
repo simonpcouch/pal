@@ -19,7 +19,7 @@ test_that("can use other models", {
   ))
 })
 
-test_that("errors informatively with bad role", {
+test_that("errors informatively with bad chore", {
   expect_snapshot(.init_helper(), error = TRUE)
   expect_snapshot(.init_helper(NULL), error = TRUE)
   expect_snapshot(.init_helper("beepBopBoop"), error = TRUE)

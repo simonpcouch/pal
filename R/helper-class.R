@@ -1,12 +1,12 @@
 Pal <- R6::R6Class(
   "Pal",
   public = list(
-    initialize = function(role, .chores_chat = getOption(".chores_chat")) {
-      self$role <- role
+    initialize = function(chore, .chores_chat = getOption(".chores_chat")) {
+      self$chore <- chore
 
       Chat <- .chores_chat$clone()
 
-      Chat$set_system_prompt(get(paste0(".helper_prompt_", role), envir = chores_env()))
+      Chat$set_system_prompt(get(paste0(".helper_prompt_", chore), envir = chores_env()))
       private$Chat <- Chat
 
       .stash_last_helper(self)
@@ -18,11 +18,11 @@ Pal <- R6::R6Class(
       request <- deparse(substitute(expr))
       private$.stream(request)
     },
-    role = NULL,
+    chore = NULL,
     print = function(...) {
       model <- private$Chat[[".__enclos_env__"]][["private"]][["provider"]]@model
       cli::cli_h3(
-        "A {.field {self$role}} chore helper using {.field {model}}."
+        "A {.field {self$chore}} chore helper using {.field {model}}."
       )
     }
   ),

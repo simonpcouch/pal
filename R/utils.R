@@ -1,20 +1,20 @@
 # helpers for the chores environment ----------------------------------------------
 .stash_last_helper <- function(x) {
   chores_env <- chores_env()
-  chores_env[[paste0(".helper_last_", x$role)]] <- x
+  chores_env[[paste0(".helper_last_", x$chore)]] <- x
   chores_env[[".helper_last"]] <- x
   invisible(NULL)
 }
 
-.stash_binding <- function(role, fn) {
+.stash_binding <- function(chore, fn) {
   chores_env <- chores_env()
-  chores_env[[paste0(".helper_rs_", role)]] <- fn
+  chores_env[[paste0(".helper_rs_", chore)]] <- fn
   invisible(NULL)
 }
 
-.stash_prompt <- function(prompt, role) {
+.stash_prompt <- function(prompt, chore) {
   chores_env <- chores_env()
-  chores_env[[paste0(".helper_prompt_", role)]] <- prompt
+  chores_env[[paste0(".helper_prompt_", chore)]] <- prompt
   invisible(NULL)
 }
 
@@ -31,12 +31,12 @@ list_helpers <- function() {
   gsub(".helper_prompt_", "", prompt_names)
 }
 
-retrieve_helper <- function(role) {
-  if (exists(paste0(".helper_last_", role))) {
-    helper <- get(paste0(".helper_last_", role))
+retrieve_helper <- function(chore) {
+  if (exists(paste0(".helper_last_", chore))) {
+    helper <- get(paste0(".helper_last_", chore))
   } else {
     tryCatch(
-      helper <- .init_helper(role),
+      helper <- .init_helper(chore),
       error = function(cnd) {
         # rethrow condition message directly rather than setting
         # `cli::cli_abort(parent)` so that rstudioapi::showDialog is able
@@ -69,33 +69,33 @@ get_primary_selection <- function(context) {
 }
 
 # ad-hoc check helpers -------
-check_role <- function(role,
+check_chore <- function(chore,
                        allow_default = !is.null(getOption(".helper_on_load")),
                        call = caller_env()) {
-  check_string(role, allow_empty = FALSE, call = call)
+  check_string(chore, allow_empty = FALSE, call = call)
 
-  if (!is_valid_role(role)) {
+  if (!is_valid_chore(chore)) {
     cli::cli_abort(
-      "{.arg role} must be a single string containing only letters and digits.",
+      "{.arg chore} must be a single string containing only letters and digits.",
       call = call
     )
   }
 
-  if (role %in% default_roles & !allow_default) {
+  if (chore %in% default_chores & !allow_default) {
     cli::cli_abort(
-      "Default roles cannot be edited or removed.",
+      "Default chores cannot be edited or removed.",
       call = call
     )
   }
 
-  invisible(role)
+  invisible(chore)
 }
 
 # miscellaneous ----------------------------------------------------------------
 interactive <- NULL
 
-is_valid_role <- function(role) {
-  grepl("^[a-zA-Z0-9]+$", role)
+is_valid_chore <- function(chore) {
+  grepl("^[a-zA-Z0-9]+$", chore)
 }
 
 is_positron <- function() {

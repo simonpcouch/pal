@@ -22,19 +22,19 @@
       
       -- A cli chore helper using gpt-4o-mini. 
 
-# role checks error informatively
+# chore checks error informatively
 
     Code
-      check_role("hey there")
+      check_chore("hey there")
     Condition
       Error:
-      ! `role` must be a single string containing only letters and digits.
+      ! `chore` must be a single string containing only letters and digits.
 
 ---
 
     Code
-      check_role(identity)
+      check_chore(identity)
     Condition
       Error:
-      ! `role` must be a single string, not a function.
+      ! `chore` must be a single string, not a function.
 

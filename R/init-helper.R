@@ -7,8 +7,8 @@
 #' with [prompt_new()].
 #' * The [chores addin][.init_addin()] will initialize needed helpers on-the-fly.
 #'
-#' @param role The identifier for a helper prompt. By default one
-#' of `r glue::glue_collapse(paste0("[", glue::double_quote(default_roles), "]", "[helper_", default_roles, "]"), ", ", last = " or ")`,
+#' @param chore The identifier for a helper prompt. By default one
+#' of `r glue::glue_collapse(paste0("[", glue::double_quote(default_chores), "]", "[helper_", default_chores, "]"), ", ", last = " or ")`,
 #' though custom helpers can be added with [.helper_add()].
 #' @param .chores_chat An ellmer Chat, e.g.
 #' `function() ellmer::chat_claude()`. Defaults to the option by the same name,
@@ -30,18 +30,18 @@
 #' )
 #' @export
 .init_helper <- function(
-    role = NULL,
+    chore = NULL,
     .chores_chat = getOption(".chores_chat")
   ) {
-  check_role(role, allow_default = TRUE)
-  if (!role %in% list_helpers()) {
+  check_chore(chore, allow_default = TRUE)
+  if (!chore %in% list_helpers()) {
     cli::cli_abort(c(
-      "No helpers with role {.arg {role}} registered.",
+      "No helpers for chore {.arg {chore}} registered.",
       "i" = "See {.fn .helper_add}."
     ))
   }
 
-  Pal$new(role = role, .chores_chat = .chores_chat)
+  Pal$new(chore = chore, .chores_chat = .chores_chat)
 }
 
-default_roles <- c("cli", "testthat", "roxygen")
+default_chores <- c("cli", "testthat", "roxygen")
