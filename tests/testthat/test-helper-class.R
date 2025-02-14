@@ -32,17 +32,6 @@ test_that("chores_chat effectively integrates system prompt", {
   expect_true(grepl("beep_bop_boop", response))
 })
 
-test_that("fetch_chores_chat returns early with old options", {
-  withr::local_options(
-    .helper_fn = "boop",
-    .helper_args = list(model = "x"),
-    .chores_chat = NULL
-  )
-
-  expect_snapshot(.res <- fetch_chores_chat())
-  expect_null(.res)
-})
-
 test_that("fetch_chores_chat returns early with no option set", {
   skip_if(identical(Sys.getenv("ANTHROPIC_API_KEY"), ""))
   withr::local_options(.chores_chat = NULL)

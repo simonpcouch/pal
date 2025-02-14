@@ -40,22 +40,6 @@ Pal <- R6::R6Class(
 # this function fails with messages and a NULL return value rather than errors
 # so that, when called from inside the addin, there's no dialog box raised by RStudio
 fetch_chores_chat <- function(.chores_chat = getOption(".chores_chat")) {
-  # first, check for old options
-  .helper_fn <- getOption(".helper_fn")
-  .helper_args <- getOption(".helper_args")
-  if (!is.null(.helper_fn) && is.null(.chores_chat)) {
-    new_option <-
-      cli::format_inline("{deparse(rlang::call2(.helper_fn, !!!.helper_args))}")
-    cli::cli_inform(c(
-      "{.pkg chores} now uses the option {cli::col_blue('.chores_chat')} instead
-      of {cli::col_blue('.helper_fn')} and {cli::col_blue('.helper_args')}.",
-      "i" = "Set
-      {.code options(.chores_chat = {deparse(rlang::call2(.helper_fn, !!!.helper_args))})}
-      instead."
-    ), call = NULL)
-    return(NULL)
-  }
-
   if (is.null(.chores_chat)) {
     cli::cli_inform(
       c(

@@ -6,14 +6,6 @@
       Error in `user_turn()`:
       ! Must supply at least one input.
 
-# fetch_chores_chat returns early with old options
-
-    Code
-      .res <- fetch_chores_chat()
-    Message
-      chores now uses the option .chores_chat instead of .helper_fn and .helper_args.
-      i Set `options(.chores_chat = boop(model = "x"))` instead.
-
 # fetch_chores_chat returns early with no option set
 
     Code
