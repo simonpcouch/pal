@@ -8,7 +8,7 @@
 #' * The [chores addin][.init_addin()] will initialize needed helpers on-the-fly.
 #'
 #' @param chore The identifier for a helper prompt. By default one
-#' of `r glue::glue_collapse(paste0("[", glue::double_quote(default_chores), "]", "[helper_", default_chores, "]"), ", ", last = " or ")`,
+#' of `r glue::glue_collapse(paste0("[", glue::double_quote(default_chores), "]", "[", default_chores, "_helper", "]"), ", ", last = " or ")`,
 #' though custom helpers can be added with [.helper_add()].
 #' @param .chores_chat An ellmer Chat, e.g.
 #' `function() ellmer::chat_claude()`. Defaults to the option by the same name,

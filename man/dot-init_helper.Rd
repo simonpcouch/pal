@@ -8,7 +8,7 @@
 }
 \arguments{
 \item{chore}{The identifier for a helper prompt. By default one
-of \link[=helper_cli]{"cli"}, \link[=helper_testthat]{"testthat"} or \link[=helper_roxygen]{"roxygen"},
+of \link[=cli_helper]{"cli"}, \link[=testthat_helper]{"testthat"} or \link[=roxygen_helper]{"roxygen"},
 though custom helpers can be added with \code{\link[=.helper_add]{.helper_add()}}.}
 
 \item{.chores_chat}{An ellmer Chat, e.g.
