@@ -6,8 +6,8 @@
 #' intended to be interfaced with in regular usage of the package.**
 #' To launch the chores addin in RStudio, navigate to `Addins > Chores`
 #' and/or register the addin with a shortcut via
-#' `Tools > Modify Keyboard Shortcuts > Search "Chores"`--we suggest `Ctrl+Alt+P`
-#' (or `Ctrl+Cmd+P` on macOS).
+#' `Tools > Modify Keyboard Shortcuts > Search "Chores"`--we suggest `Ctrl+Alt+C`
+#' (or `Ctrl+Cmd+C` on macOS).
 #'
 #' @returns
 #' `NULL`, invisibly. Called for the side effect of launching the chores addin

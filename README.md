@@ -15,7 +15,7 @@ status](https://www.r-pkg.org/badges/version/chores)](https://CRAN.R-project.org
 The chores package provides a library of ergonomic LLM assistants designed
 to help you complete repetitive, hard-to-automate tasks quickly. After
 selecting some code, press the keyboard shortcut you’ve chosen to
-trigger the chores addin (we suggest `Ctrl+Cmd+P`), select the helper, and
+trigger the chores addin (we suggest `Ctrl+Cmd+C`), select the helper, and
 watch your code be rewritten.
 
 ## Installation
@@ -43,7 +43,7 @@ access, we recommend registering the chores addin to a keyboard shortcut.
 
 **In RStudio**, navigate to
 `Tools > Modify Keyboard Shortcuts > Search "Chores"`---we suggest
-`Ctrl+Alt+P` (or `Ctrl+Cmd+P` on macOS).
+`Ctrl+Alt+C` (or `Ctrl+Cmd+C` on macOS).
 
 **In Positron**, you’ll need to open the command palette, run “Open
 Keyboard Shortcuts (JSON)”, and paste the following into your
@@ -51,7 +51,7 @@ Keyboard Shortcuts (JSON)”, and paste the following into your
 
 ``` json
     {
-        "key": "Ctrl+Cmd+P",
+        "key": "Ctrl+Cmd+C",
         "command": "workbench.action.executeCode.console",
         "when": "editorTextFocus",
         "args": {
@@ -62,7 +62,7 @@ Keyboard Shortcuts (JSON)”, and paste the following into your
     }
 ```
 
-The analogous keybinding on non-macOS is `Ctrl+Alt+P`. That said, change
+The analogous keybinding on non-macOS is `Ctrl+Alt+C`. That said, change
 the `"key"` entry to any keybinding you wish!
 
 Once those steps are completed, you’re ready to use helpers with a keyboard

@@ -50,13 +50,13 @@ knitr::include_graphics("https://raw.githubusercontent.com/simonpcouch/chores/re
 
 Chore helpers are interfaced with the via the chores addin. For easiest access, we recommend registering the chores addin to a keyboard shortcut.
 
-**In RStudio**, navigate to `Tools > Modify Keyboard Shortcuts > Search "Chores"`---we suggest `Ctrl+Alt+P` (or `Ctrl+Cmd+P` on macOS).
+**In RStudio**, navigate to `Tools > Modify Keyboard Shortcuts > Search "Chores"`---we suggest `Ctrl+Alt+C` (or `Ctrl+Cmd+C` on macOS).
 
 **In Positron**, you'll need to open the command palette, run "Open Keyboard Shortcuts (JSON)", and paste the following into your `keybindings.json()`:
 
 ```json
     {
-        "key": "Ctrl+Cmd+P",
+        "key": "Ctrl+Cmd+C",
         "command": "workbench.action.executeCode.console",
         "when": "editorTextFocus",
         "args": {
@@ -67,7 +67,7 @@ Chore helpers are interfaced with the via the chores addin. For easiest access, 
     }
 ```
 
-The analogous keybinding on non-macOS is `Ctrl+Alt+P`. That said, change the `"key"` entry to any keybinding you wish!
+The analogous keybinding on non-macOS is `Ctrl+Alt+C`. That said, change the `"key"` entry to any keybinding you wish!
 
 Once those steps are completed, you're ready to use helpers with a keyboard shortcut.
 
