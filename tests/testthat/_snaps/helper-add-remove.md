@@ -1,12 +1,12 @@
-# chores addition and removal works
+# helper addition and removal works
 
     Code
       helper_boopery
     Message
       
-      -- A boopery chores using claude-3-5-sonnet-latest. 
+      -- A boopery chore helper using claude-3-5-sonnet-latest. 
 
-# chores addition with bad inputs
+# helper addition with bad inputs
 
     Code
       .helper_add(role = identity, prompt = "hey")
@@ -30,7 +30,7 @@
       Error in `.helper_add()`:
       ! `interface` should be one of "replace", "prefix", or "suffix".
 
-# chores remove with bad inputs
+# helper remove with bad inputs
 
     Code
       .helper_remove(role = identity)
@@ -44,5 +44,5 @@
       .helper_remove(role = "notAnActivePal")
     Condition
       Error in `.helper_remove()`:
-      ! No active chores with the given `role`.
+      ! No active helper with the given `role`.
 

@@ -1,10 +1,10 @@
-# .helper_last is up to date with most recent chores
+# .helper_last is up to date with most recent helper
 
     Code
       env_get(chores_env(), ".helper_last")
     Message
       
-      -- A cli helper using claude-3-5-sonnet-latest. 
+      -- A cli chore helper using claude-3-5-sonnet-latest. 
 
 ---
 
@@ -12,7 +12,7 @@
       env_get(chores_env(), ".helper_last_cli")
     Message
       
-      -- A cli helper using claude-3-5-sonnet-latest. 
+      -- A cli chore helper using claude-3-5-sonnet-latest. 
 
 ---
 
@@ -20,7 +20,7 @@
       env_get(chores_env(), ".helper_last")
     Message
       
-      -- A cli helper using gpt-4o-mini. 
+      -- A cli chore helper using gpt-4o-mini. 
 
 # role checks error informatively
 

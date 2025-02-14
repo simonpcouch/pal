@@ -1,10 +1,10 @@
-# initializing a chores
+# initializing a helper
 
     Code
       .init_helper("cli")
     Message
       
-      -- A cli helper using claude-3-5-sonnet-latest. 
+      -- A cli chore helper using claude-3-5-sonnet-latest. 
 
 ---
 
@@ -12,7 +12,7 @@
       .init_helper("testthat")
     Message
       
-      -- A testthat helper using claude-3-5-sonnet-latest. 
+      -- A testthat chore helper using claude-3-5-sonnet-latest. 
 
 # can use other models
 
@@ -20,7 +20,7 @@
       .init_helper("cli", .chores_chat = ellmer::chat_openai(model = "gpt-4o-mini"))
     Message
       
-      -- A cli helper using gpt-4o-mini. 
+      -- A cli chore helper using gpt-4o-mini. 
 
 # errors informatively with bad role
 

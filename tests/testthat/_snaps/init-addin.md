@@ -12,7 +12,7 @@
       .init_addin()
     Condition
       Error:
-      ! Unable to locate the requested chores.
+      ! Unable to locate the requested helper.
 
 # .init_addin executes found binding
 
