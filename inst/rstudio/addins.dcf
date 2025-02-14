@@ -1,4 +1,4 @@
-Name: Pal
+Name: Chores
 Description: LLM assistants for R
 Binding: .init_addin
 Interactive: false
