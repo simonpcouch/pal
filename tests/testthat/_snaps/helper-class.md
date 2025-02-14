@@ -12,7 +12,7 @@
       .res <- fetch_chores_chat()
     Message
       ! chores requires configuring an ellmer Chat with the .chores_chat option.
-      i Set e.g. `options(.chores_chat = ellmer::chat_claude()` in your '~/.Rprofile' and restart R.
+      i Set e.g. `options(.chores_chat = ellmer::chat_claude())` in your '~/.Rprofile' and restart R.
       i See "Choosing a model" in `vignette("chores", package = "chores")` to learn more.
 
 # fetch_chores_chat returns early with bad config
