@@ -47,7 +47,7 @@
 
   ui <- miniUI::miniPage(
     miniUI::miniContentPanel(
-      shiny::selectizeInput("helper", "Select a chore helper:",
+      shiny::selectizeInput("helper", "Select a helper:",
                             choices = helper_choices,
                             multiple = FALSE,
                             options = list(
