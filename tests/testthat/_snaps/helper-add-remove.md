@@ -41,7 +41,7 @@
 ---
 
     Code
-      .helper_remove(chore = "notAnActivePal")
+      .helper_remove(chore = "notAnActiveHelper")
     Condition
       Error in `.helper_remove()`:
       ! No active helper with the given `chore`.
